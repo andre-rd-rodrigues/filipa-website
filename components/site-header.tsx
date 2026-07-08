@@ -3,6 +3,7 @@
 import { useEffect, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { SiteLogo } from "@/components/site-logo";
 import { navLinks, primaryCta, site } from "@/lib/site";
 
 export function SiteHeader() {
@@ -60,13 +61,8 @@ export function SiteHeader() {
       }`}
     >
       <div className="mx-auto flex w-full max-w-[80rem] items-center justify-between px-5 py-4 sm:px-8">
-        <Link href="/" className="group flex flex-col leading-none" aria-label={site.fullName}>
-          <span className="font-logo text-xl font-semibold uppercase tracking-[0.04em] text-action">
-            {site.name}
-          </span>
-          <span className="eyebrow mt-1 text-[0.625rem] text-fg-inverse-muted">
-            {site.tagline}
-          </span>
+        <Link href="/" className="block shrink-0" aria-label={site.fullName}>
+          <SiteLogo priority />
         </Link>
 
         {/* Desktop nav */}
@@ -138,15 +134,10 @@ export function SiteHeader() {
           <div className="mx-auto flex w-full max-w-[80rem] items-center justify-between px-5 py-4 sm:px-8">
             <Link
               href="/"
-              className="flex flex-col leading-none"
+              className="block shrink-0"
               aria-label={site.fullName}
             >
-              <span className="font-logo text-xl font-semibold uppercase tracking-[0.04em] text-action">
-                {site.name}
-              </span>
-              <span className="eyebrow mt-1 text-[0.625rem] text-fg-inverse-muted">
-                {site.tagline}
-              </span>
+              <SiteLogo priority />
             </Link>
             <button
               type="button"

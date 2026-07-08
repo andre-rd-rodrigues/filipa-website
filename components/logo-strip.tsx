@@ -65,7 +65,7 @@ export function LogoStrip() {
     >
       <Container>
         <Reveal>
-          <p className="eyebrow text-center text-fg-muted">Confiam no trabalho</p>
+          <p className="eyebrow text-center text-fg-muted">Clubes</p>
           <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-14">
             {logos.map((logo) => (
               <li

@@ -62,3 +62,9 @@ export const legalLinks: NavLink[] = [
 
 /** Primary call to action, used across pages. */
 export const primaryCta = { label: "Marcar conversa", href: "/contactos" } as const;
+
+/** Site design / development credit (footer). */
+export const siteCredit = {
+  name: "André Rodrigo",
+  href: "https://andrerodrigo.com",
+} as const;
