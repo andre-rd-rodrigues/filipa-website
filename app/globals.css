@@ -1,26 +1,364 @@
 @import "tailwindcss";
 
+/*
+ * Filipa Marques — Coaching & PNL
+ * Design tokens. See DESIGN.md (root) for the full system and named rules.
+ * North Star: "The Floodlit Field at Night" — dark-led, editorial, warm orange light.
+ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand palette:
+   *   primary  #FF5F00 · secondary #222222 · tertiary #FFFFFF · neutral #0A0A0A
+   * See the Two-Orange Rule in DESIGN.md. */
+  --action: #ff5f00; /* primary */
+  --action-hover: #ff7a2b; /* primary, lifted on hover */
+  --action-deep: #ff5f00; /* primary — reads AA as text on dark */
+  --apricot: #ff9e66; /* soft primary tint: numbers, highlights on dark */
+
+  /* Brand neutrals */
+  --slate: #4a4a4a;
+  --mist: #8a8a8a;
+
+  /* Grounds — always dark (see Always-Dark Rule in DESIGN.md) */
+  --bg: #0a0a0a; /* neutral: base body ground under the soft wave */
+  --ink: #0a0a0a; /* deepest ground: hero blend, footer */
+  --ink-raised: #222222; /* secondary: raised panels / cards */
+  --ink-line: #2e2e2e; /* hairline on dark */
+  --page: #0a0a0a; /* base band = body ground */
+  --surface: #222222; /* secondary: cards, forms, panels */
+  --surface-muted: #2a2a2a; /* hover rows / subtle panels */
+
+  /* Text — tertiary white on neutral by default */
+  --fg: #ffffff;
+  --fg-secondary: #cbcbcb;
+  --fg-muted: #9b9b9b; /* meta/caption — AA on neutral ground */
+  --fg-inverse: #ffffff;
+  --fg-inverse-muted: #a6a6a6;
+
+  /* Lines */
+  --border-stone: #2e2e2e;
+
+  /* States */
+  --success: #2d7a4f;
+  --error: #c0392b;
+
+  /* Layout */
+  --container-max: 80rem; /* 1280px */
+  --container-narrow: 46rem;
+  --section-py: clamp(4rem, 9vw, 6.5rem);
+  --section-py-lg: clamp(5.5rem, 12vw, 9rem);
+
+  /* Radius — squared system. No round edges; corners are architectural. */
+  --radius: 0px;
+
+  /* Z-index — semantic scale (never arbitrary 9999) */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 20;
+  --z-header: 40;
+  --z-overlay: 50;
+
+  /* Motion */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors → Tailwind utilities (bg-*, text-*, border-*) */
+  --color-action: var(--action);
+  --color-action-hover: var(--action-hover);
+  --color-action-deep: var(--action-deep);
+  --color-apricot: var(--apricot);
+  --color-slate: var(--slate);
+  --color-mist: var(--mist);
+
+  --color-ink: var(--ink);
+  --color-ink-raised: var(--ink-raised);
+  --color-ink-line: var(--ink-line);
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+
+  --color-fg: var(--fg);
+  --color-fg-secondary: var(--fg-secondary);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-inverse: var(--fg-inverse);
+  --color-fg-inverse-muted: var(--fg-inverse-muted);
+
+  --color-border-stone: var(--border-stone);
+  --color-success: var(--success);
+  --color-error: var(--error);
+
+  /* Fonts — variables injected by next/font in layout.tsx.
+   * Display/titles: Termina (wide geometric sans; commercial, self-hosted).
+   * `--font-termina` is defined by next/font/local once the .woff2 files exist;
+   * until then it's empty and the stack falls through to Hanken, so the build
+   * never breaks. Logo keeps the Didone wordmark (brand asset). */
+  --font-display: var(--font-termina), "Termina", var(--font-hanken), system-ui,
+    -apple-system, sans-serif;
+  --font-logo: var(--font-bodoni), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-hanken), system-ui, -apple-system, sans-serif;
+
+  /* Radius — everything square (see Squared-Corner Rule in DESIGN.md) */
+  --radius-card: 0px;
+  --radius-pill: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-full: 0px;
+
+  /* Containers */
+  --container-site: 80rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/*
+ * Squared-Corner Rule: this project has no rounded corners. Tailwind's
+ * radius utilities are all forced to 0 so any stray `rounded-*` still ships
+ * square, and future components inherit the sharp, architectural look.
+ */
+
+@layer base {
+  * {
+    border-color: var(--border-stone);
   }
 }
 
+/* Squared-Corner Rule: no round edges anywhere, including any stray
+ * `rounded-*` utility or third-party markup. Corners are architectural. */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/*
+ * Always-Dark ground with ONE continuous soft wave: a warm primary glow that
+ * blooms from the top and dissolves smoothly down the whole page — the hero
+ * glow, extended. No grain, no seams, no fixed tiling: a single radial over the
+ * neutral ground, sized to the full document so it reads as one soft wave.
+ */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  background-image: radial-gradient(
+    130% 90% at 50% -6%,
+    rgba(255, 95, 0, 0.16),
+    rgba(255, 95, 0, 0.035) 34%,
+    transparent 76%
+  );
+  background-repeat: no-repeat;
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--action);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--action);
+  outline-offset: 2px;
+}
+
+/* ── Reusable primitives (also exposed via React components) ── */
+
+.container-site {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2rem);
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Display / titles: Termina, headline size and up (Termina-Display Rule) */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Brand wordmark only: the Didone logo (never for running titles) */
+.font-logo {
+  font-family: var(--font-logo);
+  font-weight: 600;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Long-form drop cap: the first letter of the opening paragraph (blog article).
+ * Termina display initial, floated into the column like the provided reference. */
+.article-prose > p:first-of-type::first-letter {
+  float: left;
+  margin: 0.02em 0.12em 0 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 3.6em;
+  line-height: 0.74;
+  color: var(--fg);
+}
+
+/* ── Motion: fade-up reveal (progressive; content is visible by default) ── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal[data-reveal="pending"] {
+    opacity: 0;
+  }
+  .reveal[data-reveal="visible"] {
+    animation: fade-up 0.7s var(--ease-out-quart) both;
+  }
+}
+
+/* ── Fullscreen menu: sequential reveal + smooth exit ── */
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.4rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menu-item-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(0.9rem);
+  }
+}
+
+@keyframes menu-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes menu-overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.menu-overlay[data-state="open"] {
+  animation: menu-overlay-in 0.3s var(--ease-out-quart) both;
+}
+
+.menu-overlay[data-state="closed"] {
+  animation: menu-overlay-out 0.35s var(--ease-out-quart) both;
+}
+
+.menu-item {
+  opacity: 0;
+}
+
+[data-state="open"] .menu-item {
+  animation: menu-item-in 0.5s var(--ease-out-quart) both;
+  animation-delay: calc(0.1s + var(--i, 0) * 0.06s);
+}
+
+[data-state="closed"] .menu-item {
+  animation: menu-item-out 0.3s var(--ease-out-quart) both;
+  animation-delay: calc(var(--i, 0) * 0.04s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-overlay[data-state],
+  .menu-item {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ── Marquee strip: seamless horizontal scroll of an oversized headline ── */
+@keyframes marquee-x {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-track {
+  animation: marquee-x var(--marquee-duration, 30s) linear infinite;
+  animation-direction: var(--marquee-direction, normal);
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ── GSAP-choreographed surfaces ──
+ * Elements the hero timeline animates start hidden ONLY when JS + motion are
+ * available. If GSAP never runs (no-JS, reduced motion, headless render) the
+ * .gsap-ready class is never added, so content stays fully visible. */
+@media (prefers-reduced-motion: no-preference) {
+  .gsap-ready [data-anim] {
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  .gsap-ready [data-anim="cover"] {
+    opacity: 1;
+    clip-path: inset(0 0 100% 0);
+  }
 }
