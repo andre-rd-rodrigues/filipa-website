@@ -9,12 +9,37 @@ import { MarqueeStrip } from "@/components/marquee-strip";
 import { LogoStrip } from "@/components/logo-strip";
 import { HighlightStrip, type HighlightItem } from "@/components/highlight-strip";
 import { QuoteBand } from "@/components/quote-band";
+import { StatsStrip, type Stat } from "@/components/stats-strip";
 import { InstagramStrip } from "@/components/instagram-strip";
 import { site } from "@/lib/site";
 import { getLatestPosts, formatPostDate } from "@/lib/blog";
 import { episodes } from "@/app/(site)/podcast/data";
 
 const latestEpisodes = episodes.slice(0, 3);
+
+// Placeholder figures — replace with Filipa's real numbers.
+const stats: Stat[] = [
+  {
+    value: 150,
+    suffix: "+",
+    label: "Atletas acompanhados",
+    description: "Individual e em equipa, do amador ao alto rendimento.",
+    cta: { label: "Ver serviços", href: "/servicos" },
+  },
+  {
+    value: 12,
+    label: "Anos de experiência",
+    description: "Psicologia, PNL e inteligência emocional no desporto.",
+    cta: { label: "Sobre mim", href: "/sobre" },
+  },
+  {
+    value: 40,
+    suffix: "+",
+    label: "Workshops e palestras",
+    description: "Para clubes, escolas e organizações em todo o país.",
+    cta: { label: "Marcar conversa", href: "/contactos" },
+  },
+];
 
 const highlights: HighlightItem[] = [
   {
@@ -95,6 +120,11 @@ export default async function Home() {
 
       {/* Scrolling headline marquee */}
       <MarqueeStrip text="Aumento de performance" separator="◆" reverse={false}/>
+
+      {/* Stats — numbers count up from zero on scroll */}
+      <Section tone="dark">
+        <StatsStrip items={stats} />
+      </Section>
 
  {/* Podcast preview — latest 3 episodes */}
  <Section tone="surface">
