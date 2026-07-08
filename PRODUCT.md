@@ -33,7 +33,7 @@ Substituir o site Canva actual por um site multi-página profissional, rápido e
 
 **Identidade visual (fornecida):**
 - **Logótipo:** wordmark em serif display de alto contraste (Didone), laranja sobre preto — elegante, editorial, sofisticado. `FILIPA MARQUES` com subtítulo `COACHING & PNL` em maiúsculas espaçadas. **O logótipo mantém-se em Didone (Bodoni Moda); é o único uso da serif.**
-- **Tipografia de títulos:** **Termina** (Nootype) — sans geométrica larga, moderna e de alta energia — em todos os títulos (display/headline). Corpo em Hanken Grotesk. *(Termina é comercial: auto-hospedar via `next/font/local` ou kit Adobe Fonts; fallback para Hanken até estar carregada.)*
+- **Tipografia de títulos:** **Syne** (Google Fonts) — sans geométrica moderna e de alta energia — em todos os títulos (display/headline), peso **700**. Corpo em Hanken Grotesk.
 - **Modo:** **sempre escuro.** Fundo preto neutro (`#0A0A0A`) com **uma onda suave** — um brilho radial primário (`#FF5F00`) que nasce no topo e dissolve suavemente por toda a página (estende o brilho do hero). Sem grão, sem costuras, sem secções claras.
 - **Paleta:** **primária** laranja `#FF5F00` (acção/fills/badges/texto laranja sobre escuro), **secundária** `#222222` (cartões/painéis), **terciária** `#FFFFFF` (texto), **neutra** `#0A0A0A` (fundo); damasco `#FF9E66` como tint suave para números e destaques.
 
@@ -41,7 +41,7 @@ Substituir o site Canva actual por um site multi-página profissional, rápido e
 - [FitFlex Personal Coach](https://fitflex.axiomthemes.com/home-personal-coach/) — **direcção dominante**: hero cinematográfico escuro, tipografia display forte, linhas de serviço numeradas, acento quente sobre escuro.
 - [Padel 360](https://padel-developmen-83.aura.build/) — **contraponto de estrutura**: ritmo de secções, timeline de processo, FAQ, formulário, botões pill acessíveis, sec\u00e7ões claras a pontuar o escuro.
 
-**Híbrido desejado:** **FitFlex é a referência central de layout** — hero escuro, títulos display grandes (Termina), painéis de imagem sobrepostos, faixa de logótipos, badges laranja, linhas de serviço numeradas, rail de acções flutuante. Estrutura e ritmo do FitFlex traduzidos para uma voz de psicologia do desporto (sofisticado, não ginásio hardcore), com a clareza de secções do Padel 360. **Sempre escuro**, com o fundo carvão + grão + brilho. Para artigos de blog, a referência são as imagens fornecidas: hero full-bleed escuro com badge laranja e título Termina gigante, corpo legível em coluna única com capitular (drop-cap) e citações marcadas por traço laranja. Fotografia profissional forte; movimento com propósito.
+**Híbrido desejado:** **FitFlex é a referência central de layout** — hero escuro, títulos display grandes (Syne), painéis de imagem sobrepostos, faixa de logótipos, badges laranja, linhas de serviço numeradas, rail de acções flutuante. Estrutura e ritmo do FitFlex traduzidos para uma voz de psicologia do desporto (sofisticado, não ginásio hardcore), com a clareza de secções do Padel 360. **Sempre escuro**, com o fundo carvão + grão + brilho. Para artigos de blog, a referência são as imagens fornecidas: hero full-bleed escuro com badge laranja e título Syne gigante, corpo legível em coluna única com capitular (drop-cap) e citações marcadas por traço laranja. Fotografia profissional forte; movimento com propósito.
 
 ## Anti-references
 

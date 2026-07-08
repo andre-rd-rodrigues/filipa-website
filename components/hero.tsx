@@ -1,27 +1,44 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import Image from "next/image";
-import { Eyebrow } from "@/components/eyebrow";
 import { ButtonLink } from "@/components/button";
 
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /**
- * Home hero — layered, cinematic, GSAP-choreographed.
+ * Home hero — centred, GSAP-choreographed.
  *
- * Composition: an editorial photo panel is stacked *under* the headline with
- * an offset apricot accent block, so type, colour and image overlap instead of
- * sitting in tidy columns. Corners are square per the design system.
+ * Composition: a cutout portrait sits centre-stage over a very large, low-
+ * opacity "Desporto Coaching" wordmark that slides slowly and seamlessly behind
+ * it. Name, subtitle and CTAs stack centred below the figure.
  *
- * Motion: a one-shot entrance timeline (clip-path wipe on the photo, line-by-
- * line headline rise, staggered supporting content) plus a subtle scroll
- * parallax on the photo. All of it is gated behind JS + `prefers-reduced-
- * motion: no-preference`; content is fully visible if the timeline never runs.
+ * Motion: a one-shot entrance timeline (clip-path wipe on the portrait, name
+ * rise, staggered supporting content) plus a subtle scroll parallax on the
+ * portrait. The backdrop word loops continuously. All motion is gated behind
+ * JS + `prefers-reduced-motion: no-preference`; content stays fully visible if
+ * the timeline never runs, and the backdrop word falls back to static.
  */
 export function Hero() {
   const root = useRef<HTMLElement | null>(null);
+  // Only mount the smoke video on tablet/desktop, so phones never download the
+  // ~9.6 MB asset (CSS `hidden` would still fetch it).
+  const [showVideo, setShowVideo] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const apply = () => setShowVideo(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
 
   useIsomorphicLayoutEffect(() => {
     const el = root.current;
@@ -30,7 +47,6 @@ export function Hero() {
 
     let ctx: { revert: () => void } | undefined;
 
-    // Load gsap + ScrollTrigger on the client only.
     (async () => {
       const { gsap } = await import("gsap");
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
@@ -47,19 +63,15 @@ export function Hero() {
           defaults: { ease: "power4.out", duration: 0.9 },
         });
 
-        tl.to(
-          q('[data-anim="cover"]'),
-          { clipPath: "inset(0 0 0% 0)", duration: 1.1, ease: "expo.out" },
-        )
-          .from(
-            q('[data-anim="accent"]'),
-            { scaleY: 0, transformOrigin: "bottom", duration: 0.8, ease: "expo.out" },
-            "-=0.8",
-          )
+        tl.to(q('[data-anim="cover"]'), {
+          clipPath: "inset(0 0 0% 0)",
+          duration: 1.1,
+          ease: "expo.out",
+        })
           .to(
             q('[data-anim="line"]'),
             { opacity: 1, yPercent: 0, stagger: 0.12, duration: 0.8 },
-            "-=0.7",
+            "-=0.6",
           )
           .to(
             q('[data-anim="fade"]'),
@@ -67,14 +79,12 @@ export function Hero() {
             "-=0.5",
           );
 
-        // Set the pre-animation state for line/fade elements (data-anim hides
-        // them via CSS; give them a transform to travel from).
         gsap.set(q('[data-anim="line"]'), { yPercent: 110 });
         gsap.set(q('[data-anim="fade"]'), { y: 24 });
 
-        // Scroll parallax: drift the photo as the hero scrolls away.
+        // Scroll parallax: drift the portrait as the hero scrolls away.
         gsap.to(q('[data-anim="cover"] img'), {
-          yPercent: 14,
+          yPercent: 10,
           ease: "none",
           scrollTrigger: {
             trigger: el,
@@ -90,81 +100,103 @@ export function Hero() {
   }, []);
 
   return (
-    <section
-      ref={root}
-      className="relative overflow-hidden text-fg-inverse"
-    >
-      <div className="mx-auto grid w-full max-w-[80rem] gap-y-10 px-5 pb-16 pt-32 sm:px-8 sm:pb-24 sm:pt-40 lg:grid-cols-12 lg:gap-x-8 lg:pb-28 lg:pt-44">
-        {/* Copy — sits on top, spanning into the image column for overlap */}
-        <div className="relative z-[var(--z-raised)] lg:col-span-7 lg:pt-8">
-          <div data-anim="fade">
-            <Eyebrow tone="dark">Psicóloga · Coaching &amp; PNL · Desporto</Eyebrow>
+    <section ref={root} className="relative overflow-hidden text-fg-inverse">
+      {/* Smoke video backdrop — tablet/desktop only (never mounted on phones) */}
+      {showVideo ? (
+        <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+          <video
+            className="h-full w-full object-cover opacity-100"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          >
+            <source src="/videos/smoke.mp4" type="video/mp4" />
+          </video>
+          {/* Scrim: keep type legible and blend the smoke into the dark ground */}
+          <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/50 to-ink" />
+        </div>
+      ) : null}
+
+      <div className="relative z-[var(--z-raised)] mx-auto flex w-full max-w-[80rem] flex-col items-center px-5 pb-16 pt-32 text-center sm:px-8 sm:pb-24 sm:pt-40 lg:pb-28 lg:pt-44">
+        {/* Figure + sliding backdrop word */}
+        <div className="relative flex w-full items-center justify-center">
+          {/* Oversized wordmark, sliding slowly behind the portrait */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 flex items-center overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
+          >
+            <div
+              className="marquee-track flex w-max select-none font-display text-[clamp(4rem,17vw,15rem)] uppercase leading-none tracking-[-0.03em] text-white/[0.06]"
+              style={
+                {
+                  fontWeight: 800,
+                  "--marquee-duration": "120s",
+                  "--marquee-direction": "normal",
+                } as CSSProperties
+              }
+            >
+              {[0, 1].map((group) => (
+                <div key={group} className="flex shrink-0">
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <span key={i} className="whitespace-nowrap pr-[0.4em]">
+                      Desporto Coaching
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
 
-          <h1 className="mt-6 font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.98] tracking-[-0.02em]">
+          {/* Cutout portrait — revealed with a clip-path wipe */}
+          <div
+            data-anim="cover"
+            className="relative z-[var(--z-raised)] w-full max-w-[32rem] sm:max-w-[38rem] lg:max-w-[42rem]"
+          >
+            <Image
+              src="/img/profile.png"
+              alt="Filipa Marques sentada, a segurar uma bola de futebol"
+              width={3000}
+              height={3750}
+              priority
+              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 38rem, 42rem"
+              className="h-auto w-full"
+            />
+          </div>
+        </div>
+
+        {/* Name, subtitle, CTAs */}
+        <div className="relative z-[var(--z-raised)] -mt-2 flex flex-col items-center">
+          <h1 className="font-display text-[clamp(2.5rem,7vw,4.75rem)] leading-[0.98] tracking-[-0.02em]">
             <span className="block overflow-hidden">
               <span data-anim="line" className="block">
-                Ação liga os
-              </span>
-            </span>
-            <span className="block overflow-hidden">
-              <span data-anim="line" className="block">
-                teus pensamentos
-              </span>
-            </span>
-            <span className="block overflow-hidden">
-              <span data-anim="line" className="block">
-                aos teus <span className="text-apricot">resultados</span>.
+                Filipa Marques
               </span>
             </span>
           </h1>
 
           <p
             data-anim="fade"
-            className="text-pretty mt-7 max-w-xl text-lg leading-relaxed text-fg-inverse-muted"
+            className="eyebrow mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-fg-inverse-muted"
           >
-            Coaching, inteligência emocional e comunicação para atletas,
-            treinadores e profissionais do desporto. Direto ao que interessa:
-            agir e alcançar.
+            <span>Coaching</span>
+            <span aria-hidden className="size-1.5 shrink-0 bg-action" />
+            <span>PNL</span>
+            <span aria-hidden className="size-1.5 shrink-0 bg-action" />
+            <span>Desporto</span>
           </p>
 
-          <div data-anim="fade" className="mt-9 flex flex-wrap gap-4">
+          <div
+            data-anim="fade"
+            className="mt-9 flex flex-wrap justify-center gap-4"
+          >
             <ButtonLink href="/contactos" variant="primary">
               Marcar conversa
             </ButtonLink>
             <ButtonLink href="/servicos" variant="secondary-dark">
               Conhecer serviços
             </ButtonLink>
-          </div>
-        </div>
-
-        {/* Layered image stack — overlaps the copy column on large screens */}
-        <div className="relative lg:col-span-5 lg:-ml-16 lg:self-stretch">
-          <div className="relative ml-auto aspect-[3/4] w-full max-w-md lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:max-w-none lg:w-[38vw]">
-            {/* apricot accent block behind, offset */}
-            <div
-              data-anim="accent"
-              aria-hidden
-              className="absolute -left-4 -top-4 h-24 w-24 bg-apricot sm:h-32 sm:w-32 lg:-left-6 lg:-top-6"
-            />
-            {/* photo with clip-path wipe reveal */}
-            <div
-              data-anim="cover"
-              className="absolute inset-0 overflow-hidden bg-ink-raised"
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1200&q=80"
-                alt="Atleta em movimento durante o treino, foco e intensidade"
-                fill
-                priority
-                sizes="(max-width: 1024px) 90vw, 38vw"
-                className="object-cover"
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent"
-              />
-            </div>
           </div>
         </div>
       </div>

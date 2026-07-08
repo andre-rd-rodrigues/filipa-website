@@ -46,18 +46,7 @@ const faqs = [
 export default function CursosPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Cursos"
-        title="Formação que se aplica já no treino seguinte."
-        description="PNL, inteligência emocional e comunicação levadas para o contexto real do desporto. Sessões práticas para atletas, treinadores e profissionais que preferem agir a acumular teoria."
-      >
-        <ButtonLink href={primaryCta.href} variant="primary">
-          {primaryCta.label}
-        </ButtonLink>
-        <ButtonLink href="#lista" variant="secondary-dark">
-          Ver cursos
-        </ButtonLink>
-      </PageHero>
+      <PageHero title="Cursos" />
 
       {/* Course listing — full-width editorial blocks, alternating image side */}
       <Section tone="page" id="lista">

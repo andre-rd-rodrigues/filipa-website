@@ -31,11 +31,7 @@ export default async function BlogPage() {
 
   return (
     <>
-      <PageHero
-        eyebrow="Blog"
-        title="Ideias para treinar a cabeça como treinas o corpo."
-        description="Artigos práticos sobre coaching, PNL, inteligência emocional e comunicação no desporto — sem jargão, prontos a aplicar."
-      />
+      <PageHero title="Blog" />
 
       {featured ? (
         <Section tone="page">

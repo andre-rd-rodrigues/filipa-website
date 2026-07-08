@@ -1,41 +1,37 @@
-import type { ReactNode } from "react";
+import Link from "next/link";
 import { Container } from "@/components/container";
-import { Eyebrow } from "@/components/eyebrow";
 
 /**
- * Dark editorial hero for interior pages. Sits under the fixed header
- * (transparent over this dark band). Display title in Bodoni Moda.
+ * Minimal interior page title — centred heading with a Home breadcrumb
+ * (orange square separator). Sits under the fixed header; no background image.
  */
 export function PageHero({
-  eyebrow,
   title,
-  description,
-  children,
+  breadcrumb,
 }: {
-  eyebrow?: string;
-  title: ReactNode;
-  description?: ReactNode;
-  children?: ReactNode;
+  title: string;
+  breadcrumb?: string;
 }) {
+  const current = breadcrumb ?? title;
+
   return (
-    <section className="text-fg-inverse">
-      <Container className="pb-[clamp(3.5rem,7vw,5.5rem)] pt-[clamp(8rem,16vw,11rem)]">
-        <div className="max-w-3xl">
-          {eyebrow ? (
-            <Eyebrow tone="dark" className="mb-5">
-              {eyebrow}
-            </Eyebrow>
-          ) : null}
-          <h1 className="font-display text-balance text-[clamp(2.75rem,7vw,5rem)] leading-[1.02] tracking-[-0.01em]">
-            {title}
-          </h1>
-          {description ? (
-            <p className="text-pretty mt-6 max-w-2xl text-lg leading-relaxed text-fg-inverse-muted">
-              {description}
-            </p>
-          ) : null}
-          {children ? <div className="mt-9 flex flex-wrap gap-4">{children}</div> : null}
-        </div>
+    <section className="text-center">
+      <Container className="pb-[clamp(2.5rem,5vw,4rem)] pt-[clamp(7rem,14vw,9.5rem)]">
+        <h1 className="font-display text-balance text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-[-0.02em]">
+          {title}
+        </h1>
+        <nav
+          aria-label="Breadcrumb"
+          className="eyebrow mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-fg-muted"
+        >
+          <Link href="/" className="transition-colors hover:text-action">
+            Início
+          </Link>
+          <span aria-hidden className="inline-block size-2 shrink-0 bg-action" />
+          <span className="text-fg-secondary" aria-current="page">
+            {current}
+          </span>
+        </nav>
       </Container>
     </section>
   );

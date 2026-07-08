@@ -14,11 +14,7 @@ export const metadata: Metadata = {
 export default function TermosPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Legal"
-        title="Termos e Condições"
-        description="As regras de utilização deste site. Ao navegares e usares os seus conteúdos, aceitas os termos aqui descritos."
-      />
+      <PageHero title="Termos e Condições" />
 
       <Section tone="page" narrow>
         <p className="eyebrow text-fg-muted">Última atualização: julho de 2026</p>

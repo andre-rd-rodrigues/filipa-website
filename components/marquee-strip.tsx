@@ -45,7 +45,7 @@ export function MarqueeStrip({
   }, []);
 
   const wordClass =
-    "font-display text-[clamp(3rem,13vw,11rem)] font-semibold uppercase leading-none tracking-[-0.02em] text-fg-inverse select-none";
+    "font-display text-[clamp(3rem,13vw,11rem)] font-bold uppercase leading-none tracking-[-0.02em] text-fg-inverse select-none";
 
   const Unit = () => (
     <span className="flex shrink-0 items-center">

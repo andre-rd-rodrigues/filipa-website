@@ -33,11 +33,7 @@ const faqs = [
 export default function ContactosPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Contactos"
-        title="Vamos falar?"
-        description="Marca uma conversa. Conta-me onde estás e onde queres chegar — respondo em breve."
-      />
+      <PageHero title="Contactos" />
 
       <Section tone="page">
         <div className="grid gap-x-14 gap-y-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">

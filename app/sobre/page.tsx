@@ -17,13 +17,7 @@ export const metadata: Metadata = {
 export default function SobrePage() {
   return (
     <>
-      <PageHero
-        eyebrow="Sobre mim"
-        title="Olá, sou a Filipa."
-        description="Psicóloga e coach de PNL. Ajudo atletas, treinadores e profissionais do desporto a pensar melhor, sentir com clareza e agir com foco."
-      >
-        <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>
-      </PageHero>
+      <PageHero title="Sobre mim" />
 
       {/* Bio — portrait placeholder + warm intro */}
       <Section tone="page">

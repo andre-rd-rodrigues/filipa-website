@@ -17,16 +17,7 @@ export const metadata: Metadata = {
 export default function ServicosPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Serviços"
-        title="Serviços que ligam a mente aos resultados."
-        description="Coaching, inteligência emocional e PNL aplicados ao desporto — para atletas, treinadores e organizações que querem agir com clareza e chegar mais longe."
-      >
-        <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>
-        <ButtonLink href="/cursos" variant="secondary-dark">
-          Ver cursos
-        </ButtonLink>
-      </PageHero>
+      <PageHero title="Serviços" />
 
       {/* Signature service-row list */}
       <Section tone="page">
@@ -46,7 +37,7 @@ export default function ServicosPage() {
             <Reveal key={service.number} delay={i * 60}>
               <Link
                 href={primaryCta.href}
-                className="group flex items-start gap-6 border-b border-[color:var(--border-stone)] py-8 transition-colors duration-[220ms] ease-out hover:bg-surface-muted sm:gap-10 sm:py-10"
+                className="group flex items-start gap-6 border border-transparent border-b-[color:var(--border-stone)] p-6 transition-[border-color] duration-[220ms] ease-out hover:border-action sm:gap-10 sm:p-8"
               >
                 <span
                   aria-hidden
@@ -56,7 +47,7 @@ export default function ServicosPage() {
                 </span>
 
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-body text-[clamp(1.25rem,2vw,1.5rem)] font-semibold tracking-[-0.01em] transition-transform duration-[220ms] ease-out group-hover:translate-x-1">
+                  <h3 className="font-body text-[clamp(1.25rem,2vw,1.5rem)] font-semibold tracking-[-0.01em]">
                     {service.title}
                   </h3>
                   <p className="text-pretty mt-2 max-w-2xl text-[1.0625rem] leading-relaxed text-fg-muted">
@@ -79,7 +70,7 @@ export default function ServicosPage() {
 
                 <span
                   aria-hidden
-                  className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-none border border-[color:var(--border-stone)] text-fg transition-transform duration-[220ms] ease-out group-hover:rotate-45 group-hover:border-action group-hover:text-action"
+                  className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-none border border-[color:var(--border-stone)] text-fg transition-[border-color] duration-[220ms] ease-out group-hover:border-action"
                 >
                   <svg
                     width="18"

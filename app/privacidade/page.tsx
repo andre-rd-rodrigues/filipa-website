@@ -14,11 +14,7 @@ export const metadata: Metadata = {
 export default function PrivacidadePage() {
   return (
     <>
-      <PageHero
-        eyebrow="Legal"
-        title="Política de Privacidade"
-        description="Como recolhemos, usamos e protegemos os teus dados pessoais, em conformidade com o Regulamento Geral sobre a Proteção de Dados (RGPD)."
-      />
+      <PageHero title="Política de Privacidade" />
 
       <Section tone="page" narrow>
         <p className="eyebrow text-fg-muted">Última atualização: julho de 2026</p>

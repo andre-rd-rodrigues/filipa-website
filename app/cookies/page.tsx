@@ -42,11 +42,7 @@ const cookies = [
 export default function CookiesPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Legal"
-        title="Política de Cookies"
-        description="O que são cookies, como os usamos e como podes controlar a tua preferência a qualquer momento."
-      />
+      <PageHero title="Política de Cookies" />
 
       <Section tone="page" narrow>
         <p className="eyebrow text-fg-muted">Última atualização: julho de 2026</p>

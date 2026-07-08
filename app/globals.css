@@ -92,11 +92,9 @@
   --color-error: var(--error);
 
   /* Fonts — variables injected by next/font in layout.tsx.
-   * Display/titles: Termina (wide geometric sans; commercial, self-hosted).
-   * `--font-termina` is defined by next/font/local once the .woff2 files exist;
-   * until then it's empty and the stack falls through to Hanken, so the build
-   * never breaks. Logo keeps the Didone wordmark (brand asset). */
-  --font-display: var(--font-termina), "Termina", var(--font-hanken), system-ui,
+   * Display/titles: Termina (geometric sans, local .otf, Thin→Heavy).
+   * Logo keeps the Didone wordmark (brand asset). */
+  --font-display: var(--font-termina), var(--font-hanken), system-ui,
     -apple-system, sans-serif;
   --font-logo: var(--font-bodoni), Georgia, "Times New Roman", serif;
   --font-body: var(--font-hanken), system-ui, -apple-system, sans-serif;
@@ -193,10 +191,10 @@ body {
   text-transform: uppercase;
 }
 
-/* Display / titles: Termina, headline size and up (Termina-Display Rule) */
+/* Display / titles: Termina, headline size and up (Display Rule) */
 .font-display {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
@@ -220,7 +218,7 @@ body {
   float: left;
   margin: 0.02em 0.12em 0 0;
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 3.6em;
   line-height: 0.74;
   color: var(--fg);

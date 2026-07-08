@@ -1,6 +1,6 @@
 ---
 name: Filipa Marques — Coaching & PNL
-description: Dark-mode alto-energia — títulos Termina, onda suave laranja sobre preto (#0A0A0A). Layout moderno estilo FitFlex.
+description: Dark-mode alto-energia — títulos Syne, onda suave laranja sobre preto (#0A0A0A). Layout moderno estilo FitFlex.
 colors:
   primary: "#FF5F00"
   primary-hover: "#FF7A2B"
@@ -25,15 +25,15 @@ colors:
   error: "#E5675A"
 typography:
   display:
-    fontFamily: "Termina, Hanken Grotesk, system-ui, sans-serif"
+    fontFamily: "Syne, Hanken Grotesk, system-ui, sans-serif"
     fontSize: "clamp(3rem, 7vw, 5.5rem)"
-    fontWeight: 600
+    fontWeight: 700
     lineHeight: 1.02
     letterSpacing: "-0.02em"
   headline:
-    fontFamily: "Termina, Hanken Grotesk, system-ui, sans-serif"
+    fontFamily: "Syne, Hanken Grotesk, system-ui, sans-serif"
     fontSize: "clamp(2rem, 4vw, 3.25rem)"
-    fontWeight: 600
+    fontWeight: 700
     lineHeight: 1.08
     letterSpacing: "-0.02em"
   title:
@@ -101,11 +101,11 @@ components:
 
 **Creative North Star: "The Floodlit Field at Night"**
 
-Black is the stadium after dark; orange is the floodlight that picks out the action. This is a **high-energy, always-dark brand surface** — cinematic, modern, and confident. The whole site lives on a pure neutral ground (`#0A0A0A`) carrying **one continuous soft wave**: a warm primary glow (`#FF5F00`) that blooms from the top and dissolves smoothly down the entire page — the hero glow, extended, with no seams and no grain. Wide, geometric **Termina** titles carry the energy; Hanken Grotesk keeps the reading calm; vivid orange is the rare, deliberate light.
+Black is the stadium after dark; orange is the floodlight that picks out the action. This is a **high-energy, always-dark brand surface** — cinematic, modern, and confident. The whole site lives on a pure neutral ground (`#0A0A0A`) carrying **one continuous soft wave**: a warm primary glow (`#FF5F00`) that blooms from the top and dissolves smoothly down the entire page — the hero glow, extended, with no seams and no grain. Wide, geometric **Syne** titles carry the energy; Hanken Grotesk keeps the reading calm; vivid orange is the rare, deliberate light.
 
 The **core layout reference is FitFlex Personal Coach** (dark hero, oversized bold display titles, overlapping photo panels, a brand-logo strip, orange category badges, numbered service lines, floating action rail). We take its structure and pace and translate it to a boutique sports-psychology voice — sophisticated, not hardcore gym.
 
-**Layout philosophy:** reject flat card grids. Depth comes from **layered compositions** (photo panels stacked on top of each other via overlap, negative margins, and z-index), **asymmetric bento grids** (one panel leading a set), **transparent bands** that let the soft wave flow through with Secondary `#222222` cards for structure, and **scroll-driven motion** (parallax drift, velocity-boosted marquees). For long-form (blog articles) the reference is the images provided: a full-bleed dark hero with an orange category badge and a giant Termina title, then a readable single column with a drop-cap opener and pull-quotes marked by an orange dash.
+**Layout philosophy:** reject flat card grids. Depth comes from **layered compositions** (photo panels stacked on top of each other via overlap, negative margins, and z-index), **asymmetric bento grids** (one panel leading a set), **transparent bands** that let the soft wave flow through with Secondary `#222222` cards for structure, and **scroll-driven motion** (parallax drift, velocity-boosted marquees). For long-form (blog articles) the reference is the images provided: a full-bleed dark hero with an orange category badge and a giant Syne title, then a readable single column with a drop-cap opener and pull-quotes marked by an orange dash.
 
 The system explicitly rejects: hardcore gym aesthetics (black + orange with no elegance), cold corporate gray, SaaS card grids, Instagram-coach clichés, and lime-neon B2B tones (per PRODUCT.md anti-references).
 
@@ -113,7 +113,7 @@ The system explicitly rejects: hardcore gym aesthetics (black + orange with no e
 
 - **Always dark:** a single neutral ground (`#0A0A0A`) under one soft-wave glow; no light sections
 - **Soft-wave background:** one continuous `#FF5F00` radial bloom from the top, dissolving smoothly across the whole page — no grain, no seams
-- **Termina** wide geometric titles (display/headline) + **Hanken Grotesk** body; **Bodoni Moda** kept only for the logo wordmark
+- **Syne** wide geometric titles (display/headline) + **Hanken Grotesk** body; **Bodoni Moda** kept only for the logo wordmark
 - **Palette:** primary `#FF5F00`, secondary `#222222` (panels/cards), tertiary `#FFFFFF` (text), neutral `#0A0A0A` (ground); apricot `#FF9E66` is a soft primary tint for numbers/highlights
 - **Squared everything:** 0px radius on buttons, cards, inputs, chips, imagery
 - **Layered compositions:** overlapping photo panels, offset accent blocks, bento asymmetry — FitFlex-style, never identical card grids
@@ -161,24 +161,24 @@ Four colors: primary orange, secondary charcoal, tertiary white, neutral black. 
 
 ## 3. Typography
 
-**Display / Title Font:** Termina (Nootype) — wide, geometric, high-energy sans. Commercial; falls back to Hanken Grotesk until loaded (self-host via `next/font/local` or an Adobe Fonts kit).
+**Display / Title Font:** Syne (Google Fonts) — geometric, high-energy sans. Weight **700** (bold) for display and headlines.
 **Body / UI Font:** Hanken Grotesk (system-ui, sans-serif).
 **Logo Font:** Bodoni Moda — the Didone brand wordmark **only**; never for running titles.
 
-**Character:** Termina's wide geometric caps give big titles a modern, athletic, confident presence (see the provided blog-hero and homepage-section references). Hanken keeps body copy warm and quiet underneath. The contrast is width and weight, not serif-vs-sans — one loud display sans over one calm text sans.
+**Character:** Syne's geometric forms give big titles a modern, athletic, confident presence (see the provided blog-hero and homepage-section references). Hanken keeps body copy warm and quiet underneath. The contrast is weight and presence, not serif-vs-sans — one loud display sans over one calm text sans.
 
 ### Hierarchy
 
-- **Display** (Termina 600, clamp(3rem, 7vw, 5.5rem), line-height 1.02, -0.02em): Hero H1 and blog-article titles. Cap at 5.5rem. `text-wrap: balance`. Needs a dark or scrimmed ground — never over busy photo midtones without a scrim.
-- **Headline** (Termina 600, clamp(2rem, 4vw, 3.25rem), line-height 1.08): Section H2. One per section.
-- **Title** (Hanken Grotesk 600, clamp(1.25rem, 2vw, 1.5rem), line-height 1.3): Card titles, course names, FAQ questions. Hanken here — Termina gets clunky and too wide at small sizes.
+- **Display** (Syne 700, clamp(3rem, 7vw, 5.5rem), line-height 1.02, -0.02em): Hero H1 and blog-article titles. Cap at 5.5rem. `text-wrap: balance`. Needs a dark or scrimmed ground — never over busy photo midtones without a scrim.
+- **Headline** (Syne 700, clamp(2rem, 4vw, 3.25rem), line-height 1.08): Section H2. One per section.
+- **Title** (Hanken Grotesk 600, clamp(1.25rem, 2vw, 1.5rem), line-height 1.3): Card titles, course names, FAQ questions. Hanken here — Syne gets too heavy at small sizes.
 - **Body** (Hanken Grotesk 400, 1.0625rem / 17px, line-height 1.65): All prose. 65–75ch max. `text-wrap: pretty`. On dark, line-height reads a touch lighter — keep ≥1.65.
 - **Label** (Hanken Grotesk 500, 0.8125rem, 0.14em tracking, uppercase): Nav, badges, form labels, attribution.
 - **Marquee** (Hanken Grotesk 600, clamp(3.5rem, 17vw, 15rem), line-height 0.95, -0.03em): Decorative scroll-band type only — outlined or apricot-filled, never an H1.
 
 ### Named Rules
 
-**The Termina-Display Rule.** Termina is used at Headline size and above only. Below ~1.75rem, switch to Hanken Grotesk. Wide geometric caps at paragraph size are a legibility bug, not energy.
+**The Syne-Display Rule.** Syne is used at Headline size and above only. Below ~1.75rem, switch to Hanken Grotesk. Display sans at paragraph size is a legibility bug, not energy.
 
 **The One Kicker Rule.** At most one uppercase tracked label per section, and only when it names a category. Section titles stand alone.
 
@@ -252,7 +252,7 @@ Shadows appear as **state feedback** or **photo-panel depth**:
 
 - **Layout:** 12-col grid; copy (7) overlaps image (5) via negative margin + z-index. Radial orange floodlight wash top-right.
 - **Image stack:** Offset apricot accent block behind a square photo; clip-path wipe reveal; bottom gradient scrim.
-- **Type:** Line-by-line Termina H1 reveal; one accent word in Apricot.
+- **Type:** Line-by-line Syne H1 reveal; one accent word in Apricot.
 - **Motion:** GSAP one-shot timeline + scroll parallax; gated + visible-by-default without JS.
 
 ### Layered Showcase (signature)
@@ -273,17 +273,17 @@ Shadows appear as **state feedback** or **photo-panel depth**:
 ### Bento Feature Grid (signature)
 
 - **Layout:** `sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2`; first item 2×2 leading. Deepest-ink feature tile among raised neighbours.
-- **Content:** Sequence number (Termina/Apricot) + title + body + arrow CTA.
+- **Content:** Sequence number (Syne/Apricot) + title + body + arrow CTA.
 
 ### Service Row (signature)
 
-- **Layout:** Full-width row — accent number (Termina, Action Orange) + Title + circular arrow (40px, 1px ring).
+- **Layout:** Full-width row — accent number (Syne, Action Orange) + Title + circular arrow (40px, 1px ring).
 - **Hover:** Title shifts 4px right; arrow rotates 45°. 220ms ease-out.
 
 ### Blog Article (long-form — provided reference)
 
-- **Hero:** Full-bleed dark photo, orange category **badge**, giant Termina title, author + date + comments meta row.
-- **Body:** Single readable column on the wave base; **drop-cap** opening letter (large, light); section H2 in Termina.
+- **Hero:** Full-bleed dark photo, orange category **badge**, giant Syne title, author + date + comments meta row.
+- **Body:** Single readable column on the wave base; **drop-cap** opening letter (large, light); section H2 in Syne.
 - **Pull-quote:** Raised charcoal panel, Body-large quote, attribution preceded by a short **orange dash** rule (see the "Piter Bowman" reference).
 - **Rail (optional):** Floating squared Action Orange action buttons (share / bag / etc.) fixed to the right edge.
 
@@ -304,7 +304,7 @@ Shadows appear as **state feedback** or **photo-panel depth**:
 
 ### Logo (brand asset)
 
-- **Treatment:** High-contrast Didone wordmark (Bodoni Moda), Action Orange on dark. Ship as SVG where possible; never re-typeset the mark in Termina.
+- **Treatment:** High-contrast Didone wordmark (Bodoni Moda), Action Orange on dark. Ship as SVG where possible; never re-typeset the mark in Syne.
 
 ## 6. Do's and Don'ts
 
@@ -312,13 +312,13 @@ Shadows appear as **state feedback** or **photo-panel depth**:
 
 - **Do** keep the whole site dark: one neutral ground (`#0A0A0A`) under a single soft-wave glow. No light sections.
 - **Do** ship high-energy layout — overlap, parallax, bento asymmetry, brand-logo strip, scroll type — modelled on FitFlex.
-- **Do** set titles in Termina (display/headline); keep Hanken for body and small titles; keep Bodoni only for the logo.
+- **Do** set titles in Syne (display/headline); keep Hanken for body and small titles; keep Bodoni only for the logo.
 - **Do** let base bands stay transparent so the soft wave flows through; use Secondary `#222222` panels for cards and reading rooms.
 - **Do** use Primary `#FF5F00` fills/badges with neutral text; use Primary/Apricot for orange text on dark.
 - **Do** keep body copy ≥4.5:1 (Text Primary/Secondary/Muted); reserve Gray Mist for decoration and the logo strip.
 - **Do** keep every corner square (0px radius).
 - **Do** layer content — overlapping panels and offset stacks, never flat card grids.
-- **Do** style long-form like the references: orange badge, giant Termina title, drop-cap opener, orange-dash pull-quotes.
+- **Do** style long-form like the references: orange badge, giant Syne title, drop-cap opener, orange-dash pull-quotes.
 - **Do** respect `prefers-reduced-motion`; gate GSAP and marquees behind JS; keep content visible without animation.
 - **Do** write in pt-PT with `tu` address and action verbs; cap hero/article H1 at 5.5rem and test PT overflow at tablet widths.
 
@@ -326,7 +326,7 @@ Shadows appear as **state feedback** or **photo-panel depth**:
 
 - **Don't** introduce a light mode or a cream/beige/white section — the site is always dark (Always-Dark Rule).
 - **Don't** break the wave with flat solid section bands — base bands stay transparent; other bands use translucent tints (Soft-Wave Rule).
-- **Don't** set Termina below ~1.75rem, or re-typeset the Didone logo in Termina.
+- **Don't** set Syne below ~1.75rem, or re-typeset the Didone logo in Syne.
 - **Don't** use hardcore gym aesthetics (black + orange with no elegance or editorial restraint).
 - **Don't** go corporate cold — gray-only palettes with no personality.
 - **Don't** build identical icon + heading + text card grids (SaaS cliché).

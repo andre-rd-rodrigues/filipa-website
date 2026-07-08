@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bodoni_Moda, Hanken_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -8,33 +9,26 @@ import { site } from "@/lib/site";
 
 /**
  * Fonts:
+ * - Termina (--font-termina): display / titles, local .otf (Thin→Heavy).
  * - Hanken Grotesk (--font-hanken): body / UI, from Google.
  * - Bodoni Moda (--font-bodoni): the Didone brand wordmark ONLY (logo asset).
- * - Termina (--font-termina): the wide geometric title face (self-hosted).
- *
- * ── ACTIVATE TERMINA ──────────────────────────────────────────────────────
- * Termina is a commercial Nootype face (no Google build). To turn it on:
- *   1. Drop your licensed .woff2 files in `app/fonts/` with these exact names:
- *        Termina-Medium.woff2  (500)
- *        Termina-Demi.woff2    (600)
- *        Termina-Bold.woff2    (700)
- *   2. Uncomment the `localFont` import above and the `termina` block below.
- *   3. Add `termina.variable` to the <html> className list.
- * `--font-display` in globals.css already lists `--font-termina` first, so it
- * takes over automatically; until then titles fall back to Hanken. See
- * `app/fonts/README.md`.
  */
-// import localFont from "next/font/local";
-//
-// const termina = localFont({
-//   variable: "--font-termina",
-//   display: "swap",
-//   src: [
-//     { path: "./fonts/Termina-Medium.woff2", weight: "500", style: "normal" },
-//     { path: "./fonts/Termina-Demi.woff2", weight: "600", style: "normal" },
-//     { path: "./fonts/Termina-Bold.woff2", weight: "700", style: "normal" },
-//   ],
-// });
+
+const termina = localFont({
+  variable: "--font-termina",
+  display: "swap",
+  src: [
+    { path: "./fonts/TerminaTest-Thin.otf", weight: "100", style: "normal" },
+    { path: "./fonts/TerminaTest-ExtraLight.otf", weight: "200", style: "normal" },
+    { path: "./fonts/TerminaTest-Light.otf", weight: "300", style: "normal" },
+    { path: "./fonts/TerminaTest-Regular.otf", weight: "400", style: "normal" },
+    { path: "./fonts/TerminaTest-Medium.otf", weight: "500", style: "normal" },
+    { path: "./fonts/TerminaTest-Demi.otf", weight: "600", style: "normal" },
+    { path: "./fonts/TerminaTest-Bold.otf", weight: "700", style: "normal" },
+    { path: "./fonts/TerminaTest-Black.otf", weight: "800", style: "normal" },
+    { path: "./fonts/TerminaTest-Heavy.otf", weight: "900", style: "normal" },
+  ],
+});
 
 const bodoni = Bodoni_Moda({
   subsets: ["latin"],
@@ -74,8 +68,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-PT"
-      // Add `${termina.variable}` here once the Termina block above is active.
-      className={`${bodoni.variable} ${hanken.variable} h-full antialiased`}
+      className={`${termina.variable} ${bodoni.variable} ${hanken.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <SiteHeader />

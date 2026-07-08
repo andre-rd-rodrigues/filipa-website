@@ -1,8 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Container } from "@/components/container";
 import { Section } from "@/components/section";
+import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
 import { ButtonLink } from "@/components/button";
 import {
@@ -88,15 +87,6 @@ function BodyContent({ blocks }: { blocks: BodyBlock[] }) {
   );
 }
 
-/** Author initials for the meta avatar (e.g. "Filipa Marques" → "FM"). */
-function initials(name: string): string {
-  return name
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((part) => part.charAt(0).toUpperCase())
-    .join("");
-}
-
 export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
   const { slug } = await props.params;
   const post = await getPostBySlug(slug);
@@ -104,73 +94,22 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
 
   return (
     <>
-      {/* Full-bleed cinematic article hero: cover photo + orange badge + giant
-          Termina title + author meta, centred over a dark scrim. */}
-      <header className="relative isolate overflow-hidden bg-ink text-fg-inverse">
-        <div aria-hidden className="absolute inset-0">
-          <Image
-            src={post.coverImage.src}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-ink/75 via-ink/45 to-ink" />
-        </div>
+      <PageHero title={post.title} />
 
-        <Container className="relative pb-[clamp(2.5rem,6vw,4.5rem)] pt-[clamp(9rem,18vw,13rem)]">
-          <Link
-            href="/blog"
-            className="eyebrow inline-flex items-center gap-2 text-fg-inverse-muted transition-colors hover:text-apricot"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-              <path
-                d="M15 8H2M7 3L2 8l5 5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            Blog
-          </Link>
-
-          <div className="mx-auto mt-8 max-w-3xl text-center">
-            <span className="inline-flex bg-action px-3.5 py-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-ink">
-              {post.category}
-            </span>
-
-            <h1 className="font-display mt-6 text-balance text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.03]">
-              {post.title}
-            </h1>
-
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[0.875rem] text-fg-inverse-muted">
-              <span className="flex items-center gap-2">
-                <span
-                  aria-hidden
-                  className="flex h-7 w-7 items-center justify-center bg-action text-[0.7rem] font-bold text-ink"
-                >
-                  {initials(post.author)}
-                </span>
-                <span className="font-semibold uppercase tracking-[0.08em] text-fg-inverse">
-                  {post.author}
-                </span>
-              </span>
-              <span aria-hidden className="h-1 w-1 bg-fg-inverse-muted" />
-              <time dateTime={post.publishedAt}>
-                {formatPostDate(post.publishedAt)}
-              </time>
-              <span aria-hidden className="h-1 w-1 bg-fg-inverse-muted" />
-              <span>{post.readingMinutes} min de leitura</span>
-            </div>
-          </div>
-        </Container>
-      </header>
-
-      {/* Body */}
       <Section tone="page" narrow>
         <Reveal>
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center text-[0.8125rem] uppercase tracking-[0.12em] text-fg-muted">
+            <span className="text-action-deep">{post.category}</span>
+            <span aria-hidden className="h-3 w-px bg-[color:var(--border-stone)]" />
+            <time dateTime={post.publishedAt}>{formatPostDate(post.publishedAt)}</time>
+            <span aria-hidden className="h-3 w-px bg-[color:var(--border-stone)]" />
+            <span>{post.readingMinutes} min de leitura</span>
+            <span aria-hidden className="h-3 w-px bg-[color:var(--border-stone)]" />
+            <span>{post.author}</span>
+          </div>
+        </Reveal>
+
+        <Reveal className="mt-10">
           <BodyContent blocks={post.body} />
         </Reveal>
 

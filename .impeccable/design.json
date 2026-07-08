@@ -83,10 +83,10 @@
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Hero H1 and blog-article titles. Termina wide geometric sans, max 5.5rem. Falls back to Hanken until Termina is loaded."
+        "purpose": "Hero H1 and blog-article titles. Syne geometric sans (700), max 5.5rem."
       },
-      "headline": { "displayName": "Headline", "purpose": "Section H2. Termina, one per section." },
-      "title": { "displayName": "Title", "purpose": "Card titles, course names, FAQ. Hanken Grotesk — Termina too wide below ~1.75rem." },
+      "headline": { "displayName": "Headline", "purpose": "Section H2. Syne 700, one per section." },
+      "title": { "displayName": "Title", "purpose": "Card titles, course names, FAQ. Hanken Grotesk — Syne too heavy below ~1.75rem." },
       "body": { "displayName": "Body", "purpose": "All prose. Hanken Grotesk, 65–75ch, white-on-neutral." },
       "label": { "displayName": "Label", "purpose": "Nav, badges, form labels. Uppercase 0.14em tracking." }
     },
@@ -161,14 +161,14 @@
       "kind": "custom",
       "description": "Numbered service list row with arrow hover on dark — signature pattern.",
       "html": "<a class=\"ds-service-row\" href=\"#\"><span class=\"ds-service-num\">01</span><span class=\"ds-service-title\">Coaching individual</span><span class=\"ds-service-arrow\" aria-hidden=\"true\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3 8h10M9 4l4 4-4 4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span></a>",
-      "css": ".ds-service-row { display: flex; align-items: center; gap: 24px; padding: 32px 0; border-bottom: 1px solid #2E2E2E; color: #FFFFFF; text-decoration: none; } .ds-service-num { font-family: \"Termina\", \"Hanken Grotesk\", sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: #FF5F00; min-width: 3.5rem; } .ds-service-title { flex: 1; font-family: \"Hanken Grotesk\", system-ui, sans-serif; font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 600; letter-spacing: -0.01em; transition: transform 220ms cubic-bezier(0.25,0.1,0.25,1); } .ds-service-arrow { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.25); border-radius: 0; color: #FFFFFF; transition: transform 220ms cubic-bezier(0.25,0.1,0.25,1), border-color 220ms; } .ds-service-row:hover .ds-service-title { transform: translateX(4px); } .ds-service-row:hover .ds-service-arrow { transform: rotate(45deg); border-color: #FF5F00; }"
+      "css": ".ds-service-row { display: flex; align-items: center; gap: 24px; padding: 32px 0; border-bottom: 1px solid #2E2E2E; color: #FFFFFF; text-decoration: none; } .ds-service-num { font-family: \"Syne\", \"Hanken Grotesk\", sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #FF5F00; min-width: 3.5rem; } .ds-service-title { flex: 1; font-family: \"Hanken Grotesk\", system-ui, sans-serif; font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 600; letter-spacing: -0.01em; transition: transform 220ms cubic-bezier(0.25,0.1,0.25,1); } .ds-service-arrow { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.25); border-radius: 0; color: #FFFFFF; transition: transform 220ms cubic-bezier(0.25,0.1,0.25,1), border-color 220ms; } .ds-service-row:hover .ds-service-title { transform: translateX(4px); } .ds-service-row:hover .ds-service-arrow { transform: rotate(45deg); border-color: #FF5F00; }"
     },
     {
       "name": "Layered Showcase",
       "kind": "custom",
       "description": "Overlapping dual photo panels with offset accent block on dark — FitFlex pattern.",
       "html": "<div class=\"ds-showcase\"><div class=\"ds-showcase-copy\"><span class=\"ds-showcase-eyebrow\">Uma abordagem que confias</span><h2 class=\"ds-showcase-title\">Mais do que treino mental</h2><p class=\"ds-showcase-body\">Ferramentas concretas para agir.</p></div><div class=\"ds-showcase-stack\"><div class=\"ds-showcase-accent\" aria-hidden=\"true\"></div><div class=\"ds-showcase-back\"></div><div class=\"ds-showcase-front\"></div></div></div>",
-      "css": ".ds-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; } .ds-showcase-eyebrow { font-family: \"Hanken Grotesk\", system-ui, sans-serif; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #FF5F00; } .ds-showcase-title { margin: 16px 0 0; font-family: \"Termina\", \"Hanken Grotesk\", sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 600; line-height: 1.05; letter-spacing: -0.02em; color: #FFFFFF; } .ds-showcase-body { margin: 24px 0 0; font-family: \"Hanken Grotesk\", system-ui, sans-serif; font-size: 1.125rem; line-height: 1.65; color: #9B9B9B; max-width: 36rem; } .ds-showcase-stack { position: relative; aspect-ratio: 4/5; max-width: 32rem; margin-inline: auto; } .ds-showcase-accent { position: absolute; right: 24px; top: 24px; width: 66%; height: 66%; background: rgba(255,95,0,0.14); } .ds-showcase-back { position: absolute; left: 0; top: 0; width: 68%; aspect-ratio: 3/4; background: #222222; box-shadow: 0 24px 60px rgba(0,0,0,0.45); } .ds-showcase-front { position: absolute; bottom: 0; right: 0; width: 58%; aspect-ratio: 3/4; background: #2A2A2A; box-shadow: 0 24px 60px rgba(0,0,0,0.6); outline: 8px solid #0A0A0A; }"
+      "css": ".ds-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; } .ds-showcase-eyebrow { font-family: \"Hanken Grotesk\", system-ui, sans-serif; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #FF5F00; } .ds-showcase-title { margin: 16px 0 0; font-family: \"Syne\", \"Hanken Grotesk\", sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; color: #FFFFFF; } .ds-showcase-body { margin: 24px 0 0; font-family: \"Hanken Grotesk\", system-ui, sans-serif; font-size: 1.125rem; line-height: 1.65; color: #9B9B9B; max-width: 36rem; } .ds-showcase-stack { position: relative; aspect-ratio: 4/5; max-width: 32rem; margin-inline: auto; } .ds-showcase-accent { position: absolute; right: 24px; top: 24px; width: 66%; height: 66%; background: rgba(255,95,0,0.14); } .ds-showcase-back { position: absolute; left: 0; top: 0; width: 68%; aspect-ratio: 3/4; background: #222222; box-shadow: 0 24px 60px rgba(0,0,0,0.45); } .ds-showcase-front { position: absolute; bottom: 0; right: 0; width: 58%; aspect-ratio: 3/4; background: #2A2A2A; box-shadow: 0 24px 60px rgba(0,0,0,0.6); outline: 8px solid #0A0A0A; }"
     },
     {
       "name": "Blog Pull-Quote",
@@ -180,18 +180,18 @@
     {
       "name": "Blog Hero Title",
       "kind": "custom",
-      "description": "Full-bleed article hero — orange badge + giant Termina title + meta (provided reference).",
+      "description": "Full-bleed article hero — orange badge + giant Syne title + meta (provided reference).",
       "html": "<header class=\"ds-arthero\"><span class=\"ds-arthero-badge\">Training</span><h1 class=\"ds-arthero-title\">5 ways to squat with a barbell properly</h1><p class=\"ds-arthero-meta\">Ashton Porter &middot; 17 Nov 2023 &middot; 0 Comments</p></header>",
-      "css": ".ds-arthero { padding: 40px 48px; background: #0A0A0A; text-align: center; } .ds-arthero-badge { display: inline-flex; padding: 6px 14px; background: #FF5F00; color: #0A0A0A; font-family: \"Hanken Grotesk\", system-ui, sans-serif; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; } .ds-arthero-title { margin: 20px 0 0; font-family: \"Termina\", \"Hanken Grotesk\", sans-serif; font-size: clamp(2.25rem, 5vw, 4rem); font-weight: 600; line-height: 1.05; letter-spacing: -0.02em; color: #FFFFFF; text-wrap: balance; } .ds-arthero-meta { margin: 20px 0 0; font-family: \"Hanken Grotesk\", system-ui, sans-serif; font-size: 0.9375rem; color: #9B9B9B; }"
+      "css": ".ds-arthero { padding: 40px 48px; background: #0A0A0A; text-align: center; } .ds-arthero-badge { display: inline-flex; padding: 6px 14px; background: #FF5F00; color: #0A0A0A; font-family: \"Hanken Grotesk\", system-ui, sans-serif; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; } .ds-arthero-title { margin: 20px 0 0; font-family: \"Syne\", \"Hanken Grotesk\", sans-serif; font-size: clamp(2.25rem, 5vw, 4rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; color: #FFFFFF; text-wrap: balance; } .ds-arthero-meta { margin: 20px 0 0; font-family: \"Hanken Grotesk\", system-ui, sans-serif; font-size: 0.9375rem; color: #9B9B9B; }"
     }
   ],
   "narrative": {
     "northStar": "The Floodlit Field at Night",
-    "overview": "Black is the stadium after dark; orange is the floodlight. This is a high-energy, always-dark brand surface — cinematic and modern. The whole site lives on a pure neutral ground (#0A0A0A) carrying one continuous soft wave: a warm primary glow (#FF5F00) that blooms from the top and dissolves smoothly down the entire page — the hero glow, extended, with no seams and no grain. Wide geometric Termina titles carry the energy; Hanken Grotesk keeps reading calm; vivid orange is the rare, deliberate light.\n\nThe core layout reference is FitFlex Personal Coach: dark hero, oversized bold titles, overlapping photo panels, brand-logo strip, orange category badges, numbered service lines. Long-form (blog) follows the provided references: full-bleed dark hero with orange badge and giant title, then a readable column with a drop-cap opener and orange-dash pull-quotes.",
+    "overview": "Black is the stadium after dark; orange is the floodlight. This is a high-energy, always-dark brand surface — cinematic and modern. The whole site lives on a pure neutral ground (#0A0A0A) carrying one continuous soft wave: a warm primary glow (#FF5F00) that blooms from the top and dissolves smoothly down the entire page — the hero glow, extended, with no seams and no grain. Syne titles carry the energy; Hanken Grotesk keeps reading calm; vivid orange is the rare, deliberate light.\n\nThe core layout reference is FitFlex Personal Coach: dark hero, oversized bold titles, overlapping photo panels, brand-logo strip, orange category badges, numbered service lines. Long-form (blog) follows the provided references: full-bleed dark hero with orange badge and giant title, then a readable column with a drop-cap opener and orange-dash pull-quotes.",
     "keyCharacteristics": [
       "Always dark: one neutral ground (#0A0A0A) under a single soft-wave glow; no light sections",
       "Soft-wave background — one continuous #FF5F00 radial bloom from the top, no grain, no seams",
-      "Termina wide geometric titles + Hanken Grotesk body; Bodoni Moda kept only for the logo",
+      "Syne display titles (700) + Hanken Grotesk body; Bodoni Moda kept only for the logo",
       "Palette: primary #FF5F00, secondary #222222 (panels), tertiary #FFFFFF (text), neutral #0A0A0A (ground)",
       "Squared corners everywhere (0px radius)",
       "Layered compositions: overlapping panels, bento asymmetry, brand-logo strip",
@@ -203,7 +203,7 @@
       { "name": "The Soft-Wave Rule", "body": "The background is ONE continuous soft wave: a single #FF5F00 radial bloom from the top of the body, dissolving smoothly down the whole document. No grain, no fixed tiling, no per-section glows. Base sections stay transparent; other bands use translucent tints, never flat solid blocks. Cards are the only solid surfaces (Secondary #222222).", "section": "colors" },
       { "name": "The Floodlight Rule", "body": "Orange is light, and light is rare. Combined primary coverage stays ≤12% of any screen.", "section": "colors" },
       { "name": "The Two-Orange Rule", "body": "Primary #FF5F00 fills buttons/badges (with neutral text) and sets large numbers, links, and eyebrows (clears AA as text on dark). Use Apricot #FF9E66 for softer highlights. Never white text on a primary fill.", "section": "colors" },
-      { "name": "The Termina-Display Rule", "body": "Termina at Headline size and above only. Below ~1.75rem, switch to Hanken Grotesk.", "section": "typography" },
+      { "name": "The Syne-Display Rule", "body": "Syne at Headline size and above only. Below ~1.75rem, switch to Hanken Grotesk.", "section": "typography" },
       { "name": "The One Kicker Rule", "body": "At most one uppercase tracked label per section, only when it names a category.", "section": "typography" },
       { "name": "The Warm-Shadow Rule", "body": "Interactive shadows are orange glows. Neutral shadows only on overlapping photo panels.", "section": "elevation" },
       { "name": "The Flat-By-Default Rule", "body": "Content rows use 1px separators, not card containers.", "section": "elevation" },
@@ -212,18 +212,18 @@
     "dos": [
       "Do keep the whole site dark: one neutral ground (#0A0A0A) under a single soft-wave glow. No light sections.",
       "Do ship high-energy layout — overlap, parallax, bento asymmetry, brand-logo strip — modelled on FitFlex.",
-      "Do set titles in Termina; keep Hanken for body and small titles; keep Bodoni only for the logo.",
+      "Do set titles in Syne; keep Hanken for body and small titles; keep Bodoni only for the logo.",
       "Do let base bands stay transparent so the soft wave flows; use Secondary #222222 panels for cards.",
       "Do use Primary #FF5F00 fills/badges with neutral text; use Primary/Apricot for orange text on dark.",
       "Do keep every corner square (0px radius).",
       "Do layer content instead of flat card grids.",
-      "Do style long-form like the references: orange badge, giant Termina title, drop-cap opener, orange-dash pull-quotes.",
+      "Do style long-form like the references: orange badge, giant Syne title, drop-cap opener, orange-dash pull-quotes.",
       "Do respect prefers-reduced-motion; gate GSAP and marquees behind JS."
     ],
     "donts": [
       "Don't introduce a light mode or a cream/beige/white section — the site is always dark.",
       "Don't break the wave with flat solid section bands — base bands stay transparent; other bands use translucent tints.",
-      "Don't set Termina below ~1.75rem, or re-typeset the Didone logo in Termina.",
+      "Don't set Syne below ~1.75rem, or re-typeset the Didone logo in Syne.",
       "Don't use hardcore gym aesthetics (black + orange with no elegance).",
       "Don't go corporate cold — gray-only palettes with no personality.",
       "Don't build identical icon + heading + text card grids (SaaS cliché).",

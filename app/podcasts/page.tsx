@@ -45,18 +45,7 @@ function PlatformLinks({
 export default function PodcastsPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Podcasts"
-        title="Conversas sobre mente e desporto."
-        description="Episódios curtos e directos sobre PNL, inteligência emocional e a cabeça de quem compete."
-      >
-        <ButtonLink href={primaryCta.href} variant="primary">
-          {primaryCta.label}
-        </ButtonLink>
-        <ButtonLink href="#episodios" variant="secondary-dark">
-          Ouvir episódios
-        </ButtonLink>
-      </PageHero>
+      <PageHero title="Podcasts" />
 
       {/* Featured / latest episode */}
       <Section tone="page">
