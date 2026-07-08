@@ -12,7 +12,7 @@ import { QuoteBand } from "@/components/quote-band";
 import { InstagramStrip } from "@/components/instagram-strip";
 import { site } from "@/lib/site";
 import { getLatestPosts, formatPostDate } from "@/lib/blog";
-import { episodes } from "@/app/podcast/data";
+import { episodes } from "@/app/(site)/podcast/data";
 
 const latestEpisodes = episodes.slice(0, 3);
 

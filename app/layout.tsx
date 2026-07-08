@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import { Bodoni_Moda, Hanken_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
-import { Consent } from "@/components/consent";
 import { site } from "@/lib/site";
 
 /**
@@ -65,12 +62,7 @@ export default function RootLayout({
       lang="pt-PT"
       className={`${termina.variable} ${bodoni.variable} ${hanken.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
-        <Consent />
-      </body>
+      <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
 }
