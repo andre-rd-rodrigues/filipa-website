@@ -207,12 +207,12 @@ export function Hero() {
 
           <div
             data-anim="fade"
-            className="mt-9 flex flex-wrap justify-center gap-4"
+            className="mt-9 flex w-full max-w-sm flex-col gap-4 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center"
           >
-            <ButtonLink href="/contactos" variant="primary">
+            <ButtonLink href="/contactos" variant="primary" className="w-full sm:w-auto">
               Marcar conversa
             </ButtonLink>
-            <ButtonLink href="/servicos" variant="secondary-dark">
+            <ButtonLink href="/servicos" variant="secondary-dark" className="w-full sm:w-auto">
               Conhecer serviços
             </ButtonLink>
           </div>

@@ -124,7 +124,7 @@ export function LayeredShowcase({
         </div>
         {cta ? (
           <div className="mt-9">
-            <ButtonLink href={cta.href} variant="secondary">
+            <ButtonLink href={cta.href} variant="secondary" className="w-full sm:w-auto">
               {cta.label}
             </ButtonLink>
           </div>

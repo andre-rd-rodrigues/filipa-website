@@ -70,7 +70,7 @@ export function HighlightStrip({ items }: { items: HighlightItem[] }) {
             <h3 className="font-body text-2xl font-semibold tracking-[-0.01em] text-fg-inverse">
               {item.label}
             </h3>
-            <p className="text-pretty mt-3 max-w-xs leading-relaxed text-fg-inverse-muted">
+            <p className="text-pretty mt-3 w-full leading-relaxed text-fg-inverse-muted">
               {item.body}
             </p>
             <span className="mt-6 inline-flex items-center gap-2 font-body text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-action-deep">

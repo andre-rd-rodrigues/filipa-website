@@ -105,7 +105,7 @@ export default async function Home() {
               Conversas para ouvir e aplicar.
             </h2>
           </Reveal>
-          <Reveal>
+          <Reveal className="hidden sm:block">
             <Link
               href="/podcast"
               className="font-body text-sm font-semibold uppercase tracking-[0.06em] text-action-deep underline-offset-4 hover:text-action-hover hover:underline"
@@ -140,6 +140,15 @@ export default async function Home() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="mt-10 sm:hidden">
+          <Link
+            href="/podcast"
+            className="font-body text-sm font-semibold uppercase tracking-[0.06em] text-action-deep underline-offset-4 hover:text-action-hover hover:underline"
+          >
+            Ver todos os episódios
+          </Link>
+        </Reveal>
       </Section>
 
       {/* Quote band — dim copy with cursor spotlight reveal */}
@@ -166,7 +175,7 @@ export default async function Home() {
                 Ideias para levar contigo.
               </h2>
             </Reveal>
-            <Reveal>
+            <Reveal className="hidden sm:block">
               <Link
                 href="/blog"
                 className="font-body text-sm font-semibold uppercase tracking-[0.06em] text-action-deep underline-offset-4 hover:text-action-hover hover:underline"
@@ -226,6 +235,15 @@ export default async function Home() {
                   </svg>
                 </span>
               </div>
+            </Link>
+          </Reveal>
+
+          <Reveal className="mt-10 sm:hidden">
+            <Link
+              href="/blog"
+              className="font-body text-sm font-semibold uppercase tracking-[0.06em] text-action-deep underline-offset-4 hover:text-action-hover hover:underline"
+            >
+              Ver todos os artigos
             </Link>
           </Reveal>
         </Section>

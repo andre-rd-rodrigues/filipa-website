@@ -14,7 +14,6 @@ import { useEffect, useState, type CSSProperties } from "react";
  *   aria-hidden.
  * - Under `prefers-reduced-motion: reduce` it collapses to a single static,
  *   centered phrase with no horizontal motion.
- * - Hovering pauses the scroll.
  */
 export function MarqueeStrip({
   text,
