@@ -20,7 +20,7 @@ export function MarqueeStrip({
   text,
   separator = "◆",
   reverse = true,
-  durationSec = 26,
+  durationSec = 200,
   repeat = 6,
 }: {
   /** The phrase to repeat across the strip. */

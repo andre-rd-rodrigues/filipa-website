@@ -51,7 +51,7 @@ export function Consent() {
             <p className="max-w-2xl text-[0.9375rem] leading-relaxed text-fg-inverse-muted">
               Usamos cookies para analisar o tráfego do site com o Google Analytics e
               melhorar a tua experiência. Podes aceitar ou recusar. Sabe mais na{" "}
-              <Link href="/cookies" className="text-apricot underline underline-offset-2">
+              <Link href="/cookies" className="text-action underline underline-offset-2">
                 Política de Cookies
               </Link>
               .

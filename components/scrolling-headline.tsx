@@ -139,9 +139,9 @@ export function ScrollingHeadline({
   const isDark = tone === "dark";
   const strokeColor = isDark ? "rgba(250,250,250,0.32)" : "rgba(23,23,23,0.24)";
   const textStyle = accent
-    ? { color: isDark ? "var(--apricot)" : "var(--action)" }
+    ? { color: "var(--action)" }
     : { color: "transparent", WebkitTextStroke: `1.5px ${strokeColor}` };
-  const accentColor = isDark ? "var(--apricot)" : "var(--action)";
+  const accentColor = "var(--action)";
 
   const wordClass =
     "font-body text-[clamp(3.5rem,17vw,15rem)] font-semibold leading-[0.95] tracking-[-0.03em] select-none";
@@ -169,7 +169,7 @@ export function ScrollingHeadline({
     >
       {eyebrow ? (
         <div className="mx-auto mb-8 w-full max-w-[80rem] px-5 sm:px-8">
-          <span className={`eyebrow ${isDark ? "text-apricot" : "text-action-deep"}`}>
+          <span className={`eyebrow ${isDark ? "text-action" : "text-action-deep"}`}>
             {eyebrow}
           </span>
         </div>

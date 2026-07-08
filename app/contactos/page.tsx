@@ -3,6 +3,10 @@ import { Section } from "@/components/section";
 import { Eyebrow } from "@/components/eyebrow";
 import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
+import { ButtonLink } from "@/components/button";
+import { FaqAccordion } from "@/components/faq-accordion";
+import { NewsletterForm } from "@/components/newsletter-form";
+import { EditorialImage } from "@/components/editorial-image";
 import { contact, socials } from "@/lib/site";
 import { ContactForm } from "./contact-form";
 
@@ -24,6 +28,16 @@ const faqs = [
       "As duas. Faço sessões presenciais em Portugal e online por videochamada, para que a distância nunca seja um obstáculo.",
   },
   {
+    question: "Preciso de ter um problema para começar coaching?",
+    answer:
+      "Não. O coaching é tanto para resolver bloqueios como para elevar quem já está bem e quer chegar mais longe. O ponto de partida és tu e os teus objetivos.",
+  },
+  {
+    question: "Quanto tempo demora a ver resultados?",
+    answer:
+      "Depende de ti e do que procuras, mas sais logo da primeira sessão com clareza e um próximo passo concreto. A maioria nota diferenças reais nas primeiras semanas.",
+  },
+  {
     question: "O que partilho fica confidencial?",
     answer:
       "Sempre. Tudo o que falamos é confidencial e tratado com o cuidado que mereces — é a base para trabalharmos com confiança.",
@@ -35,7 +49,7 @@ export default function ContactosPage() {
     <>
       <PageHero title="Contactos" />
 
-      <Section tone="page">
+      <Section tone="page" id="form">
         <div className="grid gap-x-14 gap-y-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
           {/* LEFT — the form */}
           <Reveal>
@@ -52,9 +66,17 @@ export default function ContactosPage() {
             </div>
           </Reveal>
 
-          {/* RIGHT — direct contact details */}
+          {/* RIGHT — profile image + direct contact details */}
           <Reveal delay={80}>
             <div className="lg:pl-2">
+              <EditorialImage
+                src="/img/profile-2.jpg"
+                alt="Retrato de Filipa Marques"
+                ornament="hatch"
+                sizes="(max-width: 1024px) 90vw, 38vw"
+                className="mb-10"
+              />
+
               <h3 className="eyebrow text-fg-muted">Contacto directo</h3>
 
               <dl className="mt-6 space-y-6">
@@ -126,30 +148,31 @@ export default function ContactosPage() {
         </div>
       </Section>
 
-      {/* Reassurance — light FAQ */}
-      <Section tone="muted">
-        <Reveal>
-          <Eyebrow className="mb-4">Antes de marcares</Eyebrow>
-          <h2 className="font-display max-w-2xl text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-            O essencial, sem rodeios.
-          </h2>
-        </Reveal>
+      {/* FAQ — accordion over dark band */}
+      <Section tone="dark">
+        <div className="grid gap-x-16 gap-y-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+          {/* LEFT — intro + CTA */}
+          <Reveal>
+            <Eyebrow tone="dark" className="mb-4">
+              Perguntas &amp; respostas
+            </Eyebrow>
+            <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1] text-fg-inverse">
+              Perguntas frequentes
+            </h2>
+            <p className="text-pretty mt-4 max-w-md text-lg leading-relaxed text-fg-inverse-muted">
+              O essencial antes de marcares, sem rodeios. Se ficar alguma dúvida,
+              fala comigo — respondo a tudo.
+            </p>
+            <ButtonLink href="#form" className="mt-8">
+              Marcar conversa
+            </ButtonLink>
+          </Reveal>
 
-        <Reveal className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-3">
-          {faqs.map((faq) => (
-            <div
-              key={faq.question}
-              className="border-t border-[color:var(--border-stone)] pt-5"
-            >
-              <h3 className="font-body text-xl font-semibold tracking-[-0.01em]">
-                {faq.question}
-              </h3>
-              <p className="text-pretty mt-3 text-[1.0625rem] leading-relaxed text-fg-muted">
-                {faq.answer}
-              </p>
-            </div>
-          ))}
-        </Reveal>
+          {/* RIGHT — accordion */}
+          <Reveal delay={80}>
+            <FaqAccordion items={faqs} name="contact-faq" />
+          </Reveal>
+        </div>
       </Section>
     </>
   );

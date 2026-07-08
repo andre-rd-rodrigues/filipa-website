@@ -47,50 +47,68 @@ export function Hero() {
 
     let ctx: { revert: () => void } | undefined;
 
-    (async () => {
-      const { gsap } = await import("gsap");
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+    // Hide the animated bits synchronously (before paint) so the portrait is
+    // never shown fully before the clip-path wipe runs. This class is gated in
+    // globals.css, so no-JS / headless renders keep the content fully visible.
+    el.classList.add("gsap-ready");
 
-      // Only now hide the animated bits (class-gated in globals.css) so the
-      // hero is never blank for no-JS / headless renders.
-      el.classList.add("gsap-ready");
+    (async () => {
+      let gsap: typeof import("gsap").gsap;
+      try {
+        const gsapMod = await import("gsap");
+        const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        gsap = gsapMod.gsap;
+        gsap.registerPlugin(ScrollTrigger);
+      } catch {
+        // If GSAP can't load, don't leave the hero hidden forever.
+        el.classList.remove("gsap-ready");
+        return;
+      }
 
       ctx = gsap.context((self) => {
         const q = self.selector!;
 
-        const tl = gsap.timeline({
-          defaults: { ease: "power4.out", duration: 0.9 },
+        // Initial states for the entrance.
+        gsap.set(q('[data-anim="line"]'), { yPercent: 110 });
+        gsap.set(q('[data-anim="fade"]'), { y: 24 });
+        gsap.set(q('[data-anim="cover"]'), {
+          scale: 1.06,
+          transformOrigin: "50% 100%",
         });
 
+        const tl = gsap.timeline({
+          defaults: { ease: "power3.out", duration: 0.9 },
+        });
+
+        // Portrait: the clip-path wipe and the zoom-out settle together over a
+        // longer, softer curve so the reveal glides instead of snapping.
         tl.to(q('[data-anim="cover"]'), {
           clipPath: "inset(0 0 0% 0)",
-          duration: 1.1,
-          ease: "expo.out",
+          scale: 1,
+          duration: 1.5,
+          ease: "power4.out",
         })
           .to(
             q('[data-anim="line"]'),
-            { opacity: 1, yPercent: 0, stagger: 0.12, duration: 0.8 },
-            "-=0.6",
+            { opacity: 1, yPercent: 0, stagger: 0.12, duration: 0.9 },
+            "-=1.05",
           )
           .to(
             q('[data-anim="fade"]'),
-            { opacity: 1, y: 0, stagger: 0.1, duration: 0.7 },
-            "-=0.5",
+            { opacity: 1, y: 0, stagger: 0.1, duration: 0.8 },
+            "-=0.7",
           );
 
-        gsap.set(q('[data-anim="line"]'), { yPercent: 110 });
-        gsap.set(q('[data-anim="fade"]'), { y: 24 });
-
-        // Scroll parallax: drift the portrait as the hero scrolls away.
+        // Scroll parallax: drift the portrait as the hero scrolls away. A
+        // smoothed scrub (vs. 1:1) keeps the movement fluid and lag-free.
         gsap.to(q('[data-anim="cover"] img'), {
-          yPercent: 10,
+          yPercent: 8,
           ease: "none",
           scrollTrigger: {
             trigger: el,
             start: "top top",
             end: "bottom top",
-            scrub: true,
+            scrub: 0.8,
           },
         });
       }, el);
@@ -152,7 +170,7 @@ export function Hero() {
           {/* Cutout portrait — revealed with a clip-path wipe */}
           <div
             data-anim="cover"
-            className="relative z-[var(--z-raised)] w-full max-w-[32rem] sm:max-w-[38rem] lg:max-w-[42rem]"
+            className="relative z-[var(--z-raised)] w-full max-w-[28rem] sm:max-w-[32rem] lg:max-w-[36rem]"
           >
             <Image
               src="/img/profile.png"
@@ -160,7 +178,7 @@ export function Hero() {
               width={3000}
               height={3750}
               priority
-              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 38rem, 42rem"
+              sizes="(max-width: 640px) 90vw, (max-width: 1024px) 32rem, 36rem"
               className="h-auto w-full"
             />
           </div>

@@ -63,6 +63,10 @@
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* Allow height keywords (auto) to animate — used by the FAQ accordion.
+   * Ignored by browsers that don't support it; behaviour degrades to instant. */
+  interpolate-size: allow-keywords;
 }
 
 @theme inline {
@@ -129,6 +133,13 @@
 *::before,
 *::after {
   border-radius: 0 !important;
+}
+
+/* Deliberate exception to the Squared-Corner Rule: the floating Instagram
+ * badge is intentionally a circle (see components/instagram-strip.tsx). A
+ * class selector outranks the universal reset above, so it wins the cascade. */
+.insta-badge {
+  border-radius: 9999px !important;
 }
 
 html {
@@ -343,6 +354,29 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .marquee-track {
     animation: none;
+  }
+}
+
+/* ── FAQ accordion: smooth open/close (progressive enhancement) ──
+ * Native <details> normally snaps open. In browsers that support the
+ * ::details-content pseudo-element (and interpolate-size for auto → keyword
+ * animation) the answer height eases open, with the text fading in behind it.
+ * Unsupported browsers keep the instant native behaviour; no JS required. */
+@media (prefers-reduced-motion: no-preference) {
+  .faq-item::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition:
+      block-size 0.32s var(--ease-out-quart),
+      content-visibility 0.32s allow-discrete;
+  }
+
+  .faq-item[open]::details-content {
+    block-size: auto;
+  }
+
+  .faq-item[open] > :not(summary) {
+    animation: fade-up 0.4s var(--ease-out-quart) 0.05s both;
   }
 }
 

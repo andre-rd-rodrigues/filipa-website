@@ -48,7 +48,7 @@ export function HighlightStrip({ items }: { items: HighlightItem[] }) {
           {/* Background photo — revealed on hover / focus (always shown on touch) */}
           <div
             aria-hidden
-            className="absolute inset-0 -z-10 opacity-100 transition-opacity duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100"
+            className="absolute inset-0 -z-10 opacity-100 transition-opacity duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] lg:opacity-60 lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100"
           >
             <Image
               src={item.image.src}
@@ -61,7 +61,7 @@ export function HighlightStrip({ items }: { items: HighlightItem[] }) {
           </div>
 
           {/* Number */}
-          <span className="font-display text-4xl text-apricot sm:text-5xl">
+          <span className="font-display text-4xl text-action-deep sm:text-5xl">
             {String(i + 1).padStart(2, "0")}
           </span>
 
@@ -73,7 +73,7 @@ export function HighlightStrip({ items }: { items: HighlightItem[] }) {
             <p className="text-pretty mt-3 max-w-xs leading-relaxed text-fg-inverse-muted">
               {item.body}
             </p>
-            <span className="mt-6 inline-flex items-center gap-2 font-body text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-apricot">
+            <span className="mt-6 inline-flex items-center gap-2 font-body text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-action-deep">
               Saber mais
               <Arrow />
             </span>

@@ -50,34 +50,51 @@ export function LayeredShowcase({
       ctx = gsap.context((self) => {
         const q = self.selector!;
 
-        // Different scrub speeds create the layered depth.
+        const scrollFor = (trigger: Element) => ({
+          trigger,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0.6,
+        });
+
+        // Entrance: a clip-path wipe with a gentle zoom-out and fade, staggered
+        // back-then-front, plays once as the block scrolls into view. Animates
+        // the inner images so it never conflicts with the parallax transform on
+        // the panel wrappers.
         gsap.fromTo(
-          q('[data-layer="back"]'),
-          { yPercent: -8 },
+          q('[data-layer] img'),
           {
-            yPercent: 8,
-            ease: "none",
+            clipPath: "inset(0 0 100% 0)",
+            scale: 1.12,
+            autoAlpha: 0,
+          },
+          {
+            clipPath: "inset(0 0 0% 0)",
+            scale: 1,
+            autoAlpha: 1,
+            duration: 1.1,
+            ease: "expo.out",
+            stagger: 0.18,
             scrollTrigger: {
               trigger: el,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
+              start: "top 78%",
+              once: true,
             },
           },
         );
+
+        // Subtle, equal-and-opposite counter-drift: the panels gently separate
+        // then converge as the block passes through the viewport. Amplitudes are
+        // small and mirrored so nothing ever leaves its inset bounds.
+        gsap.fromTo(
+          q('[data-layer="back"]'),
+          { yPercent: -6 },
+          { yPercent: 6, ease: "none", scrollTrigger: scrollFor(el) },
+        );
         gsap.fromTo(
           q('[data-layer="front"]'),
-          { yPercent: 12 },
-          {
-            yPercent: -12,
-            ease: "none",
-            scrollTrigger: {
-              trigger: el,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          },
+          { yPercent: 6 },
+          { yPercent: -6, ease: "none", scrollTrigger: scrollFor(el) },
         );
       }, el);
     })();
@@ -95,7 +112,7 @@ export function LayeredShowcase({
       {/* Copy */}
       <div className={imageFirst ? "lg:order-2" : ""}>
         <Eyebrow className="mb-4">{eyebrow}</Eyebrow>
-        <h2 className="font-display text-balance text-[clamp(2rem,4.2vw,3.5rem)] leading-[1.05]">
+        <h2 className="font-display text-balance text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1]">
           {title}
         </h2>
         <div className="mt-6 max-w-xl space-y-4 text-lg leading-relaxed text-fg-muted">
@@ -114,26 +131,21 @@ export function LayeredShowcase({
         ) : null}
       </div>
 
-      {/* Overlapping image stack */}
+      {/* Overlapping image stack. Panels are inset from the edges so the scroll
+          drift has room to move without ever leaving the frame. */}
       <div
-        className={`relative mx-auto aspect-[4/5] w-full max-w-lg ${imageFirst ? "lg:order-1" : ""}`}
+        className={`relative mx-auto aspect-[4/5] w-full max-w-md ${imageFirst ? "lg:order-1" : ""}`}
       >
-        {/* offset accent block, deepest layer */}
-        <div
-          aria-hidden
-          className="absolute right-6 top-6 h-2/3 w-2/3 bg-action/12"
-        />
-
         {/* back panel */}
         <div
           data-layer="back"
-          className="absolute left-0 top-0 aspect-[3/4] w-[68%] overflow-hidden bg-surface-muted shadow-[0_24px_60px_rgba(10,10,10,0.18)]"
+          className="absolute left-0 top-[7%] aspect-[3/4] w-[62%] overflow-hidden bg-surface-muted shadow-[0_24px_60px_rgba(10,10,10,0.18)] will-change-transform"
         >
           <Image
             src={images[0].src}
             alt={images[0].alt}
             fill
-            sizes="(max-width: 1024px) 60vw, 24vw"
+            sizes="(max-width: 1024px) 55vw, 22vw"
             className="object-cover"
           />
         </div>
@@ -141,13 +153,13 @@ export function LayeredShowcase({
         {/* front panel — sits on top, offset to the bottom-right */}
         <div
           data-layer="front"
-          className="absolute bottom-0 right-0 aspect-[3/4] w-[58%] overflow-hidden bg-surface-muted shadow-[0_24px_60px_rgba(10,10,10,0.28)] ring-8 ring-page"
+          className="absolute bottom-[7%] right-0 aspect-[3/4] w-[56%] overflow-hidden bg-surface-muted shadow-[0_24px_60px_rgba(10,10,10,0.28)] will-change-transform"
         >
           <Image
             src={images[1].src}
             alt={images[1].alt}
             fill
-            sizes="(max-width: 1024px) 50vw, 20vw"
+            sizes="(max-width: 1024px) 48vw, 19vw"
             className="object-cover"
           />
         </div>

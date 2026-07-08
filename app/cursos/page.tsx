@@ -183,7 +183,7 @@ export default function CursosPage() {
 
         <Reveal className="mt-10 divide-y divide-[color:var(--border-stone)] border-y border-[color:var(--border-stone)]">
           {faqs.map((faq) => (
-            <details key={faq.q} className="group py-5">
+            <details key={faq.q} className="faq-item group py-5">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold tracking-[-0.01em] text-fg [&::-webkit-details-marker]:hidden">
                 {faq.q}
                 <span
@@ -204,16 +204,18 @@ export default function CursosPage() {
       </Section>
 
       {/* Final CTA */}
-      <Section tone="ink" className="text-center">
-        <Reveal>
-          <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-            Ainda com dúvidas sobre qual curso é para ti?
-          </h2>
-          <p className="text-pretty mx-auto mt-5 max-w-xl text-lg leading-relaxed text-fg-inverse-muted">
-            Marca uma conversa. Percebemos juntos o teu contexto e escolhemos a
-            formação que te leva mais longe — sem compromisso.
-          </p>
-          <div className="mt-9 flex justify-center">
+      <Section tone="ink">
+        <Reveal className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+          <div className="max-w-2xl">
+            <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
+              Ainda com dúvidas sobre qual curso é para ti?
+            </h2>
+            <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-inverse-muted">
+              Marca uma conversa. Percebemos juntos o teu contexto e escolhemos a
+              formação que te leva mais longe — sem compromisso.
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-4">
             <ButtonLink href={primaryCta.href} variant="primary">
               {primaryCta.label}
             </ButtonLink>

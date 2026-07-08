@@ -9,7 +9,10 @@ import { site } from "@/lib/site";
 
 /**
  * Fonts:
- * - Termina (--font-termina): display / titles, local .otf (Thin→Heavy).
+ * - Termina (--font-termina): display / titles, licensed local Bold .otf.
+ *   Only the Bold cut is licensed; it's declared across the full weight range
+ *   so every display weight (all uses are 700/800) renders in real Termina —
+ *   including accented glyphs (é, ç, ã…) that the old trial cut lacked.
  * - Hanken Grotesk (--font-hanken): body / UI, from Google.
  * - Bodoni Moda (--font-bodoni): the Didone brand wordmark ONLY (logo asset).
  */
@@ -18,15 +21,7 @@ const termina = localFont({
   variable: "--font-termina",
   display: "swap",
   src: [
-    { path: "./fonts/TerminaTest-Thin.otf", weight: "100", style: "normal" },
-    { path: "./fonts/TerminaTest-ExtraLight.otf", weight: "200", style: "normal" },
-    { path: "./fonts/TerminaTest-Light.otf", weight: "300", style: "normal" },
-    { path: "./fonts/TerminaTest-Regular.otf", weight: "400", style: "normal" },
-    { path: "./fonts/TerminaTest-Medium.otf", weight: "500", style: "normal" },
-    { path: "./fonts/TerminaTest-Demi.otf", weight: "600", style: "normal" },
-    { path: "./fonts/TerminaTest-Bold.otf", weight: "700", style: "normal" },
-    { path: "./fonts/TerminaTest-Black.otf", weight: "800", style: "normal" },
-    { path: "./fonts/TerminaTest-Heavy.otf", weight: "900", style: "normal" },
+    { path: "./fonts/Termina-Bold.otf", weight: "100 900", style: "normal" },
   ],
 });
 

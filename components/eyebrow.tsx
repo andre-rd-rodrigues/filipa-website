@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 /**
  * Uppercase tracked label. One per section at most (One Kicker Rule).
- * `tone="dark"` uses apricot for use on dark backgrounds.
+ * `tone="dark"` uses the primary action colour for use on dark backgrounds.
  */
 export function Eyebrow({
   tone = "light",
@@ -13,7 +13,7 @@ export function Eyebrow({
   className?: string;
   children: ReactNode;
 }) {
-  const color = tone === "dark" ? "text-apricot" : "text-action-deep";
+  const color = tone === "dark" ? "text-action" : "text-action-deep";
   return (
     <span
       className={`eyebrow inline-block ${color} ${className}`}

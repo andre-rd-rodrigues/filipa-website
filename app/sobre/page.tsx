@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Section } from "@/components/section";
 import { Eyebrow } from "@/components/eyebrow";
 import { ButtonLink } from "@/components/button";
 import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
+import { EditorialImage } from "@/components/editorial-image";
 import { primaryCta, site } from "@/lib/site";
 import { approach, credentials } from "./data";
 
@@ -23,15 +23,12 @@ export default function SobrePage() {
       <Section tone="page">
         <Reveal className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
           <figure className="m-0">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-none bg-surface-muted">
-              <Image
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80"
-                alt="Retrato de Filipa Marques"
-                fill
-                sizes="(max-width: 1024px) 90vw, 38vw"
-                className="object-cover"
-              />
-            </div>
+            <EditorialImage
+              src="/img/profile-1.jpg"
+              alt="Retrato de Filipa Marques"
+              priority
+              sizes="(max-width: 1024px) 90vw, 38vw"
+            />
             <figcaption className="mt-3 text-[0.8125rem] text-fg-muted">
               Foto: Filipa Marques
             </figcaption>
@@ -79,7 +76,7 @@ export default function SobrePage() {
           {approach.map((item, i) => (
             <div key={item.title} className="flex flex-col">
               <span
-                className="font-display text-2xl text-apricot"
+                className="font-display text-2xl text-action"
                 aria-hidden
               >
                 {String(i + 1).padStart(2, "0")}
@@ -97,30 +94,42 @@ export default function SobrePage() {
 
       {/* Percurso & formação — clean editorial list */}
       <Section tone="surface">
-        <Reveal className="max-w-2xl">
-          <Eyebrow className="mb-4">Percurso &amp; formação</Eyebrow>
-          <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-            A base que sustenta o trabalho.
-          </h2>
-        </Reveal>
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-16">
+          <div>
+            <Reveal className="max-w-2xl">
+              <Eyebrow className="mb-4">Percurso &amp; formação</Eyebrow>
+              <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
+                A base que sustenta o trabalho.
+              </h2>
+            </Reveal>
 
-        <Reveal className="mt-12">
-          <ul className="max-w-3xl border-t border-[color:var(--border-stone)]">
-            {credentials.map((item) => (
-              <li
-                key={item.title}
-                className="grid gap-1.5 border-b border-[color:var(--border-stone)] py-6 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] sm:gap-8"
-              >
-                <h3 className="font-body text-lg font-semibold tracking-[-0.01em] text-fg">
-                  {item.title}
-                </h3>
-                <p className="text-pretty leading-relaxed text-fg-muted">
-                  {item.detail}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+            <Reveal className="mt-12">
+              <ul className="border-t border-[color:var(--border-stone)]">
+                {credentials.map((item) => (
+                  <li
+                    key={item.title}
+                    className="grid gap-1.5 border-b border-[color:var(--border-stone)] py-6 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] sm:gap-8"
+                  >
+                    <h3 className="font-body text-lg font-semibold tracking-[-0.01em] text-fg">
+                      {item.title}
+                    </h3>
+                    <p className="text-pretty leading-relaxed text-fg-muted">
+                      {item.detail}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
+
+          <Reveal delay={80} className="lg:sticky lg:top-28">
+            <EditorialImage
+              src="/img/profile-3.jpg"
+              alt="Filipa Marques em estúdio"
+              sizes="(max-width: 1024px) 90vw, 38vw"
+            />
+          </Reveal>
+        </div>
       </Section>
 
       {/* Quote band */}
@@ -129,29 +138,39 @@ export default function SobrePage() {
           <p className="font-display text-balance text-[clamp(1.75rem,4vw,3rem)] leading-[1.15]">
             &ldquo;{site.quote}&rdquo;
           </p>
-          <p className="eyebrow mt-6 text-apricot">
+          <p className="eyebrow mt-6 text-action">
             {site.name} — {site.tagline}
           </p>
         </Reveal>
       </Section>
 
       {/* Final CTA */}
-      <Section tone="page" className="text-center">
-        <Reveal>
-          <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-            Vamos pôr a tua cabeça a jogar a teu favor?
-          </h2>
-          <p className="mx-auto mt-5 max-w-lg text-pretty text-lg text-fg-muted">
-            Marca uma conversa e vê como o coaching e a PNL te podem ajudar a
-            chegar mais longe — dentro e fora de campo.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
-            <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>
-            <ButtonLink href="/servicos" variant="ghost">
-              Ver serviços
-            </ButtonLink>
-          </div>
-        </Reveal>
+      <Section tone="page">
+        <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <Reveal>
+            <EditorialImage
+              src="/img/profile-2.jpg"
+              alt="Filipa Marques com uma bola de futebol"
+              sizes="(max-width: 1024px) 90vw, 34vw"
+            />
+          </Reveal>
+
+          <Reveal delay={80}>
+            <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
+              Vamos pôr a tua cabeça a jogar a teu favor?
+            </h2>
+            <p className="mt-5 max-w-lg text-pretty text-lg text-fg-muted">
+              Marca uma conversa e vê como o coaching e a PNL te podem ajudar a
+              chegar mais longe — dentro e fora de campo.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>
+              <ButtonLink href="/servicos" variant="ghost">
+                Ver serviços
+              </ButtonLink>
+            </div>
+          </Reveal>
+        </div>
       </Section>
     </>
   );

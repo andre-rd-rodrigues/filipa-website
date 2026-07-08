@@ -62,7 +62,7 @@ const posts: BlogPost[] = [
     publishedAt: "2026-06-24",
     readingMinutes: 6,
     coverImage: {
-      src: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=1600&q=80",
+      src: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1600&q=80",
       alt: "Atleta a preparar-se antes do treino, concentração e respiração",
     },
     body: [

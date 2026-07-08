@@ -5,7 +5,9 @@ import { Eyebrow } from "@/components/eyebrow";
 import { ButtonLink } from "@/components/button";
 import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
-import { primaryCta } from "@/lib/site";
+import { QuoteBand } from "@/components/quote-band";
+import { EditorialImage } from "@/components/editorial-image";
+import { primaryCta, site } from "@/lib/site";
 import { audiences, services } from "./data";
 
 export const metadata: Metadata = {
@@ -21,16 +23,26 @@ export default function ServicosPage() {
 
       {/* Signature service-row list */}
       <Section tone="page">
-        <Reveal>
-          <Eyebrow className="mb-4">O que ofereço</Eyebrow>
-          <h2 className="font-display max-w-2xl text-balance text-[clamp(2rem,4vw,3.25rem)] leading-[1.1]">
-            Cada serviço, um caminho para agir com foco.
-          </h2>
-          <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-muted">
-            Do acompanhamento individual às formações para clubes — escolhe por
-            onde começar e falamos sobre o que faz sentido para ti.
-          </p>
-        </Reveal>
+        <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          <Reveal>
+            <Eyebrow className="mb-4">O que ofereço</Eyebrow>
+            <h2 className="font-display max-w-2xl text-balance text-[clamp(2rem,4vw,3.25rem)] leading-[1.1]">
+              Cada serviço, um caminho para agir com foco.
+            </h2>
+            <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-muted">
+              Do acompanhamento individual às formações para clubes — escolhe por
+              onde começar e falamos sobre o que faz sentido para ti.
+            </p>
+          </Reveal>
+
+          <Reveal delay={80}>
+            <EditorialImage
+              src="/img/profile-2.jpg"
+              alt="Filipa Marques com uma bola de futebol"
+              priority
+            />
+          </Reveal>
+        </div>
 
         <div className="mt-14 border-t border-[color:var(--border-stone)]">
           {services.map((service, i) => (
@@ -47,7 +59,7 @@ export default function ServicosPage() {
                 </span>
 
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-body text-[clamp(1.25rem,2vw,1.5rem)] font-semibold tracking-[-0.01em]">
+                  <h3 className="font-body text-[clamp(1.25rem,2vw,1.5rem)] font-semibold tracking-[-0.01em] transition-transform duration-[220ms] ease-out group-hover:translate-x-1">
                     {service.title}
                   </h3>
                   <p className="text-pretty mt-2 max-w-2xl text-[1.0625rem] leading-relaxed text-fg-muted">
@@ -70,7 +82,7 @@ export default function ServicosPage() {
 
                 <span
                   aria-hidden
-                  className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-none border border-[color:var(--border-stone)] text-fg transition-[border-color] duration-[220ms] ease-out group-hover:border-action"
+                  className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-none border border-[color:var(--border-stone)] text-fg transition-[border-color,background-color,color,transform] duration-[220ms] ease-out group-hover:translate-x-1 group-hover:border-action group-hover:bg-action group-hover:text-ink"
                 >
                   <svg
                     width="18"
@@ -101,40 +113,72 @@ export default function ServicosPage() {
           </h2>
         </Reveal>
 
-        <Reveal className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-3">
-          {audiences.map((audience) => (
-            <div
-              key={audience.title}
-              className="border-t border-[color:var(--border-stone)] pt-5"
-            >
-              <h3 className="font-body text-xl font-semibold tracking-[-0.01em]">
-                {audience.title}
-              </h3>
-              <p className="text-pretty mt-3 text-[1.0625rem] leading-relaxed text-fg-muted">
-                {audience.description}
-              </p>
-            </div>
-          ))}
+        <div className="mt-12 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16">
+          <Reveal>
+            <EditorialImage
+              src="/img/profile-1.jpg"
+              alt="Retrato de Filipa Marques"
+              sizes="(max-width: 1024px) 90vw, 38vw"
+            />
+          </Reveal>
+
+          <Reveal delay={80} className="space-y-8">
+            {audiences.map((audience) => (
+              <div
+                key={audience.title}
+                className="border-t border-[color:var(--border-stone)] pt-5"
+              >
+                <h3 className="font-body text-xl font-semibold tracking-[-0.01em]">
+                  {audience.title}
+                </h3>
+                <p className="text-pretty mt-3 text-[1.0625rem] leading-relaxed text-fg-muted">
+                  {audience.description}
+                </p>
+              </div>
+            ))}
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Quote band — cursor-spotlight reveal */}
+      <Section tone="dark" size="lg">
+        <Reveal>
+          <QuoteBand
+            eyebrow="Porquê trabalhar comigo"
+            quote={site.quote}
+            name={site.name}
+            title={site.tagline}
+          />
         </Reveal>
       </Section>
 
       {/* Final CTA */}
-      <Section tone="ink" className="text-center">
-        <Reveal>
-          <h2 className="font-display mx-auto max-w-2xl text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-            Não sabes por onde começar?
-          </h2>
-          <p className="text-pretty mx-auto mt-5 max-w-lg text-lg leading-relaxed text-fg-inverse-muted">
-            Marca uma conversa e descobrimos juntos qual o serviço que melhor
-            responde ao teu momento.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>
-            <ButtonLink href="/cursos" variant="secondary-dark">
-              Ver cursos
-            </ButtonLink>
-          </div>
-        </Reveal>
+      <Section tone="ink">
+        <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <Reveal>
+            <EditorialImage
+              src="/img/profile-3.jpg"
+              alt="Filipa Marques em estúdio"
+              sizes="(max-width: 1024px) 90vw, 34vw"
+            />
+          </Reveal>
+
+          <Reveal delay={80}>
+            <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
+              Não sabes por onde começar?
+            </h2>
+            <p className="text-pretty mt-5 max-w-lg text-lg leading-relaxed text-fg-inverse-muted">
+              Marca uma conversa e descobrimos juntos qual o serviço que melhor
+              responde ao teu momento.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>
+              <ButtonLink href="/cursos" variant="secondary-dark">
+                Ver cursos
+              </ButtonLink>
+            </div>
+          </Reveal>
+        </div>
       </Section>
     </>
   );

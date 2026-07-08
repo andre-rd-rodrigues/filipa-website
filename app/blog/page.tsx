@@ -135,16 +135,18 @@ export default async function BlogPage() {
       )}
 
       {/* CTA */}
-      <Section tone="ink" className="text-center">
-        <Reveal>
-          <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-            Queres aplicar isto ao teu contexto?
-          </h2>
-          <p className="text-pretty mx-auto mt-5 max-w-xl text-lg leading-relaxed text-fg-inverse-muted">
-            Marca uma conversa e transformamos estas ideias em ferramentas para
-            o teu treino, a tua equipa ou a tua carreira.
-          </p>
-          <div className="mt-9 flex justify-center">
+      <Section tone="ink">
+        <Reveal className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+          <div className="max-w-2xl">
+            <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
+              Queres aplicar isto ao teu contexto?
+            </h2>
+            <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-inverse-muted">
+              Marca uma conversa e transformamos estas ideias em ferramentas para
+              o teu treino, a tua equipa ou a tua carreira.
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-4">
             <ButtonLink href={primaryCta.href} variant="primary">
               {primaryCta.label}
             </ButtonLink>

@@ -44,7 +44,7 @@ export const courses: Course[] = [
       { label: "Inscrição", href: "/contactos", variant: "primary" },
     ],
     image: {
-      src: "https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=1200&q=80",
+      src: "https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=1200&q=80",
       alt: "Treinador a falar com a equipa em campo",
     },
   },
@@ -65,7 +65,7 @@ export const courses: Course[] = [
     ],
     ctas: [{ label: "Inscrição", href: "/contactos", variant: "primary" }],
     image: {
-      src: "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=1200&q=80",
+      src: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=1200&q=80",
       alt: "Atleta em momento de concentração e serenidade",
     },
   },
@@ -86,7 +86,7 @@ export const courses: Course[] = [
     ],
     ctas: [{ label: "Lista de espera", href: "/contactos", variant: "secondary" }],
     image: {
-      src: "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80",
+      src: "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=1200&q=80",
       alt: "Equipa reunida antes do jogo, foco e liderança",
     },
     upcoming: true,
