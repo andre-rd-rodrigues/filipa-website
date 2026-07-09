@@ -109,7 +109,7 @@ export default async function Home() {
         <Reveal>
           <Eyebrow className="mb-4">Serviços</Eyebrow>
           <h2 className="font-display max-w-2xl text-balance text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1]">
-           Ferramentas para atingir objetivos.
+            Ferramentas para atingir objetivos.
           </h2>
         </Reveal>
 
@@ -119,15 +119,15 @@ export default async function Home() {
       </Section>
 
       {/* Scrolling headline marquee */}
-      <MarqueeStrip text="Aumento de performance" separator="◆" reverse={false}/>
+      <MarqueeStrip text="Aumento de performance" separator="◆" reverse={false} />
 
       {/* Stats — numbers count up from zero on scroll */}
       <Section tone="dark">
         <StatsStrip items={stats} />
       </Section>
 
- {/* Podcast preview — latest 3 episodes */}
- <Section tone="surface">
+      {/* Podcast preview — latest 3 episodes */}
+      <Section tone="surface">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <Reveal>
             <Eyebrow className="mb-4">Podcast</Eyebrow>
@@ -192,8 +192,6 @@ export default async function Home() {
           />
         </Reveal>
       </Section>
-
-      
 
       {/* Blog teaser — latest article */}
       {featured ? (
