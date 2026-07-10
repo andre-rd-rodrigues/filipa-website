@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { Section } from "@/components/section";
 import { Eyebrow } from "@/components/eyebrow";
 import { Reveal } from "@/components/reveal";
@@ -14,6 +15,17 @@ import { InstagramStrip } from "@/components/instagram-strip";
 import { site } from "@/lib/site";
 import { getLatestPosts, formatPostDate } from "@/lib/blog";
 import { episodes } from "@/app/(site)/podcast/data";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: `${site.name} | ${site.tagline}`,
+    description: site.description,
+    type: "website",
+  },
+};
 
 const latestEpisodes = episodes.slice(0, 3);
 

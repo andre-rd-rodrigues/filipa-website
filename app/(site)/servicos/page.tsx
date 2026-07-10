@@ -14,6 +14,15 @@ export const metadata: Metadata = {
   title: "Serviços",
   description:
     "Coaching individual, coaching de equipas, inteligência emocional e PNL aplicados ao desporto. Serviços que ligam a mente aos teus resultados.",
+  alternates: {
+    canonical: "/servicos",
+  },
+  openGraph: {
+    title: "Serviços",
+    description:
+      "Coaching individual, coaching de equipas, inteligência emocional e PNL aplicados ao desporto. Serviços que ligam a mente aos teus resultados.",
+    type: "website",
+  },
 };
 
 export default function ServicosPage() {

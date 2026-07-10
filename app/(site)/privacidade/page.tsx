@@ -9,6 +9,15 @@ export const metadata: Metadata = {
   title: "Política de Privacidade",
   description:
     "Como a Filipa Marques — Coaching & PNL trata os teus dados pessoais: formulário de contacto, Google Analytics, base legal, direitos RGPD e contactos.",
+  alternates: {
+    canonical: "/privacidade",
+  },
+  openGraph: {
+    title: "Política de Privacidade",
+    description:
+      "Como a Filipa Marques — Coaching & PNL trata os teus dados pessoais: formulário de contacto, Google Analytics, base legal, direitos RGPD e contactos.",
+    type: "website",
+  },
 };
 
 export default function PrivacidadePage() {

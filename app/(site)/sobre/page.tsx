@@ -6,17 +6,34 @@ import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { EditorialImage } from "@/components/editorial-image";
 import { primaryCta, site } from "@/lib/site";
+import { buildPersonSchema } from "@/lib/schema";
 import { approach, credentials } from "./data";
 
 export const metadata: Metadata = {
   title: "Sobre mim",
   description:
-    "Conhece a Filipa Marques: psicóloga e coach de PNL para o desporto. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.",
+    "Conhece a Filipa Marques: psicóloga do desporto e coach de PNL. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.",
+  alternates: {
+    canonical: "/sobre",
+  },
+  openGraph: {
+    title: "Sobre mim",
+    description:
+      "Conhece a Filipa Marques: psicóloga do desporto e coach de PNL. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.",
+    type: "profile",
+    images: [{ url: "/img/profile-1.jpg" }],
+  },
 };
 
 export default function SobrePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(buildPersonSchema()),
+        }}
+      />
       <PageHero title="Sobre mim" />
 
       {/* Bio — portrait placeholder + warm intro */}
@@ -40,7 +57,7 @@ export default function SobrePage() {
             </h2>
             <div className="text-pretty mt-6 space-y-5 text-lg leading-relaxed text-fg-muted">
               <p>
-                Sou psicóloga e passei os últimos anos a perceber uma coisa
+                Sou psicóloga do desporto e passei os últimos anos a perceber uma coisa
                 simples: o talento chega a um ponto — depois é a mente que decide
                 o resto. É aí que entro, ao teu lado, para transformar pressão em
                 clareza e vontade em ação.

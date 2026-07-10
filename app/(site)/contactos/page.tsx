@@ -14,6 +14,15 @@ export const metadata: Metadata = {
   title: "Contactos",
   description:
     "Marca uma conversa com a Filipa Marques. Coaching, PNL e inteligência emocional para o desporto — por telefone, email ou formulário. Respondo em breve.",
+  alternates: {
+    canonical: "/contactos",
+  },
+  openGraph: {
+    title: "Contactos",
+    description:
+      "Marca uma conversa com a Filipa Marques. Coaching, PNL e inteligência emocional para o desporto — por telefone, email ou formulário. Respondo em breve.",
+    type: "website",
+  },
 };
 
 const faqs = [

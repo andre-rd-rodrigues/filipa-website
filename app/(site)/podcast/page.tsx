@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import { Section } from "@/components/section";
 import { Eyebrow } from "@/components/eyebrow";
 import { ButtonLink } from "@/components/button";
@@ -7,10 +8,19 @@ import { PageHero } from "@/components/page-hero";
 import { primaryCta } from "@/lib/site";
 import { episodes, platforms, type Episode } from "./data";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Podcast",
   description:
     "Conversas curtas sobre PNL, inteligência emocional e a mente de quem compete. Episódios práticos de coaching desportivo, em pt-PT, para atletas e treinadores.",
+  alternates: {
+    canonical: "/podcast",
+  },
+  openGraph: {
+    title: "Podcast",
+    description:
+      "Conversas curtas sobre PNL, inteligência emocional e a mente de quem compete. Episódios práticos de coaching desportivo, em pt-PT, para atletas e treinadores.",
+    type: "website",
+  },
 };
 
 const [featured, ...rest] = episodes;

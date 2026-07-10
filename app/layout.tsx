@@ -3,6 +3,10 @@ import { Bodoni_Moda, Hanken_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { site } from "@/lib/site";
+import {
+  buildOrganizationSchema,
+  buildWebSiteSchema,
+} from "@/lib/schema";
 
 /**
  * Fonts:
@@ -62,6 +66,20 @@ export default function RootLayout({
       lang="pt-PT"
       className={`${termina.variable} ${bodoni.variable} ${hanken.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(buildOrganizationSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(buildWebSiteSchema()),
+          }}
+        />
+      </head>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

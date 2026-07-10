@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import { Section } from "@/components/section";
 import { Eyebrow } from "@/components/eyebrow";
 import { ButtonLink } from "@/components/button";
@@ -7,10 +8,19 @@ import { PageHero } from "@/components/page-hero";
 import { primaryCta } from "@/lib/site";
 import { courses } from "./data";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Cursos",
   description:
     "Cursos de PNL, inteligência emocional e comunicação aplicados ao desporto. Formação prática para atletas, treinadores e profissionais que querem agir.",
+  alternates: {
+    canonical: "/cursos",
+  },
+  openGraph: {
+    title: "Cursos",
+    description:
+      "Cursos de PNL, inteligência emocional e comunicação aplicados ao desporto. Formação prática para atletas, treinadores e profissionais que querem agir.",
+    type: "website",
+  },
 };
 
 const howItWorks = [

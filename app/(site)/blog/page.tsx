@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { Section } from "@/components/section";
 import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
@@ -7,10 +8,19 @@ import { ButtonLink } from "@/components/button";
 import { getAllPosts, formatPostDate, type BlogPost } from "@/lib/blog";
 import { primaryCta } from "@/lib/site";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Blog",
   description:
     "Artigos sobre coaching, PNL, inteligência emocional e comunicação no desporto. Ferramentas práticas para pensar, sentir e agir melhor.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "Blog",
+    description:
+      "Artigos sobre coaching, PNL, inteligência emocional e comunicação no desporto. Ferramentas práticas para pensar, sentir e agir melhor.",
+    type: "website",
+  },
 };
 
 function PostMeta({ post }: { post: BlogPost }) {

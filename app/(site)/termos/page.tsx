@@ -9,6 +9,15 @@ export const metadata: Metadata = {
   title: "Termos e Condições",
   description:
     "Termos e condições de utilização do site da Filipa Marques — Coaching & PNL: objeto, propriedade intelectual, isenção de responsabilidade e lei aplicável.",
+  alternates: {
+    canonical: "/termos",
+  },
+  openGraph: {
+    title: "Termos e Condições",
+    description:
+      "Termos e condições de utilização do site da Filipa Marques — Coaching & PNL: objeto, propriedade intelectual, isenção de responsabilidade e lei aplicável.",
+    type: "website",
+  },
 };
 
 export default function TermosPage() {

@@ -10,6 +10,15 @@ export const metadata: Metadata = {
   title: "Política de Cookies",
   description:
     "O que são cookies, como este site usa cookies do Google Analytics apenas após consentimento, os tipos utilizados e como gerir a tua preferência.",
+  alternates: {
+    canonical: "/cookies",
+  },
+  openGraph: {
+    title: "Política de Cookies",
+    description:
+      "O que são cookies, como este site usa cookies do Google Analytics apenas após consentimento, os tipos utilizados e como gerir a tua preferência.",
+    type: "website",
+  },
 };
 
 const cookies = [
