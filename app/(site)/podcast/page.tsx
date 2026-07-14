@@ -195,7 +195,7 @@ export default function PodcastPage() {
         <Reveal className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
           <div className="max-w-2xl">
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-              Queres levar isto para o teu contexto?
+              Ouvir é o primeiro passo. Aplicar muda o jogo.
             </h2>
             <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-inverse-muted">
               O que ouves aqui aplica-se ao teu treino, à tua equipa e à tua

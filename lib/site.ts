@@ -15,6 +15,17 @@ export const site = {
   quote: "Ação liga os teus pensamentos aos teus resultados.",
 } as const;
 
+/**
+ * Variações da frase de destaque por página, para não repetir a frase de marca
+ * (`site.quote`, usada no rodapé de todas as páginas) duas vezes na mesma página.
+ */
+export const quotes = {
+  home: "As tuas intenções ganham vida quando decides caminhar em direção a elas.",
+  servicos:
+    "Planos e sonhos só ganham forma quando damos o primeiro passo. Vamos dar esse passo juntos?",
+  sobre: "O movimento é a ponte entre o que idealizas e o que conquistas.",
+} as const;
+
 export const contact = {
   phone: "+351 933 327 567",
   phoneHref: "tel:+351933327567",

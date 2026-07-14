@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { getAllPosts } from "@/lib/blog";
+import { getAllCourses } from "@/lib/courses";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = site.url;
@@ -69,6 +70,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+  // Dynamic course detail pages
+  const courses = await getAllCourses();
+  const courseRoutes: MetadataRoute.Sitemap = courses.map((course) => ({
+    url: `${baseUrl}/cursos/${course.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
   // Dynamic blog posts
   const posts = await getAllPosts();
   const postRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
@@ -78,5 +88,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...postRoutes];
+  return [...staticRoutes, ...courseRoutes, ...postRoutes];
 }

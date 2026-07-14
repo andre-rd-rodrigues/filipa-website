@@ -1,10 +1,13 @@
-<!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
 
-<!-- VERCEL BEST PRACTICES START -->
+## Project skills
+
+Skills live in `.cursor/skills/`. Use them proactively when a request matches, even if the user doesn't name the skill:
+
+- **copywriting** (`.cursor/skills/copywriting/SKILL.md`) — short-form marketing copy: headlines, CTAs, ad copy, landing page copy, email copy, and conversion frameworks (PAS, AIDA, BAB). Use whenever the user wants to write or optimize marketing copy.
+
 ## Best practices for developing on Vercel
 
 These defaults are optimized for AI coding agents (and humans) working on apps that deploy to Vercel.
@@ -24,7 +27,5 @@ These defaults are optimized for AI coding agents (and humans) working on apps t
 - If Enable Deployment Protection is enabled, use a bypass secret to directly access them
 - Add OpenTelemetry via `@vercel/otel` on Node; don't expect OTEL support on the Edge runtime
 - Enable Web Analytics + Speed Insights early
-- Use AI Gateway for model routing, set AI_GATEWAY_API_KEY, using a model string (e.g. 'anthropic/claude-sonnet-4.6'), Gateway is already default in AI SDK
-  needed. Always curl https://ai-gateway.vercel.sh/v1/models first; never trust model IDs from memory
+- Use AI Gateway for model routing, set AI_GATEWAY_API_KEY, using a model string (e.g. 'anthropic/claude-sonnet-4.6'); Gateway is already default in AI SDK. Always curl [https://ai-gateway.vercel.sh/v1/models](https://ai-gateway.vercel.sh/v1/models) first; never trust model IDs from memory
 - For durable agent loops or untrusted code: use Workflow (pause/resume/state) + Sandbox; use Vercel MCP for secure infra access
-<!-- VERCEL BEST PRACTICES END -->

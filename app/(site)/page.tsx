@@ -12,7 +12,7 @@ import { HighlightStrip, type HighlightItem } from "@/components/highlight-strip
 import { QuoteBand } from "@/components/quote-band";
 import { StatsStrip, type Stat } from "@/components/stats-strip";
 import { InstagramStrip } from "@/components/instagram-strip";
-import { site } from "@/lib/site";
+import { quotes, site } from "@/lib/site";
 import { getLatestPosts, formatPostDate } from "@/lib/blog";
 import { episodes } from "@/app/(site)/podcast/data";
 
@@ -121,7 +121,7 @@ export default async function Home() {
         <Reveal>
           <Eyebrow className="mb-4">Serviços</Eyebrow>
           <h2 className="font-display max-w-2xl text-balance text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1]">
-            Ferramentas para atingir objetivos.
+            Ferramentas para transformar potencial em resultados.
           </h2>
         </Reveal>
 
@@ -197,8 +197,8 @@ export default async function Home() {
       <Section tone="dark" size="lg">
         <Reveal>
           <QuoteBand
-            eyebrow="Motivação extra"
-            quote={site.quote}
+            eyebrow="O que me move"
+            quote={quotes.home}
             name={site.name}
             title={site.tagline}
           />

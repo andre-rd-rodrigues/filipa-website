@@ -7,7 +7,7 @@ import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { QuoteBand } from "@/components/quote-band";
 import { EditorialImage } from "@/components/editorial-image";
-import { primaryCta, site } from "@/lib/site";
+import { primaryCta, quotes, site } from "@/lib/site";
 import { audiences, services } from "./data";
 
 export const metadata: Metadata = {
@@ -36,11 +36,12 @@ export default function ServicosPage() {
           <Reveal>
             <Eyebrow className="mb-4">O que ofereço</Eyebrow>
             <h2 className="font-display max-w-2xl text-balance text-[clamp(2rem,4vw,3.25rem)] leading-[1.1]">
-              Cada serviço, um caminho para agir com foco.
+              Treina a tua mente para aumentares os resultados.
             </h2>
             <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-muted">
-              Do acompanhamento individual às formações para clubes — escolhe por
-              onde começar e falamos sobre o que faz sentido para ti.
+              Coaching e PNL aplicados ao desporto, do acompanhamento individual
+              às formações para clubes. Escolhe por onde começar e decidimos
+              juntos o próximo passo.
             </p>
           </Reveal>
 
@@ -154,7 +155,7 @@ export default function ServicosPage() {
         <Reveal>
           <QuoteBand
             eyebrow="Porquê trabalhar comigo"
-            quote={site.quote}
+            quote={quotes.servicos}
             name={site.name}
             title={site.tagline}
           />
@@ -174,11 +175,10 @@ export default function ServicosPage() {
 
           <Reveal delay={80}>
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-              Não sabes por onde começar?
+            A tua jornada começa aqui.
             </h2>
             <p className="text-pretty mt-5 max-w-lg text-lg leading-relaxed text-fg-inverse-muted">
-              Marca uma conversa e descobrimos juntos qual o serviço que melhor
-              responde ao teu momento.
+            Agenda uma conversa para descobrirmos, juntos, o melhor caminho para ti.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>

@@ -128,8 +128,8 @@ export default function ContactosPage() {
               </dl>
 
               <p className="text-pretty mt-8 max-w-sm text-[0.9375rem] leading-relaxed text-fg-muted">
-                Escrevo-te de volta, normalmente em 24–48h. Prefiro conversas a
-                respostas automáticas.
+                Prefiro uma conversa a uma resposta automática. Escreve por aqui
+                ou liga — o que for mais fácil para ti.
               </p>
 
               <div className="mt-10 border-t border-[color:var(--border-stone)] pt-6">

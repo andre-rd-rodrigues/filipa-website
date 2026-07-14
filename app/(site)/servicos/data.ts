@@ -16,7 +16,7 @@ export const services: Service[] = [
     number: "01",
     title: "Coaching individual",
     description:
-      "Acompanhamento um-para-um para clarificar objectivos, tirar peso da cabeça e agir com foco — sessão a sessão, no teu ritmo.",
+      "Trabalhamos um-para-um, só tu e o teu objetivo, e usamos a PNL para treinar a tua cabeça a gerir a pressão, manter o foco e chegar onde o talento sozinho não te leva.",
     includes: [
       "Sessão de diagnóstico inicial",
       "Plano de objectivos personalizado",
@@ -27,7 +27,7 @@ export const services: Service[] = [
     number: "02",
     title: "Coaching de equipas & workshops",
     description:
-      "Dinâmicas práticas para reforçar comunicação, coesão e desempenho colectivo — pensadas para o dia a dia da equipa, não para a sala de aula.",
+      "Uma equipa alinhada ganha mais, por isso uso coaching e PNL em grupo para pôr atletas e staff a comunicar melhor, a confiar uns nos outros e a competir como um só.",
     includes: [
       "Workshops presenciais ou online",
       "Dinâmicas de grupo à medida",
@@ -38,7 +38,7 @@ export const services: Service[] = [
     number: "03",
     title: "Inteligência emocional no desporto",
     description:
-      "Reconhecer e gerir emoções sob pressão — do momento decisivo ao pós-jogo — para competir com a cabeça no sítio certo.",
+      "As emoções decidem jogos. Aprende a reconhecê-las e a geri-las — do momento decisivo ao pós-jogo — para competires com a cabeça no sítio certo.",
     includes: [
       "Mapa das tuas emoções em competição",
       "Rotinas de regulação antes e durante o jogo",
@@ -49,7 +49,7 @@ export const services: Service[] = [
     number: "04",
     title: "Comunicação em campo (PNL)",
     description:
-      "Linguagem e influência aplicadas ao terreno: como treinadores e atletas dizem o que importa, no momento em que importa.",
+      "O que dizes muda o que a equipa faz. Linguagem e influência aplicadas ao terreno, para dizeres o que importa no momento em que importa.",
     includes: [
       "Padrões de linguagem para dar feedback",
       "Comunicação sob stress e em conflito",
@@ -60,7 +60,7 @@ export const services: Service[] = [
     number: "05",
     title: "Palestras & formação",
     description:
-      "Sessões para clubes, escolas e organizações — conteúdo prático sobre mente, emoção e comunicação, adaptado ao teu público.",
+      "Levo mente, emoção e comunicação ao teu clube ou escola — conteúdo prático, à medida do público, que fica com os participantes depois de eu sair.",
     includes: [
       "Palestras de 60 a 90 minutos",
       "Temas à medida do clube ou escola",

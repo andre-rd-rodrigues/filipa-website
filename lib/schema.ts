@@ -6,6 +6,7 @@
  */
 
 import { site, contact, socials } from "@/lib/site";
+import type { Course } from "@/lib/courses";
 
 export interface JsonLdData {
   "@context": string;
@@ -52,6 +53,27 @@ export function buildWebSiteSchema(): JsonLdData {
  * - name, title (jobTitle), URL, image, social profiles, work affiliation, service area.
  * - Credential-specific schema fields MUST be added in a follow-up once real credentials exist.
  */
+/**
+ * Course schema for a single course (course detail page).
+ * Provider is the site owner Organization. No price/date encoded until the
+ * real enrolment details are confirmed.
+ */
+export function buildCourseSchema(course: Course): JsonLdData {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: course.title,
+    description: course.summary,
+    url: `${site.url}/cursos/${course.slug}`,
+    inLanguage: "pt-PT",
+    provider: {
+      "@type": "Organization",
+      name: site.fullName,
+      url: site.url,
+    },
+  };
+}
+
 export function buildPersonSchema(): JsonLdData {
   return {
     "@context": "https://schema.org",

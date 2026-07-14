@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { Section } from "@/components/section";
 import { Eyebrow } from "@/components/eyebrow";
@@ -6,7 +7,8 @@ import { ButtonLink } from "@/components/button";
 import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { primaryCta } from "@/lib/site";
-import { courses } from "./data";
+import { getAllCourses, getUpcomingSessions } from "@/lib/courses";
+import { CourseCalendar } from "@/components/course-calendar";
 
 export const metadata: Metadata = {
   title: "Cursos",
@@ -27,14 +29,26 @@ const howItWorks = [
   {
     title: "Prática antes de teoria",
     body: "Cada sessão parte de situações reais — treino, jogo, balneário — e sai com ferramentas que aplicas já na semana seguinte.",
+    icon: (
+      <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z" />
+    ),
   },
   {
     title: "Presencial ou online",
     body: "Escolhes o formato que encaixa na tua agenda. O grupo é reduzido para que haja espaço para as tuas perguntas.",
+    icon: (
+      <>
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <path d="M8 21h8M12 17v4" />
+      </>
+    ),
   },
   {
     title: "Acompanhamento próximo",
     body: "Sais com exercícios e material de apoio, e podes marcar uma conversa para adaptar o que aprendeste ao teu contexto.",
+    icon: (
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z" />
+    ),
   },
 ];
 
@@ -53,21 +67,42 @@ const faqs = [
   },
 ];
 
-export default function CursosPage() {
+export default async function CursosPage() {
+  const [courses, upcomingSessions] = await Promise.all([
+    getAllCourses(),
+    getUpcomingSessions(),
+  ]);
+
+  // Base month for the calendar window, computed server-side so SSR and client
+  // hydration agree (avoids a `new Date()` mismatch across a month boundary).
+  const now = new Date();
+  const baseMonth = { year: now.getFullYear(), month: now.getMonth() };
+
   return (
     <>
       <PageHero title="Cursos" />
 
-      {/* Course listing — full-width editorial blocks, alternating image side */}
-      <Section tone="page" id="lista">
+      {/* Upcoming dates — month grid + agenda */}
+      <Section tone="page" id="datas">
         <Reveal>
-          <Eyebrow className="mb-4">Programa</Eyebrow>
+          <Eyebrow className="mb-4">Próximas datas</Eyebrow>
           <h2 className="font-display max-w-3xl text-balance text-[clamp(2rem,4vw,3.25rem)] leading-[1.1]">
-            Cursos para pensar, sentir e comunicar melhor.
+            Quando começam as próximas turmas.
           </h2>
         </Reveal>
 
-        <div className="mt-16 space-y-16 sm:mt-20 sm:space-y-24">
+        <Reveal className="mt-12 sm:mt-14">
+          <CourseCalendar sessions={upcomingSessions} baseMonth={baseMonth} />
+        </Reveal>
+      </Section>
+
+      {/* Course listing — full-width editorial blocks, alternating image side */}
+      <Section tone="surface" id="lista">
+        <Reveal>
+          <Eyebrow className="mb-4">Todos os cursos</Eyebrow>
+        </Reveal>
+
+        <div className="mt-10 space-y-16 sm:mt-12 sm:space-y-24">
           {courses.map((course, i) => {
             const imageRight = i % 2 === 1;
             return (
@@ -95,15 +130,15 @@ export default function CursosPage() {
                     <span className="inline-block rounded-none border border-[color:var(--border-stone)] px-3.5 py-1.5 text-[0.75rem] font-medium uppercase tracking-[0.14em] text-action-deep">
                       {course.category}
                     </span>
-                    {course.upcoming ? (
-                      <span className="inline-block rounded-none bg-ink px-3.5 py-1.5 text-[0.75rem] font-medium uppercase tracking-[0.14em] text-fg-inverse">
-                        Em breve
-                      </span>
-                    ) : null}
                   </div>
 
                   <h3 className="font-display mt-5 text-balance text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.12]">
-                    {course.title}
+                    <Link
+                      href={`/cursos/${course.slug}`}
+                      className="transition-colors hover:text-action-deep"
+                    >
+                      {course.title}
+                    </Link>
                   </h3>
 
                   <p className="text-pretty mt-4 max-w-xl text-lg leading-relaxed text-fg-muted">
@@ -138,6 +173,13 @@ export default function CursosPage() {
                   </ul>
 
                   <div className="mt-8 flex flex-wrap gap-3">
+                    <ButtonLink
+                      href={`/cursos/${course.slug}`}
+                      variant="secondary"
+                      size="sm"
+                    >
+                      Saber mais
+                    </ButtonLink>
                     {course.ctas.map((cta) => (
                       <ButtonLink
                         key={cta.label}
@@ -171,6 +213,23 @@ export default function CursosPage() {
           {howItWorks.map((item, i) => (
             <Reveal key={item.title} delay={i * 80}>
               <div className="border-t border-[color:var(--ink-line)] pt-6">
+                <span
+                  aria-hidden
+                  className="mb-5 flex h-11 w-11 items-center justify-center rounded-none border border-[color:var(--ink-line)] text-fg-inverse"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    {item.icon}
+                  </svg>
+                </span>
                 <h3 className="text-xl font-semibold tracking-[-0.01em] text-fg-inverse">
                   {item.title}
                 </h3>
@@ -221,8 +280,9 @@ export default function CursosPage() {
               Ainda com dúvidas sobre qual curso é para ti?
             </h2>
             <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-inverse-muted">
-              Marca uma conversa. Percebemos juntos o teu contexto e escolhemos a
-              formação que te leva mais longe — sem compromisso.
+              Marca uma conversa de 20 minutos. Ouço o teu contexto, respondo às
+              tuas perguntas e escolhemos juntos a formação que te leva mais
+              longe — sem compromisso.
             </p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-4">

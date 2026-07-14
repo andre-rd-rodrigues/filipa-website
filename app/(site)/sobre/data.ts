@@ -1,10 +1,10 @@
 /**
- * Mock content for the /sobre page.
+ * Content for the /sobre page.
  *
- * NOTE: All content below is REPRESENTATIVE / MOCK data written to match the
- * brand voice in PRODUCT.md. Formations, experience and descriptions are
- * placeholders and should be replaced with Filipa's real information before
- * launch.
+ * Values and credentials below are based on Filipa's real "Quem sou eu?" page.
+ * Copy is adapted to the brand voice in PRODUCT.md (pt-PT, `tu`, dinâmica e
+ * próxima). Confirm exact certification names/entities before launch if precise
+ * wording matters for accreditation.
  */
 
 export type Principle = {
@@ -12,19 +12,19 @@ export type Principle = {
   body: string;
 };
 
-/** The three pillars of Filipa's approach. Mock copy, pt-PT, `tu`. */
+/** Filipa's three core values (from the real "Valores" section). pt-PT, `tu`. */
 export const approach: Principle[] = [
   {
-    title: "Ação com substância",
-    body: "Nada de frases feitas. Cada sessão sai com um passo concreto para dares — porque é a ação que liga o que pensas ao que alcanças.",
+    title: "Respeito",
+    body: "O teu percurso é único e, como tal, merece ser respeitado. Escuto sem julgamentos e caminho ao teu lado, respeitando sempre o teu tempo. O que partilhamos é sagrado: a tua privacidade e confidencialidade são a base absoluta da nossa relação.",
   },
   {
-    title: "Proximidade profissional",
-    body: "Trato-te por tu e falo a tua língua, mas com o rigor de quem trabalha com psicologia e desporto a sério. Calor humano e método, sem jargão a mais.",
+    title: "Individualidade",
+    body: "Porque não existem duas pessoas iguais, o teu caminho nunca será uma cópia. Aqui, não te tento encaixar em fórmulas pré-feitas; o método é desenhado à tua medida, alinhado com os teus objetivos e, acima de tudo, com o teu próprio ritmo.",
   },
   {
-    title: "Foco em resultados",
-    body: "Definimos onde queres chegar e desenhamos o caminho. Mede-se pela clareza que ganhas, pela forma como comunicas e pelo que consegues fazer em campo.",
+    title: "Compromisso",
+    body: "Não estou aqui para te dar o que te falta, mas para te ajudar a potenciar o que já tens. O meu compromisso é total: dedicação genuína para despertar o teu melhor e acompanhar-te, passo a passo, até onde queres chegar.",
   },
 ];
 
@@ -34,29 +34,34 @@ export type Credential = {
 };
 
 /**
- * Formations and experience.
+ * Formations and certifications.
  *
- * MOCK / REPRESENTATIVE data — do not treat as verified credentials.
+ * Based on Filipa's real credentials listed on the current Canva site.
+ * Verify exact titles/awarding bodies before adding to structured data.
  */
 export const credentials: Credential[] = [
   {
     title: "Licenciatura em Psicologia",
-    detail: "Base clínica que sustenta todo o trabalho de coaching e gestão emocional.",
+    detail: "A base clínica e científica que sustenta todo o trabalho: perceber como a mente funciona antes de a treinar.",
   },
   {
-    title: "Practitioner e Master em PNL",
-    detail: "Programação Neurolinguística aplicada à comunicação e à performance.",
+    title: "Pós-Graduação em Psicologia do Desporto",
+    detail: "Otimização do desempenho através do desenvolvimento mental e emocional do atleta: a psicologia aplicada ao que acontece em campo.",
   },
   {
-    title: "Formação em Inteligência Emocional",
-    detail: "Ferramentas para reconhecer, nomear e gerir emoções — dentro e fora do jogo.",
+    title: "Certificação em Psicologia para o Treinador no Alto Rendimento",
+    detail: "O alto rendimento nasce de uma mente preparada e resiliente. Ferramentas, com base na psicologia, para chegar a níveis de excelência.",
   },
   {
-    title: "Experiência com atletas e equipas técnicas",
-    detail: "Acompanhamento individual e de grupo em contextos de competição e alto rendimento.",
+    title: "Master Trainer em Programação Neurolinguística (PNL)",
+    detail: "PNL para compreender como os teus programas mentais estão organizados e como moldam a forma como pensas e ages.",
+  },
+  {
+    title: "Certificação em Coaching",
+    detail: "Técnicas e ferramentas para te conduzir num percurso de autoconhecimento e crescimento, ao teu lado e ao teu ritmo.",
   },
   {
     title: "Formadora certificada",
-    detail: "Cursos e workshops de comunicação e inteligência emocional para o desporto.",
+    detail: "Formação em Comunicação, PNL, Inteligência Emocional e Coaching, para quem quer levar estas competências para a sua equipa.",
   },
 ];
