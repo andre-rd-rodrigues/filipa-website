@@ -36,12 +36,12 @@ export default function ServicosPage() {
           <Reveal>
             <Eyebrow className="mb-4">O que ofereço</Eyebrow>
             <h2 className="font-display max-w-2xl text-balance text-[clamp(2rem,4vw,3.25rem)] leading-[1.1]">
-              Treina a tua mente para aumentares os resultados.
+              Treina a tua mente para elevares os teus resultados.
             </h2>
             <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-muted">
-              Coaching e PNL aplicados ao desporto, do acompanhamento individual
-              às formações para clubes. Escolhe por onde começar e decidimos
-              juntos o próximo passo.
+              Coaching e PNL aplicados ao desporto, desde o acompanhamento
+              individual a formações personalizadas para clubes. Escolhe por onde
+              queres começar e desenhamos o plano juntos.
             </p>
           </Reveal>
 
@@ -154,10 +154,9 @@ export default function ServicosPage() {
       <Section tone="dark" size="lg">
         <Reveal>
           <QuoteBand
-            eyebrow="Porquê trabalhar comigo"
+            eyebrow="autonomia e consciência"
             quote={quotes.servicos}
             name={site.name}
-            title={site.tagline}
           />
         </Reveal>
       </Section>
@@ -175,10 +174,11 @@ export default function ServicosPage() {
 
           <Reveal delay={80}>
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-            A tua jornada começa aqui.
+              O teu próximo nível começa aqui.
             </h2>
             <p className="text-pretty mt-5 max-w-lg text-lg leading-relaxed text-fg-inverse-muted">
-            Agenda uma conversa para descobrirmos, juntos, o melhor caminho para ti.
+              Vamos conversar? Agenda uma sessão de diagnóstico e descobrimos,
+              juntos, o melhor plano de jogo para ti.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>

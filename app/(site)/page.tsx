@@ -34,21 +34,23 @@ const stats: Stat[] = [
   {
     value: 150,
     suffix: "+",
-    label: "Atletas acompanhados",
-    description: "Individual e em equipa, do amador ao alto rendimento.",
+    label: "Atletas impactados",
+    description:
+      "Acompanhamento individual e coletivo, do escalão de formação ao alto rendimento.",
     cta: { label: "Ver serviços", href: "/servicos" },
   },
   {
     value: 12,
-    label: "Anos de experiência",
-    description: "Psicologia, PNL e inteligência emocional no desporto.",
+    label: "Anos no terreno",
+    description: "Psicologia, PNL e inteligência emocional aplicadas ao desporto.",
     cta: { label: "Sobre mim", href: "/sobre" },
   },
   {
     value: 40,
     suffix: "+",
     label: "Workshops e palestras",
-    description: "Para clubes, escolas e organizações em todo o país.",
+    description:
+      "Partilha de ferramentas práticas em clubes, escolas e organizações do país.",
     cta: { label: "Marcar conversa", href: "/contactos" },
   },
 ];
@@ -56,7 +58,7 @@ const stats: Stat[] = [
 const highlights: HighlightItem[] = [
   {
     label: "Coaching individual",
-    body: "Um-para-um, foco e ação.",
+    body: "O teu plano de jogo focado em resultados.",
     href: "/servicos",
     image: {
       src: "https://images.unsplash.com/photo-1549476464-37392f717541?auto=format&fit=crop&w=1200&q=80",
@@ -65,7 +67,7 @@ const highlights: HighlightItem[] = [
   },
   {
     label: "Inteligência emocional",
-    body: "Gerir emoções sob pressão.",
+    body: "Domínio mental e gestão sob pressão.",
     href: "/cursos",
     image: {
       src: "https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=1200&q=80",
@@ -74,7 +76,7 @@ const highlights: HighlightItem[] = [
   },
   {
     label: "Comunicação em campo",
-    body: "PNL para treinadores e equipas.",
+    body: "PNL aplicada a líderes, treinadores e equipas.",
     href: "/cursos",
     image: {
       src: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=1200&q=80",
@@ -98,9 +100,9 @@ export default async function Home() {
       <Section tone="page">
         <LayeredShowcase
           eyebrow="Método"
-          title="Mais do que treino mental — um método para agir."
+          title="Mais do que treino mental — uma estratégia para entrares em campo."
           paragraphs={[
-            "Psicologia, PNL e inteligência emocional em ferramentas concretas. Sais de cada sessão a saber o que fazer a seguir.",
+            "Juntamos a Psicologia, a PNL e a Inteligência Emocional em ferramentas práticas e sem rodeios. Sais de cada sessão com um plano claro sobre o que fazer a seguir.",
           ]}
           cta={{ label: "Saber mais", href: "/sobre" }}
           images={[
@@ -131,7 +133,7 @@ export default async function Home() {
       </Section>
 
       {/* Scrolling headline marquee */}
-      <MarqueeStrip text="Aumento de performance" separator="◆" reverse={false} />
+      <MarqueeStrip text="performance" separator="◆" reverse={false} outline />
 
       {/* Stats — numbers count up from zero on scroll */}
       <Section tone="dark">
@@ -200,7 +202,6 @@ export default async function Home() {
             eyebrow="O que me move"
             quote={quotes.home}
             name={site.name}
-            title={site.tagline}
           />
         </Reveal>
       </Section>
@@ -212,7 +213,7 @@ export default async function Home() {
             <Reveal>
               <Eyebrow className="mb-4">Blog</Eyebrow>
               <h2 className="font-display max-w-xl text-balance text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1]">
-                Ideias para levar contigo.
+                Estratégias mentais para levares contigo para o campo.
               </h2>
             </Reveal>
             <Reveal className="hidden sm:block">

@@ -21,6 +21,7 @@ export function MarqueeStrip({
   reverse = true,
   durationSec = 200,
   repeat = 6,
+  outline = false,
 }: {
   /** The phrase to repeat across the strip. */
   text: string;
@@ -32,6 +33,8 @@ export function MarqueeStrip({
   durationSec?: number;
   /** Phrase copies per group (both groups are identical). */
   repeat?: number;
+  /** Render the phrase as hollow outlined letters (transparent fill, white stroke). */
+  outline?: boolean;
 }) {
   const [reduced, setReduced] = useState(false);
 
@@ -43,13 +46,21 @@ export function MarqueeStrip({
     return () => mq.removeEventListener("change", apply);
   }, []);
 
-  const wordClass =
-    "font-display text-[clamp(3rem,13vw,11rem)] font-bold uppercase leading-none tracking-[-0.02em] text-fg-inverse select-none";
+  const wordClass = `font-display text-[clamp(3rem,13vw,11rem)] font-bold uppercase leading-none tracking-[-0.02em] select-none ${
+    outline
+      ? "text-transparent [-webkit-text-stroke:2px_var(--color-fg-inverse,#fff)] [text-stroke:2px_var(--color-fg-inverse,#fff)]"
+      : "text-fg-inverse"
+  }`;
 
   const Unit = () => (
     <span className="flex shrink-0 items-center">
       <span>{text}</span>
-      <span aria-hidden className="px-[0.4em] text-action">
+      <span
+        aria-hidden
+        className={`px-[0.4em] text-action ${
+          outline ? "[-webkit-text-stroke:0] [text-stroke:0]" : ""
+        }`}
+      >
         {separator}
       </span>
     </span>

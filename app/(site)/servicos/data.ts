@@ -16,55 +16,55 @@ export const services: Service[] = [
     number: "01",
     title: "Coaching individual",
     description:
-      "Trabalhamos um-para-um, só tu e o teu objetivo, e usamos a PNL para treinar a tua cabeça a gerir a pressão, manter o foco e chegar onde o talento sozinho não te leva.",
+      "Trabalhamos lado a lado, focados no teu objetivo. Usamos a Psicologia e a PNL para treinares a tua mente a dominar a pressão, manter o foco sob stress e chegar onde o talento sozinho não te consegue levar.",
     includes: [
       "Sessão de diagnóstico inicial",
-      "Plano de objectivos personalizado",
-      "Ferramentas de PNL e gestão emocional",
+      "Plano de objetivos personalizado",
+      "Ferramentas práticas de PNL e gestão emocional",
     ],
   },
   {
     number: "02",
     title: "Coaching de equipas & workshops",
     description:
-      "Uma equipa alinhada ganha mais, por isso uso coaching e PNL em grupo para pôr atletas e staff a comunicar melhor, a confiar uns nos outros e a competir como um só.",
+      "Uma equipa alinhada joga melhor e ganha mais. Uso o coaching e a PNL para colocar atletas e staff a comunicar com clareza, a construir confiança mútua e a competir como um só bloco.",
     includes: [
       "Workshops presenciais ou online",
-      "Dinâmicas de grupo à medida",
-      "Guia de seguimento para a equipa técnica",
+      "Dinâmicas de grupo personalizadas",
+      "Guia de acompanhamento para a equipa técnica",
     ],
   },
   {
     number: "03",
     title: "Inteligência emocional no desporto",
     description:
-      "As emoções decidem jogos. Aprende a reconhecê-las e a geri-las — do momento decisivo ao pós-jogo — para competires com a cabeça no sítio certo.",
+      "As emoções decidem campeonatos. Aprende a identificá-las e a usá-las a teu favor — do aquecimento ao apito final — para competires sempre com a cabeça no sítio certo.",
     includes: [
-      "Mapa das tuas emoções em competição",
-      "Rotinas de regulação antes e durante o jogo",
-      "Estratégias de recuperação mental",
+      "Mapeamento emocional em competição",
+      "Rotinas de regulação pré e pós-jogo",
+      "Estratégias de recuperação mental ativa",
     ],
   },
   {
     number: "04",
     title: "Comunicação em campo (PNL)",
     description:
-      "O que dizes muda o que a equipa faz. Linguagem e influência aplicadas ao terreno, para dizeres o que importa no momento em que importa.",
+      "A forma como comunicas dita o comportamento da tua equipa. Aplicamos a PNL e técnicas de influência ao terreno de jogo, para que saibas exatamente o que dizer no momento de maior pressão.",
     includes: [
-      "Padrões de linguagem para dar feedback",
-      "Comunicação sob stress e em conflito",
-      "Aplicação directa a treino e balneário",
+      "Padrões de linguagem de alto impacto",
+      "Gestão de comunicação sob stress e conflito",
+      "Aplicação prática em treino e balneário",
     ],
   },
   {
     number: "05",
     title: "Palestras & formação",
     description:
-      "Levo mente, emoção e comunicação ao teu clube ou escola — conteúdo prático, à medida do público, que fica com os participantes depois de eu sair.",
+      "Levo o treino mental, a inteligência emocional e a comunicação ao teu clube ou associação. Entrego conteúdo prático e dinâmico, desenhado à medida, que continua a gerar impacto muito depois de a sessão terminar.",
     includes: [
-      "Palestras de 60 a 90 minutos",
-      "Temas à medida do clube ou escola",
-      "Materiais de apoio para os participantes",
+      "Palestras e masterclasses dinâmicas",
+      "Temas totalmente personalizados",
+      "Ferramentas e materiais de apoio pós-formação",
     ],
   },
 ];
@@ -79,12 +79,12 @@ export const audiences: Audience[] = [
   {
     title: "Atletas",
     description:
-      "Para quem quer competir com a mente ao mesmo nível do corpo — gerir pressão, ganhar foco e recuperar da derrota.",
+      "Para quem quer competir com a mente ao mesmo nível do corpo — gerindo a pressão, mantendo o foco e recuperando rapidamente do erro ou da derrota.",
   },
   {
     title: "Treinadores & equipas técnicas",
     description:
-      "Para quem lidera pessoas e precisa de comunicar melhor, criar coesão e tirar o máximo de cada atleta.",
+      "Para líderes que procuram otimizar a sua comunicação, criar uma forte coesão de grupo e extrair o potencial máximo de cada atleta.",
   },
   {
     title: "Clubes & organizações",

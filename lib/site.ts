@@ -12,18 +12,15 @@ export const site = {
     "Psicóloga e coach de PNL. Coaching, inteligência emocional e comunicação para atletas, treinadores e profissionais do desporto. Resultados concretos, em português.",
   url: "https://filipamarques.pt",
   locale: "pt-PT",
-  quote: "Ação liga os teus pensamentos aos teus resultados.",
+  quote: "A tua mente joga a teu favor. O primeiro passo é teu.",
 } as const;
 
-/**
- * Variações da frase de destaque por página, para não repetir a frase de marca
- * (`site.quote`, usada no rodapé de todas as páginas) duas vezes na mesma página.
- */
+
 export const quotes = {
-  home: "As tuas intenções ganham vida quando decides caminhar em direção a elas.",
+  home: "O movimento é a ponte entre o que idealizas e o que conquistas.",
   servicos:
-    "Planos e sonhos só ganham forma quando damos o primeiro passo. Vamos dar esse passo juntos?",
-  sobre: "O movimento é a ponte entre o que idealizas e o que conquistas.",
+    "A verdadeira liberdade é quando deixas de reagir ao que te acontece e passas a responder com intenção.",
+  sobre: "A estratégia mental ganha o jogo, mas é o primeiro passo que te coloca em campo.",
 } as const;
 
 export const contact = {

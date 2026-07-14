@@ -27,7 +27,7 @@ export function QuoteBand({
   eyebrow?: string;
   quote: string;
   name: string;
-  title: string;
+  title?: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [spot, setSpot] = useState({ x: 0, y: 0, active: false });
@@ -109,7 +109,7 @@ export function QuoteBand({
 
       <figcaption className="mt-10">
         <p className="font-body text-lg font-semibold text-fg-inverse">{name}</p>
-        <p className="mt-1 text-fg-inverse-muted">{title}</p>
+        {title ? <p className="mt-1 text-fg-inverse-muted">{title}</p> : null}
       </figcaption>
     </figure>
   );

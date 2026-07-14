@@ -57,11 +57,12 @@ export default function SobrePage() {
             </h2>
             <div className="text-pretty mt-6 space-y-5 text-lg leading-relaxed text-fg-muted">
               <p>
-                Chamo-me Filipa Marques e sou apaixonada pelo potencial humano, por
-                aquilo que cada pessoa consegue quando a mente joga a seu favor. Como
-                psicóloga do desporto e mental coach, trabalho a parte que o talento
-                sozinho não resolve: o foco, a pressão e a forma como pensas quando o
-                resultado aperta.
+                Chamo-me Filipa Marques e sou apaixonada pelo potencial humano —
+                por tudo o que és capaz de alcançar quando a tua mente joga na tua
+                equipa. Como psicóloga do desporto e mental coach, trabalho
+                exatamente onde o talento puro já não chega sozinho: na gestão da
+                pressão, na manutenção do foco e na forma como pensas quando cada
+                segundo conta.
               </p>
               <p>
                 Junto a psicologia ao coaching, à Programação Neurolinguística e à
@@ -162,7 +163,7 @@ export default function SobrePage() {
             &ldquo;{quotes.sobre}&rdquo;
           </p>
           <p className="eyebrow mt-6 text-action">
-            {site.name} — {site.tagline}
+            {site.name}
           </p>
         </Reveal>
       </Section>
@@ -183,9 +184,9 @@ export default function SobrePage() {
               Vamos pôr a tua cabeça a jogar a teu favor?
             </h2>
             <p className="mt-5 max-w-lg text-pretty text-lg text-fg-muted">
-              Marca uma conversa, sem compromisso, e descobre como o coaching e
-              a PNL podem libertar o teu potencial — para chegares mais longe,
-              com mais clareza e confiança, dentro e fora de campo.
+              Dá o primeiro passo. Agenda uma conversa sem compromisso e vamos
+              descobrir, juntos, como treinar a tua mente para jogares ao teu
+              melhor nível — dentro e fora de campo.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
               <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>
