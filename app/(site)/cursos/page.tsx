@@ -86,9 +86,6 @@ export default async function CursosPage() {
       <Section tone="page" id="datas">
         <Reveal>
           <Eyebrow className="mb-4">Próximas datas</Eyebrow>
-          <h2 className="font-display max-w-3xl text-balance text-[clamp(2rem,4vw,3.25rem)] leading-[1.1]">
-            Quando começam as próximas turmas.
-          </h2>
         </Reveal>
 
         <Reveal className="mt-12 sm:mt-14">
@@ -277,12 +274,10 @@ export default async function CursosPage() {
         <Reveal className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
           <div className="max-w-2xl">
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-              Ainda com dúvidas sobre qual curso é para ti?
+              Tens dúvidas sobre os cursos?
             </h2>
             <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-inverse-muted">
-              Marca uma conversa de 20 minutos. Ouço o teu contexto, respondo às
-              tuas perguntas e escolhemos juntos a formação que te leva mais
-              longe — sem compromisso.
+              Agenda uma conversa comigo e ajudo-te a descobrir qual a formação que mais se adequa ao teu contexto.
             </p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-4">
