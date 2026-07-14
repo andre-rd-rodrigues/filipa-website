@@ -31,6 +31,7 @@ export const approach: Principle[] = [
 export type Credential = {
   title: string;
   detail: string;
+  type: "licenciatura" | "pos-graduacao" | "certificacao";
 };
 
 /**
@@ -43,25 +44,31 @@ export const credentials: Credential[] = [
   {
     title: "Licenciatura em Psicologia",
     detail: "A base clínica e científica que sustenta todo o trabalho: perceber como a mente funciona antes de a treinar.",
+    type: "licenciatura",
   },
   {
     title: "Pós-Graduação em Psicologia do Desporto",
     detail: "Otimização do desempenho através do desenvolvimento mental e emocional do atleta: a psicologia aplicada ao que acontece em campo.",
+    type: "pos-graduacao",
   },
   {
     title: "Certificação em Psicologia para o Treinador no Alto Rendimento",
     detail: "O alto rendimento nasce de uma mente preparada e resiliente. Ferramentas, com base na psicologia, para chegar a níveis de excelência.",
+    type: "certificacao",
   },
   {
     title: "Master Trainer em Programação Neurolinguística (PNL)",
     detail: "PNL para compreender como os teus programas mentais estão organizados e como moldam a forma como pensas e ages.",
+    type: "certificacao",
   },
   {
     title: "Certificação em Coaching",
     detail: "Técnicas e ferramentas para te conduzir num percurso de autoconhecimento e crescimento, ao teu lado e ao teu ritmo.",
+    type: "certificacao",
   },
   {
     title: "Formadora certificada",
     detail: "Formação em Comunicação, PNL, Inteligência Emocional e Coaching, para quem quer levar estas competências para a sua equipa.",
+    type: "certificacao",
   },
 ];
