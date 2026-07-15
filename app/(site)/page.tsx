@@ -34,23 +34,24 @@ const stats: Stat[] = [
   {
     value: 150,
     suffix: "+",
-    label: "Atletas impactados",
+    label: "Percursos transformados",
     description:
-      "Acompanhamento individual e coletivo, do escalão de formação ao alto rendimento.",
+      "Apoio lado a lado para atletas que querem alinhar a mente com o corpo, da formação ao alto rendimento.",
     cta: { label: "Ver serviços", href: "/servicos" },
   },
   {
     value: 12,
     label: "Anos no terreno",
-    description: "Psicologia, PNL e inteligência emocional aplicadas ao desporto.",
+    description:
+      "A ciência da psicologia unida à eficácia da PNL para construir consistência no desporto.",
     cta: { label: "Sobre mim", href: "/sobre" },
   },
   {
     value: 40,
     suffix: "+",
-    label: "Workshops e palestras",
+    label: "Formações de impacto",
     description:
-      "Partilha de ferramentas práticas em clubes, escolas e organizações do país.",
+      "Treinos mentais coletivos e palestras desenhadas para elevar a cultura competitiva de equipas e clubes.",
     cta: { label: "Marcar conversa", href: "/contactos" },
   },
 ];
@@ -100,9 +101,9 @@ export default async function Home() {
       <Section tone="page">
         <LayeredShowcase
           eyebrow="Método"
-          title="Mais do que treino mental — uma estratégia para entrares em campo."
+          title="Mais do que treino mental: uma estratégia desenhada à tua medida para entrares em campo e dominares a pressão."
           paragraphs={[
-            "Juntamos a Psicologia, a PNL e a Inteligência Emocional em ferramentas práticas e sem rodeios. Sais de cada sessão com um plano claro sobre o que fazer a seguir.",
+            "Cruzamos a base clínica da Psicologia com a eficácia prática da PNL e da Inteligência Emocional. Sem discursos vazios ou fórmulas prontas: sais de cada sessão com ferramentas reais e um plano claro para saberes exatamente como agir quando o apito soar.",
           ]}
           cta={{ label: "Saber mais", href: "/sobre" }}
           images={[

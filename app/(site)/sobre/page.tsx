@@ -53,11 +53,11 @@ export default function SobrePage() {
 
           <div className="max-w-[60ch]">
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-              Trabalho a cabeça de quem vive o desporto.
+              Trabalho a mente de quem vive o desporto.
             </h2>
             <div className="text-pretty mt-6 space-y-5 text-lg leading-relaxed text-fg-muted">
               <p>
-                Chamo-me Filipa Marques e sou apaixonada pelo potencial humano —
+                Chamo-me Filipa Marques e sou apaixonada pelo potencial humano,
                 por tudo o que és capaz de alcançar quando a tua mente joga na tua
                 equipa. Como psicóloga do desporto e mental coach, trabalho
                 exatamente onde o talento puro já não chega sozinho: na gestão da
@@ -184,12 +184,12 @@ export default function SobrePage() {
 
           <Reveal delay={80}>
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-              Vamos pôr a tua cabeça a jogar a teu favor?
+              Vamos pôr a tua mente a jogar a teu favor?
             </h2>
             <p className="mt-5 max-w-lg text-pretty text-lg text-fg-muted">
               Dá o primeiro passo. Agenda uma conversa sem compromisso e vamos
               descobrir, juntos, como treinar a tua mente para jogares ao teu
-              melhor nível — dentro e fora de campo.
+              melhor nível, dentro e fora de campo.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
               <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>

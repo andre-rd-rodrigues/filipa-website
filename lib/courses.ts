@@ -115,17 +115,17 @@ const courses: Course[] = [
       "Online (Zoom) ou presencial · inscrição individual ou em equipa/grupo",
     includes: ["1 sessão individual de coaching", "Manual do curso"],
     intro: [
-      "Ao trabalhar com atletas, equipas e clubes, o treinador enfrenta todos os dias uma série de desafios: as diferenças de cada atleta — habilidades, personalidades e motivações; as dificuldades emocionais — falta de confiança, frustração, medo e ansiedade; e a pressão de dentro e de fora — clube, família, agentes, adeptos e a gestão de expectativas.",
-      "E se pudesses transformar esses desafios em oportunidades? Liderar com confiança, comunicar com clareza e criar um ambiente onde cada atleta se sente inspirado a chegar ao seu máximo — elevando o desempenho individual e coletivo.",
+      "Ao trabalhar com atletas, equipas e clubes, o treinador enfrenta todos os dias uma série de desafios: as diferenças de cada atleta (habilidades, personalidades e motivações); as dificuldades emocionais (falta de confiança, frustração, medo e ansiedade); e a pressão de dentro e de fora (clube, família, agentes, adeptos e a gestão de expectativas).",
+      "E se pudesses transformar esses desafios em oportunidades? Liderar com confiança, comunicar com clareza e criar um ambiente onde cada atleta se sente inspirado a chegar ao seu máximo, elevando o desempenho individual e coletivo.",
       "É aqui que entram duas ferramentas poderosas. A Programação Neurolinguística (PNL) explora como os teus programas mentais, guardados no inconsciente, influenciam diretamente o teu comportamento: ao dominá-la, conheces-te melhor, compreendes melhor os outros e alinhas a tua comunicação com aquilo em que acreditas.",
-      "A Inteligência Emocional (IE) é a chave para reconhecer, compreender e gerir emoções — as tuas e as dos outros. Desenvolvê-la permite-te criar estados emocionais mais harmoniosos, tomar decisões mais assertivas e fortalecer as relações, dentro e fora do campo.",
-      "Porque é hora de transformares a tua abordagem enquanto treinador — comunicar com impacto, liderar com propósito e inspirar a tua equipa a alcançar patamares nunca antes imaginados.",
+      "A Inteligência Emocional (IE) é a chave para reconhecer, compreender e gerir emoções, as tuas e as dos outros. Desenvolvê-la permite-te criar estados emocionais mais harmoniosos, tomar decisões mais assertivas e fortalecer as relações, dentro e fora do campo.",
+      "Porque é hora de transformares a tua abordagem enquanto treinador: comunicar com impacto, liderar com propósito e inspirar a tua equipa a alcançar patamares nunca antes imaginados.",
     ],
     objectives: [
-      "Compreender melhor as pessoas — como pensam, sentem e agem.",
+      "Compreender melhor as pessoas: como pensam, sentem e agem.",
       "Conhecer-te melhor a ti para agires e decidires de forma mais consciente.",
       "Comunicar de forma clara e eficaz, contigo próprio e com os outros.",
-      "Perceber como as emoções influenciam o comportamento — e usá-las a teu favor.",
+      "Perceber como as emoções influenciam o comportamento, e usá-las a teu favor.",
       "Reconhecer e gerir emoções, tuas e dos outros, para criar relações mais positivas.",
       "Superar bloqueios mentais e crenças limitantes que te travam.",
       "Ganhar ferramentas práticas para lidar com o stress, a pressão e o dia a dia.",
@@ -164,7 +164,7 @@ const courses: Course[] = [
     ],
     outcomes: [
       "Dar feedback que motiva em vez de bloquear, mesmo em momentos de tensão.",
-      "Ler e ajustar a tua linguagem — verbal e não-verbal — a cada atleta.",
+      "Ler e ajustar a tua linguagem (verbal e não-verbal) a cada atleta.",
       "Criar rotinas de comunicação para o antes, o durante e o depois do jogo.",
       "Gerir conflitos na equipa técnica com método e não com instinto.",
     ],
@@ -195,16 +195,16 @@ const courses: Course[] = [
     title: "Inteligência Emocional",
     category: "Inteligência Emocional",
     summary:
-      "As emoções não se desligam quando mais precisas de clareza — mas podes aprender a geri-las. Reconhece o que sentes e o que sentem os outros, responde em vez de reagires e transforma a forma como vives o dia a dia, no desporto e fora dele.",
+      "As emoções não se desligam quando mais precisas de clareza, mas podes aprender a geri-las. Reconhece o que sentes e o que sentem os outros, responde em vez de reagires e transforma a forma como vives o dia a dia, no desporto e fora dele.",
     audience:
       "Atletas, treinadores, fisioterapeutas, gestores, formadores e quem queira melhorar o bem-estar e a qualidade de vida.",
     schedule: "Outubro 2025 · 7, 9, 14, 16, 21 e 23 · 19h20–22h30",
     intro: [
-      "Reconhecer e compreender emoções — em ti e nos outros — é uma competência que se treina. Este curso dá-te estratégias simples e práticas para o fazer no momento em que mais conta.",
+      "Reconhecer e compreender emoções (em ti e nos outros) é uma competência que se treina. Este curso dá-te estratégias simples e práticas para o fazer no momento em que mais conta.",
       "Aprende a gerir o que sentes, a responder em vez de reagir e a transformar a forma como te relacionas e vives o dia a dia.",
     ],
     outcomes: [
-      "Identificar as tuas emoções no momento em que surgem — e o que as desencadeia.",
+      "Identificar as tuas emoções no momento em que surgem, e o que as desencadeia.",
       "Responder em vez de reagir, sobretudo em contextos de alta pressão.",
       "Compreender e acompanhar o estado emocional de quem está à tua volta.",
       "Construir hábitos simples de autorregulação que se mantêm no dia a dia.",

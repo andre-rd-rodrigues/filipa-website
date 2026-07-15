@@ -95,7 +95,7 @@ export default async function BlogPage() {
           </Reveal>
 
           {/* Remaining posts — breakpoint-free responsive grid */}
-          {rest.length > 0 ? (
+          {rest.length > 0 && (
             <div className="mt-20 grid gap-x-8 gap-y-12 [grid-template-columns:repeat(auto-fill,minmax(min(100%,20rem),1fr))]">
               {rest.map((post, i) => (
                 <Reveal key={post.slug} as="article" delay={i * 80}>
@@ -122,20 +122,6 @@ export default async function BlogPage() {
                 </Reveal>
               ))}
             </div>
-          ) : (
-            <Reveal className="mt-16 border-t border-[color:var(--border-stone)] pt-8">
-              <p className="max-w-lg text-pretty text-fg-muted">
-                Este é o primeiro de muitos. Novos artigos estão a caminho — se
-                queres receber os próximos,{" "}
-                <Link
-                  href={primaryCta.href}
-                  className="text-action-deep underline decoration-1 underline-offset-4 hover:text-action-hover"
-                >
-                  fala comigo
-                </Link>
-                .
-              </p>
-            </Reveal>
           )}
         </Section>
       ) : (

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 const howItWorks = [
   {
     title: "Prática antes de teoria",
-    body: "Cada sessão parte de situações reais — treino, jogo, balneário — e sai com ferramentas que aplicas já na semana seguinte.",
+    body: "Cada sessão parte de situações reais (treino, jogo, balneário) e sai com ferramentas que aplicas já na semana seguinte.",
     icon: (
       <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z" />
     ),
@@ -63,7 +63,7 @@ const faqs = [
   },
   {
     q: "Os cursos são presenciais ou online?",
-    a: "Ambos. Há turmas presenciais e turmas online em direto — o conteúdo e o acompanhamento são os mesmos. Escolhes o que fizer mais sentido para ti.",
+    a: "Ambos. Há turmas presenciais e turmas online em direto. O conteúdo e o acompanhamento são os mesmos. Escolhes o que fizer mais sentido para ti.",
   },
 ];
 

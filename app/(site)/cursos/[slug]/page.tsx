@@ -232,7 +232,7 @@ export default async function CoursePage(props: PageProps<"/cursos/[slug]">) {
             </h2>
             <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-inverse-muted">
               Marca uma conversa e confirmo contigo datas, formato e todos os
-              detalhes antes de reservares — sem compromisso.
+              detalhes antes de reservares, sem compromisso.
             </p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-4">

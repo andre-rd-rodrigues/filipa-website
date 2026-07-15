@@ -115,7 +115,7 @@ export function NewsletterForm({
     if (!state.email.trim()) {
       next.email = "Preciso do teu email para te enviar novidades.";
     } else if (!state.email.includes("@")) {
-      next.email = "Verifica o email — parece estar incompleto.";
+      next.email = "Verifica o email, parece estar incompleto.";
     }
     if (!state.consentimento) {
       next.consentimento = "Aceita a Política de Privacidade para continuar.";
@@ -166,7 +166,7 @@ export function NewsletterForm({
             Estás na lista!
           </p>
           <p className={`text-pretty mt-2 text-[0.9375rem] leading-relaxed ${descClass}`}>
-            Obrigada por te inscreveres. Recebes novidades em breve — sem spam.
+            Obrigada por te inscreveres. Recebes novidades em breve, sem spam.
           </p>
         </div>
       ) : (

@@ -86,7 +86,7 @@ function EmptyState() {
     <div className="border-t border-[color:var(--border-stone)] pt-8">
       <p className="text-pretty max-w-md text-lg leading-relaxed text-fg-muted">
         Não há datas agendadas de momento. Fala comigo e encontramos a próxima
-        turma — ou uma sessão à tua medida.
+        turma, ou uma sessão à tua medida.
       </p>
       <ButtonLink href={primaryCta.href} variant="secondary" size="sm" className="mt-6">
         {primaryCta.label}

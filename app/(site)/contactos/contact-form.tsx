@@ -72,7 +72,7 @@ export function ContactForm() {
     if (!state.email.trim()) {
       next.email = "Preciso do teu email para responder.";
     } else if (!state.email.includes("@")) {
-      next.email = "Verifica o email — parece estar incompleto.";
+      next.email = "Verifica o email, parece estar incompleto.";
     }
     if (!state.mensagem.trim()) {
       next.mensagem = "Conta-me um pouco sobre o que precisas.";
@@ -126,7 +126,7 @@ export function ContactForm() {
           Mensagem enviada!
         </h3>
         <p className="text-pretty mt-2 text-[1.0625rem] leading-relaxed text-fg-muted">
-          Obrigada pela tua mensagem. Entro em contacto em breve — normalmente
+          Obrigada pela tua mensagem. Entro em contacto em breve, normalmente
           em 24–48h.
         </p>
         <div className="mt-6">

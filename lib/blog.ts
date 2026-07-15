@@ -56,7 +56,7 @@ const posts: BlogPost[] = [
     slug: "inteligencia-emocional-no-desporto",
     title: "Inteligência emocional: a vantagem que não se treina no ginásio",
     excerpt:
-      "Gerir o que sentes sob pressão decide tanto como a preparação física. Fica com um mapa prático para treinar a cabeça com o mesmo rigor que treinas o corpo.",
+      "Gerir o que sentes sob pressão decide tanto como a preparação física. Fica com um mapa prático para treinar a mente com o mesmo rigor que treinas o corpo.",
     category: "Inteligência Emocional",
     author: "Filipa Marques",
     publishedAt: "2026-06-24",
@@ -68,7 +68,7 @@ const posts: BlogPost[] = [
     body: [
       {
         type: "paragraph",
-        text: "Há um momento, segundos antes de entrares em campo, em que tudo o que treinaste fica em segundo plano. O corpo está pronto — mas é a cabeça que decide se a preparação se transforma em resultado. É aí que a inteligência emocional deixa de ser um conceito bonito e passa a ser uma vantagem concreta.",
+        text: "Há um momento, segundos antes de entrares em campo, em que tudo o que treinaste fica em segundo plano. O corpo está pronto, mas é a mente que decide se a preparação se transforma em resultado. É aí que a inteligência emocional deixa de ser um conceito bonito e passa a ser uma vantagem concreta.",
       },
       {
         type: "heading",
@@ -76,7 +76,7 @@ const posts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "Inteligência emocional é a capacidade de reconhecer o que sentes, perceber de onde vem, e escolher o que fazes a seguir — em vez de reagires em piloto automático. No desporto, isto aparece na forma como lidas com um erro, com a pressão do resultado, ou com um colega que não está no seu melhor dia.",
+        text: "Inteligência emocional é a capacidade de reconhecer o que sentes, perceber de onde vem, e escolher o que fazes a seguir, em vez de reagires em piloto automático. No desporto, isto aparece na forma como lidas com um erro, com a pressão do resultado, ou com um colega que não está no seu melhor dia.",
       },
       {
         type: "quote",
@@ -89,11 +89,11 @@ const posts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "Primeiro: nomeia a emoção. Dizer «estou frustrado» em vez de deixar a frustração conduzir já reduz a sua intensidade. Segundo: separa o facto da interpretação — «falhei o passe» é um facto; «sou um desastre» é uma história. Terceiro: define a tua próxima ação mínima, aquela coisa pequena e concreta que te devolve o controlo.",
+        text: "Primeiro: nomeia a emoção. Dizer «estou frustrado» em vez de deixar a frustração conduzir já reduz a sua intensidade. Segundo: separa o facto da interpretação: «falhei o passe» é um facto; «sou um desastre» é uma história. Terceiro: define a tua próxima ação mínima, aquela coisa pequena e concreta que te devolve o controlo.",
       },
       {
         type: "paragraph",
-        text: "Nenhum destes hábitos exige tempo extra de treino. Exige intenção. E, como tudo o que treinas, melhora com repetição — até se tornar a tua forma natural de estar em competição.",
+        text: "Nenhum destes hábitos exige tempo extra de treino. Exige intenção. E, como tudo o que treinas, melhora com repetição, até se tornar a tua forma natural de estar em competição.",
       },
     ],
   },

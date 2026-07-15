@@ -38,7 +38,7 @@ export const services: Service[] = [
     number: "03",
     title: "Inteligência emocional no desporto",
     description:
-      "As emoções decidem campeonatos. Aprende a identificá-las e a usá-las a teu favor — do aquecimento ao apito final — para competires sempre com a cabeça no sítio certo.",
+      "As emoções decidem campeonatos. Aprende a identificá-las e a usá-las a teu favor, do aquecimento ao apito final, para competires sempre com a mente no sítio certo.",
     includes: [
       "Mapeamento emocional em competição",
       "Rotinas de regulação pré e pós-jogo",
@@ -79,7 +79,7 @@ export const audiences: Audience[] = [
   {
     title: "Atletas",
     description:
-      "Para quem quer competir com a mente ao mesmo nível do corpo — gerindo a pressão, mantendo o foco e recuperando rapidamente do erro ou da derrota.",
+      "Para quem quer competir com a mente ao mesmo nível do corpo, gerindo a pressão, mantendo o foco e recuperando rapidamente do erro ou da derrota.",
   },
   {
     title: "Treinadores & equipas técnicas",

@@ -199,7 +199,7 @@ export default function PodcastPage() {
             </h2>
             <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-inverse-muted">
               O que ouves aqui aplica-se ao teu treino, à tua equipa e à tua
-              cabeça. Marca uma conversa e trabalhamos o que é teu — sem
+              mente. Marca uma conversa e trabalhamos o que é teu, sem
               compromisso.
             </p>
           </div>

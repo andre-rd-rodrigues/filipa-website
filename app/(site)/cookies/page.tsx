@@ -155,7 +155,7 @@ export default function CookiesPage() {
         <p className="text-pretty text-fg-muted leading-relaxed mb-4">
           Além do banner de consentimento deste site, podes gerir ou eliminar
           cookies diretamente nas definições do teu navegador. A maioria dos
-          navegadores permite bloquear ou apagar cookies — consulta a secção de
+          navegadores permite bloquear ou apagar cookies. Consulta a secção de
           privacidade / cookies do teu navegador (por exemplo, Google Chrome,
           Mozilla Firefox, Safari ou Microsoft Edge). Nota que desativar
           determinados cookies pode afetar algumas funcionalidades.

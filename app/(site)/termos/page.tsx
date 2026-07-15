@@ -53,8 +53,8 @@ export default function TermosPage() {
           Propriedade intelectual
         </h2>
         <p className="text-pretty text-fg-muted leading-relaxed mb-4">
-          Todos os conteúdos deste site — incluindo textos, imagens, logótipo,
-          marca, grafismos, estrutura e código — são propriedade de{" "}
+          Todos os conteúdos deste site (incluindo textos, imagens, logótipo,
+          marca, grafismos, estrutura e código) são propriedade de{" "}
           {site.name} ou de terceiros que autorizaram a sua utilização, estando
           protegidos pela legislação de propriedade intelectual aplicável. Não é
           permitida a reprodução, distribuição, modificação ou utilização

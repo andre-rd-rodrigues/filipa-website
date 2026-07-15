@@ -13,14 +13,14 @@ import { ContactForm } from "./contact-form";
 export const metadata: Metadata = {
   title: "Contactos",
   description:
-    "Marca uma conversa com a Filipa Marques. Coaching, PNL e inteligência emocional para o desporto — por telefone, email ou formulário. Respondo em breve.",
+    "Marca uma conversa com a Filipa Marques. Coaching, PNL e inteligência emocional para o desporto: por telefone, email ou formulário. Respondo em breve.",
   alternates: {
     canonical: "/contactos",
   },
   openGraph: {
     title: "Contactos",
     description:
-      "Marca uma conversa com a Filipa Marques. Coaching, PNL e inteligência emocional para o desporto — por telefone, email ou formulário. Respondo em breve.",
+      "Marca uma conversa com a Filipa Marques. Coaching, PNL e inteligência emocional para o desporto: por telefone, email ou formulário. Respondo em breve.",
     type: "website",
   },
 };
@@ -29,7 +29,7 @@ const faqs = [
   {
     question: "A primeira sessão é já um compromisso?",
     answer:
-      "Não. A primeira conversa serve para nos conhecermos, perceber onde estás e o que procuras. Sem obrigação — só decidimos avançar se fizer sentido para ti.",
+      "Não. A primeira conversa serve para nos conhecermos, perceber onde estás e o que procuras. Sem obrigação: só decidimos avançar se fizer sentido para ti.",
   },
   {
     question: "Trabalhas online ou presencial?",
@@ -49,7 +49,7 @@ const faqs = [
   {
     question: "O que partilho fica confidencial?",
     answer:
-      "Sempre. Tudo o que falamos é confidencial e tratado com o cuidado que mereces — é a base para trabalharmos com confiança.",
+      "Sempre. Tudo o que falamos é confidencial e tratado com o cuidado que mereces: é a base para trabalharmos com confiança.",
   },
 ];
 
@@ -62,13 +62,14 @@ export default function ContactosPage() {
         <div className="grid gap-x-14 gap-y-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
           {/* LEFT — the form */}
           <Reveal>
-            <Eyebrow className="mb-4">Envia mensagem</Eyebrow>
+            <Eyebrow className="mb-4">Fala comigo</Eyebrow>
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-              Conta-me o que precisas.
+              Envia mensagem e entra em campo.
             </h2>
             <p className="text-pretty mt-4 max-w-lg text-lg leading-relaxed text-fg-muted">
-              Preenche o formulário e recebes resposta minha, normalmente em
-              24–48h. Sem respostas automáticas.
+              Conta-me qual é o teu objetivo. Preenche o formulário e eu
+              respondo-te pessoalmente em 24 a 48 horas. Aqui não há respostas
+              automáticas, apenas compromisso.
             </p>
             <div className="mt-10">
               <ContactForm />
@@ -128,8 +129,8 @@ export default function ContactosPage() {
               </dl>
 
               <p className="text-pretty mt-8 max-w-sm text-[0.9375rem] leading-relaxed text-fg-muted">
-                Prefiro uma conversa a uma resposta automática. Escreve por aqui
-                ou liga — o que for mais fácil para ti.
+                O meu trabalho é lado a lado, não por respostas automáticas.
+                Escreve-me ou liga, o que for mais fácil para ti.
               </p>
 
               <div className="mt-10 border-t border-[color:var(--border-stone)] pt-6">
@@ -169,8 +170,9 @@ export default function ContactosPage() {
               Perguntas frequentes
             </h2>
             <p className="text-pretty mt-4 max-w-md text-lg leading-relaxed text-fg-inverse-muted">
-              O essencial antes de marcares, sem rodeios. Se ficar alguma dúvida,
-              fala comigo — respondo a tudo.
+              A clareza mental começa antes da primeira sessão. Encontra aqui as
+              respostas diretas sobre como funciona o meu método. Se restar
+              alguma dúvida, o meu compromisso é responder-te pessoalmente.
             </p>
             <ButtonLink href="#form" className="mt-8">
               Marcar conversa

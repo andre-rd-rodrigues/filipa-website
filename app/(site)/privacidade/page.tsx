@@ -130,7 +130,7 @@ export default function PrivacidadePage() {
         <ul className="list-disc pl-5 space-y-2 text-fg-muted mb-4">
           <li>
             <strong className="text-fg">Responder aos teus contactos</strong> e
-            dar seguimento a pedidos de marcação de sessões ou informações — base
+            dar seguimento a pedidos de marcação de sessões ou informações. Base
             legal: execução de diligências pré-contratuais a teu pedido (art.º
             6.º, n.º 1, al. b) do RGPD).
           </li>
@@ -138,7 +138,7 @@ export default function PrivacidadePage() {
             <strong className="text-fg">
               Análise estatística e melhoria do site
             </strong>{" "}
-            através do Google Analytics — base legal: o teu consentimento (art.º
+            através do Google Analytics. Base legal: o teu consentimento (art.º
             6.º, n.º 1, al. a) do RGPD), que podes retirar a qualquer momento.
           </li>
         </ul>
@@ -228,7 +228,7 @@ export default function PrivacidadePage() {
         <p className="text-pretty text-fg-muted leading-relaxed mb-4">
           Se considerares que o tratamento dos teus dados viola a legislação
           aplicável, tens o direito de apresentar reclamação junto da autoridade
-          de controlo competente em Portugal — a{" "}
+          de controlo competente em Portugal, a{" "}
           <strong className="text-fg">
             CNPD (Comissão Nacional de Proteção de Dados)
           </strong>

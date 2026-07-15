@@ -37,7 +37,7 @@ const episodeLinks: EpisodeLink[] = [
 export const episodes: Episode[] = [
   {
     number: 1,
-    title: "A cabeça também treina",
+    title: "A mente também treina",
     description:
       "Porque é que o talento não chega e o que muda quando levas a preparação mental tão a sério como o treino físico. Um ponto de partida para tudo o que se segue.",
     duration: "38 min",
@@ -45,14 +45,14 @@ export const episodes: Episode[] = [
     links: episodeLinks,
     coverImage: {
       src: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=800&q=80",
-      alt: "Arte do episódio: a cabeça também treina",
+      alt: "Arte do episódio: a mente também treina",
     },
   },
   {
     number: 2,
     title: "PNL sem misticismo",
     description:
-      "O que é, afinal, a Programação Neurolinguística — e o que não é. Ferramentas concretas para mudares a conversa que tens contigo próprio antes de competir.",
+      "O que é, afinal, a Programação Neurolinguística, e o que não é. Ferramentas concretas para mudares a conversa que tens contigo próprio antes de competir.",
     duration: "42 min",
     date: "26 Mar 2025",
     links: episodeLinks,
