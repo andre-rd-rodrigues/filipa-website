@@ -62,7 +62,7 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex w-full max-w-[80rem] items-center justify-between px-5 py-4 sm:px-8">
         <Link href="/" className="block shrink-0" aria-label={site.fullName}>
-          <SiteLogo priority />
+          <SiteLogo variant="navbar" priority />
         </Link>
 
         {/* Desktop nav */}
@@ -137,7 +137,7 @@ export function SiteHeader() {
               className="block shrink-0"
               aria-label={site.fullName}
             >
-              <SiteLogo priority />
+              <SiteLogo variant="navbar" priority />
             </Link>
             <button
               type="button"
