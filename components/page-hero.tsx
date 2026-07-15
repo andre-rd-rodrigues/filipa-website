@@ -8,11 +8,15 @@ import { Container } from "@/components/container";
 export function PageHero({
   title,
   breadcrumb,
+  parent,
 }: {
   title: string;
   breadcrumb?: string;
+  /** Parent breadcrumb crumb. Defaults to the site root ("Início"). */
+  parent?: { label: string; href: string };
 }) {
   const current = breadcrumb ?? title;
+  const root = parent ?? { label: "Início", href: "/" };
 
   return (
     <section className="text-center">
@@ -24,8 +28,8 @@ export function PageHero({
           aria-label="Breadcrumb"
           className="eyebrow mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-fg-muted"
         >
-          <Link href="/" className="transition-colors hover:text-action">
-            Início
+          <Link href={root.href} className="transition-colors hover:text-action">
+            {root.label}
           </Link>
           <span aria-hidden className="inline-block size-2 shrink-0 bg-action" />
           <span className="text-fg-secondary" aria-current="page">

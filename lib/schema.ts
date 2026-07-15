@@ -7,6 +7,7 @@
 
 import { site, contact, socials } from "@/lib/site";
 import type { Course } from "@/lib/courses";
+import type { Service } from "@/lib/services";
 
 export interface JsonLdData {
   "@context": string;
@@ -66,6 +67,28 @@ export function buildCourseSchema(course: Course): JsonLdData {
     description: course.summary,
     url: `${site.url}/cursos/${course.slug}`,
     inLanguage: "pt-PT",
+    provider: {
+      "@type": "Organization",
+      name: site.fullName,
+      url: site.url,
+    },
+  };
+}
+
+/**
+ * Service schema for a single service (service detail page).
+ * Provider is the site owner Organization. No price encoded until real
+ * pricing is confirmed.
+ */
+export function buildServiceSchema(service: Service): JsonLdData {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    description: service.summary,
+    url: `${site.url}/servicos/${service.slug}`,
+    serviceType: service.title,
+    areaServed: "Portugal",
     provider: {
       "@type": "Organization",
       name: site.fullName,

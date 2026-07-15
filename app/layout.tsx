@@ -65,8 +65,20 @@ export default function RootLayout({
     <html
       lang="pt-PT"
       className={`${termina.variable} ${bodoni.variable} ${hanken.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
+        {/* Blocking pre-paint hint: mark the document as motion-ready before the
+         * first paint so GSAP-choreographed elements (e.g. the hero portrait)
+         * start hidden instead of flashing fully visible from the SSR HTML and
+         * then being clipped once the entrance timeline runs. Gated on
+         * prefers-reduced-motion so no-JS / reduced-motion users see content. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('gsap-ready')}}catch(e){}",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

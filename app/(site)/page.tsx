@@ -58,9 +58,9 @@ const stats: Stat[] = [
 
 const highlights: HighlightItem[] = [
   {
-    label: "Coaching individual",
+    label: "Treino mental individual",
     body: "O teu plano de jogo focado em resultados.",
-    href: "/servicos",
+    href: "/servicos/treino-mental-individual",
     image: {
       src: "https://images.unsplash.com/photo-1549476464-37392f717541?auto=format&fit=crop&w=1200&q=80",
       alt: "Momento de foco e respiração antes do esforço",
@@ -69,7 +69,7 @@ const highlights: HighlightItem[] = [
   {
     label: "Inteligência emocional",
     body: "Domínio mental e gestão sob pressão.",
-    href: "/cursos",
+    href: "/servicos/inteligencia-emocional-no-desporto",
     image: {
       src: "https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=1200&q=80",
       alt: "Atleta em momento de concentração e serenidade",
@@ -78,7 +78,7 @@ const highlights: HighlightItem[] = [
   {
     label: "Comunicação em campo",
     body: "PNL aplicada a líderes, treinadores e equipas.",
-    href: "/cursos",
+    href: "/servicos/comunicacao-em-campo-pnl",
     image: {
       src: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=1200&q=80",
       alt: "Treinador a falar com a equipa em campo",

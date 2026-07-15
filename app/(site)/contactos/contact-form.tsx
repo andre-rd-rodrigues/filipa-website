@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/button";
 
 const subjects = [
-  "Coaching individual",
+  "Treino mental individual",
   "Coaching de equipa",
   "Cursos",
   "Palestra / formação",

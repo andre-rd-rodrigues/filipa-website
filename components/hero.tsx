@@ -47,10 +47,14 @@ export function Hero() {
 
     let ctx: { revert: () => void } | undefined;
 
-    // Hide the animated bits synchronously (before paint) so the portrait is
-    // never shown fully before the clip-path wipe runs. This class is gated in
-    // globals.css, so no-JS / headless renders keep the content fully visible.
-    el.classList.add("gsap-ready");
+    // Hide the animated bits before paint so the portrait is never shown fully
+    // before the clip-path wipe runs. On hard loads this class is already on
+    // <html> (set by a blocking script in the document head, before first
+    // paint). We set it here too so client-side navigations to this page are
+    // covered. It's gated in globals.css, so no-JS / reduced-motion renders keep
+    // the content fully visible.
+    const docEl = document.documentElement;
+    docEl.classList.add("gsap-ready");
 
     (async () => {
       let gsap: typeof import("gsap").gsap;
@@ -61,7 +65,7 @@ export function Hero() {
         gsap.registerPlugin(ScrollTrigger);
       } catch {
         // If GSAP can't load, don't leave the hero hidden forever.
-        el.classList.remove("gsap-ready");
+        docEl.classList.remove("gsap-ready");
         return;
       }
 
@@ -87,6 +91,14 @@ export function Hero() {
           scale: 1,
           duration: 1.5,
           ease: "power4.out",
+          // Once revealed, drop the clip-path and will-change entirely. Leaving a
+          // live clip on a composited parent forces the browser to re-clip the
+          // large portrait every scroll-parallax frame, which flickers.
+          onComplete: () =>
+            gsap.set(q('[data-anim="cover"]'), {
+              clipPath: "none",
+              willChange: "auto",
+            }),
         })
           .to(
             q('[data-anim="line"]'),
@@ -101,9 +113,16 @@ export function Hero() {
 
         // Scroll parallax: drift the portrait as the hero scrolls away. A
         // smoothed scrub (vs. 1:1) keeps the movement fluid and lag-free.
+        // Promote the image to its own GPU layer so the continuous transform
+        // doesn't re-rasterize the large portrait each frame (a flicker source).
+        gsap.set(q('[data-anim="cover"] img'), {
+          willChange: "transform",
+          backfaceVisibility: "hidden",
+        });
         gsap.to(q('[data-anim="cover"] img'), {
           yPercent: 8,
           ease: "none",
+          force3D: true,
           scrollTrigger: {
             trigger: el,
             start: "top top",

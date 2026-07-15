@@ -7,8 +7,8 @@ import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { QuoteBand } from "@/components/quote-band";
 import { EditorialImage } from "@/components/editorial-image";
-import { primaryCta, quotes, site } from "@/lib/site";
-import { audiences, services } from "./data";
+import { quotes, primaryCta, site } from "@/lib/site";
+import { audiences, getAllServices } from "@/lib/services";
 
 export const metadata: Metadata = {
   title: "Serviços",
@@ -25,7 +25,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ServicosPage() {
+export default async function ServicosPage() {
+  const services = await getAllServices();
+
   return (
     <>
       <PageHero title="Serviços" />
@@ -56,9 +58,9 @@ export default function ServicosPage() {
 
         <div className="mt-14 border-t border-[color:var(--border-stone)]">
           {services.map((service, i) => (
-            <Reveal key={service.number} delay={i * 60}>
+            <Reveal key={service.slug} delay={i * 60}>
               <Link
-                href={primaryCta.href}
+                href={`/servicos/${service.slug}`}
                 className="group flex items-start gap-6 border border-transparent border-b-[color:var(--border-stone)] p-6 transition-[border-color] duration-[220ms] ease-out hover:border-action sm:gap-10 sm:p-8"
               >
                 <span
@@ -177,8 +179,8 @@ export default function ServicosPage() {
               O teu próximo nível começa aqui.
             </h2>
             <p className="text-pretty mt-5 max-w-lg text-lg leading-relaxed text-fg-inverse-muted">
-              Vamos conversar? Agenda uma sessão de diagnóstico e descobrimos,
-              juntos, o melhor plano de jogo para ti.
+              Vamos conversar? Agenda uma sessão gratuita e descobrimos,
+              juntos, o plano de jogo ideal para ti.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>

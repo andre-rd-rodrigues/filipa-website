@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { getAllPosts } from "@/lib/blog";
 import { getAllCourses } from "@/lib/courses";
+import { getAllServices } from "@/lib/services";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = site.url;
@@ -70,6 +71,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+  // Dynamic service detail pages
+  const services = await getAllServices();
+  const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
+    url: `${baseUrl}/servicos/${service.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
   // Dynamic course detail pages
   const courses = await getAllCourses();
   const courseRoutes: MetadataRoute.Sitemap = courses.map((course) => ({
@@ -88,5 +98,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...courseRoutes, ...postRoutes];
+  return [...staticRoutes, ...serviceRoutes, ...courseRoutes, ...postRoutes];
 }
