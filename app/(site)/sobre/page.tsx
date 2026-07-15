@@ -12,14 +12,14 @@ import { approach, credentials } from "./data";
 export const metadata: Metadata = {
   title: "Sobre mim",
   description:
-    "Conhece a Filipa Marques: psicóloga do desporto e coach de PNL. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.",
+    "Conhece a Filipa Marques: mental coach e coach de PNL, especializada em Psicologia do Desporto. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.",
   alternates: {
     canonical: "/sobre",
   },
   openGraph: {
     title: "Sobre mim",
     description:
-      "Conhece a Filipa Marques: psicóloga do desporto e coach de PNL. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.",
+      "Conhece a Filipa Marques: mental coach e coach de PNL, especializada em Psicologia do Desporto. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.",
     type: "profile",
     images: [{ url: "/img/profile-1.jpg" }],
   },
@@ -59,8 +59,8 @@ export default function SobrePage() {
               <p>
                 Chamo-me Filipa Marques e sou apaixonada pelo potencial humano,
                 por tudo o que és capaz de alcançar quando a tua mente joga na tua
-                equipa. Como psicóloga do desporto e mental coach, trabalho
-                exatamente onde o talento puro já não chega sozinho: na gestão da
+                equipa. Como mental coach com formação em Psicologia do Desporto,
+                trabalho exatamente onde o talento puro já não chega sozinho: na gestão da
                 pressão, na manutenção do foco e na forma como pensas quando cada
                 segundo conta.
               </p>
@@ -120,8 +120,8 @@ export default function SobrePage() {
               A base que sustenta o trabalho.
             </h2>
             <p className="mt-5 max-w-lg text-pretty text-lg leading-relaxed text-fg-muted">
-              Anos de estudo em psicologia, coaching e PNL ao serviço de uma coisa
-              só: ajudar-te a pensar, sentir e agir com foco.
+              Anos de estudo em Psicologia do Desporto, coaching e PNL ao serviço
+              de uma coisa só: ajudar-te a pensar, sentir e agir com foco.
             </p>
           </Reveal>
 

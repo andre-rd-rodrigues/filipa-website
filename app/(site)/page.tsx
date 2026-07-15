@@ -103,7 +103,7 @@ export default async function Home() {
           eyebrow="Método"
           title="Mais do que treino mental: uma estratégia desenhada à tua medida para entrares em campo e dominares a pressão."
           paragraphs={[
-            "Cruzamos a base clínica da Psicologia com a eficácia prática da PNL e da Inteligência Emocional. Sem discursos vazios ou fórmulas prontas: sais de cada sessão com ferramentas reais e um plano claro para saberes exatamente como agir quando o apito soar.",
+            "Cruzamos a base científica da Psicologia do Desporto com a eficácia prática da PNL e da Inteligência Emocional. Sem discursos vazios ou fórmulas prontas: sais de cada sessão com ferramentas reais e um plano claro para saberes exatamente como agir quando o apito soar.",
           ]}
           cta={{ label: "Saber mais", href: "/sobre" }}
           images={[

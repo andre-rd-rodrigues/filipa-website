@@ -30,7 +30,6 @@ export type Platform = {
 
 const episodeLinks: EpisodeLink[] = [
   { platform: "Spotify", href: "#" },
-  { platform: "Apple Podcast", href: "#" },
   { platform: "YouTube", href: "#" },
 ];
 
@@ -117,7 +116,5 @@ export const episodes: Episode[] = [
 
 export const platforms: Platform[] = [
   { name: "Spotify", href: "#" },
-  { name: "Apple Podcast", href: "#" },
   { name: "YouTube", href: "#" },
-  { name: "RSS", href: "#" },
 ];

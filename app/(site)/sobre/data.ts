@@ -42,11 +42,6 @@ export type Credential = {
  */
 export const credentials: Credential[] = [
   {
-    title: "Licenciatura em Psicologia",
-    detail: "A base clínica e científica que sustenta todo o trabalho: perceber como a mente funciona antes de a treinar.",
-    type: "licenciatura",
-  },
-  {
     title: "Pós-Graduação em Psicologia do Desporto",
     detail: "Otimização do desempenho através do desenvolvimento mental e emocional do atleta: a psicologia aplicada ao que acontece em campo.",
     type: "pos-graduacao",

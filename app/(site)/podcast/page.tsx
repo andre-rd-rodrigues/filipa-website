@@ -1,11 +1,10 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { Section } from "@/components/section";
 import { Eyebrow } from "@/components/eyebrow";
-import { ButtonLink } from "@/components/button";
 import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
-import { primaryCta } from "@/lib/site";
 import { episodes, platforms, type Episode } from "./data";
 
 export const metadata: Metadata = {
@@ -23,7 +22,20 @@ export const metadata: Metadata = {
   },
 };
 
-const [featured, ...rest] = episodes;
+const [featured, ...rest] = episodes.slice(0, 10);
+
+const platformIcons: Record<string, ReactNode> = {
+  Spotify: (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="h-4 w-4 shrink-0">
+      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.623.623 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 1 1-.277-1.215c3.809-.87 7.077-.496 9.712 1.115a.623.623 0 0 1 .207.857zm1.223-2.722a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 1 1-.452-1.494c3.632-1.101 8.147-.568 11.232 1.328a.78.78 0 0 1 .257 1.075zm.105-2.835c-3.223-1.914-8.54-2.09-11.618-1.156a.936.936 0 1 1-.542-1.79c3.532-1.072 9.404-.865 13.115 1.338a.936.936 0 0 1-.955 1.608z" />
+    </svg>
+  ),
+  YouTube: (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="h-4 w-4 shrink-0">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.016 3.016 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+    </svg>
+  ),
+};
 
 function PlatformLinks({
   links,
@@ -42,8 +54,9 @@ function PlatformLinks({
         <li key={link.platform}>
           <a
             href={link.href}
-            className={`inline-flex items-center rounded-none border px-3.5 py-1.5 text-[0.75rem] font-medium uppercase tracking-[0.12em] transition-colors duration-200 ${cls}`}
+            className={`inline-flex items-center gap-2 rounded-none border px-3.5 py-1.5 text-[0.75rem] font-medium uppercase tracking-[0.12em] transition-colors duration-200 ${cls}`}
           >
+            {platformIcons[link.platform]}
             {link.platform}
           </a>
         </li>
@@ -163,7 +176,7 @@ export default function PodcastPage() {
       <Section tone="dark">
         <Reveal>
           <Eyebrow tone="dark" className="mb-4">
-            Subscrever
+            Ver todos os episódios
           </Eyebrow>
           <h2 className="font-display max-w-2xl text-balance text-[clamp(2rem,4vw,3.25rem)] leading-[1.1]">
             Ouve onde preferes.
@@ -180,34 +193,14 @@ export default function PodcastPage() {
               <li key={platform.name}>
                 <a
                   href={platform.href}
-                  className="inline-flex items-center rounded-none border-[1.5px] border-white/25 px-6 py-3 text-sm font-medium uppercase tracking-[0.06em] text-fg-inverse transition-colors duration-200 hover:border-action hover:text-action"
+                  className="inline-flex items-center gap-2.5 rounded-none border-[1.5px] border-white/25 px-6 py-3 text-sm font-medium uppercase tracking-[0.06em] text-fg-inverse transition-colors duration-200 hover:border-action hover:text-action"
                 >
+                  {platformIcons[platform.name]}
                   {platform.name}
                 </a>
               </li>
             ))}
           </ul>
-        </Reveal>
-      </Section>
-
-      {/* Final CTA */}
-      <Section tone="ink">
-        <Reveal className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
-          <div className="max-w-2xl">
-            <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-              Ouvir é o primeiro passo. Aplicar muda o jogo.
-            </h2>
-            <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-inverse-muted">
-              O que ouves aqui aplica-se ao teu treino, à tua equipa e à tua
-              mente. Marca uma conversa e trabalhamos o que é teu, sem
-              compromisso.
-            </p>
-          </div>
-          <div className="flex shrink-0 flex-wrap gap-4">
-            <ButtonLink href={primaryCta.href} variant="primary">
-              {primaryCta.label}
-            </ButtonLink>
-          </div>
         </Reveal>
       </Section>
     </>

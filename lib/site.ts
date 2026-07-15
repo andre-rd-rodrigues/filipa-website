@@ -9,7 +9,7 @@ export const site = {
   tagline: "Coaching & PNL",
   fullName: "Filipa Marques — Coaching & PNL",
   description:
-    "Psicóloga e coach de PNL. Coaching, inteligência emocional e comunicação para atletas, treinadores e profissionais do desporto. Resultados concretos, em português.",
+    "Mental coach e coach de PNL, com pós-graduação em Psicologia do Desporto. Coaching, inteligência emocional e comunicação para atletas, treinadores e profissionais do desporto. Resultados concretos, em português.",
   url: "https://filipamarques.pt",
   locale: "pt-PT",
   quote: "A tua mente joga a teu favor. O primeiro passo é teu.",
