@@ -170,7 +170,7 @@ const courses: Course[] = [
     ],
     ctas: [{ label: "Inscrição", href: "/contactos", variant: "primary" }],
     image: {
-      src: "https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=1200&q=80",
+      src: "https://images.unsplash.com/photo-1751394220229-9a23c9ed6a75?auto=format&fit=crop&w=1200&q=80",
       alt: "Treinador a falar com a equipa em campo",
     },
     // PLACEHOLDER dates (Outubro 2026) so the calendar shows upcoming sessions.
@@ -211,7 +211,7 @@ const courses: Course[] = [
     ],
     ctas: [{ label: "Inscrição", href: "/contactos", variant: "primary" }],
     image: {
-      src: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=1200&q=80",
+      src: "https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=1200&q=80",
       alt: "Atleta em momento de concentração e serenidade",
     },
     // PLACEHOLDER dates (Outubro 2026) so the calendar shows upcoming sessions.

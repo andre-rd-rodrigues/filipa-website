@@ -62,8 +62,8 @@ const highlights: HighlightItem[] = [
     body: "O teu plano de jogo focado em resultados.",
     href: "/servicos/treino-mental-individual",
     image: {
-      src: "https://images.unsplash.com/photo-1549476464-37392f717541?auto=format&fit=crop&w=1200&q=80",
-      alt: "Momento de foco e respiração antes do esforço",
+      src: "https://images.unsplash.com/photo-1749862961428-79a562db4105?auto=format&fit=crop&w=1200&q=80",
+      alt: "Atleta sozinho, concentrado antes de competir",
     },
   },
   {
@@ -80,7 +80,7 @@ const highlights: HighlightItem[] = [
     body: "PNL aplicada a líderes, treinadores e equipas.",
     href: "/servicos/comunicacao-em-campo-pnl",
     image: {
-      src: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=1200&q=80",
+      src: "https://images.unsplash.com/photo-1751394220229-9a23c9ed6a75?auto=format&fit=crop&w=1200&q=80",
       alt: "Treinador a falar com a equipa em campo",
     },
   },

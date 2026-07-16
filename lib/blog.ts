@@ -53,51 +53,6 @@ export type BlogPost = {
  */
 const posts: BlogPost[] = [
   {
-    slug: "inteligencia-emocional-no-desporto",
-    title: "Inteligência emocional: a vantagem que não se treina no ginásio",
-    excerpt:
-      "Gerir o que sentes sob pressão decide tanto como a preparação física. Fica com um mapa prático para treinar a mente com o mesmo rigor que treinas o corpo.",
-    category: "Inteligência Emocional",
-    author: "Filipa Marques",
-    publishedAt: "2026-06-24",
-    readingMinutes: 6,
-    coverImage: {
-      src: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1600&q=80",
-      alt: "Atleta a preparar-se antes do treino, concentração e respiração",
-    },
-    body: [
-      {
-        type: "paragraph",
-        text: "Há um momento, segundos antes de entrares em campo, em que tudo o que treinaste fica em segundo plano. O corpo está pronto, mas é a mente que decide se a preparação se transforma em resultado. É aí que a inteligência emocional deixa de ser um conceito bonito e passa a ser uma vantagem concreta.",
-      },
-      {
-        type: "heading",
-        text: "O que é, sem jargão",
-      },
-      {
-        type: "paragraph",
-        text: "Inteligência emocional é a capacidade de reconhecer o que sentes, perceber de onde vem, e escolher o que fazes a seguir, em vez de reagires em piloto automático. No desporto, isto aparece na forma como lidas com um erro, com a pressão do resultado, ou com um colega que não está no seu melhor dia.",
-      },
-      {
-        type: "quote",
-        text: "Não é sobre não sentir. É sobre sentir e continuar a decidir bem.",
-        cite: "Filipa Marques",
-      },
-      {
-        type: "heading",
-        text: "Três hábitos para começar esta semana",
-      },
-      {
-        type: "paragraph",
-        text: "Primeiro: nomeia a emoção. Dizer «estou frustrado» em vez de deixar a frustração conduzir já reduz a sua intensidade. Segundo: separa o facto da interpretação: «falhei o passe» é um facto; «sou um desastre» é uma história. Terceiro: define a tua próxima ação mínima, aquela coisa pequena e concreta que te devolve o controlo.",
-      },
-      {
-        type: "paragraph",
-        text: "Nenhum destes hábitos exige tempo extra de treino. Exige intenção. E, como tudo o que treinas, melhora com repetição, até se tornar a tua forma natural de estar em competição.",
-      },
-    ],
-  },
-  {
     slug: "ansiedade-competitiva-o-que-e-e-sintomas",
     title: "Ansiedade competitiva: o que é e como reconhecer os sintomas",
     excerpt:
@@ -107,8 +62,8 @@ const posts: BlogPost[] = [
     publishedAt: "2026-07-16",
     readingMinutes: 6,
     coverImage: {
-      src: "https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=1600&q=80",
-      alt: "Atleta concentrado, a respirar fundo momentos antes de competir",
+      src: "https://images.unsplash.com/photo-1693683223364-7cb25fdfaf0c?auto=format&fit=crop&w=1600&q=80",
+      alt: "Jovem atleta a sentir o nervosismo momentos antes de competir",
     },
     body: [
       {
@@ -184,8 +139,8 @@ const posts: BlogPost[] = [
     publishedAt: "2026-07-15",
     readingMinutes: 6,
     coverImage: {
-      src: "https://images.unsplash.com/photo-1549476464-37392f717541?auto=format&fit=crop&w=1600&q=80",
-      alt: "Atleta a preparar a respiração para gerir a pressão antes do esforço",
+      src: "https://images.unsplash.com/photo-1761258772711-fda3c790573e?auto=format&fit=crop&w=1600&q=80",
+      alt: "Atleta de olhos fechados a controlar a respiração antes de entrar",
     },
     body: [
       {
@@ -262,7 +217,7 @@ const posts: BlogPost[] = [
     publishedAt: "2026-07-14",
     readingMinutes: 7,
     coverImage: {
-      src: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1600&q=80",
+      src: "https://images.unsplash.com/photo-1761258772175-24f047c9290d?auto=format&fit=crop&w=1600&q=80",
       alt: "Atleta a preparar-se mentalmente, em silêncio, antes do treino",
     },
     body: [
