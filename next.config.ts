@@ -15,6 +15,17 @@ const nextConfig: NextConfig = {
         hostname: "cdn.sanity.io",
         pathname: "/**",
       },
+      // YouTube episode thumbnails (see youTubeThumbnail in app/(site)/podcast/data.ts).
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+        pathname: "/vi/**",
+      },
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+        pathname: "/vi/**",
+      },
     ],
   },
 };

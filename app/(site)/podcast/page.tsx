@@ -1,10 +1,11 @@
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { Section } from "@/components/section";
 import { Eyebrow } from "@/components/eyebrow";
 import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
+import { ButtonLink } from "@/components/button";
 import { episodes, platforms, type Episode } from "./data";
 
 export const metadata: Metadata = {
@@ -37,6 +38,54 @@ const platformIcons: Record<string, ReactNode> = {
   ),
 };
 
+function youTubeHref(episode: Episode): string | undefined {
+  const href = episode.links.find((l) => l.platform === "YouTube")?.href;
+  return href && href !== "#" ? href : undefined;
+}
+
+function EpisodeCover({
+  episode,
+  className,
+  imageProps,
+}: {
+  episode: Episode;
+  className: string;
+  imageProps: Omit<ComponentProps<typeof Image>, "src" | "alt">;
+}) {
+  const href = youTubeHref(episode);
+  const image = (
+    <Image
+      src={episode.coverImage.src}
+      alt={episode.coverImage.alt}
+      {...imageProps}
+      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+    />
+  );
+
+  if (!href) {
+    return <div className={className}>{image}</div>;
+  }
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={`Ver "${episode.title}" no YouTube`}
+      className={`group ${className}`}
+    >
+      {image}
+      <span className="absolute inset-0 grid place-items-center bg-black/0 transition-colors duration-300 group-hover:bg-black/35">
+        <span className="flex aspect-square w-[42%] max-w-14 items-center justify-center rounded-full bg-white/90 text-ink opacity-0 shadow-lg transition-opacity duration-300 group-hover:opacity-100">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="h-1/2 w-1/2 translate-x-[1px]">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </span>
+      </span>
+    </a>
+  );
+}
+
 function PlatformLinks({
   links,
   tone = "light",
@@ -68,7 +117,13 @@ function PlatformLinks({
 export default function PodcastPage() {
   return (
     <>
-      <PageHero title="Podcast" />
+      <PageHero
+        title="Podcast"
+        logo={{
+          src: "/img/podcast-invisivel.jpg",
+          alt: "Logótipo do podcast INVISÍVEL",
+        }}
+      />
 
       {/* Featured / latest episode */}
       <Section tone="page">
@@ -81,16 +136,15 @@ export default function PodcastPage() {
           className="grid items-center gap-8 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-14"
         >
           {/* Cover art */}
-          <div className="relative aspect-square overflow-hidden rounded-none bg-surface-muted">
-            <Image
-              src={featured.coverImage.src}
-              alt={featured.coverImage.alt}
-              fill
-              priority
-              sizes="(max-width: 1024px) 90vw, 22rem"
-              className="object-cover"
-            />
-          </div>
+          <EpisodeCover
+            episode={featured}
+            className="relative aspect-video overflow-hidden rounded-none bg-surface-muted"
+            imageProps={{
+              fill: true,
+              priority: true,
+              sizes: "(max-width: 1024px) 90vw, 22rem",
+            }}
+          />
 
           {/* Content */}
           <div>
@@ -120,7 +174,7 @@ export default function PodcastPage() {
       {/* Episode list */}
       <Section tone="surface" id="episodios">
         <Reveal>
-          <Eyebrow className="mb-4">Todos os episódios</Eyebrow>
+          <Eyebrow className="mb-4">Mais episódios</Eyebrow>
           <h2 className="font-display max-w-2xl text-balance text-[clamp(2rem,4vw,3.25rem)] leading-[1.1]">
             Ferramentas para pensar, sentir e competir melhor.
           </h2>
@@ -132,18 +186,17 @@ export default function PodcastPage() {
               key={episode.number}
               as="article"
               delay={i * 70}
-              className="grid gap-5 border-b border-[color:var(--border-stone)] py-8 sm:grid-cols-[5rem_1fr] sm:gap-8 sm:py-10"
+              className="grid gap-5 border-b border-[color:var(--border-stone)] py-8 sm:grid-cols-[10rem_1fr] sm:gap-8 sm:py-10"
             >
               {/* Thumbnail */}
-              <div className="relative aspect-square w-20 overflow-hidden rounded-none bg-surface-muted">
-                <Image
-                  src={episode.coverImage.src}
-                  alt={episode.coverImage.alt}
-                  fill
-                  sizes="5rem"
-                  className="object-cover"
-                />
-              </div>
+              <EpisodeCover
+                episode={episode}
+                className="relative aspect-video w-40 overflow-hidden rounded-none bg-surface-muted"
+                imageProps={{
+                  fill: true,
+                  sizes: "10rem",
+                }}
+              />
 
               {/* Content */}
               <div>
@@ -170,20 +223,31 @@ export default function PodcastPage() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="mt-12 text-center">
+          <ButtonLink
+            href="https://open.spotify.com/show/4PQe3Vd4qeMBm8FIk1g1oy"
+            variant="secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ver todos os episódios
+          </ButtonLink>
+        </Reveal>
       </Section>
 
       {/* Subscribe band */}
       <Section tone="dark">
         <Reveal>
           <Eyebrow tone="dark" className="mb-4">
-            Ver todos os episódios
+            Todos os episódios
           </Eyebrow>
           <h2 className="font-display max-w-2xl text-balance text-[clamp(2rem,4vw,3.25rem)] leading-[1.1]">
-            Ouve onde preferes.
+            Leva o teu treino mental para qualquer lugar
           </h2>
           <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-inverse-muted">
-            Novos episódios todas as semanas. Segue o podcast na tua plataforma
-            e não perdes nenhuma conversa.
+            Há novos episódios todas as semanas. Segue o podcast na tua aplicação
+            favorita e não percas o próximo passo para o teu desenvolvimento.
           </p>
         </Reveal>
 

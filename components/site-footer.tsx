@@ -15,7 +15,7 @@ export function SiteFooter() {
           variant="dark"
           fullWidth
           title="Newsletter"
-          description="Ideias, artigos e novidades sobre coaching, PNL e desporto, directamente na tua caixa de entrada."
+          description="Ideias, artigos e novidades sobre coaching, PNL e desporto, directamente na tua caixa de correio electrónico."
         />
 
         <div className="mt-14 grid gap-12 border-t border-white/10 pt-14 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">

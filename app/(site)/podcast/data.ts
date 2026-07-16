@@ -28,93 +28,184 @@ export type Platform = {
   href: string;
 };
 
-const episodeLinks: EpisodeLink[] = [
-  { platform: "Spotify", href: "#" },
-  { platform: "YouTube", href: "#" },
-];
+/**
+ * Builds a YouTube thumbnail URL from a video id or watch URL.
+ * Uses `maxresdefault` (highest resolution); `hqdefault` is always present as a
+ * fallback if a video lacks a max-res thumbnail.
+ */
+export function youTubeThumbnail(
+  idOrUrl: string,
+  quality: "maxresdefault" | "hqdefault" = "maxresdefault",
+): string {
+  const match = idOrUrl.match(/(?:v=|youtu\.be\/|\/embed\/)([\w-]{11})/);
+  const videoId = match?.[1] ?? idOrUrl;
+  return `https://i.ytimg.com/vi/${videoId}/${quality}.jpg`;
+}
 
 export const episodes: Episode[] = [
   {
     number: 1,
-    title: "A mente também treina",
+    title: "O que é afinal o treino mental… e porque não funcionou?",
     description:
-      "Porque é que o talento não chega e o que muda quando levas a preparação mental tão a sério como o treino físico. Um ponto de partida para tudo o que se segue.",
-    duration: "38 min",
-    date: "12 Mar 2025",
-    links: episodeLinks,
+      "Há atletas que acreditam que o treino mental não funciona. Mas será mesmo essa a conclusão correta? Na maioria dos casos, aquilo a que chamam «treino mental» resume-se a uma sessão, uma conversa ou uma técnica aprendida num momento de dificuldade. Só que conhecer uma ferramenta não significa que o cérebro a consegue usar quando a pressão aumenta.",
+    duration: "9 min",
+    date: "15 Jul 2026",
+    links: [
+      { platform: "Spotify", href: "https://open.spotify.com/episode/3czR7xnL2UxbMaXPOPOsdQ" },
+      { platform: "YouTube", href: "https://www.youtube.com/watch?v=kgssDHYyfl4" },
+    ],
     coverImage: {
-      src: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=800&q=80",
-      alt: "Arte do episódio: a mente também treina",
+      src: youTubeThumbnail("https://www.youtube.com/watch?v=kgssDHYyfl4"),
+      alt: "Arte do episódio: o que é afinal o treino mental",
     },
   },
   {
     number: 2,
-    title: "PNL sem misticismo",
+    title: "O que o atleta não está a dizer — e porquê",
     description:
-      "O que é, afinal, a Programação Neurolinguística, e o que não é. Ferramentas concretas para mudares a conversa que tens contigo próprio antes de competir.",
-    duration: "42 min",
-    date: "26 Mar 2025",
-    links: episodeLinks,
+      "«Estou bem.» Muitos atletas dizem isto antes sequer de pensarem na resposta. Sai rápido, sai treinado, sai como proteção. Porque no desporto aprende-se cedo que mostrar o que pesa pode parecer risco: risco de perder estatuto, confiança, lugar ou respeito. Mas há um custo oculto.",
+    duration: "8 min",
+    date: "8 Jul 2026",
+    links: [
+      { platform: "Spotify", href: "https://open.spotify.com/episode/1pps3AGw5S61O22edtLJmf" },
+      { platform: "YouTube", href: "https://www.youtube.com/watch?v=NsgknknMD1s" },
+    ],
     coverImage: {
-      src: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80",
-      alt: "Arte do episódio: PNL sem misticismo",
+      src: youTubeThumbnail("https://www.youtube.com/watch?v=NsgknknMD1s"),
+      alt: "Arte do episódio: o que o atleta não está a dizer",
     },
   },
   {
     number: 3,
-    title: "Gerir a pressão do momento decisivo",
+    title: "A solidão do capitão — o preço oculto do brilho",
     description:
-      "O penálti, o último serviço, a curva final. Como preparar o corpo e a mente para os instantes em que tudo se decide, sem deixar a ansiedade decidir por ti.",
-    duration: "35 min",
-    date: "9 Abr 2025",
-    links: episodeLinks,
+      "A braçadeira de capitão tem um peso que nem sempre se vê. O público vê liderança, o balneário vê estabilidade, a direção vê referência e a equipa técnica vê uma extensão do treinador. Mas poucas pessoas veem o peso invisível que o capitão carrega.",
+    duration: "10 min",
+    date: "1 Jul 2026",
+    links: [
+      { platform: "Spotify", href: "https://open.spotify.com/episode/52we2o2NO3Icjt2NUHk9T2" },
+      { platform: "YouTube", href: "https://www.youtube.com/watch?v=BkdOx3elY3U" },
+    ],
     coverImage: {
-      src: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80",
-      alt: "Arte do episódio: gerir a pressão do momento decisivo",
+      src: youTubeThumbnail("https://www.youtube.com/watch?v=BkdOx3elY3U"),
+      alt: "Arte do episódio: a solidão do capitão",
     },
   },
   {
     number: 4,
-    title: "Falar para a equipa ouvir",
+    title: "Geração Z no desporto — o que ninguém entende",
     description:
-      "Comunicação em campo e no balneário: dar feedback que motiva em vez de bloquear, e ajustar o que dizes ao momento e a cada atleta.",
-    duration: "40 min",
-    date: "23 Abr 2025",
-    links: episodeLinks,
+      "A Geração Z não chegou ao desporto com menos coragem. Chegou com outro sistema de processamento: cresceu com estímulo constante, feedback imediato, acesso rápido à informação e uma relação diferente com a autoridade, o fracasso e a identidade.",
+    duration: "11 min",
+    date: "24 Jun 2026",
+    links: [
+      { platform: "Spotify", href: "https://open.spotify.com/episode/0MYVVhAheEwARARVJ87mgB" },
+      { platform: "YouTube", href: "https://www.youtube.com/watch?v=JNmHbLvhN6E" },
+    ],
     coverImage: {
-      src: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=80",
-      alt: "Arte do episódio: falar para a equipa ouvir",
+      src: youTubeThumbnail("https://www.youtube.com/watch?v=JNmHbLvhN6E"),
+      alt: "Arte do episódio: Geração Z no desporto",
     },
   },
   {
     number: 5,
-    title: "Inteligência emocional no balneário",
+    title: "A coragem de escolheres os teus valores (com João Nunes)",
     description:
-      "Reconhecer o que sentes antes que o jogo o faça por ti. Estratégias simples de autorregulação para atletas e treinadores no dia a dia.",
-    duration: "37 min",
-    date: "7 Mai 2025",
-    links: episodeLinks,
+      "Por trás de um atleta há sempre muito mais do que aquilo que se vê. Neste episódio converso com João Nunes, defesa-central de futebol com um percurso sólido construído entre a formação nacional, clubes de referência e uma carreira cada vez mais consistente.",
+    duration: "1 h 19 min",
+    date: "16 Jun 2026",
+    links: [
+      { platform: "Spotify", href: "https://open.spotify.com/episode/6foO51G75k5PStNbjVDH7f" },
+      { platform: "YouTube", href: "https://www.youtube.com/watch?v=1173OezGieA" },
+    ],
     coverImage: {
-      src: "https://images.unsplash.com/photo-1534367610401-9f5ed68180aa?auto=format&fit=crop&w=800&q=80",
-      alt: "Arte do episódio: inteligência emocional no balneário",
+      src: youTubeThumbnail("https://www.youtube.com/watch?v=1173OezGieA"),
+      alt: "Arte do episódio: a coragem de escolheres os teus valores",
     },
   },
   {
     number: 6,
-    title: "Motivação que dura uma época inteira",
+    title: "A época acaba e tu não sabes desligar?",
     description:
-      "Distinguir a fagulha do compromisso. Como manter a energia e o foco quando os resultados tardam e a rotina começa a pesar.",
-    duration: "44 min",
-    date: "21 Mai 2025",
-    links: episodeLinks,
+      "Há atletas que param de treinar… mas não param por dentro. Chegam as férias, o calendário esvazia, o treino formal acaba e, mesmo assim, o corpo continua em alerta, a cabeça continua em missão e o descanso não acontece verdadeiramente.",
+    duration: "7 min",
+    date: "10 Jun 2026",
+    links: [
+      { platform: "Spotify", href: "https://open.spotify.com/episode/48HmSWUnOgtFifoGEqoC2W" },
+      { platform: "YouTube", href: "https://www.youtube.com/watch?v=9oJNy8VElyw" },
+    ],
     coverImage: {
-      src: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=80",
-      alt: "Arte do episódio: motivação que dura uma época inteira",
+      src: youTubeThumbnail("https://www.youtube.com/watch?v=9oJNy8VElyw"),
+      alt: "Arte do episódio: a época acaba e tu não sabes desligar",
+    },
+  },
+  {
+    number: 7,
+    title: "A ressaca emocional: o que fazer quando a época acaba",
+    description:
+      "A época acaba, mas nem tudo acaba com ela. Independentemente de como terminou, há uma coisa que muitos atletas sentem e quase ninguém fala: o vazio. Neste episódio falo sobre a ressaca emocional que muitos atletas vivem no final da temporada.",
+    duration: "7 min",
+    date: "3 Jun 2026",
+    links: [
+      { platform: "Spotify", href: "https://open.spotify.com/episode/0F5ovfxsHW1fzGu05ce8hW" },
+      { platform: "YouTube", href: "https://www.youtube.com/watch?v=1OrJbX2sh0I" },
+    ],
+    coverImage: {
+      src: youTubeThumbnail("https://www.youtube.com/watch?v=1OrJbX2sh0I"),
+      alt: "Arte do episódio: a ressaca emocional",
+    },
+  },
+  {
+    number: 8,
+    title: "O impacto do diálogo interno: treina a tua voz interior",
+    description:
+      "O atleta não compete apenas contra o adversário ou contra o cronómetro. Em cada segundo, compete contra a forma como fala consigo próprio. Neste episódio despimos a tática e entramos na conversa interna que define muito do que acontece em campo.",
+    duration: "9 min",
+    date: "27 Mai 2026",
+    links: [
+      { platform: "Spotify", href: "https://open.spotify.com/episode/1aXNKMjKGqlzXa9rFonV5x" },
+      { platform: "YouTube", href: "https://www.youtube.com/watch?v=rpYJW1RCjPw" },
+    ],
+    coverImage: {
+      src: youTubeThumbnail("https://www.youtube.com/watch?v=rpYJW1RCjPw"),
+      alt: "Arte do episódio: o impacto do diálogo interno",
+    },
+  },
+  {
+    number: 9,
+    title: "Quando ficar frio parece proteção",
+    description:
+      "Há atletas que não deixaram de sentir. Só aprenderam, muito cedo ou muito à força, a esconder aquilo que sentem. Neste episódio falo sobre o que acontece quando um atleta se habitua a desligar emocionalmente para sobreviver.",
+    duration: "7 min",
+    date: "20 Mai 2026",
+    links: [
+      { platform: "Spotify", href: "https://open.spotify.com/episode/3DhsJwjleMgR32WKZ6JTTS" },
+      { platform: "YouTube", href: "https://www.youtube.com/watch?v=Hn2VqQDHmDk" },
+    ],
+    coverImage: {
+      src: youTubeThumbnail("https://www.youtube.com/watch?v=Hn2VqQDHmDk"),
+      alt: "Arte do episódio: quando ficar frio parece proteção",
+    },
+  },
+  {
+    number: 10,
+    title: "Já não falta nada, mas falta tudo",
+    description:
+      "Há atletas que treinam, competem, aparecem e cumprem. Por fora, até pode parecer que está tudo mais ou menos em ordem. Mas por dentro já não se sentem da mesma maneira: já não sentem a mesma leveza, a mesma energia, o mesmo entusiasmo.",
+    duration: "9 min",
+    date: "13 Mai 2026",
+    links: [
+      { platform: "Spotify", href: "https://open.spotify.com/episode/1T6vbBkuk5GntgO9H7sPOP" },
+      { platform: "YouTube", href: "https://www.youtube.com/watch?v=LuKkG8bK8Ac" },
+    ],
+    coverImage: {
+      src: youTubeThumbnail("https://www.youtube.com/watch?v=LuKkG8bK8Ac"),
+      alt: "Arte do episódio: já não falta nada, mas falta tudo",
     },
   },
 ];
 
 export const platforms: Platform[] = [
-  { name: "Spotify", href: "#" },
-  { name: "YouTube", href: "#" },
+  { name: "Spotify", href: "https://open.spotify.com/show/4PQe3Vd4qeMBm8FIk1g1oy" },
+  { name: "YouTube", href: "https://www.youtube.com/@Invisível-Podcast" },
 ];

@@ -103,13 +103,14 @@
   --font-logo: var(--font-bodoni), Georgia, "Times New Roman", serif;
   --font-body: var(--font-hanken), system-ui, -apple-system, sans-serif;
 
-  /* Radius — everything square (see Squared-Corner Rule in DESIGN.md) */
+  /* Radius — everything square (see Squared-Corner Rule in DESIGN.md).
+   * `rounded-full` is deliberately left at Tailwind's default so intentional
+   * circles (logos, badges, dots, play buttons) can use it directly. */
   --radius-card: 0px;
   --radius-pill: 0px;
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
-  --radius-full: 0px;
 
   /* Containers */
   --container-site: 80rem;
@@ -119,20 +120,14 @@
  * Squared-Corner Rule: this project has no rounded corners. Tailwind's
  * radius utilities are all forced to 0 so any stray `rounded-*` still ships
  * square, and future components inherit the sharp, architectural look.
+ * The lone exception is `rounded-full` (kept at Tailwind's default) for
+ * intentional circles such as logos, badges, dots and play buttons.
  */
 
 @layer base {
   * {
     border-color: var(--border-stone);
   }
-}
-
-/* Squared-Corner Rule: no round edges anywhere, including any stray
- * `rounded-*` utility or third-party markup. Corners are architectural. */
-*,
-*::before,
-*::after {
-  border-radius: 0 !important;
 }
 
 /* Deliberate exception to the Squared-Corner Rule: the floating Instagram
