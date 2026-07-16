@@ -59,21 +59,21 @@ export default function SobrePage() {
               <p>
                 Chamo-me Filipa Marques e sou apaixonada pelo potencial humano,
                 por tudo o que és capaz de alcançar quando a tua mente joga na tua
-                equipa. Como mental coach com formação em Psicologia do Desporto,
+                equipa. Como mental coach especializada em desporto,
                 trabalho exatamente onde o talento puro já não chega sozinho: na gestão da
                 pressão, na manutenção do foco e na forma como pensas quando cada
                 segundo conta.
               </p>
               <p>
-                Junto a psicologia ao coaching, à Programação Neurolinguística e à
+                Junto a Psicologia ao coaching, à Programação Neurolinguística e à
                 inteligência emocional para te dar ferramentas práticas: comunicar
                 melhor com a equipa, gerir a ansiedade de competição e transformar
-                pensamento em ação. Sem discursos vazios, com método.
+                pensamento em ação.
               </p>
               <p>
-                Trabalho com atletas, treinadores e equipas, no desporto e na vida,
-                presencialmente e online. Se sentes que podes ir mais longe do que
-                aquilo que os resultados mostram, provavelmente temos conversa.
+                Trabalho com atletas, treinadores, dirigentes desportivos e equipas,
+                no desporto e na vida, presencialmente e online. Se sentes que podes
+                ir mais longe do que aquilo que os resultados mostram.
               </p>
             </div>
           </div>
@@ -188,8 +188,8 @@ export default function SobrePage() {
             </h2>
             <p className="mt-5 max-w-lg text-pretty text-lg text-fg-muted">
               Dá o primeiro passo. Agenda uma conversa sem compromisso e vamos
-              descobrir, juntos, como treinar a tua mente para jogares ao teu
-              melhor nível, dentro e fora de campo.
+              descobrir, juntos, como te posso ajudar a treinar a tua mente para
+              jogares ao teu melhor nível, dentro e fora de campo.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
               <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>

@@ -93,9 +93,9 @@ const services: Service[] = [
     tag: "Para atletas",
     subtitle: "O teu plano de jogo exclusivo para o alto rendimento",
     summary:
-      "Treino mental com Psicologia do Desporto e PNL para dominares a pressão, blindares o teu foco e chegares onde o teu talento sozinho não chega.",
+      "Treino mental com Psicologia do Desporto e PNL para dominares a pressão, aumentares o teu foco e chegares onde o teu talento sozinho não chega.",
     description:
-      "Trabalhamos lado a lado, focados no teu objetivo. Unimos a Psicologia do Desporto à PNL para treinares a tua mente a dominar a pressão, a manter o foco sob stress e a atingir o patamar que o teu talento sozinho não consegue garantir.",
+      "Trabalhamos lado a lado, focados no teu objetivo. Unimos a Psicologia do Desporto à PNL e ao coaching para treinares a tua mente e aprenderes a dominar a pressão, a manter o foco sob stress e a atingir o patamar que o teu talento sozinho não consegue garantir.",
     image: {
       src: "/img/profile-2.jpg",
       alt: "Filipa Marques em sessão de coaching individual",
@@ -119,7 +119,7 @@ const services: Service[] = [
           "Controlar os picos de ansiedade competitiva e manter a lucidez tática quando o resultado está em jogo.",
       },
       {
-        label: "Foco blindado",
+        label: "Foco",
         description:
           "Manter a concentração máxima no que controlas, ignorando o ruído das bancadas, da arbitragem ou do adversário.",
       },
@@ -131,7 +131,7 @@ const services: Service[] = [
       {
         label: "Confiança ativa",
         description:
-          "Transformar as tuas crenças limitadoras em convicção profunda e clareza mental para decidires com eficácia.",
+          "Transformar as tuas crenças limitadoras e garantir uma clareza mental que te permite competir e decidir com eficácia.",
       },
       {
         label: "Praticidade imediata",
@@ -148,7 +148,7 @@ const services: Service[] = [
       {
         title: "Plano personalizado",
         lead: "A estratégia desenhada à tua medida.",
-        body: "Definimos metas claras para a época desportiva e selecionamos as ferramentas de PNL e regulação emocional específicas que vamos treinar juntos.",
+        body: "Definimos metas claras para a época ou para o teu momento desportivo e selecionamos as ferramentas de PNL e regulação emocional específicas que vamos treinar juntos.",
       },
       {
         title: "Acompanhamento",
@@ -183,7 +183,7 @@ const services: Service[] = [
       alt: "Sessão de coaching de equipa em grupo",
     },
     audience:
-      "Equipas, equipas técnicas e grupos desportivos que querem alinhar a comunicação, resolver conflitos de balneário e reforçar a coesão.",
+      "Equipas, equipas técnicas e grupos desportivos que querem melhorar a forma como comunicam, reforçar a confiança interna e criar dinâmicas alinhadas com o rendimento coletivo.",
     includes: [
       "Workshops práticos (presenciais ou online)",
       "Dinâmicas de grupo personalizadas no terreno",

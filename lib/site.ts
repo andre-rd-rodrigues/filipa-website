@@ -20,7 +20,7 @@ export const quotes = {
   home: "O movimento é a ponte entre o que idealizas e o que conquistas.",
   servicos:
     "A verdadeira liberdade é quando deixas de reagir ao que te acontece e passas a responder com intenção.",
-  sobre: "A estratégia mental ganha o jogo, mas é o primeiro passo que te coloca em campo.",
+  sobre: "A estratégia mental não ganha o jogo, mas é o primeiro passo que te coloca em campo.",
 } as const;
 
 export const contact = {

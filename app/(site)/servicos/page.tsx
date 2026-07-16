@@ -42,8 +42,8 @@ export default async function ServicosPage() {
             </h2>
             <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-muted">
               Coaching e PNL aplicados ao desporto, desde o acompanhamento
-              individual a formações personalizadas para clubes. Escolhe por onde
-              queres começar e desenhamos o plano juntos.
+              individual e de equipas a formações personalizadas para treinadores e
+              clubes. Escolhe por onde queres começar e desenhamos o plano juntos.
             </p>
           </Reveal>
 
