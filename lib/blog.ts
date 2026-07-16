@@ -62,8 +62,8 @@ const posts: BlogPost[] = [
     publishedAt: "2026-07-16",
     readingMinutes: 6,
     coverImage: {
-      src: "https://images.unsplash.com/photo-1693683223364-7cb25fdfaf0c?auto=format&fit=crop&w=1600&q=80",
-      alt: "Jovem atleta a sentir o nervosismo momentos antes de competir",
+      src: "/img/editorial/atletismo-corrida.webp",
+      alt: "Atletas na tensão da partida, momentos de máxima pressão",
     },
     body: [
       {
@@ -139,8 +139,8 @@ const posts: BlogPost[] = [
     publishedAt: "2026-07-15",
     readingMinutes: 6,
     coverImage: {
-      src: "https://images.unsplash.com/photo-1761258772711-fda3c790573e?auto=format&fit=crop&w=1600&q=80",
-      alt: "Atleta de olhos fechados a controlar a respiração antes de entrar",
+      src: "/img/editorial/forca-levantamento.webp",
+      alt: "Atleta a controlar o esforço e a ativação do corpo",
     },
     body: [
       {
@@ -217,8 +217,8 @@ const posts: BlogPost[] = [
     publishedAt: "2026-07-14",
     readingMinutes: 7,
     coverImage: {
-      src: "https://images.unsplash.com/photo-1761258772175-24f047c9290d?auto=format&fit=crop&w=1600&q=80",
-      alt: "Atleta a preparar-se mentalmente, em silêncio, antes do treino",
+      src: "/img/editorial/tenis-bola.webp",
+      alt: "Bola de ténis em impacto, a força do momento decisivo",
     },
     body: [
       {

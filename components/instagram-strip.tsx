@@ -14,14 +14,16 @@ const instagram = socials.find((s) => s.label === "Instagram")!;
  * The badge stays centred over the grid at every breakpoint. Photo tiles are
  * decorative (aria-hidden); the one real, labelled link is the badge.
  */
+// Placeholder tiles — a stand-in Instagram grid. These stay as raw placeholders
+// until the strip is wired to real posts from @filipamarques.coaching.pnl.
 const defaultImages: InstaImage[] = [
   {
-    src: "https://images.unsplash.com/photo-1751394214121-3c1757f92f5c?auto=format&fit=crop&w=800&q=80",
-    alt: "Equipa a celebrar em conjunto no campo",
+    src: "https://images.unsplash.com/photo-1533681904393-9ab6eee7e408?auto=format&fit=crop&w=800&q=80",
+    alt: "Treino de força em grupo",
   },
   {
-    src: "https://images.unsplash.com/photo-1764438246710-83c535cada80?auto=format&fit=crop&w=800&q=80",
-    alt: "Equipa reunida no campo antes do jogo",
+    src: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80",
+    alt: "Atleta a treinar com halteres",
   },
   {
     src: "https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=800&q=80",
@@ -32,12 +34,12 @@ const defaultImages: InstaImage[] = [
     alt: "Momento de foco antes do esforço",
   },
   {
-    src: "https://images.unsplash.com/photo-1696536823512-79d724454616?auto=format&fit=crop&w=800&q=80",
-    alt: "Atleta em velocidade na pista",
+    src: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=80",
+    alt: "Corrida e cardio",
   },
   {
-    src: "https://images.unsplash.com/photo-1599446691418-9938936aa43b?auto=format&fit=crop&w=800&q=80",
-    alt: "Jovens atletas em treino no campo",
+    src: "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=800&q=80",
+    alt: "Equipa a partilhar energia no treino",
   },
 ];
 

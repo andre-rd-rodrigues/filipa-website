@@ -170,8 +170,8 @@ const courses: Course[] = [
     ],
     ctas: [{ label: "Inscrição", href: "/contactos", variant: "primary" }],
     image: {
-      src: "https://images.unsplash.com/photo-1751394220229-9a23c9ed6a75?auto=format&fit=crop&w=1200&q=80",
-      alt: "Treinador a falar com a equipa em campo",
+      src: "/img/editorial/relvado-linha.webp",
+      alt: "Linha de marcação no relvado do campo",
     },
     // PLACEHOLDER dates (Outubro 2026) so the calendar shows upcoming sessions.
     // Confirm/replace with the real edition dates in Sanity.
@@ -211,8 +211,8 @@ const courses: Course[] = [
     ],
     ctas: [{ label: "Inscrição", href: "/contactos", variant: "primary" }],
     image: {
-      src: "https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=1200&q=80",
-      alt: "Atleta em momento de concentração e serenidade",
+      src: "/img/editorial/atletismo-partida.webp",
+      alt: "Mãos nos blocos de partida, concentração antes da prova",
     },
     // PLACEHOLDER dates (Outubro 2026) so the calendar shows upcoming sessions.
     // Confirm/replace with the real edition dates in Sanity.

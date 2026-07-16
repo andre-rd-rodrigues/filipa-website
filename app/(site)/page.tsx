@@ -62,8 +62,8 @@ const highlights: HighlightItem[] = [
     body: "O teu plano de jogo focado em resultados.",
     href: "/servicos/treino-mental-individual",
     image: {
-      src: "https://images.unsplash.com/photo-1749862961428-79a562db4105?auto=format&fit=crop&w=1200&q=80",
-      alt: "Atleta sozinho, concentrado antes de competir",
+      src: "/img/editorial/tenis-jogador.webp",
+      alt: "Tenista concentrado, sozinho antes do ponto",
     },
   },
   {
@@ -71,8 +71,8 @@ const highlights: HighlightItem[] = [
     body: "Domínio mental e gestão sob pressão.",
     href: "/servicos/inteligencia-emocional-no-desporto",
     image: {
-      src: "https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=1200&q=80",
-      alt: "Atleta em momento de concentração e serenidade",
+      src: "/img/editorial/tenis-servico.webp",
+      alt: "Tenista em movimento controlado dentro do court",
     },
   },
   {
@@ -80,8 +80,8 @@ const highlights: HighlightItem[] = [
     body: "PNL aplicada a líderes, treinadores e equipas.",
     href: "/servicos/comunicacao-em-campo-pnl",
     image: {
-      src: "https://images.unsplash.com/photo-1751394220229-9a23c9ed6a75?auto=format&fit=crop&w=1200&q=80",
-      alt: "Treinador a falar com a equipa em campo",
+      src: "/img/editorial/futebol-bola.webp",
+      alt: "Chuteira sobre a bola, pronta para entrar em campo",
     },
   },
 ];
@@ -108,12 +108,12 @@ export default async function Home() {
           cta={{ label: "Saber mais", href: "/sobre" }}
           images={[
             {
-              src: "https://images.unsplash.com/photo-1595078475328-1ab05d0a6a0e?auto=format&fit=crop&w=1200&q=80",
-              alt: "Momento de foco e respiração antes do esforço",
+              src: "/img/editorial/basquetebol-salto.webp",
+              alt: "Jogador de basquetebol em salto, esforço e determinação",
             },
             {
-              src: "https://images.unsplash.com/photo-1550345332-09e3ac987658?auto=format&fit=crop&w=1200&q=80",
-              alt: "Treino em grupo, energia e concentração partilhadas",
+              src: "/img/editorial/pista-atletismo.webp",
+              alt: "Pista de atletismo, o palco da preparação",
             },
           ]}
         />
