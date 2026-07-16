@@ -2,7 +2,7 @@
 slug: "porque-aparece-a-ansiedade-competitiva-e-quando-procurar-apoio"
 title: "O medo por trás do jogo: Quando a ansiedade competitiva exige um plano de ação"
 excerpt: "Medo das consequências, expectativas a mais, experiências passadas. Percebe porque surge a ansiedade competitiva, quando é normal e quando é altura de procurar ajuda."
-category: "Psicologia do Desporto"
+category: "Alta Performance"
 author: "Filipa Marques"
 publishedAt: "2026-07-14"
 readingMinutes: 7

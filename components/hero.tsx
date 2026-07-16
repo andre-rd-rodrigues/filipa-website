@@ -205,10 +205,17 @@ export function Hero() {
 
         {/* Name, subtitle, CTAs */}
         <div className="relative z-[var(--z-raised)] -mt-2 flex flex-col items-center">
-          <h1 className="font-display text-[clamp(2.5rem,7vw,4.75rem)] leading-[0.98] tracking-[-0.02em]">
+          <h1 className="leading-[0.98]">
             <span className="block overflow-hidden">
               <span data-anim="line" className="block">
-                Filipa Marques
+                <Image
+                  src="/img/logo-text-w.webp"
+                  alt="Filipa Marques — Coaching & PNL"
+                  width={1600}
+                  height={251}
+                  priority
+                  className="mx-auto h-auto w-[min(88vw,34rem)]"
+                />
               </span>
             </span>
           </h1>

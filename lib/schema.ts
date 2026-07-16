@@ -8,6 +8,7 @@
 import { site, contact, socials } from "@/lib/site";
 import type { Course } from "@/lib/courses";
 import type { Service } from "@/lib/services";
+import type { BlogPost } from "@/lib/blog";
 
 export interface JsonLdData {
   "@context": string;
@@ -94,6 +95,64 @@ export function buildServiceSchema(service: Service): JsonLdData {
       name: site.fullName,
       url: site.url,
     },
+  };
+}
+
+/**
+ * BlogPosting schema for a single blog article (blog detail page).
+ * Improves eligibility for rich results and clarifies authorship/dates to
+ * search engines. Image is resolved to an absolute URL.
+ */
+export function buildBlogPostingSchema(post: BlogPost): JsonLdData {
+  const url = `${site.url}/blog/${post.slug}`;
+  const image = post.coverImage.src.startsWith("http")
+    ? post.coverImage.src
+    : `${site.url}${post.coverImage.src}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    inLanguage: "pt-PT",
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    image: [image],
+    articleSection: post.category,
+    ...(post.keywords?.length ? { keywords: post.keywords.join(", ") } : {}),
+    author: {
+      "@type": "Person",
+      name: post.author,
+      url: `${site.url}/sobre`,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: site.fullName,
+      url: site.url,
+    },
+  };
+}
+
+/**
+ * FAQPage schema for an article's FAQ block.
+ * Emitted only when the post has FAQ items; powers FAQ rich results.
+ */
+export function buildFaqSchema(
+  faq: NonNullable<BlogPost["faq"]>,
+): JsonLdData {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   };
 }
 

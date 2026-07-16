@@ -43,6 +43,7 @@ export function ContactForm() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const fieldId = (name: keyof FormState) => `${uid}-${name}`;
   const errorId = (name: keyof FormState) => `${uid}-${name}-error`;
@@ -83,19 +84,42 @@ export function ContactForm() {
     return next;
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const nextErrors = validate(values);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    // Mock submission — no network call. Simulates a brief send delay.
+    const endpoint = `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`;
+
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError(null);
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome: values.nome,
+          email: values.email,
+          telefone: values.telefone,
+          assunto: values.assunto,
+          mensagem: values.mensagem,
+          _subject: `Novo contacto: ${values.assunto}`,
+        }),
+      });
+      if (!res.ok) throw new Error("request failed");
       setIsSent(true);
       setValues(initialState);
-    }, 600);
+    } catch {
+      setSubmitError(
+        "Não consegui enviar a mensagem. Tenta novamente ou escreve-me diretamente por email.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   if (isSent) {
@@ -291,6 +315,11 @@ export function ContactForm() {
       </div>
 
       <div className="mt-1">
+        {submitError ? (
+          <p role="alert" className="mb-4 text-sm text-error">
+            {submitError}
+          </p>
+        ) : null}
         <Button
           type="submit"
           disabled={isSubmitting}

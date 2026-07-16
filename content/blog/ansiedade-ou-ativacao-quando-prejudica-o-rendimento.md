@@ -2,7 +2,7 @@
 slug: "ansiedade-ou-ativacao-quando-prejudica-o-rendimento"
 title: "Quando o nervosismo começa a prejudicar o rendimento"
 excerpt: "Sentir o coração acelerado antes de competir é normal. Descobre a diferença entre ativação e ansiedade, e o momento exato em que ela começa a tirar-te do jogo."
-category: "Psicologia do Desporto"
+category: "Alta Performance"
 author: "Filipa Marques"
 publishedAt: "2026-07-15"
 readingMinutes: 6

@@ -48,7 +48,7 @@ export function HighlightStrip({ items }: { items: HighlightItem[] }) {
           {/* Background photo — revealed on hover / focus (always shown on touch) */}
           <div
             aria-hidden
-            className="absolute inset-0 -z-10 opacity-100 transition-opacity duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] lg:opacity-60 lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100"
+            className="absolute inset-0 -z-10 opacity-100 transition-opacity duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] lg:opacity-85 lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100"
           >
             <Image
               src={item.image.src}
@@ -57,7 +57,7 @@ export function HighlightStrip({ items }: { items: HighlightItem[] }) {
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="scale-105 object-cover transition-transform duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-100"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-ink/55" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/55 to-ink/25" />
           </div>
 
           {/* Number */}

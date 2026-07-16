@@ -39,4 +39,42 @@ describe("blog data layer", () => {
     // Guards against Intl behavior changes across Node upgrades.
     expect(formatPostDate("2026-06-24")).toBe("24 de junho de 2026");
   });
+
+  // Shape invariants — the contract a future Sanity mapping must uphold.
+  it("returns posts with a well-formed shape", async () => {
+    const posts = await getAllPosts();
+    const blockTypes = new Set(["paragraph", "heading", "quote"]);
+
+    for (const post of posts) {
+      expect(typeof post.slug).toBe("string");
+      expect(post.slug.length).toBeGreaterThan(0);
+      expect(typeof post.title).toBe("string");
+      expect(typeof post.excerpt).toBe("string");
+      expect(typeof post.category).toBe("string");
+      expect(typeof post.author).toBe("string");
+
+      expect(typeof post.coverImage.src).toBe("string");
+      expect(typeof post.coverImage.alt).toBe("string");
+
+      expect(Number.isFinite(post.readingMinutes)).toBe(true);
+      expect(post.readingMinutes).toBeGreaterThan(0);
+
+      expect(Array.isArray(post.body)).toBe(true);
+      for (const block of post.body) {
+        expect(blockTypes.has(block.type)).toBe(true);
+        expect(typeof block.text).toBe("string");
+      }
+    }
+  });
+
+  it("keeps relatedSlugs referentially valid", async () => {
+    const posts = await getAllPosts();
+    const known = new Set(posts.map((p) => p.slug));
+
+    for (const post of posts) {
+      for (const related of post.relatedSlugs ?? []) {
+        expect(known.has(related)).toBe(true);
+      }
+    }
+  });
 });

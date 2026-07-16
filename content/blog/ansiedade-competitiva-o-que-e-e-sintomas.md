@@ -2,7 +2,7 @@
 slug: "ansiedade-competitiva-o-que-e-e-sintomas"
 title: "Ansiedade competitiva: o que é e como reconhecer os sintomas"
 excerpt: "O coração acelera e a cabeça antecipa erros que ainda não aconteceram. Percebe o que é a ansiedade competitiva e como reconhecê-la na mente, no corpo e no comportamento."
-category: "Psicologia do Desporto"
+category: "Alta Performance"
 author: "Filipa Marques"
 publishedAt: "2026-07-16"
 readingMinutes: 6

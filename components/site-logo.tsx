@@ -7,12 +7,14 @@ type SiteLogoProps = {
 };
 
 const logos = {
-  default: { src: "/img/logo-fm.png", width: 2000, height: 2000 },
-  navbar: { src: "/img/logo-test.png", width: 762, height: 725 },
+  // Footer: the complete lockup — monogram + wordmark, in orange.
+  default: { src: "/img/logo-text-icon-orange.webp", width: 1468, height: 996 },
+  // Navbar: the simple white monogram.
+  navbar: { src: "/img/logo-icon-w.webp", width: 1600, height: 1504 },
 } as const;
 
 export function SiteLogo({
-  className = "h-15 w-auto sm:h-17",
+  className = "h-10 w-auto sm:h-11",
   priority = false,
   variant = "default",
 }: SiteLogoProps) {

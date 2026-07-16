@@ -9,8 +9,10 @@ import {
   getPostBySlug,
   formatPostDate,
   type BodyBlock,
+  type BlogPost,
 } from "@/lib/blog";
 import { primaryCta } from "@/lib/site";
+import { buildBlogPostingSchema, buildFaqSchema } from "@/lib/schema";
 
 // All slugs are known at build time (mock today, Sanity later). Unknown slugs
 // 404 rather than rendering on demand.
@@ -29,6 +31,7 @@ export async function generateMetadata(props: PageProps<"/blog/[slug]">) {
   return {
     title: post.title,
     description: post.excerpt,
+    keywords: post.keywords,
     alternates: {
       canonical: `/blog/${slug}`,
     },
@@ -90,13 +93,88 @@ function BodyContent({ blocks }: { blocks: BodyBlock[] }) {
   );
 }
 
+function FaqSection({ faq }: { faq: NonNullable<BlogPost["faq"]> }) {
+  return (
+    <Reveal
+      as="section"
+      className="mt-16 border-t border-[color:var(--border-stone)] pt-10"
+    >
+      <h2 className="font-display text-balance text-[clamp(1.5rem,3vw,2rem)] leading-[1.15]">
+        Perguntas frequentes
+      </h2>
+      <dl className="mt-8 space-y-8">
+        {faq.map((item) => (
+          <div key={item.question}>
+            <dt className="font-body text-lg font-semibold text-fg">
+              {item.question}
+            </dt>
+            <dd className="text-pretty mt-2 text-[1.0625rem] leading-[1.75] text-fg-secondary">
+              {item.answer}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </Reveal>
+  );
+}
+
+function RelatedPosts({ posts }: { posts: BlogPost[] }) {
+  if (posts.length === 0) return null;
+  return (
+    <Reveal
+      as="section"
+      className="mt-16 border-t border-[color:var(--border-stone)] pt-10"
+    >
+      <h2 className="font-body text-sm font-semibold uppercase tracking-[0.12em] text-action-deep">
+        Continua a ler
+      </h2>
+      <ul className="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+        {posts.map((related) => (
+          <li key={related.slug}>
+            <Link
+              href={`/blog/${related.slug}`}
+              className="group block"
+            >
+              <h3 className="font-display text-balance text-xl leading-[1.2] transition-colors group-hover:text-action-deep">
+                {related.title}
+              </h3>
+              <p className="text-pretty mt-2 text-fg-muted">{related.excerpt}</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </Reveal>
+  );
+}
+
 export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
   const { slug } = await props.params;
   const post = await getPostBySlug(slug);
   if (!post) notFound();
 
+  const related = post.relatedSlugs?.length
+    ? (
+        await Promise.all(post.relatedSlugs.map((s) => getPostBySlug(s)))
+      ).filter((p): p is BlogPost => p !== null)
+    : [];
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(buildBlogPostingSchema(post)),
+        }}
+      />
+      {post.faq?.length ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(buildFaqSchema(post.faq)),
+          }}
+        />
+      ) : null}
+
       <PageHero title={post.title} />
 
       <Section tone="page" narrow>
@@ -115,6 +193,10 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
         <Reveal className="mt-10">
           <BodyContent blocks={post.body} />
         </Reveal>
+
+        {post.faq?.length ? <FaqSection faq={post.faq} /> : null}
+
+        <RelatedPosts posts={related} />
 
         <Reveal className="mt-16 border-t border-[color:var(--border-stone)] pt-10">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
