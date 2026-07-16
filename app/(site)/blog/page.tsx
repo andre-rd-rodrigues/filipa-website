@@ -63,7 +63,6 @@ export default async function BlogPage() {
               </div>
 
               <div>
-                <span className="eyebrow text-action-deep">Em destaque</span>
                 <PostMeta post={featured} />
                 <h2 className="font-display mt-4 text-balance text-[clamp(1.75rem,3.5vw,2.75rem)] leading-[1.1]">
                   {featured.title}
