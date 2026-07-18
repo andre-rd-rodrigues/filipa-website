@@ -27,14 +27,14 @@ export const metadata: Metadata = {
 
 const faqs = [
   {
-    question: "A primeira sessão é já um compromisso?",
+    question: "A primeira conversa é já um compromisso?",
     answer:
       "Não. A primeira conversa serve para nos conhecermos, perceber onde estás e o que procuras. Sem obrigação: só decidimos avançar se fizer sentido para ti.",
   },
   {
     question: "Trabalhas online ou presencial?",
     answer:
-      "As duas. Faço sessões presenciais em Portugal e online por videochamada, para que a distância nunca seja um obstáculo.",
+      "As sessões individuais são online, por videochamada — a distância deixa de ser um obstáculo. As sessões de equipa podem ser online ou presenciais, conforme o que fizer mais sentido.",
   },
   {
     question: "Preciso de ter um problema para começar coaching?",
