@@ -8,6 +8,7 @@ import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { getAllServices, getServiceBySlug } from "@/lib/services";
 import { buildServiceSchema } from "@/lib/schema";
+import { getSiteSettings } from "@/lib/settings";
 import { primaryCta } from "@/lib/site";
 
 // All slugs are known at build time (mock today, Sanity later). Unknown slugs
@@ -41,7 +42,10 @@ export async function generateMetadata(props: PageProps<"/servicos/[slug]">) {
 
 export default async function ServicePage(props: PageProps<"/servicos/[slug]">) {
   const { slug } = await props.params;
-  const service = await getServiceBySlug(slug);
+  const [service, site] = await Promise.all([
+    getServiceBySlug(slug),
+    getSiteSettings(),
+  ]);
   if (!service) notFound();
 
   const ctas = service.ctas ?? [
@@ -53,7 +57,7 @@ export default async function ServicePage(props: PageProps<"/servicos/[slug]">) 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildServiceSchema(service)),
+          __html: JSON.stringify(buildServiceSchema(service, site)),
         }}
       />
 

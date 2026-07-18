@@ -1,0 +1,116 @@
+import { defineType, defineField } from "sanity";
+
+/** Artigo do blog. */
+export const post = defineType({
+  name: "post",
+  title: "Artigo do blog",
+  type: "document",
+  groups: [
+    { name: "conteudo", title: "Conteúdo", default: true },
+    { name: "meta", title: "Meta & SEO" },
+  ],
+  fields: [
+    defineField({
+      name: "title",
+      title: "Título",
+      type: "string",
+      group: "conteudo",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: { source: "title", maxLength: 96 },
+      group: "conteudo",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "excerpt",
+      title: "Resumo",
+      type: "text",
+      rows: 3,
+      description: "Frase de entrada, apresentada nas listagens e nos metadados.",
+      group: "conteudo",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "category",
+      title: "Categoria",
+      type: "reference",
+      to: [{ type: "category" }],
+      group: "conteudo",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "author",
+      title: "Autor",
+      type: "string",
+      initialValue: "Filipa Marques",
+      group: "conteudo",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "publishedAt",
+      title: "Data de publicação",
+      type: "date",
+      options: { dateFormat: "YYYY-MM-DD" },
+      group: "conteudo",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "readingMinutes",
+      title: "Tempo de leitura (min)",
+      type: "number",
+      group: "conteudo",
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: "coverImage",
+      title: "Imagem de capa",
+      type: "figure",
+      group: "conteudo",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "body",
+      title: "Corpo do artigo",
+      type: "richText",
+      group: "conteudo",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "faq",
+      title: "Perguntas frequentes",
+      type: "array",
+      of: [{ type: "faqItem" }],
+      description: "Opcional. Também gera dados estruturados (FAQ).",
+      group: "conteudo",
+    }),
+    defineField({
+      name: "relatedPosts",
+      title: "Artigos relacionados",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "post" }] }],
+      group: "conteudo",
+    }),
+    defineField({
+      name: "keywords",
+      title: "Palavras-chave (SEO)",
+      type: "array",
+      of: [{ type: "string" }],
+      options: { layout: "tags" },
+      group: "meta",
+    }),
+  ],
+  orderings: [
+    {
+      title: "Data (mais recente primeiro)",
+      name: "publishedDesc",
+      by: [{ field: "publishedAt", direction: "desc" }],
+    },
+  ],
+  preview: {
+    select: { title: "title", subtitle: "category.title", media: "coverImage" },
+  },
+});

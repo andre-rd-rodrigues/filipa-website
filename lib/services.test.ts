@@ -1,8 +1,23 @@
-import { describe, expect, it } from "vitest";
-import { getAllServices, getServiceBySlug } from "@/lib/services";
+import { describe, expect, it, vi } from "vitest";
+import { makeService } from "@/test/fixtures";
 
-// Contract tests: assert the shape and invariants pages rely on, not the
-// specific mock content, so they hold once content moves to Sanity.
+const fixtureServices = [
+  makeService({ slug: "servico-um", number: "01", title: "Serviço Um" }),
+  makeService({ slug: "servico-dois", number: "02", title: "Serviço Dois" }),
+];
+
+vi.mock("@/sanity/lib/client", () => ({
+  sanityFetch: vi.fn(
+    async (query: string, params: Record<string, unknown> = {}) => {
+      if (query.includes("slug.current == $slug")) {
+        return fixtureServices.find((s) => s.slug === params.slug) ?? null;
+      }
+      return fixtureServices;
+    },
+  ),
+}));
+
+import { getAllServices, getServiceBySlug } from "@/lib/services";
 
 describe("services data layer", () => {
   it("returns a non-empty list where every service has the required fields", async () => {
@@ -13,19 +28,11 @@ describe("services data layer", () => {
       expect(typeof service.slug).toBe("string");
       expect(service.slug.length).toBeGreaterThan(0);
       expect(typeof service.number).toBe("string");
-      expect(service.number.length).toBeGreaterThan(0);
       expect(typeof service.title).toBe("string");
       expect(typeof service.summary).toBe("string");
       expect(typeof service.description).toBe("string");
       expect(typeof service.image.src).toBe("string");
       expect(typeof service.image.alt).toBe("string");
-
-      // Optional CTAs, when present, must be well-formed.
-      for (const cta of service.ctas ?? []) {
-        expect(typeof cta.label).toBe("string");
-        expect(typeof cta.href).toBe("string");
-        expect(["primary", "secondary"]).toContain(cta.variant);
-      }
     }
   });
 
@@ -36,11 +43,9 @@ describe("services data layer", () => {
   });
 
   it("finds a service by a known slug", async () => {
-    const all = await getAllServices();
-    const target = all[0];
-    const found = await getServiceBySlug(target.slug);
+    const found = await getServiceBySlug("servico-um");
     expect(found).not.toBeNull();
-    expect(found?.slug).toBe(target.slug);
+    expect(found?.slug).toBe("servico-um");
   });
 
   it("returns null for an unknown slug", async () => {

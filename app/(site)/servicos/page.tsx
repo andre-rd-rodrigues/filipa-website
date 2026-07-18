@@ -7,53 +7,56 @@ import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { QuoteBand } from "@/components/quote-band";
 import { EditorialImage } from "@/components/editorial-image";
-import { quotes, primaryCta, site } from "@/lib/site";
-import { audiences, getAllServices } from "@/lib/services";
+import { getSiteSettings } from "@/lib/settings";
+import { getServicesPage } from "@/lib/pages";
+import { getAllServices } from "@/lib/services";
 
-export const metadata: Metadata = {
-  title: "Serviços",
-  description:
-    "Coaching individual, coaching de equipas, inteligência emocional e PNL aplicados ao desporto. Serviços que ligam a mente aos teus resultados.",
-  alternates: {
-    canonical: "/servicos",
-  },
-  openGraph: {
-    title: "Serviços",
-    description:
-      "Coaching individual, coaching de equipas, inteligência emocional e PNL aplicados ao desporto. Serviços que ligam a mente aos teus resultados.",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getServicesPage();
+  const description =
+    page.seo?.metaDescription ??
+    "Coaching individual, coaching de equipas, inteligência emocional e PNL aplicados ao desporto. Serviços que ligam a mente aos teus resultados.";
+  return {
+    title: page.seo?.metaTitle ?? "Serviços",
+    description,
+    alternates: { canonical: "/servicos" },
+    openGraph: {
+      title: page.seo?.metaTitle ?? "Serviços",
+      description,
+      type: "website",
+    },
+  };
+}
 
 export default async function ServicosPage() {
-  const services = await getAllServices();
+  const [site, page, services] = await Promise.all([
+    getSiteSettings(),
+    getServicesPage(),
+    getAllServices(),
+  ]);
 
   return (
     <>
-      <PageHero title="Serviços" />
+      <PageHero title={page.heroTitle ?? "Serviços"} />
 
       {/* Signature service-row list */}
       <Section tone="page">
         <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <Reveal>
-            <Eyebrow className="mb-4">O que ofereço</Eyebrow>
+            <Eyebrow className="mb-4">{page.introEyebrow}</Eyebrow>
             <h2 className="font-display max-w-2xl text-balance text-[clamp(2rem,4vw,3.25rem)] leading-[1.1]">
-              Treina a tua mente para elevares os teus resultados.
+              {page.introTitle}
             </h2>
             <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-muted">
-              Coaching e PNL aplicados ao desporto, desde o acompanhamento
-              individual e de equipas a formações personalizadas para treinadores e
-              clubes. Escolhe por onde queres começar e desenhamos o plano juntos.
+              {page.introBody}
             </p>
           </Reveal>
 
-          <Reveal delay={80}>
-            <EditorialImage
-              src="/img/profile-2.jpg"
-              alt="Filipa Marques com uma bola de futebol"
-              priority
-            />
-          </Reveal>
+          {page.introImage ? (
+            <Reveal delay={80}>
+              <EditorialImage src={page.introImage.src} alt={page.introImage.alt} priority />
+            </Reveal>
+          ) : null}
         </div>
 
         <div className="mt-14 border-t border-[color:var(--border-stone)]">
@@ -119,32 +122,34 @@ export default async function ServicosPage() {
       {/* Para quem — editorial audience columns */}
       <Section tone="muted">
         <Reveal>
-          <Eyebrow className="mb-4">Para quem</Eyebrow>
+          <Eyebrow className="mb-4">{page.audiencesEyebrow}</Eyebrow>
           <h2 className="font-display max-w-2xl text-balance text-[clamp(2rem,4vw,3.25rem)] leading-[1.1]">
-            Feito para quem vive o desporto.
+            {page.audiencesTitle}
           </h2>
         </Reveal>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16">
-          <Reveal>
-            <EditorialImage
-              src="/img/profile-1.jpg"
-              alt="Retrato de Filipa Marques"
-              sizes="(max-width: 1024px) 90vw, 38vw"
-            />
-          </Reveal>
+          {page.audiencesImage ? (
+            <Reveal>
+              <EditorialImage
+                src={page.audiencesImage.src}
+                alt={page.audiencesImage.alt}
+                sizes="(max-width: 1024px) 90vw, 38vw"
+              />
+            </Reveal>
+          ) : null}
 
           <Reveal delay={80} className="space-y-8">
-            {audiences.map((audience) => (
+            {(page.audiences ?? []).map((aud) => (
               <div
-                key={audience.title}
+                key={aud.title}
                 className="border-t border-[color:var(--border-stone)] pt-5"
               >
                 <h3 className="font-body text-xl font-semibold tracking-[-0.01em]">
-                  {audience.title}
+                  {aud.title}
                 </h3>
                 <p className="text-pretty mt-3 text-[1.0625rem] leading-relaxed text-fg-muted">
-                  {audience.description}
+                  {aud.description}
                 </p>
               </div>
             ))}
@@ -152,12 +157,12 @@ export default async function ServicosPage() {
         </div>
       </Section>
 
-      {/* Quote band — cursor-spotlight reveal */}
+      {/* Quote band */}
       <Section tone="dark" size="lg">
         <Reveal>
           <QuoteBand
-            eyebrow="autonomia e consciência"
-            quote={quotes.servicos}
+            eyebrow={page.quoteEyebrow ?? ""}
+            quote={site.quotes.servicos}
             name={site.name}
           />
         </Reveal>
@@ -166,27 +171,33 @@ export default async function ServicosPage() {
       {/* Final CTA */}
       <Section tone="ink">
         <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <Reveal>
-            <EditorialImage
-              src="/img/profile-3.jpg"
-              alt="Filipa Marques em estúdio"
-              sizes="(max-width: 1024px) 90vw, 34vw"
-            />
-          </Reveal>
+          {page.ctaImage ? (
+            <Reveal>
+              <EditorialImage
+                src={page.ctaImage.src}
+                alt={page.ctaImage.alt}
+                sizes="(max-width: 1024px) 90vw, 34vw"
+              />
+            </Reveal>
+          ) : null}
 
           <Reveal delay={80}>
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-              O teu próximo nível começa aqui.
+              {page.ctaTitle}
             </h2>
             <p className="text-pretty mt-5 max-w-lg text-lg leading-relaxed text-fg-inverse-muted">
-              Vamos conversar? Agenda uma sessão gratuita e descobrimos,
-              juntos, o plano de jogo ideal para ti.
+              {page.ctaBody}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>
-              <ButtonLink href="/cursos" variant="secondary-dark">
-                Ver cursos
-              </ButtonLink>
+              {(page.ctas ?? []).map((cta) => (
+                <ButtonLink
+                  key={cta.label}
+                  href={cta.href}
+                  variant={cta.variant === "primary" ? "primary" : "secondary-dark"}
+                >
+                  {cta.label}
+                </ButtonLink>
+              ))}
             </div>
           </Reveal>
         </div>

@@ -4,9 +4,9 @@ import { useEffect, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SiteLogo } from "@/components/site-logo";
-import { navLinks, primaryCta, site } from "@/lib/site";
+import { navLinks, primaryCta } from "@/lib/site";
 
-export function SiteHeader() {
+export function SiteHeader({ siteName = "Filipa Marques" }: { siteName?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   // Keep the overlay mounted through its exit animation before unmounting.
@@ -61,7 +61,7 @@ export function SiteHeader() {
       }`}
     >
       <div className="mx-auto flex w-full max-w-[80rem] items-center justify-between px-5 py-4 sm:px-8">
-        <Link href="/" className="block shrink-0" aria-label={site.fullName}>
+        <Link href="/" className="block shrink-0" aria-label={siteName}>
           <SiteLogo variant="navbar" priority />
         </Link>
 
@@ -135,7 +135,7 @@ export function SiteHeader() {
             <Link
               href="/"
               className="block shrink-0"
-              aria-label={site.fullName}
+              aria-label={siteName}
             >
               <SiteLogo variant="navbar" priority />
             </Link>

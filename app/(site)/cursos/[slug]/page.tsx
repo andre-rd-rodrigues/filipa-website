@@ -8,6 +8,7 @@ import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { getAllCourses, getCourseBySlug } from "@/lib/courses";
 import { buildCourseSchema } from "@/lib/schema";
+import { getSiteSettings } from "@/lib/settings";
 import { primaryCta } from "@/lib/site";
 
 // All slugs are known at build time (mock today, Sanity later). Unknown slugs
@@ -54,7 +55,10 @@ function MetaRow({ label, value }: { label: string; value?: string }) {
 
 export default async function CoursePage(props: PageProps<"/cursos/[slug]">) {
   const { slug } = await props.params;
-  const course = await getCourseBySlug(slug);
+  const [course, site] = await Promise.all([
+    getCourseBySlug(slug),
+    getSiteSettings(),
+  ]);
   if (!course) notFound();
 
   const learn = course.objectives ?? course.outcomes;
@@ -64,7 +68,7 @@ export default async function CoursePage(props: PageProps<"/cursos/[slug]">) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildCourseSchema(course)),
+          __html: JSON.stringify(buildCourseSchema(course, site)),
         }}
       />
 

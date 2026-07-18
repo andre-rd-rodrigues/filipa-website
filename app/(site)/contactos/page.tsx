@@ -5,71 +5,46 @@ import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { ButtonLink } from "@/components/button";
 import { FaqAccordion } from "@/components/faq-accordion";
-import { NewsletterForm } from "@/components/newsletter-form";
 import { EditorialImage } from "@/components/editorial-image";
-import { contact, socials } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings";
+import { getContactPage } from "@/lib/pages";
 import { ContactForm } from "./contact-form";
 
-export const metadata: Metadata = {
-  title: "Contactos",
-  description:
-    "Marca uma conversa com a Filipa Marques. Coaching, PNL e inteligência emocional para o desporto: por telefone, email ou formulário. Respondo em breve.",
-  alternates: {
-    canonical: "/contactos",
-  },
-  openGraph: {
-    title: "Contactos",
-    description:
-      "Marca uma conversa com a Filipa Marques. Coaching, PNL e inteligência emocional para o desporto: por telefone, email ou formulário. Respondo em breve.",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getContactPage();
+  const description =
+    page.seo?.metaDescription ??
+    "Marca uma conversa com a Filipa Marques. Coaching, PNL e inteligência emocional para o desporto: por telefone, email ou formulário. Respondo em breve.";
+  return {
+    title: page.seo?.metaTitle ?? "Contactos",
+    description,
+    alternates: { canonical: "/contactos" },
+    openGraph: {
+      title: page.seo?.metaTitle ?? "Contactos",
+      description,
+      type: "website",
+    },
+  };
+}
 
-const faqs = [
-  {
-    question: "A primeira conversa é já um compromisso?",
-    answer:
-      "Não. A primeira conversa serve para nos conhecermos, perceber onde estás e o que procuras. Sem obrigação: só decidimos avançar se fizer sentido para ti.",
-  },
-  {
-    question: "Trabalhas online ou presencial?",
-    answer:
-      "As sessões individuais são online, por videochamada — a distância deixa de ser um obstáculo. As sessões de equipa podem ser online ou presenciais, conforme o que fizer mais sentido.",
-  },
-  {
-    question: "Preciso de ter um problema para começar coaching?",
-    answer:
-      "Não. O coaching é tanto para resolver bloqueios como para elevar quem já está bem e quer chegar mais longe. O ponto de partida és tu e os teus objetivos.",
-  },
-  {
-    question: "Quanto tempo demora a ver resultados?",
-    answer:
-      "Depende de ti e do que procuras, mas sais logo da primeira sessão com clareza e um próximo passo concreto. A maioria nota diferenças reais nas primeiras semanas.",
-  },
-  {
-    question: "O que partilho fica confidencial?",
-    answer:
-      "Sempre. Tudo o que falamos é confidencial e tratado com o cuidado que mereces: é a base para trabalharmos com confiança.",
-  },
-];
+export default async function ContactosPage() {
+  const [site, page] = await Promise.all([getSiteSettings(), getContactPage()]);
+  const { contact, socials } = site;
 
-export default function ContactosPage() {
   return (
     <>
-      <PageHero title="Contactos" />
+      <PageHero title={page.heroTitle ?? "Contactos"} />
 
       <Section tone="page" id="form">
         <div className="grid gap-x-14 gap-y-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
           {/* LEFT — the form */}
           <Reveal>
-            <Eyebrow className="mb-4">Fala comigo</Eyebrow>
+            <Eyebrow className="mb-4">{page.formEyebrow}</Eyebrow>
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-              Envia mensagem e entra em campo.
+              {page.formTitle}
             </h2>
             <p className="text-pretty mt-4 max-w-lg text-lg leading-relaxed text-fg-muted">
-              Conta-me qual é o teu objetivo. Preenche o formulário e eu
-              respondo-te pessoalmente em 24 a 48 horas. Aqui não há respostas
-              automáticas, apenas compromisso.
+              {page.formBody}
             </p>
             <div className="mt-10">
               <ContactForm />
@@ -79,21 +54,21 @@ export default function ContactosPage() {
           {/* RIGHT — profile image + direct contact details */}
           <Reveal delay={80}>
             <div className="lg:pl-2">
-              <EditorialImage
-                src="/img/profile-2.jpg"
-                alt="Retrato de Filipa Marques"
-                ornament="hatch"
-                sizes="(max-width: 1024px) 90vw, 38vw"
-                className="mb-10"
-              />
+              {page.directImage ? (
+                <EditorialImage
+                  src={page.directImage.src}
+                  alt={page.directImage.alt}
+                  ornament="hatch"
+                  sizes="(max-width: 1024px) 90vw, 38vw"
+                  className="mb-10"
+                />
+              ) : null}
 
-              <h3 className="eyebrow text-fg-muted">Contacto directo</h3>
+              <h3 className="eyebrow text-fg-muted">{page.directTitle}</h3>
 
               <dl className="mt-6 space-y-6">
                 <div className="border-t border-[color:var(--border-stone)] pt-5">
-                  <dt className="text-sm font-medium text-fg-secondary">
-                    Telefone
-                  </dt>
+                  <dt className="text-sm font-medium text-fg-secondary">Telefone</dt>
                   <dd className="mt-1">
                     <a
                       href={contact.phoneHref}
@@ -105,9 +80,7 @@ export default function ContactosPage() {
                 </div>
 
                 <div className="border-t border-[color:var(--border-stone)] pt-5">
-                  <dt className="text-sm font-medium text-fg-secondary">
-                    Email
-                  </dt>
+                  <dt className="text-sm font-medium text-fg-secondary">Email</dt>
                   <dd className="mt-1">
                     <a
                       href={contact.emailHref}
@@ -119,22 +92,19 @@ export default function ContactosPage() {
                 </div>
 
                 <div className="border-t border-[color:var(--border-stone)] pt-5">
-                  <dt className="text-sm font-medium text-fg-secondary">
-                    Onde
-                  </dt>
-                  <dd className="mt-1 text-[1.0625rem] text-fg">
-                    {contact.location}
-                  </dd>
+                  <dt className="text-sm font-medium text-fg-secondary">Onde</dt>
+                  <dd className="mt-1 text-[1.0625rem] text-fg">{contact.location}</dd>
                 </div>
               </dl>
 
-              <p className="text-pretty mt-8 max-w-sm text-[0.9375rem] leading-relaxed text-fg-muted">
-                O meu trabalho é lado a lado, não por respostas automáticas.
-                Escreve-me ou liga, o que for mais fácil para ti.
-              </p>
+              {page.directNote ? (
+                <p className="text-pretty mt-8 max-w-sm text-[0.9375rem] leading-relaxed text-fg-muted">
+                  {page.directNote}
+                </p>
+              ) : null}
 
               <div className="mt-10 border-t border-[color:var(--border-stone)] pt-6">
-                <h3 className="eyebrow text-fg-muted">Segue o trabalho</h3>
+                <h3 className="eyebrow text-fg-muted">{page.socialTitle}</h3>
                 <ul className="mt-4 space-y-3">
                   {socials.map((social) => (
                     <li key={social.label}>
@@ -164,24 +134,24 @@ export default function ContactosPage() {
           {/* LEFT — intro + CTA */}
           <Reveal>
             <Eyebrow tone="dark" className="mb-4">
-              Perguntas &amp; respostas
+              {page.faqEyebrow}
             </Eyebrow>
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1] text-fg-inverse">
-              Perguntas frequentes
+              {page.faqTitle}
             </h2>
             <p className="text-pretty mt-4 max-w-md text-lg leading-relaxed text-fg-inverse-muted">
-              A clareza mental começa antes da primeira sessão. Encontra aqui as
-              respostas diretas sobre como funciona o meu método. Se restar
-              alguma dúvida, o meu compromisso é responder-te pessoalmente.
+              {page.faqBody}
             </p>
-            <ButtonLink href="#form" className="mt-8">
-              Marcar conversa
-            </ButtonLink>
+            {page.faqCtaLabel ? (
+              <ButtonLink href="#form" className="mt-8">
+                {page.faqCtaLabel}
+              </ButtonLink>
+            ) : null}
           </Reveal>
 
           {/* RIGHT — accordion */}
           <Reveal delay={80}>
-            <FaqAccordion items={faqs} name="contact-faq" />
+            <FaqAccordion items={page.faqs ?? []} name="contact-faq" />
           </Reveal>
         </div>
       </Section>

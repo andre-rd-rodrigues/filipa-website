@@ -5,99 +5,90 @@ import { ButtonLink } from "@/components/button";
 import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { EditorialImage } from "@/components/editorial-image";
-import { primaryCta, quotes, site } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings";
+import { getAboutPage } from "@/lib/pages";
 import { buildPersonSchema } from "@/lib/schema";
-import { approach, credentials } from "./data";
 
-export const metadata: Metadata = {
-  title: "Sobre mim",
-  description:
-    "Conhece a Filipa Marques: mental coach e coach de PNL, especializada em Psicologia do Desporto. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.",
-  alternates: {
-    canonical: "/sobre",
-  },
-  openGraph: {
-    title: "Sobre mim",
-    description:
-      "Conhece a Filipa Marques: mental coach e coach de PNL, especializada em Psicologia do Desporto. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.",
-    type: "profile",
-    images: [{ url: "/img/profile-1.jpg" }],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const about = await getAboutPage();
+  const description =
+    about.seo?.metaDescription ??
+    "Conhece a Filipa Marques: mental coach e coach de PNL, especializada em Psicologia do Desporto. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.";
+  return {
+    title: about.seo?.metaTitle ?? "Sobre mim",
+    description,
+    alternates: { canonical: "/sobre" },
+    openGraph: {
+      title: about.seo?.metaTitle ?? "Sobre mim",
+      description,
+      type: "profile",
+      images: [{ url: about.portrait?.src ?? "/img/profile-1.jpg" }],
+    },
+  };
+}
 
-export default function SobrePage() {
+export default async function SobrePage() {
+  const [site, about] = await Promise.all([getSiteSettings(), getAboutPage()]);
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildPersonSchema()),
+          __html: JSON.stringify(buildPersonSchema(site)),
         }}
       />
-      <PageHero title="Sobre mim" />
+      <PageHero title={about.heroTitle ?? "Sobre mim"} />
 
-      {/* Bio — portrait placeholder + warm intro */}
+      {/* Bio — portrait + warm intro */}
       <Section tone="page">
         <Reveal className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
-          <figure className="m-0">
-            <EditorialImage
-              src="/img/profile-1.jpg"
-              alt="Retrato de Filipa Marques"
-              priority
-              sizes="(max-width: 1024px) 90vw, 38vw"
-            />
-            <figcaption className="mt-3 text-[0.8125rem] text-fg-muted">
-              Foto: Filipa Marques
-            </figcaption>
-          </figure>
+          {about.portrait ? (
+            <figure className="m-0">
+              <EditorialImage
+                src={about.portrait.src}
+                alt={about.portrait.alt}
+                priority
+                sizes="(max-width: 1024px) 90vw, 38vw"
+              />
+              {about.portraitCaption ? (
+                <figcaption className="mt-3 text-[0.8125rem] text-fg-muted">
+                  {about.portraitCaption}
+                </figcaption>
+              ) : null}
+            </figure>
+          ) : (
+            <div />
+          )}
 
           <div className="max-w-[60ch]">
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-              Trabalho a mente de quem vive o desporto.
+              {about.bioTitle}
             </h2>
             <div className="text-pretty mt-6 space-y-5 text-lg leading-relaxed text-fg-muted">
-              <p>
-                Chamo-me Filipa Marques e sou apaixonada pelo potencial humano,
-                por tudo o que és capaz de alcançar quando a tua mente joga na tua
-                equipa. Como mental coach especializada em desporto,
-                trabalho exatamente onde o talento puro já não chega sozinho: na gestão da
-                pressão, na manutenção do foco e na forma como pensas quando cada
-                segundo conta.
-              </p>
-              <p>
-                Junto a Psicologia ao coaching, à Programação Neurolinguística e à
-                inteligência emocional para te dar ferramentas práticas: comunicar
-                melhor com a equipa, gerir a ansiedade de competição e transformar
-                pensamento em ação.
-              </p>
-              <p>
-                Trabalho com atletas, treinadores, dirigentes desportivos e equipas,
-                no desporto e na vida, presencialmente e online. Se sentes que podes
-                ir mais longe do que aquilo que os resultados mostram.
-              </p>
+              {(about.bioParagraphs ?? []).map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
             </div>
           </div>
         </Reveal>
       </Section>
 
-      {/* A minha abordagem — three editorial principles on dark */}
+      {/* Valores — three editorial principles on dark */}
       <Section tone="dark">
         <Reveal className="max-w-2xl">
           <Eyebrow tone="dark" className="mb-4">
-            Os meus valores
+            {about.valuesEyebrow}
           </Eyebrow>
           <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-            Três valores que guiam cada sessão.
+            {about.valuesTitle}
           </h2>
         </Reveal>
 
         <Reveal className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
-          {approach.map((item, i) => (
+          {(about.values ?? []).map((item, i) => (
             <div key={item.title} className="flex flex-col">
-              <span
-                className="font-display text-2xl text-action"
-                aria-hidden
-              >
+              <span className="font-display text-2xl text-action" aria-hidden>
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className="mt-4 font-body text-xl font-semibold tracking-[-0.01em] text-fg-inverse">
@@ -111,32 +102,35 @@ export default function SobrePage() {
         </Reveal>
       </Section>
 
-      {/* Formação & certificações — heading + image, then bordered credential grid */}
+      {/* Formação & certificações */}
       <Section tone="surface">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
           <Reveal className="max-w-2xl">
-            <Eyebrow className="mb-4">Formação &amp; certificações</Eyebrow>
+            <Eyebrow className="mb-4">{about.credentialsEyebrow}</Eyebrow>
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-              A base que sustenta o trabalho.
+              {about.credentialsTitle}
             </h2>
-            <p className="mt-5 max-w-lg text-pretty text-lg leading-relaxed text-fg-muted">
-              Anos de estudo em Psicologia do Desporto, coaching e PNL ao serviço
-              de uma coisa só: ajudar-te a pensar, sentir e agir com foco.
-            </p>
+            {about.credentialsIntro ? (
+              <p className="mt-5 max-w-lg text-pretty text-lg leading-relaxed text-fg-muted">
+                {about.credentialsIntro}
+              </p>
+            ) : null}
           </Reveal>
 
-          <Reveal delay={80}>
-            <EditorialImage
-              src="/img/profile-3.jpg"
-              alt="Filipa Marques em estúdio"
-              sizes="(max-width: 1024px) 90vw, 38vw"
-            />
-          </Reveal>
+          {about.credentialsImage ? (
+            <Reveal delay={80}>
+              <EditorialImage
+                src={about.credentialsImage.src}
+                alt={about.credentialsImage.alt}
+                sizes="(max-width: 1024px) 90vw, 38vw"
+              />
+            </Reveal>
+          ) : null}
         </div>
 
         <Reveal className="mt-14 lg:mt-16">
           <ul className="grid border-l border-t border-border-stone sm:grid-cols-2">
-            {credentials.map((item, i) => (
+            {(about.credentials ?? []).map((item, i) => (
               <li
                 key={item.title}
                 className="flex flex-col border-b border-r border-border-stone p-8 sm:p-10"
@@ -163,39 +157,46 @@ export default function SobrePage() {
       <Section tone="dark" size="lg" narrow className="text-center">
         <Reveal>
           <p className="font-display text-balance text-[clamp(1.75rem,4vw,3rem)] leading-[1.15]">
-            &ldquo;{quotes.sobre}&rdquo;
+            &ldquo;{site.quotes.sobre}&rdquo;
           </p>
-          <p className="eyebrow mt-6 text-action">
-            {site.name}
-          </p>
+          <p className="eyebrow mt-6 text-action">{site.name}</p>
         </Reveal>
       </Section>
 
       {/* Final CTA */}
       <Section tone="page">
         <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <Reveal>
-            <EditorialImage
-              src="/img/profile-2.jpg"
-              alt="Filipa Marques com uma bola de futebol"
-              sizes="(max-width: 1024px) 90vw, 34vw"
-            />
-          </Reveal>
+          {about.ctaImage ? (
+            <Reveal>
+              <EditorialImage
+                src={about.ctaImage.src}
+                alt={about.ctaImage.alt}
+                sizes="(max-width: 1024px) 90vw, 34vw"
+              />
+            </Reveal>
+          ) : (
+            <div />
+          )}
 
           <Reveal delay={80}>
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-              Vamos pôr a tua mente a jogar a teu favor?
+              {about.ctaTitle}
             </h2>
-            <p className="mt-5 max-w-lg text-pretty text-lg text-fg-muted">
-              Dá o primeiro passo. Agenda uma conversa sem compromisso e vamos
-              descobrir, juntos, como te posso ajudar a treinar a tua mente para
-              jogares ao teu melhor nível, dentro e fora de campo.
-            </p>
+            {about.ctaBody ? (
+              <p className="mt-5 max-w-lg text-pretty text-lg text-fg-muted">
+                {about.ctaBody}
+              </p>
+            ) : null}
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>
-              <ButtonLink href="/servicos" variant="ghost">
-                Ver serviços
-              </ButtonLink>
+              {(about.ctas ?? []).map((cta) => (
+                <ButtonLink
+                  key={cta.label}
+                  href={cta.href}
+                  variant={cta.variant === "primary" ? "primary" : "ghost"}
+                >
+                  {cta.label}
+                </ButtonLink>
+              ))}
             </div>
           </Reveal>
         </div>

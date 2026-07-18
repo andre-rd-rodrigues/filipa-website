@@ -4,18 +4,18 @@ import { Section } from "@/components/section";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
 import { ButtonLink } from "@/components/button";
+import { ArticleBody } from "@/components/article-body";
 import {
   getAllPosts,
   getPostBySlug,
   formatPostDate,
-  type BodyBlock,
   type BlogPost,
 } from "@/lib/blog";
+import { getSiteSettings } from "@/lib/settings";
 import { primaryCta } from "@/lib/site";
 import { buildBlogPostingSchema, buildFaqSchema } from "@/lib/schema";
 
-// All slugs are known at build time (mock today, Sanity later). Unknown slugs
-// 404 rather than rendering on demand.
+// All slugs are known at build time. Unknown slugs 404 rather than rendering.
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
@@ -43,54 +43,6 @@ export async function generateMetadata(props: PageProps<"/blog/[slug]">) {
       images: [{ url: post.coverImage.src }],
     },
   };
-}
-
-function BodyContent({ blocks }: { blocks: BodyBlock[] }) {
-  return (
-    <div className="article-prose space-y-6">
-      {blocks.map((block, i) => {
-        if (block.type === "heading") {
-          return (
-            <h2
-              key={i}
-              className="font-display mt-12 text-balance text-[clamp(1.5rem,3vw,2rem)] leading-[1.15]"
-            >
-              {block.text}
-            </h2>
-          );
-        }
-        if (block.type === "quote") {
-          // Pull-quote: raised charcoal panel, orange-dash attribution.
-          return (
-            <blockquote
-              key={i}
-              className="my-10 border border-ink-line bg-ink-raised p-8 sm:p-10"
-            >
-              <p className="text-pretty text-[clamp(1.25rem,2.4vw,1.6rem)] leading-[1.45] text-fg">
-                {block.text}
-              </p>
-              {block.cite ? (
-                <footer className="mt-6 flex items-center gap-4">
-                  <span aria-hidden className="h-0.5 w-10 shrink-0 bg-action" />
-                  <cite className="font-body text-base font-semibold not-italic text-fg">
-                    {block.cite}
-                  </cite>
-                </footer>
-              ) : null}
-            </blockquote>
-          );
-        }
-        return (
-          <p
-            key={i}
-            className="text-pretty text-[1.125rem] leading-[1.8] text-fg-secondary"
-          >
-            {block.text}
-          </p>
-        );
-      })}
-    </div>
-  );
 }
 
 function FaqSection({ faq }: { faq: NonNullable<BlogPost["faq"]> }) {
@@ -131,10 +83,7 @@ function RelatedPosts({ posts }: { posts: BlogPost[] }) {
       <ul className="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2">
         {posts.map((related) => (
           <li key={related.slug}>
-            <Link
-              href={`/blog/${related.slug}`}
-              className="group block"
-            >
+            <Link href={`/blog/${related.slug}`} className="group block">
               <h3 className="font-display text-balance text-xl leading-[1.2] transition-colors group-hover:text-action-deep">
                 {related.title}
               </h3>
@@ -149,7 +98,10 @@ function RelatedPosts({ posts }: { posts: BlogPost[] }) {
 
 export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
   const { slug } = await props.params;
-  const post = await getPostBySlug(slug);
+  const [post, site] = await Promise.all([
+    getPostBySlug(slug),
+    getSiteSettings(),
+  ]);
   if (!post) notFound();
 
   const related = post.relatedSlugs?.length
@@ -163,7 +115,7 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildBlogPostingSchema(post)),
+          __html: JSON.stringify(buildBlogPostingSchema(post, site)),
         }}
       />
       {post.faq?.length ? (
@@ -191,7 +143,7 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
         </Reveal>
 
         <Reveal className="mt-10">
-          <BodyContent blocks={post.body} />
+          <ArticleBody value={post.body ?? []} />
         </Reveal>
 
         {post.faq?.length ? <FaqSection faq={post.faq} /> : null}

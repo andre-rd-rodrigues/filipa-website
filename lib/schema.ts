@@ -1,14 +1,16 @@
 /**
  * JSON-LD Schema.org builders.
  *
- * Exports functions that return plain objects suitable for JSON-LD serialization.
- * All data sourced from lib/site.ts — no mock/unverified claims encoded.
+ * Pure functions returning plain objects for JSON-LD serialization. Identity
+ * data comes from Sanity site settings (passed in); URLs use the deployment
+ * config in lib/site.ts.
  */
 
-import { site, contact, socials } from "@/lib/site";
+import { siteConfig } from "@/lib/site";
+import type { SiteSettings } from "@/lib/settings";
 import type { Course } from "@/lib/courses";
 import type { Service } from "@/lib/services";
-import type { BlogPost } from "@/lib/blog";
+import type { BlogPost, FaqItem } from "@/lib/blog";
 
 export interface JsonLdData {
   "@context": string;
@@ -16,98 +18,80 @@ export interface JsonLdData {
   [key: string]: unknown;
 }
 
-/**
- * Organization schema for the site owner.
- * Used sitewide; represents the business entity.
- */
-export function buildOrganizationSchema(): JsonLdData {
+/** Organization schema for the site owner. Used sitewide. */
+export function buildOrganizationSchema(settings: SiteSettings): JsonLdData {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: site.fullName,
-    url: site.url,
-    email: contact.email,
-    telephone: contact.phone,
-    sameAs: socials.map((s) => s.href),
+    name: settings.fullName,
+    url: siteConfig.url,
+    email: settings.contact.email,
+    telephone: settings.contact.phone,
+    sameAs: settings.socials.map((s) => s.href),
   };
 }
 
-/**
- * WebSite schema for the site itself.
- * Marks the overall site identity and language.
- */
-export function buildWebSiteSchema(): JsonLdData {
+/** WebSite schema for the site itself. */
+export function buildWebSiteSchema(settings: SiteSettings): JsonLdData {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: site.fullName,
-    url: site.url,
+    name: settings.fullName,
+    url: siteConfig.url,
     inLanguage: "pt-PT",
   };
 }
 
-/**
- * Person schema for Filipa Marques (about page).
- *
- * NOTE: Does NOT include credential-specific fields (alumniOf, hasCredential, award).
- * The credentials in app/(site)/sobre/data.ts are MOCK/REPRESENTATIVE — not verified.
- * Until real credentials are confirmed, we only encode:
- * - name, title (jobTitle), URL, image, social profiles, work affiliation, service area.
- * - Credential-specific schema fields MUST be added in a follow-up once real credentials exist.
- */
-/**
- * Course schema for a single course (course detail page).
- * Provider is the site owner Organization. No price/date encoded until the
- * real enrolment details are confirmed.
- */
-export function buildCourseSchema(course: Course): JsonLdData {
+/** Course schema for a single course (course detail page). */
+export function buildCourseSchema(
+  course: Course,
+  settings: SiteSettings,
+): JsonLdData {
   return {
     "@context": "https://schema.org",
     "@type": "Course",
     name: course.title,
     description: course.summary,
-    url: `${site.url}/cursos/${course.slug}`,
+    url: `${siteConfig.url}/cursos/${course.slug}`,
     inLanguage: "pt-PT",
     provider: {
       "@type": "Organization",
-      name: site.fullName,
-      url: site.url,
+      name: settings.fullName,
+      url: siteConfig.url,
     },
   };
 }
 
-/**
- * Service schema for a single service (service detail page).
- * Provider is the site owner Organization. No price encoded until real
- * pricing is confirmed.
- */
-export function buildServiceSchema(service: Service): JsonLdData {
+/** Service schema for a single service (service detail page). */
+export function buildServiceSchema(
+  service: Service,
+  settings: SiteSettings,
+): JsonLdData {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     name: service.title,
     description: service.summary,
-    url: `${site.url}/servicos/${service.slug}`,
+    url: `${siteConfig.url}/servicos/${service.slug}`,
     serviceType: service.title,
     areaServed: "Portugal",
     provider: {
       "@type": "Organization",
-      name: site.fullName,
-      url: site.url,
+      name: settings.fullName,
+      url: siteConfig.url,
     },
   };
 }
 
-/**
- * BlogPosting schema for a single blog article (blog detail page).
- * Improves eligibility for rich results and clarifies authorship/dates to
- * search engines. Image is resolved to an absolute URL.
- */
-export function buildBlogPostingSchema(post: BlogPost): JsonLdData {
-  const url = `${site.url}/blog/${post.slug}`;
+/** BlogPosting schema for a single blog article (blog detail page). */
+export function buildBlogPostingSchema(
+  post: BlogPost,
+  settings: SiteSettings,
+): JsonLdData {
+  const url = `${siteConfig.url}/blog/${post.slug}`;
   const image = post.coverImage.src.startsWith("http")
     ? post.coverImage.src
-    : `${site.url}${post.coverImage.src}`;
+    : `${siteConfig.url}${post.coverImage.src}`;
 
   return {
     "@context": "https://schema.org",
@@ -125,23 +109,18 @@ export function buildBlogPostingSchema(post: BlogPost): JsonLdData {
     author: {
       "@type": "Person",
       name: post.author,
-      url: `${site.url}/sobre`,
+      url: `${siteConfig.url}/sobre`,
     },
     publisher: {
       "@type": "Organization",
-      name: site.fullName,
-      url: site.url,
+      name: settings.fullName,
+      url: siteConfig.url,
     },
   };
 }
 
-/**
- * FAQPage schema for an article's FAQ block.
- * Emitted only when the post has FAQ items; powers FAQ rich results.
- */
-export function buildFaqSchema(
-  faq: NonNullable<BlogPost["faq"]>,
-): JsonLdData {
+/** FAQPage schema for an article's FAQ block. */
+export function buildFaqSchema(faq: FaqItem[]): JsonLdData {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -156,18 +135,19 @@ export function buildFaqSchema(
   };
 }
 
-export function buildPersonSchema(): JsonLdData {
+/** Person schema for Filipa Marques (about page). */
+export function buildPersonSchema(settings: SiteSettings): JsonLdData {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: site.name,
-    jobTitle: site.tagline, // "Coaching & PNL"
-    url: `${site.url}/sobre`,
-    image: `${site.url}/img/profile-1.jpg`,
-    sameAs: socials.map((s) => s.href),
+    name: settings.name,
+    jobTitle: settings.tagline,
+    url: `${siteConfig.url}/sobre`,
+    image: `${siteConfig.url}/img/profile-1.jpg`,
+    sameAs: settings.socials.map((s) => s.href),
     worksFor: {
       "@type": "Organization",
-      name: site.fullName,
+      name: settings.fullName,
     },
     areaServed: "Portugal",
   };

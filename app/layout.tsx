@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Bodoni_Moda, Hanken_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import { site } from "@/lib/site";
+import { siteConfig } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings";
 import {
   buildOrganizationSchema,
   buildWebSiteSchema,
@@ -38,29 +39,33 @@ const hanken = Hanken_Grotesk({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: {
-    default: `${site.name} | ${site.tagline} para Desporto`,
-    template: `%s | ${site.name}`,
-  },
-  description: site.description,
-  openGraph: {
-    title: `${site.name} | ${site.tagline}`,
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSiteSettings();
+  return {
+    metadataBase: new URL(siteConfig.url),
+    title: {
+      default: `${site.name} | ${site.tagline} para Desporto`,
+      template: `%s | ${site.name}`,
+    },
     description: site.description,
-    url: site.url,
-    siteName: site.fullName,
-    locale: "pt_PT",
-    type: "website",
-  },
-  robots: { index: true, follow: true },
-};
+    openGraph: {
+      title: `${site.name} | ${site.tagline}`,
+      description: site.description,
+      url: siteConfig.url,
+      siteName: site.fullName,
+      locale: "pt_PT",
+      type: "website",
+    },
+    robots: { index: true, follow: true },
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const site = await getSiteSettings();
   return (
     <html
       lang="pt-PT"
@@ -82,13 +87,13 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(buildOrganizationSchema()),
+            __html: JSON.stringify(buildOrganizationSchema(site)),
           }}
         />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(buildWebSiteSchema()),
+            __html: JSON.stringify(buildWebSiteSchema(site)),
           }}
         />
       </head>

@@ -2,11 +2,13 @@ import Link from "next/link";
 import { Container } from "@/components/container";
 import { SiteLogo } from "@/components/site-logo";
 import { NewsletterForm } from "@/components/newsletter-form";
-import { contact, legalLinks, navLinks, site, siteCredit, socials } from "@/lib/site";
+import { legalLinks, navLinks, siteCredit } from "@/lib/site";
+import type { SiteSettings } from "@/lib/settings";
 import { CookieSettingsButton } from "@/components/consent";
 
-export function SiteFooter() {
+export function SiteFooter({ settings }: { settings: SiteSettings }) {
   const year = new Date().getFullYear();
+  const { contact, socials } = settings;
 
   return (
     <footer className="bg-ink text-fg-inverse-muted">
@@ -21,11 +23,11 @@ export function SiteFooter() {
         <div className="mt-14 grid gap-12 border-t border-white/10 pt-14 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           {/* Brand + quote */}
           <div>
-            <Link href="/" className="inline-block" aria-label={site.fullName}>
+            <Link href="/" className="inline-block" aria-label={settings.fullName}>
               <SiteLogo className="h-28 w-auto sm:h-32" />
             </Link>
             <p className="mt-6 max-w-xs text-pretty text-[0.9375rem] leading-relaxed">
-              “{site.quote}”
+              “{settings.quote}”
             </p>
           </div>
 
@@ -90,7 +92,7 @@ export function SiteFooter() {
         <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-6 text-[0.8125rem] sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col gap-1">
             <p>
-              © {year} {site.name} — {site.tagline}. Todos os direitos reservados.
+              © {year} {settings.name} — {settings.tagline}. Todos os direitos reservados.
             </p>
             <p>
               Site por{" "}

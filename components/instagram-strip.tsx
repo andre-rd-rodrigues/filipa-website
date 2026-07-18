@@ -1,9 +1,6 @@
 import Image from "next/image";
-import { socials } from "@/lib/site";
 
 export type InstaImage = { src: string; alt: string };
-
-const instagram = socials.find((s) => s.label === "Instagram")!;
 
 /**
  * Full-bleed Instagram gallery strip — an edge-to-edge, gapless row of square
@@ -14,35 +11,6 @@ const instagram = socials.find((s) => s.label === "Instagram")!;
  * The badge stays centred over the grid at every breakpoint. Photo tiles are
  * decorative (aria-hidden); the one real, labelled link is the badge.
  */
-// Placeholder tiles — a stand-in Instagram grid. These stay as raw placeholders
-// until the strip is wired to real posts from @filipamarques.coaching.pnl.
-const defaultImages: InstaImage[] = [
-  {
-    src: "https://images.unsplash.com/photo-1533681904393-9ab6eee7e408?auto=format&fit=crop&w=800&q=80",
-    alt: "Treino de força em grupo",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80",
-    alt: "Atleta a treinar com halteres",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=800&q=80",
-    alt: "Sessão de treino intensa",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1534367610401-9f5ed68180aa?auto=format&fit=crop&w=800&q=80",
-    alt: "Momento de foco antes do esforço",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=80",
-    alt: "Corrida e cardio",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=800&q=80",
-    alt: "Equipa a partilhar energia no treino",
-  },
-];
-
 function InstagramGlyph() {
   return (
     <svg viewBox="0 0 24 24" className="h-[42%] w-[42%]" fill="none" aria-hidden>
@@ -62,14 +30,15 @@ function InstagramGlyph() {
 }
 
 export function InstagramStrip({
-  images = defaultImages,
-  href = instagram.href,
-  handle = instagram.handle,
+  images,
+  href,
+  handle,
 }: {
-  images?: InstaImage[];
-  href?: string;
-  handle?: string;
+  images: InstaImage[];
+  href: string;
+  handle: string;
 }) {
+  if (!images.length) return null;
   return (
     <section
       aria-label={`Instagram ${handle}`}

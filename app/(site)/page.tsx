@@ -8,91 +8,44 @@ import { Hero } from "@/components/hero";
 import { LayeredShowcase } from "@/components/layered-showcase";
 import { MarqueeStrip } from "@/components/marquee-strip";
 import { LogoStrip } from "@/components/logo-strip";
-import { HighlightStrip, type HighlightItem } from "@/components/highlight-strip";
+import { HighlightStrip } from "@/components/highlight-strip";
 import { QuoteBand } from "@/components/quote-band";
-import { StatsStrip, type Stat } from "@/components/stats-strip";
+import { StatsStrip } from "@/components/stats-strip";
 import { InstagramStrip } from "@/components/instagram-strip";
-import { quotes, site } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings";
+import { getHomePage } from "@/lib/pages";
 import { getLatestPosts, formatPostDate } from "@/lib/blog";
-import { episodes } from "@/app/(site)/podcast/data";
+import { getLatestEpisodes } from "@/lib/podcast";
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: `${site.name} | ${site.tagline}`,
-    description: site.description,
-    type: "website",
-  },
-};
-
-const latestEpisodes = episodes.slice(0, 3);
-
-// Placeholder figures — replace with Filipa's real numbers.
-const stats: Stat[] = [
-  {
-    value: 150,
-    suffix: "+",
-    label: "Percursos transformados",
-    description:
-      "Apoio lado a lado para atletas que querem alinhar a mente com o corpo, da formação ao alto rendimento.",
-    cta: { label: "Ver serviços", href: "/servicos" },
-  },
-  {
-    value: 12,
-    label: "Anos no terreno",
-    description:
-      "A ciência da psicologia unida à eficácia da PNL para construir consistência no desporto.",
-    cta: { label: "Sobre mim", href: "/sobre" },
-  },
-  {
-    value: 40,
-    suffix: "+",
-    label: "Formações de impacto",
-    description:
-      "Treinos mentais coletivos e palestras desenhadas para elevar a cultura competitiva de equipas e clubes.",
-    cta: { label: "Marcar conversa", href: "/contactos" },
-  },
-];
-
-const highlights: HighlightItem[] = [
-  {
-    label: "Treino mental individual",
-    body: "O teu plano de jogo focado em resultados.",
-    href: "/servicos/treino-mental-individual",
-    image: {
-      src: "/img/editorial/tenis-jogador.webp",
-      alt: "Tenista concentrado, sozinho antes do ponto",
+export async function generateMetadata(): Promise<Metadata> {
+  const [site, home] = await Promise.all([getSiteSettings(), getHomePage()]);
+  return {
+    alternates: { canonical: "/" },
+    openGraph: {
+      title: home.seo?.metaTitle ?? `${site.name} | ${site.tagline}`,
+      description: home.seo?.metaDescription ?? site.description,
+      type: "website",
     },
-  },
-  {
-    label: "Inteligência emocional",
-    body: "Domínio mental e gestão sob pressão.",
-    href: "/servicos/inteligencia-emocional-no-desporto",
-    image: {
-      src: "/img/editorial/tenis-servico.webp",
-      alt: "Tenista em movimento controlado dentro do court",
-    },
-  },
-  {
-    label: "Comunicação em campo",
-    body: "PNL aplicada a líderes, treinadores e equipas.",
-    href: "/servicos/comunicacao-em-campo-pnl",
-    image: {
-      src: "/img/editorial/futebol-bola.webp",
-      alt: "Chuteira sobre a bola, pronta para entrar em campo",
-    },
-  },
-];
+  };
+}
 
 export default async function Home() {
-  const latest = await getLatestPosts(1);
+  const [site, home, latest, latestEpisodes] = await Promise.all([
+    getSiteSettings(),
+    getHomePage(),
+    getLatestPosts(1),
+    getLatestEpisodes(3),
+  ]);
   const featured = latest[0];
+  const instagram = site.socials.find((s) => s.label === "Instagram");
 
   return (
     <>
-      <Hero />
+      <Hero
+        backdropWord={home.heroBackdropWord}
+        eyebrow={home.heroEyebrow}
+        ctas={home.heroCtas}
+      />
 
       {/* Trust band — dimmed club logos (mocked) */}
       <LogoStrip />
@@ -100,54 +53,48 @@ export default async function Home() {
       {/* Layered editorial block — overlapping image panels on top of each other */}
       <Section tone="page">
         <LayeredShowcase
-          eyebrow="Método"
-          title="Mais do que treino mental: uma estratégia desenhada à tua medida para entrares em campo e dominares a pressão."
-          paragraphs={[
-            "Cruzamos a base científica da Psicologia do Desporto com a eficácia prática da PNL e da Inteligência Emocional. Sem discursos vazios ou fórmulas prontas: sais de cada sessão com ferramentas reais e um plano claro para saberes exatamente como agir quando o apito soar.",
-          ]}
-          cta={{ label: "Saber mais", href: "/sobre" }}
-          images={[
-            {
-              src: "/img/editorial/basquetebol-salto.webp",
-              alt: "Jogador de basquetebol em salto, esforço e determinação",
-            },
-            {
-              src: "/img/editorial/pista-atletismo.webp",
-              alt: "Pista de atletismo, o palco da preparação",
-            },
-          ]}
+          eyebrow={home.methodEyebrow ?? ""}
+          title={home.methodTitle ?? ""}
+          paragraphs={home.methodParagraphs ?? []}
+          cta={home.methodCta ? { label: home.methodCta.label, href: home.methodCta.href } : undefined}
+          images={
+            (home.methodImages ?? []).slice(0, 2) as [
+              { src: string; alt: string },
+              { src: string; alt: string },
+            ]
+          }
         />
       </Section>
 
       {/* What I do — asymmetric bento grid (one dark feature tile leads) */}
       <Section tone="surface">
         <Reveal>
-          <Eyebrow className="mb-4">Serviços</Eyebrow>
+          <Eyebrow className="mb-4">{home.servicesEyebrow}</Eyebrow>
           <h2 className="font-display max-w-2xl text-balance text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1]">
-            Ferramentas para transformar potencial em resultados.
+            {home.servicesTitle}
           </h2>
         </Reveal>
 
         <Reveal className="mt-12">
-          <HighlightStrip items={highlights} />
+          <HighlightStrip items={home.highlights ?? []} />
         </Reveal>
       </Section>
 
       {/* Scrolling headline marquee */}
-      <MarqueeStrip text="performance" separator="◆" reverse={false} outline />
+      <MarqueeStrip text={home.marqueeText ?? "performance"} separator="◆" reverse={false} outline />
 
       {/* Stats — numbers count up from zero on scroll */}
       <Section tone="dark">
-        <StatsStrip items={stats} />
+        <StatsStrip items={home.stats ?? []} />
       </Section>
 
       {/* Podcast preview — latest 3 episodes */}
       <Section tone="surface">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <Reveal>
-            <Eyebrow className="mb-4">Podcast</Eyebrow>
+            <Eyebrow className="mb-4">{home.podcastEyebrow}</Eyebrow>
             <h2 className="font-display max-w-xl text-balance text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1]">
-              Conversas para ouvir e aplicar.
+              {home.podcastTitle}
             </h2>
           </Reveal>
           <Reveal className="hidden sm:block">
@@ -200,8 +147,8 @@ export default async function Home() {
       <Section tone="dark" size="lg">
         <Reveal>
           <QuoteBand
-            eyebrow="O que me move"
-            quote={quotes.home}
+            eyebrow={home.quoteEyebrow ?? ""}
+            quote={site.quotes.home}
             name={site.name}
           />
         </Reveal>
@@ -212,9 +159,9 @@ export default async function Home() {
         <Section tone="page">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <Reveal>
-              <Eyebrow className="mb-4">Blog</Eyebrow>
+              <Eyebrow className="mb-4">{home.blogEyebrow}</Eyebrow>
               <h2 className="font-display max-w-xl text-balance text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1]">
-                Estratégias mentais para levares contigo para o campo.
+                {home.blogTitle}
               </h2>
             </Reveal>
             <Reveal className="hidden sm:block">
@@ -292,7 +239,13 @@ export default async function Home() {
       ) : null}
 
       {/* Instagram — full-bleed follow strip with centred badge */}
-      <InstagramStrip />
+      {instagram ? (
+        <InstagramStrip
+          images={home.instagramImages ?? []}
+          href={instagram.href}
+          handle={instagram.handle}
+        />
+      ) : null}
     </>
   );
 }

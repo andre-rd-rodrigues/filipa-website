@@ -7,11 +7,30 @@
  * hardcoded content and survives the swap to Sanity untouched.
  */
 
+import type { PortableTextBlock } from "@portabletext/types";
 import type { BlogPost } from "@/lib/blog";
 import type { Course, UpcomingSession } from "@/lib/courses";
 import type { Service } from "@/lib/services";
+import type { SiteSettings } from "@/lib/settings";
 import type { HighlightItem } from "@/components/highlight-strip";
 import type { Stat } from "@/components/stats-strip";
+
+const sampleBody: PortableTextBlock[] = [
+  {
+    _type: "block",
+    _key: "b1",
+    style: "normal",
+    markDefs: [],
+    children: [{ _type: "span", _key: "s1", text: "Primeiro parágrafo.", marks: [] }],
+  },
+  {
+    _type: "block",
+    _key: "b2",
+    style: "h2",
+    markDefs: [],
+    children: [{ _type: "span", _key: "s2", text: "Um título", marks: [] }],
+  },
+];
 
 export function makeBlogPost(overrides: Partial<BlogPost> = {}): BlogPost {
   return {
@@ -23,11 +42,37 @@ export function makeBlogPost(overrides: Partial<BlogPost> = {}): BlogPost {
     publishedAt: "2026-01-15",
     readingMinutes: 5,
     coverImage: { src: "/img/editorial/capa.webp", alt: "Imagem de capa" },
-    body: [
-      { type: "paragraph", text: "Primeiro parágrafo." },
-      { type: "heading", text: "Um título" },
-      { type: "quote", text: "Uma citação.", cite: "Autor" },
+    body: sampleBody,
+    ...overrides,
+  };
+}
+
+export function makeSiteSettings(
+  overrides: Partial<SiteSettings> = {},
+): SiteSettings {
+  return {
+    name: "Filipa Marques",
+    tagline: "Coaching & PNL",
+    fullName: "Filipa Marques — Coaching & PNL",
+    description: "Descrição de teste do site.",
+    url: "https://filipamarques.pt",
+    locale: "pt-PT",
+    quote: "Uma citação da marca.",
+    contact: {
+      phone: "+351 933 327 567",
+      phoneHref: "tel:+351933327567",
+      email: "teste@example.com",
+      emailHref: "mailto:teste@example.com",
+      location: "Portugal · Presencial e online",
+    },
+    socials: [
+      { label: "Instagram", handle: "@teste", href: "https://instagram.com/teste" },
     ],
+    quotes: {
+      home: "Citação da página inicial.",
+      servicos: "Citação da página de serviços.",
+      sobre: "Citação da página sobre.",
+    },
     ...overrides,
   };
 }

@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { site } from "@/lib/site";
+import { siteConfig } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/studio"],
     },
-    sitemap: `${site.url}/sitemap.xml`,
+    sitemap: `${siteConfig.url}/sitemap.xml`,
   };
 }

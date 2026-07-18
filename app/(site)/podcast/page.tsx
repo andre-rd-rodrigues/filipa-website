@@ -6,24 +6,25 @@ import { Eyebrow } from "@/components/eyebrow";
 import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { ButtonLink } from "@/components/button";
-import { episodes, platforms, type Episode } from "./data";
+import { getAllEpisodes, type Episode } from "@/lib/podcast";
+import { getPodcastPage } from "@/lib/pages";
 
-export const metadata: Metadata = {
-  title: "Podcast",
-  description:
-    "Conversas curtas sobre PNL, inteligência emocional e a mente de quem compete. Episódios práticos de coaching desportivo, em pt-PT, para atletas e treinadores.",
-  alternates: {
-    canonical: "/podcast",
-  },
-  openGraph: {
-    title: "Podcast",
-    description:
-      "Conversas curtas sobre PNL, inteligência emocional e a mente de quem compete. Episódios práticos de coaching desportivo, em pt-PT, para atletas e treinadores.",
-    type: "website",
-  },
-};
-
-const [featured, ...rest] = episodes.slice(0, 10);
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPodcastPage();
+  const description =
+    page.seo?.metaDescription ??
+    "Conversas curtas sobre PNL, inteligência emocional e a mente de quem compete. Episódios práticos de coaching desportivo, em pt-PT, para atletas e treinadores.";
+  return {
+    title: page.seo?.metaTitle ?? "Podcast",
+    description,
+    alternates: { canonical: "/podcast" },
+    openGraph: {
+      title: page.seo?.metaTitle ?? "Podcast",
+      description,
+      type: "website",
+    },
+  };
+}
 
 const platformIcons: Record<string, ReactNode> = {
   Spotify: (
@@ -114,69 +115,73 @@ function PlatformLinks({
   );
 }
 
-export default function PodcastPage() {
+export default async function PodcastPage() {
+  const [page, episodes] = await Promise.all([getPodcastPage(), getAllEpisodes()]);
+  const [featured, ...rest] = episodes;
+
   return (
     <>
       <PageHero
-        title="Podcast"
-        logo={{
-          src: "/img/podcast-invisivel.jpg",
-          alt: "Logótipo do podcast INVISÍVEL",
-        }}
+        title={page.heroTitle ?? "Podcast"}
+        logo={
+          page.heroLogo
+            ? { src: page.heroLogo.src, alt: page.heroLogo.alt }
+            : undefined
+        }
       />
 
       {/* Featured / latest episode */}
-      <Section tone="page">
-        <Reveal>
-          <Eyebrow className="mb-4">Último episódio</Eyebrow>
-        </Reveal>
+      {featured ? (
+        <Section tone="page">
+          <Reveal>
+            <Eyebrow className="mb-4">{page.featuredEyebrow}</Eyebrow>
+          </Reveal>
 
-        <Reveal
-          as="article"
-          className="grid items-center gap-8 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-14"
-        >
-          {/* Cover art */}
-          <EpisodeCover
-            episode={featured}
-            className="relative aspect-video overflow-hidden rounded-none bg-surface-muted"
-            imageProps={{
-              fill: true,
-              priority: true,
-              sizes: "(max-width: 1024px) 90vw, 22rem",
-            }}
-          />
+          <Reveal
+            as="article"
+            className="grid items-center gap-8 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-14"
+          >
+            <EpisodeCover
+              episode={featured}
+              className="relative aspect-video overflow-hidden rounded-none bg-surface-muted"
+              imageProps={{
+                fill: true,
+                priority: true,
+                sizes: "(max-width: 1024px) 90vw, 22rem",
+              }}
+            />
 
-          {/* Content */}
-          <div>
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.75rem] font-medium uppercase tracking-[0.14em] text-fg-muted">
-              <span className="text-action-deep">Episódio {featured.number}</span>
-              <span aria-hidden>·</span>
-              <span>{featured.date}</span>
-              <span aria-hidden>·</span>
-              <span>{featured.duration}</span>
+            <div>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.75rem] font-medium uppercase tracking-[0.14em] text-fg-muted">
+                <span className="text-action-deep">Episódio {featured.number}</span>
+                <span aria-hidden>·</span>
+                <span>{featured.date}</span>
+                <span aria-hidden>·</span>
+                <span>{featured.duration}</span>
+              </div>
+
+              <h2 className="font-display mt-4 text-balance text-[clamp(1.9rem,4vw,3rem)] leading-[1.1]">
+                {featured.title}
+              </h2>
+
+              <p className="text-pretty mt-4 max-w-xl text-lg leading-relaxed text-fg-muted">
+                {featured.description}
+              </p>
+
+              <div className="mt-7">
+                <PlatformLinks links={featured.links} />
+              </div>
             </div>
-
-            <h2 className="font-display mt-4 text-balance text-[clamp(1.9rem,4vw,3rem)] leading-[1.1]">
-              {featured.title}
-            </h2>
-
-            <p className="text-pretty mt-4 max-w-xl text-lg leading-relaxed text-fg-muted">
-              {featured.description}
-            </p>
-
-            <div className="mt-7">
-              <PlatformLinks links={featured.links} />
-            </div>
-          </div>
-        </Reveal>
-      </Section>
+          </Reveal>
+        </Section>
+      ) : null}
 
       {/* Episode list */}
       <Section tone="surface" id="episodios">
         <Reveal>
-          <Eyebrow className="mb-4">Mais episódios</Eyebrow>
+          <Eyebrow className="mb-4">{page.listEyebrow}</Eyebrow>
           <h2 className="font-display max-w-2xl text-balance text-[clamp(2rem,4vw,3.25rem)] leading-[1.1]">
-            Ferramentas para pensar, sentir e competir melhor.
+            {page.listTitle}
           </h2>
         </Reveal>
 
@@ -188,17 +193,12 @@ export default function PodcastPage() {
               delay={i * 70}
               className="grid gap-5 border-b border-[color:var(--border-stone)] py-8 sm:grid-cols-[10rem_1fr] sm:gap-8 sm:py-10"
             >
-              {/* Thumbnail */}
               <EpisodeCover
                 episode={episode}
                 className="relative aspect-video w-40 overflow-hidden rounded-none bg-surface-muted"
-                imageProps={{
-                  fill: true,
-                  sizes: "10rem",
-                }}
+                imageProps={{ fill: true, sizes: "10rem" }}
               />
 
-              {/* Content */}
               <div>
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.75rem] font-medium uppercase tracking-[0.14em] text-fg-muted">
                   <span className="text-action-deep">Episódio {episode.number}</span>
@@ -224,43 +224,44 @@ export default function PodcastPage() {
           ))}
         </div>
 
-        <Reveal className="mt-12 text-center">
-          <ButtonLink
-            href="https://open.spotify.com/show/4PQe3Vd4qeMBm8FIk1g1oy"
-            variant="secondary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Ver todos os episódios
-          </ButtonLink>
-        </Reveal>
+        {page.listCta ? (
+          <Reveal className="mt-12 text-center">
+            <ButtonLink
+              href={page.listCta.href}
+              variant="secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {page.listCta.label}
+            </ButtonLink>
+          </Reveal>
+        ) : null}
       </Section>
 
       {/* Subscribe band */}
       <Section tone="dark">
         <Reveal>
           <Eyebrow tone="dark" className="mb-4">
-            Todos os episódios
+            {page.subscribeEyebrow}
           </Eyebrow>
           <h2 className="font-display max-w-2xl text-balance text-[clamp(2rem,4vw,3.25rem)] leading-[1.1]">
-            Leva o teu treino mental para qualquer lugar
+            {page.subscribeTitle}
           </h2>
           <p className="text-pretty mt-5 max-w-xl text-lg leading-relaxed text-fg-inverse-muted">
-            Há novos episódios todas as semanas. Segue o podcast na tua aplicação
-            favorita e não percas o próximo passo para o teu desenvolvimento.
+            {page.subscribeBody}
           </p>
         </Reveal>
 
         <Reveal className="mt-9">
           <ul className="flex flex-wrap gap-3">
-            {platforms.map((platform) => (
-              <li key={platform.name}>
+            {(page.platforms ?? []).map((platform) => (
+              <li key={platform.platform}>
                 <a
                   href={platform.href}
                   className="inline-flex items-center gap-2.5 rounded-none border-[1.5px] border-white/25 px-6 py-3 text-sm font-medium uppercase tracking-[0.06em] text-fg-inverse transition-colors duration-200 hover:border-action hover:text-action"
                 >
-                  {platformIcons[platform.name]}
-                  {platform.name}
+                  {platformIcons[platform.platform]}
+                  {platform.platform}
                 </a>
               </li>
             ))}

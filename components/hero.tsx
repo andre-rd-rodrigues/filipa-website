@@ -26,7 +26,20 @@ const useIsomorphicLayoutEffect =
  * JS + `prefers-reduced-motion: no-preference`; content stays fully visible if
  * the timeline never runs, and the backdrop word falls back to static.
  */
-export function Hero() {
+type HeroCta = { label: string; href: string; variant: "primary" | "secondary" };
+
+export function Hero({
+  backdropWord = "Desporto Coaching",
+  eyebrow = ["Coaching", "PNL", "Desporto"],
+  ctas = [
+    { label: "Marcar conversa", href: "/contactos", variant: "primary" },
+    { label: "Conhecer serviços", href: "/servicos", variant: "secondary" },
+  ],
+}: {
+  backdropWord?: string;
+  eyebrow?: string[];
+  ctas?: HeroCta[];
+} = {}) {
   const root = useRef<HTMLElement | null>(null);
   // Only mount the smoke video on tablet/desktop, so phones never download the
   // ~9.6 MB asset (CSS `hidden` would still fetch it).
@@ -178,7 +191,7 @@ export function Hero() {
                 <div key={group} className="flex shrink-0">
                   {Array.from({ length: 4 }).map((_, i) => (
                     <span key={i} className="whitespace-nowrap pr-[0.4em]">
-                      Desporto Coaching
+                      {backdropWord}
                     </span>
                   ))}
                 </div>
@@ -224,23 +237,30 @@ export function Hero() {
             data-anim="fade"
             className="eyebrow mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-fg-inverse-muted"
           >
-            <span>Coaching</span>
-            <span aria-hidden className="size-1.5 shrink-0 bg-action" />
-            <span>PNL</span>
-            <span aria-hidden className="size-1.5 shrink-0 bg-action" />
-            <span>Desporto</span>
+            {eyebrow.map((word, i) => (
+              <span key={word} className="contents">
+                {i > 0 ? (
+                  <span aria-hidden className="size-1.5 shrink-0 bg-action" />
+                ) : null}
+                <span>{word}</span>
+              </span>
+            ))}
           </p>
 
           <div
             data-anim="fade"
             className="mt-9 flex w-full max-w-sm flex-col gap-4 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center"
           >
-            <ButtonLink href="/contactos" variant="primary" className="w-full sm:w-auto">
-              Marcar conversa
-            </ButtonLink>
-            <ButtonLink href="/servicos" variant="secondary-dark" className="w-full sm:w-auto">
-              Conhecer serviços
-            </ButtonLink>
+            {ctas.map((cta) => (
+              <ButtonLink
+                key={cta.label}
+                href={cta.href}
+                variant={cta.variant === "primary" ? "primary" : "secondary-dark"}
+                className="w-full sm:w-auto"
+              >
+                {cta.label}
+              </ButtonLink>
+            ))}
           </div>
         </div>
       </div>
