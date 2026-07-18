@@ -112,7 +112,7 @@ export function StatsStrip({ items }: { items: Stat[] }) {
       {items.map((item) => (
         <div
           key={item.label}
-          className="flex flex-col gap-4 border-b border-ink-line py-10 last:border-b-0 sm:border-b-0 sm:border-l sm:px-8 sm:py-2 sm:first:border-l-0 sm:first:pl-0 lg:px-12"
+          className="flex flex-col gap-4 border-b border-ink-line py-10 text-center last:border-b-0 sm:border-b-0 sm:border-l sm:px-8 sm:py-2 sm:text-left sm:first:border-l-0 sm:first:pl-0 lg:px-12"
         >
           <dt>
             <StatNumber value={item.value} suffix={item.suffix} />
@@ -121,12 +121,12 @@ export function StatsStrip({ items }: { items: Stat[] }) {
             </span>
           </dt>
           <dd className="m-0 flex flex-1 flex-col">
-            <p className="text-pretty max-w-xs leading-relaxed text-fg-inverse-muted">
+            <p className="text-pretty mx-auto max-w-xs leading-relaxed text-fg-inverse-muted sm:mx-0">
               {item.description}
             </p>
             <Link
               href={item.cta.href}
-              className="group mt-6 inline-flex items-center gap-2 self-start font-body text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-action-deep underline-offset-4 hover:text-action-hover hover:underline"
+              className="group mt-6 inline-flex items-center gap-2 self-center font-body text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-action-deep underline-offset-4 hover:text-action-hover hover:underline sm:self-start"
             >
               {item.cta.label}
               <Arrow />

@@ -44,7 +44,7 @@ export function youTubeThumbnail(
 
 export const episodes: Episode[] = [
   {
-    number: 1,
+    number: 60,
     title: "O que é afinal o treino mental… e porque não funcionou?",
     description:
       "Há atletas que acreditam que o treino mental não funciona. Mas será mesmo essa a conclusão correta? Na maioria dos casos, aquilo a que chamam «treino mental» resume-se a uma sessão, uma conversa ou uma técnica aprendida num momento de dificuldade. Só que conhecer uma ferramenta não significa que o cérebro a consegue usar quando a pressão aumenta.",
@@ -60,7 +60,7 @@ export const episodes: Episode[] = [
     },
   },
   {
-    number: 2,
+    number: 59,
     title: "O que o atleta não está a dizer — e porquê",
     description:
       "«Estou bem.» Muitos atletas dizem isto antes sequer de pensarem na resposta. Sai rápido, sai treinado, sai como proteção. Porque no desporto aprende-se cedo que mostrar o que pesa pode parecer risco: risco de perder estatuto, confiança, lugar ou respeito. Mas há um custo oculto.",
@@ -76,7 +76,7 @@ export const episodes: Episode[] = [
     },
   },
   {
-    number: 3,
+    number: 58,
     title: "A solidão do capitão — o preço oculto do brilho",
     description:
       "A braçadeira de capitão tem um peso que nem sempre se vê. O público vê liderança, o balneário vê estabilidade, a direção vê referência e a equipa técnica vê uma extensão do treinador. Mas poucas pessoas veem o peso invisível que o capitão carrega.",
@@ -92,7 +92,7 @@ export const episodes: Episode[] = [
     },
   },
   {
-    number: 4,
+    number: 57,
     title: "Geração Z no desporto — o que ninguém entende",
     description:
       "A Geração Z não chegou ao desporto com menos coragem. Chegou com outro sistema de processamento: cresceu com estímulo constante, feedback imediato, acesso rápido à informação e uma relação diferente com a autoridade, o fracasso e a identidade.",
@@ -108,7 +108,7 @@ export const episodes: Episode[] = [
     },
   },
   {
-    number: 5,
+    number: 56,
     title: "A coragem de escolheres os teus valores (com João Nunes)",
     description:
       "Por trás de um atleta há sempre muito mais do que aquilo que se vê. Neste episódio converso com João Nunes, defesa-central de futebol com um percurso sólido construído entre a formação nacional, clubes de referência e uma carreira cada vez mais consistente.",
@@ -124,7 +124,7 @@ export const episodes: Episode[] = [
     },
   },
   {
-    number: 6,
+    number: 55,
     title: "A época acaba e tu não sabes desligar?",
     description:
       "Há atletas que param de treinar… mas não param por dentro. Chegam as férias, o calendário esvazia, o treino formal acaba e, mesmo assim, o corpo continua em alerta, a cabeça continua em missão e o descanso não acontece verdadeiramente.",
@@ -140,7 +140,7 @@ export const episodes: Episode[] = [
     },
   },
   {
-    number: 7,
+    number: 54,
     title: "A ressaca emocional: o que fazer quando a época acaba",
     description:
       "A época acaba, mas nem tudo acaba com ela. Independentemente de como terminou, há uma coisa que muitos atletas sentem e quase ninguém fala: o vazio. Neste episódio falo sobre a ressaca emocional que muitos atletas vivem no final da temporada.",
@@ -156,7 +156,7 @@ export const episodes: Episode[] = [
     },
   },
   {
-    number: 8,
+    number: 53,
     title: "O impacto do diálogo interno: treina a tua voz interior",
     description:
       "O atleta não compete apenas contra o adversário ou contra o cronómetro. Em cada segundo, compete contra a forma como fala consigo próprio. Neste episódio despimos a tática e entramos na conversa interna que define muito do que acontece em campo.",
@@ -172,7 +172,7 @@ export const episodes: Episode[] = [
     },
   },
   {
-    number: 9,
+    number: 52,
     title: "Quando ficar frio parece proteção",
     description:
       "Há atletas que não deixaram de sentir. Só aprenderam, muito cedo ou muito à força, a esconder aquilo que sentem. Neste episódio falo sobre o que acontece quando um atleta se habitua a desligar emocionalmente para sobreviver.",
@@ -188,7 +188,7 @@ export const episodes: Episode[] = [
     },
   },
   {
-    number: 10,
+    number: 51,
     title: "Já não falta nada, mas falta tudo",
     description:
       "Há atletas que treinam, competem, aparecem e cumprem. Por fora, até pode parecer que está tudo mais ou menos em ordem. Mas por dentro já não se sentem da mesma maneira: já não sentem a mesma leveza, a mesma energia, o mesmo entusiasmo.",

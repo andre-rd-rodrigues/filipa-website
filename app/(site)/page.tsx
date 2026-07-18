@@ -164,7 +164,7 @@ export default async function Home() {
           {latestEpisodes.map((episode, i) => (
             <Reveal key={episode.number} as="article" delay={i * 70}>
               <Link href="/podcast" className="group block">
-                <div className="relative aspect-square overflow-hidden bg-surface-muted">
+                <div className="relative aspect-video w-full overflow-hidden bg-surface-muted">
                   <Image
                     src={episode.coverImage.src}
                     alt={episode.coverImage.alt}

@@ -216,7 +216,7 @@ export default function PodcastPage() {
                   {episode.description}
                 </p>
 
-                <div className="mt-5">
+                <div className="mt-5 flex justify-end sm:justify-start">
                   <PlatformLinks links={episode.links} />
                 </div>
               </div>
