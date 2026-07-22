@@ -74,6 +74,7 @@ export function NewsletterForm({
   const [errors, setErrors] = useState<FieldErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const isDark = variant === "dark";
   const fieldId = (name: keyof FormState) => `${uid}-${name}`;
@@ -123,18 +124,36 @@ export function NewsletterForm({
     return next;
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const nextErrors = validate(values);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: values.email,
+          consentimento: values.consentimento,
+        }),
+      });
+      if (!res.ok) throw new Error("request failed");
       setIsSent(true);
       setValues(initialState);
-    }, 600);
+    } catch {
+      setSubmitError(
+        "Não consegui completar a inscrição. Tenta novamente dentro de momentos.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -247,6 +266,12 @@ export function NewsletterForm({
               </p>
             ) : null}
           </div>
+
+          {submitError ? (
+            <p role="alert" className="mt-5 text-sm text-error">
+              {submitError}
+            </p>
+          ) : null}
         </form>
       )}
     </div>
