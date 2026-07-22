@@ -177,16 +177,41 @@ export function NewsletterForm({
         <div
           role="status"
           aria-live="polite"
-          className={title || description ? "mt-8" : undefined}
+          className={`rounded-none border border-success/60 bg-success/10 p-6 ${
+            title || description ? "mt-8" : ""
+          }`}
         >
-          <p
-            className={`font-body text-[1.0625rem] font-semibold tracking-[-0.01em] ${titleClass}`}
-          >
-            Estás na lista!
-          </p>
-          <p className={`text-pretty mt-2 text-[0.9375rem] leading-relaxed ${descClass}`}>
-            Obrigada por te inscreveres. Recebes novidades em breve, sem spam.
-          </p>
+          <div className="flex items-start gap-3">
+            <span
+              aria-hidden
+              className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-none bg-success/15 text-success"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+            </span>
+            <div>
+              <p className="font-body text-[1.0625rem] font-semibold tracking-[-0.01em] text-success">
+                Obrigado pela inscrição!
+              </p>
+              <p
+                className={`text-pretty mt-2 text-[0.9375rem] leading-relaxed ${descClass}`}
+              >
+                Falta só um passo: vê a tua caixa de entrada e carrega no botão
+                de confirmação para ficares oficialmente na lista. Se não
+                aparecer já, espreita a pasta de spam.
+              </p>
+            </div>
+          </div>
         </div>
       ) : (
         <form
