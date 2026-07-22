@@ -72,8 +72,13 @@ export async function POST(request: Request) {
   try {
     // Kit v4 is a two-step flow: upsert the subscriber, then add to the form.
     // The subscriber must already exist before it can be added to a form.
+    // `state: "inactive"` keeps them unconfirmed so the form's double opt-in
+    // confirmation email gates the subscription (they become active only after
+    // clicking the link). Requires the form's confirmation email to be enabled
+    // with "Auto-confirm new subscribers" left unchecked in the Kit dashboard.
     const createRes = await kitFetch("/subscribers", apiKey, {
       email_address: email,
+      state: "inactive",
     });
 
     if (!createRes.ok) {
