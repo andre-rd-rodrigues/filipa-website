@@ -52,11 +52,13 @@ export default async function ServicosPage() {
             </p>
           </Reveal>
 
-          {page.introImage ? (
-            <Reveal delay={80}>
-              <EditorialImage src={page.introImage.src} alt={page.introImage.alt} priority />
-            </Reveal>
-          ) : null}
+          <Reveal delay={80}>
+            <EditorialImage
+              src="/img/profile-bola.webp"
+              alt="Filipa Marques a segurar uma bola de futebol"
+              priority
+            />
+          </Reveal>
         </div>
 
         <div className="mt-14 border-t border-[color:var(--border-stone)]">
@@ -129,15 +131,13 @@ export default async function ServicosPage() {
         </Reveal>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16">
-          {page.audiencesImage ? (
-            <Reveal>
-              <EditorialImage
-                src={page.audiencesImage.src}
-                alt={page.audiencesImage.alt}
-                sizes="(max-width: 1024px) 90vw, 38vw"
-              />
-            </Reveal>
-          ) : null}
+          <Reveal>
+            <EditorialImage
+              src="/img/profile-blazer-branco.webp"
+              alt="Filipa Marques de blazer branco, pose pensativa"
+              sizes="(max-width: 1024px) 90vw, 38vw"
+            />
+          </Reveal>
 
           <Reveal delay={80} className="space-y-8">
             {(page.audiences ?? []).map((aud) => (
@@ -171,15 +171,13 @@ export default async function ServicosPage() {
       {/* Final CTA */}
       <Section tone="ink">
         <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          {page.ctaImage ? (
-            <Reveal>
-              <EditorialImage
-                src={page.ctaImage.src}
-                alt={page.ctaImage.alt}
-                sizes="(max-width: 1024px) 90vw, 34vw"
-              />
-            </Reveal>
-          ) : null}
+          <Reveal>
+            <EditorialImage
+              src="/img/profile-escritorio.webp"
+              alt="Filipa Marques à secretária, de blazer azul"
+              sizes="(max-width: 1024px) 90vw, 34vw"
+            />
+          </Reveal>
 
           <Reveal delay={80}>
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
