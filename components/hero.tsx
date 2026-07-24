@@ -205,10 +205,10 @@ export function Hero({
             className="relative z-[var(--z-raised)] w-full max-w-[28rem] sm:max-w-[32rem] lg:max-w-[36rem]"
           >
             <Image
-              src="/img/profile.png"
+              src="/img/profile.webp"
               alt="Filipa Marques sentada, a segurar uma bola de futebol"
-              width={3000}
-              height={3750}
+              width={1493}
+              height={1600}
               priority
               sizes="(max-width: 640px) 90vw, (max-width: 1024px) 32rem, 36rem"
               className="h-auto w-full"

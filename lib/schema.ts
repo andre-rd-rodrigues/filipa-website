@@ -143,7 +143,7 @@ export function buildPersonSchema(settings: SiteSettings): JsonLdData {
     name: settings.name,
     jobTitle: settings.tagline,
     url: `${siteConfig.url}/sobre`,
-    image: `${siteConfig.url}/img/profile-1.jpg`,
+    image: `${siteConfig.url}/img/profile-1.webp`,
     sameAs: settings.socials.map((s) => s.href),
     worksFor: {
       "@type": "Organization",

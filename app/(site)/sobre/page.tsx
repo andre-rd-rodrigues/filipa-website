@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: about.seo?.metaTitle ?? "Sobre mim",
       description,
       type: "profile",
-      images: [{ url: about.portrait?.src ?? "/img/profile-1.jpg" }],
+      images: [{ url: about.portrait?.src ?? "/img/profile-1.webp" }],
     },
   };
 }
