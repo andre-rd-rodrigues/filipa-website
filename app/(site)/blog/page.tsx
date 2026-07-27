@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = await getBlogPage();
   const description =
     page.seo?.metaDescription ??
-    "Artigos sobre coaching, PNL, inteligência emocional e comunicação no desporto. Ferramentas práticas para pensar, sentir e agir melhor.";
+    "Artigos sobre coaching, PNL, gestão emocional e comunicação no desporto. Ferramentas práticas para pensar, sentir e agir melhor.";
   return {
     title: page.seo?.metaTitle ?? "Blog",
     description,

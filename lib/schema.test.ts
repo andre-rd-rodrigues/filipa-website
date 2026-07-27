@@ -42,6 +42,13 @@ describe("schema builders", () => {
     expect(schema.name).toBe(settings.name);
     expect(schema.url).toBe(`${siteConfig.url}/sobre`);
     expect(Array.isArray(schema.sameAs)).toBe(true);
+    expect(schema.image).toBeUndefined();
+  });
+
+  it("buildPersonSchema includes image when provided", () => {
+    const imageUrl = "https://cdn.sanity.io/images/example/portrait.webp";
+    const schema = buildPersonSchema(settings, imageUrl);
+    expect(schema.image).toBe(imageUrl);
   });
 
   it("buildCourseSchema encodes the course url and provider", () => {

@@ -18,7 +18,6 @@ export const podcastPage = defineType({
     // Lista
     defineField({ name: "listEyebrow", title: "Etiqueta", type: "string", group: "lista" }),
     defineField({ name: "listTitle", title: "Título", type: "text", rows: 2, group: "lista" }),
-    defineField({ name: "listCta", title: "Botão (ver todos)", type: "cta", group: "lista" }),
     // Subscrever
     defineField({ name: "subscribeEyebrow", title: "Etiqueta", type: "string", group: "subscrever" }),
     defineField({ name: "subscribeTitle", title: "Título", type: "text", rows: 2, group: "subscrever" }),

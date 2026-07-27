@@ -21,6 +21,7 @@ export type HomePage = {
   heroBackdropWord?: string;
   heroEyebrow?: string[];
   heroCtas?: Cta[];
+  heroPortrait?: Img;
   methodEyebrow?: string;
   methodTitle?: string;
   methodParagraphs?: string[];
@@ -49,7 +50,7 @@ export type HomePage = {
 export const getHomePage = cache(async (): Promise<HomePage> => {
   return (
     (await sanityFetch<HomePage | null>(`*[_type == "homePage"][0]{
-      heroBackdropWord, heroEyebrow, heroCtas[]${CTA},
+      heroBackdropWord, heroEyebrow, heroCtas[]${CTA}, ${IMG("heroPortrait")},
       methodEyebrow, methodTitle, methodParagraphs, methodCta${CTA},
       "methodImages": methodImages[]{ "src": asset->url, "alt": alt },
       servicesEyebrow, servicesTitle,
@@ -193,7 +194,6 @@ export type PodcastPage = {
   featuredEyebrow?: string;
   listEyebrow?: string;
   listTitle?: string;
-  listCta?: Cta;
   subscribeEyebrow?: string;
   subscribeTitle?: string;
   subscribeBody?: string;
@@ -205,7 +205,7 @@ export const getPodcastPage = cache(async (): Promise<PodcastPage> => {
   return (
     (await sanityFetch<PodcastPage | null>(`*[_type == "podcastPage"][0]{
       heroTitle, ${IMG("heroLogo")}, featuredEyebrow,
-      listEyebrow, listTitle, listCta${CTA},
+      listEyebrow, listTitle,
       subscribeEyebrow, subscribeTitle, subscribeBody,
       platforms[]{ platform, href },
       ${SEO}

@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = await getCoursesPage();
   const description =
     page.seo?.metaDescription ??
-    "Cursos de PNL, inteligência emocional e comunicação aplicados ao desporto. Formação prática para atletas, treinadores e profissionais que querem agir.";
+    "Cursos de PNL, gestão emocional e comunicação aplicados ao desporto. Formação prática para atletas, treinadores e profissionais que querem agir.";
   return {
     title: page.seo?.metaTitle ?? "Cursos",
     description,

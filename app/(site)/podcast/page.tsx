@@ -5,7 +5,6 @@ import { Section } from "@/components/section";
 import { Eyebrow } from "@/components/eyebrow";
 import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
-import { ButtonLink } from "@/components/button";
 import { getAllEpisodes, type Episode } from "@/lib/podcast";
 import { getPodcastPage } from "@/lib/pages";
 
@@ -13,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = await getPodcastPage();
   const description =
     page.seo?.metaDescription ??
-    "Conversas curtas sobre PNL, inteligência emocional e a mente de quem compete. Episódios práticos de coaching desportivo, em pt-PT, para atletas e treinadores.";
+    "Conversas curtas sobre PNL, gestão emocional e a mente de quem compete. Episódios práticos de coaching desportivo, em pt-PT, para atletas e treinadores.";
   return {
     title: page.seo?.metaTitle ?? "Podcast",
     description,
@@ -223,19 +222,6 @@ export default async function PodcastPage() {
             </Reveal>
           ))}
         </div>
-
-        {page.listCta ? (
-          <Reveal className="mt-12 text-center">
-            <ButtonLink
-              href={page.listCta.href}
-              variant="secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {page.listCta.label}
-            </ButtonLink>
-          </Reveal>
-        ) : null}
       </Section>
 
       {/* Subscribe band */}

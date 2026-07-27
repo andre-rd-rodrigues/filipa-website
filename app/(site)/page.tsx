@@ -45,6 +45,7 @@ export default async function Home() {
         backdropWord={home.heroBackdropWord}
         eyebrow={home.heroEyebrow}
         ctas={home.heroCtas}
+        portrait={home.heroPortrait}
       />
 
       {/* Trust band — dimmed club logos (mocked) */}

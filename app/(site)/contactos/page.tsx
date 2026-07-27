@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = await getContactPage();
   const description =
     page.seo?.metaDescription ??
-    "Marca uma conversa com a Filipa Marques. Coaching, PNL e inteligência emocional para o desporto: por telefone, email ou formulário. Respondo em breve.";
+    "Marca uma conversa comigo. Coaching, PNL e gestão emocional para o desporto: por telefone, email ou formulário. Respondo em breve.";
   return {
     title: page.seo?.metaTitle ?? "Contactos",
     description,

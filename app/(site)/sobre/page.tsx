@@ -14,6 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     about.seo?.metaDescription ??
     "Conhece a Filipa Marques: mental coach e coach de PNL, especializada em Psicologia do Desporto. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.";
+  const ogImage = about.seo?.ogImage?.src ?? about.portrait?.src;
   return {
     title: about.seo?.metaTitle ?? "Sobre mim",
     description,
@@ -22,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: about.seo?.metaTitle ?? "Sobre mim",
       description,
       type: "profile",
-      images: [{ url: about.portrait?.src ?? "/img/profile-1.webp" }],
+      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
     },
   };
 }
@@ -35,7 +36,7 @@ export default async function SobrePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildPersonSchema(site)),
+          __html: JSON.stringify(buildPersonSchema(site, about.portrait?.src)),
         }}
       />
       <PageHero title={about.heroTitle ?? "Sobre mim"} />

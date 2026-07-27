@@ -136,14 +136,17 @@ export function buildFaqSchema(faq: FaqItem[]): JsonLdData {
 }
 
 /** Person schema for Filipa Marques (about page). */
-export function buildPersonSchema(settings: SiteSettings): JsonLdData {
+export function buildPersonSchema(
+  settings: SiteSettings,
+  imageUrl?: string,
+): JsonLdData {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
     name: settings.name,
     jobTitle: settings.tagline,
     url: `${siteConfig.url}/sobre`,
-    image: `${siteConfig.url}/img/profile-1.webp`,
+    ...(imageUrl ? { image: imageUrl } : {}),
     sameAs: settings.socials.map((s) => s.href),
     worksFor: {
       "@type": "Organization",

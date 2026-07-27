@@ -27,6 +27,7 @@ const useIsomorphicLayoutEffect =
  * the timeline never runs, and the backdrop word falls back to static.
  */
 type HeroCta = { label: string; href: string; variant: "primary" | "secondary" };
+type HeroPortrait = { src: string; alt: string };
 
 export function Hero({
   backdropWord = "Desporto Coaching",
@@ -35,10 +36,12 @@ export function Hero({
     { label: "Marcar conversa", href: "/contactos", variant: "primary" },
     { label: "Conhecer serviços", href: "/servicos", variant: "secondary" },
   ],
+  portrait,
 }: {
   backdropWord?: string;
   eyebrow?: string[];
   ctas?: HeroCta[];
+  portrait?: HeroPortrait;
 } = {}) {
   const root = useRef<HTMLElement | null>(null);
   // Only mount the smoke video on tablet/desktop, so phones never download the
@@ -200,20 +203,22 @@ export function Hero({
           </div>
 
           {/* Cutout portrait — revealed with a clip-path wipe */}
-          <div
-            data-anim="cover"
-            className="relative z-[var(--z-raised)] w-full max-w-[28rem] sm:max-w-[32rem] lg:max-w-[36rem]"
-          >
-            <Image
-              src="/img/profile.webp"
-              alt="Filipa Marques sentada, a segurar uma bola de futebol"
-              width={1493}
-              height={1600}
-              priority
-              sizes="(max-width: 640px) 90vw, (max-width: 1024px) 32rem, 36rem"
-              className="h-auto w-full"
-            />
-          </div>
+          {portrait ? (
+            <div
+              data-anim="cover"
+              className="relative z-[var(--z-raised)] w-full max-w-[28rem] sm:max-w-[32rem] lg:max-w-[36rem]"
+            >
+              <Image
+                src={portrait.src}
+                alt={portrait.alt}
+                width={1493}
+                height={1600}
+                priority
+                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 32rem, 36rem"
+                className="h-auto w-full"
+              />
+            </div>
+          ) : null}
         </div>
 
         {/* Name, subtitle, CTAs */}

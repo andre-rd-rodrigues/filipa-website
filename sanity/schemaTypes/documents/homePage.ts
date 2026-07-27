@@ -40,6 +40,13 @@ export const homePage = defineType({
       of: [{ type: "cta" }],
       group: "hero",
     }),
+    defineField({
+      name: "heroPortrait",
+      title: "Retrato do destaque",
+      type: "figure",
+      description: "Fotografia cutout no centro do hero.",
+      group: "hero",
+    }),
     // Método (layered showcase)
     defineField({ name: "methodEyebrow", title: "Etiqueta", type: "string", group: "metodo" }),
     defineField({ name: "methodTitle", title: "Título", type: "text", rows: 3, group: "metodo" }),

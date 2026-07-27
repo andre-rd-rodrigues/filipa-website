@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = await getServicesPage();
   const description =
     page.seo?.metaDescription ??
-    "Coaching individual, coaching de equipas, inteligência emocional e PNL aplicados ao desporto. Serviços que ligam a mente aos teus resultados.";
+    "Coaching individual, coaching de equipas, gestão emocional e PNL aplicados ao desporto. Serviços que ligam a mente aos teus resultados.";
   return {
     title: page.seo?.metaTitle ?? "Serviços",
     description,
@@ -53,11 +53,13 @@ export default async function ServicosPage() {
           </Reveal>
 
           <Reveal delay={80}>
-            <EditorialImage
-              src="/img/profile-bola.webp"
-              alt="Filipa Marques a segurar uma bola de futebol"
-              priority
-            />
+            {page.introImage ? (
+              <EditorialImage
+                src={page.introImage.src}
+                alt={page.introImage.alt}
+                priority
+              />
+            ) : null}
           </Reveal>
         </div>
 
@@ -132,11 +134,13 @@ export default async function ServicosPage() {
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16">
           <Reveal>
-            <EditorialImage
-              src="/img/profile-blazer-branco.webp"
-              alt="Filipa Marques de blazer branco, pose pensativa"
-              sizes="(max-width: 1024px) 90vw, 38vw"
-            />
+            {page.audiencesImage ? (
+              <EditorialImage
+                src={page.audiencesImage.src}
+                alt={page.audiencesImage.alt}
+                sizes="(max-width: 1024px) 90vw, 38vw"
+              />
+            ) : null}
           </Reveal>
 
           <Reveal delay={80} className="space-y-8">
@@ -172,11 +176,13 @@ export default async function ServicosPage() {
       <Section tone="ink">
         <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <Reveal>
-            <EditorialImage
-              src="/img/profile-escritorio.webp"
-              alt="Filipa Marques à secretária, de blazer azul"
-              sizes="(max-width: 1024px) 90vw, 34vw"
-            />
+            {page.ctaImage ? (
+              <EditorialImage
+                src={page.ctaImage.src}
+                alt={page.ctaImage.alt}
+                sizes="(max-width: 1024px) 90vw, 34vw"
+              />
+            ) : null}
           </Reveal>
 
           <Reveal delay={80}>
