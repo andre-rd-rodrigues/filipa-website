@@ -8,13 +8,13 @@ import { EditorialImage } from "@/components/editorial-image";
 import { getSiteSettings } from "@/lib/settings";
 import { getAboutPage } from "@/lib/pages";
 import { buildPersonSchema } from "@/lib/schema";
+import { resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   const about = await getAboutPage();
   const description =
     about.seo?.metaDescription ??
     "Conhece a Filipa Marques: mental coach e coach de PNL, especializada em Psicologia do Desporto. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.";
-  const ogImage = about.seo?.ogImage?.src ?? about.portrait?.src;
   return {
     title: about.seo?.metaTitle ?? "Sobre mim",
     description,
@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: about.seo?.metaTitle ?? "Sobre mim",
       description,
       type: "profile",
-      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
+      images: resolveOgImages(about.seo?.ogImage?.src),
     },
   };
 }

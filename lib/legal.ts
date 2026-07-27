@@ -18,7 +18,11 @@ export type LegalPage = {
   lastUpdated?: string;
   body: PortableTextBlock[];
   cookies?: CookieRow[];
-  seo?: { metaTitle?: string; metaDescription?: string };
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    ogImage?: { src: string; alt: string };
+  };
 };
 
 export async function getLegalPage(slug: string): Promise<LegalPage | null> {
@@ -29,7 +33,11 @@ export async function getLegalPage(slug: string): Promise<LegalPage | null> {
       lastUpdated,
       body,
       cookies[]{ name, provider, purpose, duration },
-      "seo": seo{ metaTitle, metaDescription }
+      "seo": seo{
+        metaTitle,
+        metaDescription,
+        "ogImage": ogImage{ "src": asset->url, "alt": alt }
+      }
     }`,
     { slug },
   );

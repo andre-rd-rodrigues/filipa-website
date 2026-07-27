@@ -9,7 +9,7 @@ import { PageHero } from "@/components/page-hero";
 import { getAllServices, getServiceBySlug } from "@/lib/services";
 import { buildServiceSchema } from "@/lib/schema";
 import { getSiteSettings } from "@/lib/settings";
-import { primaryCta } from "@/lib/site";
+import { primaryCta, resolveOgImages } from "@/lib/site";
 
 // All slugs are known at build time (mock today, Sanity later). Unknown slugs
 // 404 rather than rendering on demand.
@@ -35,7 +35,7 @@ export async function generateMetadata(props: PageProps<"/servicos/[slug]">) {
       title: service.title,
       description: service.summary,
       type: "website",
-      images: [{ url: service.image.src }],
+      images: resolveOgImages(),
     },
   };
 }

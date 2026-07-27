@@ -4,6 +4,7 @@ import { Section } from "@/components/section";
 import { PageHero } from "@/components/page-hero";
 import { LegalContent } from "@/components/legal-content";
 import { getLegalPage } from "@/lib/legal";
+import { resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getLegalPage("termos");
@@ -18,6 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: page?.seo?.metaTitle ?? page?.title ?? "Termos e Condições",
       description,
       type: "website",
+      images: resolveOgImages(page?.seo?.ogImage?.src),
     },
   };
 }

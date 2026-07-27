@@ -16,6 +16,7 @@ import { getSiteSettings } from "@/lib/settings";
 import { getHomePage } from "@/lib/pages";
 import { getLatestPosts, formatPostDate } from "@/lib/blog";
 import { getLatestEpisodes } from "@/lib/podcast";
+import { resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [site, home] = await Promise.all([getSiteSettings(), getHomePage()]);
@@ -25,6 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: home.seo?.metaTitle ?? `${site.name} | ${site.tagline}`,
       description: home.seo?.metaDescription ?? site.description,
       type: "website",
+      images: resolveOgImages(home.seo?.ogImage?.src),
     },
   };
 }

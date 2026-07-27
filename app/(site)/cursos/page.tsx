@@ -10,6 +10,7 @@ import { PageHero } from "@/components/page-hero";
 import { getAllCourses, getUpcomingSessions } from "@/lib/courses";
 import { getCoursesPage } from "@/lib/pages";
 import { CourseCalendar } from "@/components/course-calendar";
+import { resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getCoursesPage();
@@ -24,6 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: page.seo?.metaTitle ?? "Cursos",
       description,
       type: "website",
+      images: resolveOgImages(page.seo?.ogImage?.src),
     },
   };
 }

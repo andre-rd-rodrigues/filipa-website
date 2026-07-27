@@ -9,6 +9,7 @@ import { EditorialImage } from "@/components/editorial-image";
 import { getSiteSettings } from "@/lib/settings";
 import { getContactPage } from "@/lib/pages";
 import { ContactForm } from "./contact-form";
+import { resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getContactPage();
@@ -23,6 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: page.seo?.metaTitle ?? "Contactos",
       description,
       type: "website",
+      images: resolveOgImages(page.seo?.ogImage?.src),
     },
   };
 }

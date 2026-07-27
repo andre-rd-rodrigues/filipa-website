@@ -7,6 +7,7 @@ import { ButtonLink } from "@/components/button";
 import { BlogExplorer } from "@/components/blog-explorer";
 import { getAllPosts, getAllCategories } from "@/lib/blog";
 import { getBlogPage } from "@/lib/pages";
+import { resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getBlogPage();
@@ -21,6 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: page.seo?.metaTitle ?? "Blog",
       description,
       type: "website",
+      images: resolveOgImages(page.seo?.ogImage?.src),
     },
   };
 }

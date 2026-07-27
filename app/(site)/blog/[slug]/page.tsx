@@ -12,7 +12,7 @@ import {
   type BlogPost,
 } from "@/lib/blog";
 import { getSiteSettings } from "@/lib/settings";
-import { primaryCta } from "@/lib/site";
+import { primaryCta, resolveOgImages } from "@/lib/site";
 import { buildBlogPostingSchema, buildFaqSchema } from "@/lib/schema";
 
 // All slugs are known at build time. Unknown slugs 404 rather than rendering.
@@ -40,7 +40,7 @@ export async function generateMetadata(props: PageProps<"/blog/[slug]">) {
       description: post.excerpt,
       type: "article",
       publishedTime: post.publishedAt,
-      images: [{ url: post.coverImage.src }],
+      images: resolveOgImages(),
     },
   };
 }

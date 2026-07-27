@@ -10,6 +10,7 @@ import { EditorialImage } from "@/components/editorial-image";
 import { getSiteSettings } from "@/lib/settings";
 import { getServicesPage } from "@/lib/pages";
 import { getAllServices } from "@/lib/services";
+import { resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getServicesPage();
@@ -24,6 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: page.seo?.metaTitle ?? "Serviços",
       description,
       type: "website",
+      images: resolveOgImages(page.seo?.ogImage?.src),
     },
   };
 }

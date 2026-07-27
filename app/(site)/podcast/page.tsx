@@ -7,6 +7,7 @@ import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { getAllEpisodes, type Episode } from "@/lib/podcast";
 import { getPodcastPage } from "@/lib/pages";
+import { resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPodcastPage();
@@ -21,6 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: page.seo?.metaTitle ?? "Podcast",
       description,
       type: "website",
+      images: resolveOgImages(page.seo?.ogImage?.src),
     },
   };
 }
