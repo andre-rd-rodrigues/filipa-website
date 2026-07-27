@@ -9,23 +9,25 @@ import { EditorialImage } from "@/components/editorial-image";
 import { getSiteSettings } from "@/lib/settings";
 import { getContactPage } from "@/lib/pages";
 import { ContactForm } from "./contact-form";
-import { resolveOgImages } from "@/lib/site";
+import { buildOpenGraph, resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const page = await getContactPage();
+  const [site, page] = await Promise.all([getSiteSettings(), getContactPage()]);
+  const title = page.seo?.metaTitle ?? "Contactos";
   const description =
     page.seo?.metaDescription ??
     "Marca uma conversa comigo. Coaching, PNL e gestão emocional para o desporto: por telefone, email ou formulário. Respondo em breve.";
   return {
-    title: page.seo?.metaTitle ?? "Contactos",
+    title,
     description,
     alternates: { canonical: "/contactos" },
-    openGraph: {
-      title: page.seo?.metaTitle ?? "Contactos",
+    openGraph: buildOpenGraph({
+      title,
       description,
-      type: "website",
+      url: "/contactos",
+      siteName: site.fullName,
       images: resolveOgImages(page.seo?.ogImage?.src),
-    },
+    }),
   };
 }
 

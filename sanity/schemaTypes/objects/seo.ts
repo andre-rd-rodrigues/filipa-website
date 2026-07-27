@@ -21,7 +21,8 @@ export const seo = defineType({
       rows: 3,
       description:
         "Resumo apresentado nos resultados de pesquisa e nas partilhas.",
-      validation: (rule) => rule.max(180).warning("Idealmente até 180 caracteres."),
+      validation: (rule) =>
+        rule.max(160).warning("Idealmente até 160 caracteres."),
     }),
     defineField({
       name: "ogImage",

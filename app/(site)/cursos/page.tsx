@@ -10,23 +10,26 @@ import { PageHero } from "@/components/page-hero";
 import { getAllCourses, getUpcomingSessions } from "@/lib/courses";
 import { getCoursesPage } from "@/lib/pages";
 import { CourseCalendar } from "@/components/course-calendar";
-import { resolveOgImages } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings";
+import { buildOpenGraph, resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const page = await getCoursesPage();
+  const [site, page] = await Promise.all([getSiteSettings(), getCoursesPage()]);
+  const title = page.seo?.metaTitle ?? "Cursos";
   const description =
     page.seo?.metaDescription ??
     "Cursos de PNL, gestão emocional e comunicação aplicados ao desporto. Formação prática para atletas, treinadores e profissionais que querem agir.";
   return {
-    title: page.seo?.metaTitle ?? "Cursos",
+    title,
     description,
     alternates: { canonical: "/cursos" },
-    openGraph: {
-      title: page.seo?.metaTitle ?? "Cursos",
+    openGraph: buildOpenGraph({
+      title,
       description,
-      type: "website",
+      url: "/cursos",
+      siteName: site.fullName,
       images: resolveOgImages(page.seo?.ogImage?.src),
-    },
+    }),
   };
 }
 
