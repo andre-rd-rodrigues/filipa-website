@@ -63,7 +63,7 @@ describe("SiteLogo", () => {
 
 describe("LogoStrip", () => {
   it("renders the trust band with club names", () => {
-    render(<LogoStrip />);
+    render(<LogoStrip title="Clubes" clubs={["SL Benfica", "FC Porto"]} />);
     expect(screen.getByText("Clubes")).toBeInTheDocument();
     expect(screen.getByText("SL Benfica")).toBeInTheDocument();
   });

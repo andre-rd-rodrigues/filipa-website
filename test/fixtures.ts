@@ -73,6 +73,8 @@ export function makeSiteSettings(
       servicos: "Citação da página de serviços.",
       sobre: "Citação da página sobre.",
     },
+    clubsTitle: "Clubes e organizações",
+    clubs: ["Clube de teste um", "Clube de teste dois"],
     ...overrides,
   };
 }
