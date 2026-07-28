@@ -2,7 +2,30 @@
 
 import { useId, useState, type ChangeEvent, type FormEvent } from "react";
 import Link from "next/link";
+import Script from "next/script";
 import { Button } from "@/components/button";
+
+const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA;
+
+declare global {
+  interface Window {
+    grecaptcha?: {
+      ready: (cb: () => void) => void;
+      execute: (
+        siteKey: string,
+        options: { action: string },
+      ) => Promise<string>;
+    };
+  }
+}
+
+async function getRecaptchaToken(): Promise<string | undefined> {
+  if (!recaptchaSiteKey) return undefined;
+  const grecaptcha = window.grecaptcha;
+  if (!grecaptcha) throw new Error("recaptcha-unavailable");
+  await new Promise<void>((resolve) => grecaptcha.ready(resolve));
+  return grecaptcha.execute(recaptchaSiteKey, { action: "submit" });
+}
 
 const subjects = [
   "Treino mental individual",
@@ -95,6 +118,7 @@ export function ContactForm() {
     setIsSubmitting(true);
     setSubmitError(null);
     try {
+      const recaptchaToken = await getRecaptchaToken();
       const res = await fetch(endpoint, {
         method: "POST",
         headers: {
@@ -108,6 +132,9 @@ export function ContactForm() {
           assunto: values.assunto,
           mensagem: values.mensagem,
           _subject: `Novo contacto: ${values.assunto}`,
+          ...(recaptchaToken
+            ? { "g-recaptcha-response": recaptchaToken }
+            : {}),
         }),
       });
       if (!res.ok) throw new Error("request failed");
@@ -167,167 +194,176 @@ export function ContactForm() {
   }
 
   return (
-    <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-6">
-      <div>
-        <label htmlFor={fieldId("nome")} className={labelClasses}>
-          Nome
-        </label>
-        <input
-          id={fieldId("nome")}
-          name="nome"
-          type="text"
-          value={values.nome}
-          onChange={update}
-          required
-          autoComplete="name"
-          aria-invalid={errors.nome ? true : undefined}
-          aria-describedby={errors.nome ? errorId("nome") : undefined}
-          className={`mt-2 ${fieldClasses}`}
+    <>
+      {recaptchaSiteKey ? (
+        <Script
+          src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}
+          strategy="afterInteractive"
         />
-        {errors.nome ? (
-          <p id={errorId("nome")} className="mt-1.5 text-sm text-error">
-            {errors.nome}
-          </p>
-        ) : null}
-      </div>
-
-      <div>
-        <label htmlFor={fieldId("email")} className={labelClasses}>
-          Email
-        </label>
-        <input
-          id={fieldId("email")}
-          name="email"
-          type="email"
-          value={values.email}
-          onChange={update}
-          required
-          autoComplete="email"
-          aria-invalid={errors.email ? true : undefined}
-          aria-describedby={errors.email ? errorId("email") : undefined}
-          className={`mt-2 ${fieldClasses}`}
-        />
-        {errors.email ? (
-          <p id={errorId("email")} className="mt-1.5 text-sm text-error">
-            {errors.email}
-          </p>
-        ) : null}
-      </div>
-
-      <div>
-        <label htmlFor={fieldId("telefone")} className={labelClasses}>
-          Telefone <span className="normal-case text-fg-muted">(opcional)</span>
-        </label>
-        <input
-          id={fieldId("telefone")}
-          name="telefone"
-          type="tel"
-          value={values.telefone}
-          onChange={update}
-          autoComplete="tel"
-          className={`mt-2 ${fieldClasses}`}
-        />
-      </div>
-
-      <div>
-        <label htmlFor={fieldId("assunto")} className={labelClasses}>
-          Assunto
-        </label>
-        <select
-          id={fieldId("assunto")}
-          name="assunto"
-          value={values.assunto}
-          onChange={update}
-          className={`mt-2 appearance-none bg-[length:1.1rem] bg-[right_1rem_center] bg-no-repeat pr-11 ${fieldClasses}`}
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%239a9aa0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")",
-          }}
-        >
-          {subjects.map((subject) => (
-            <option key={subject} value={subject}>
-              {subject}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor={fieldId("mensagem")} className={labelClasses}>
-          Mensagem
-        </label>
-        <textarea
-          id={fieldId("mensagem")}
-          name="mensagem"
-          value={values.mensagem}
-          onChange={update}
-          required
-          rows={5}
-          placeholder="Conta-me onde estás e onde queres chegar."
-          aria-invalid={errors.mensagem ? true : undefined}
-          aria-describedby={errors.mensagem ? errorId("mensagem") : undefined}
-          className={`mt-2 resize-y ${fieldClasses}`}
-        />
-        {errors.mensagem ? (
-          <p id={errorId("mensagem")} className="mt-1.5 text-sm text-error">
-            {errors.mensagem}
-          </p>
-        ) : null}
-      </div>
-
-      <div>
-        <div className="flex items-start gap-3">
+      ) : null}
+      <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-6">
+        <div>
+          <label htmlFor={fieldId("nome")} className={labelClasses}>
+            Nome
+          </label>
           <input
-            id={fieldId("consentimento")}
-            name="consentimento"
-            type="checkbox"
-            checked={values.consentimento}
+            id={fieldId("nome")}
+            name="nome"
+            type="text"
+            value={values.nome}
             onChange={update}
             required
-            aria-invalid={errors.consentimento ? true : undefined}
-            aria-describedby={
-              errors.consentimento ? errorId("consentimento") : undefined
-            }
-            className="mt-1 h-[18px] w-[18px] shrink-0 rounded-none border border-[color:var(--border-stone)] accent-action focus:ring-2 focus:ring-action/30 focus:outline-none"
+            autoComplete="name"
+            aria-invalid={errors.nome ? true : undefined}
+            aria-describedby={errors.nome ? errorId("nome") : undefined}
+            className={`mt-2 ${fieldClasses}`}
           />
-          <label
-            htmlFor={fieldId("consentimento")}
-            className="text-[0.9375rem] leading-relaxed text-fg-secondary"
-          >
-            Li e aceito a{" "}
-            <Link
-              href="/privacidade"
-              className="text-action-deep underline decoration-1 underline-offset-2 hover:text-action-hover"
-            >
-              Política de Privacidade
-            </Link>
-            .
-          </label>
+          {errors.nome ? (
+            <p id={errorId("nome")} className="mt-1.5 text-sm text-error">
+              {errors.nome}
+            </p>
+          ) : null}
         </div>
-        {errors.consentimento ? (
-          <p
-            id={errorId("consentimento")}
-            className="mt-1.5 text-sm text-error"
-          >
-            {errors.consentimento}
-          </p>
-        ) : null}
-      </div>
 
-      <div className="mt-1">
-        {submitError ? (
-          <p role="alert" className="mb-4 text-sm text-error">
-            {submitError}
-          </p>
-        ) : null}
-        <Button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full sm:w-auto"
-        >
-          {isSubmitting ? "A enviar…" : "Enviar mensagem"}
-        </Button>
-      </div>
-    </form>
+        <div>
+          <label htmlFor={fieldId("email")} className={labelClasses}>
+            Email
+          </label>
+          <input
+            id={fieldId("email")}
+            name="email"
+            type="email"
+            value={values.email}
+            onChange={update}
+            required
+            autoComplete="email"
+            aria-invalid={errors.email ? true : undefined}
+            aria-describedby={errors.email ? errorId("email") : undefined}
+            className={`mt-2 ${fieldClasses}`}
+          />
+          {errors.email ? (
+            <p id={errorId("email")} className="mt-1.5 text-sm text-error">
+              {errors.email}
+            </p>
+          ) : null}
+        </div>
+
+        <div>
+          <label htmlFor={fieldId("telefone")} className={labelClasses}>
+            Telefone{" "}
+            <span className="normal-case text-fg-muted">(opcional)</span>
+          </label>
+          <input
+            id={fieldId("telefone")}
+            name="telefone"
+            type="tel"
+            value={values.telefone}
+            onChange={update}
+            autoComplete="tel"
+            className={`mt-2 ${fieldClasses}`}
+          />
+        </div>
+
+        <div>
+          <label htmlFor={fieldId("assunto")} className={labelClasses}>
+            Assunto
+          </label>
+          <select
+            id={fieldId("assunto")}
+            name="assunto"
+            value={values.assunto}
+            onChange={update}
+            className={`mt-2 appearance-none bg-[length:1.1rem] bg-[right_1rem_center] bg-no-repeat pr-11 ${fieldClasses}`}
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%239a9aa0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")",
+            }}
+          >
+            {subjects.map((subject) => (
+              <option key={subject} value={subject}>
+                {subject}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor={fieldId("mensagem")} className={labelClasses}>
+            Mensagem
+          </label>
+          <textarea
+            id={fieldId("mensagem")}
+            name="mensagem"
+            value={values.mensagem}
+            onChange={update}
+            required
+            rows={5}
+            placeholder="Conta-me onde estás e onde queres chegar."
+            aria-invalid={errors.mensagem ? true : undefined}
+            aria-describedby={errors.mensagem ? errorId("mensagem") : undefined}
+            className={`mt-2 resize-y ${fieldClasses}`}
+          />
+          {errors.mensagem ? (
+            <p id={errorId("mensagem")} className="mt-1.5 text-sm text-error">
+              {errors.mensagem}
+            </p>
+          ) : null}
+        </div>
+
+        <div>
+          <div className="flex items-start gap-3">
+            <input
+              id={fieldId("consentimento")}
+              name="consentimento"
+              type="checkbox"
+              checked={values.consentimento}
+              onChange={update}
+              required
+              aria-invalid={errors.consentimento ? true : undefined}
+              aria-describedby={
+                errors.consentimento ? errorId("consentimento") : undefined
+              }
+              className="mt-1 h-[18px] w-[18px] shrink-0 rounded-none border border-[color:var(--border-stone)] accent-action focus:ring-2 focus:ring-action/30 focus:outline-none"
+            />
+            <label
+              htmlFor={fieldId("consentimento")}
+              className="text-[0.9375rem] leading-relaxed text-fg-secondary"
+            >
+              Li e aceito a{" "}
+              <Link
+                href="/privacidade"
+                className="text-action-deep underline decoration-1 underline-offset-2 hover:text-action-hover"
+              >
+                Política de Privacidade
+              </Link>
+              .
+            </label>
+          </div>
+          {errors.consentimento ? (
+            <p
+              id={errorId("consentimento")}
+              className="mt-1.5 text-sm text-error"
+            >
+              {errors.consentimento}
+            </p>
+          ) : null}
+        </div>
+
+        <div className="mt-1">
+          {submitError ? (
+            <p role="alert" className="mb-4 text-sm text-error">
+              {submitError}
+            </p>
+          ) : null}
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full sm:w-auto"
+          >
+            {isSubmitting ? "A enviar…" : "Enviar mensagem"}
+          </Button>
+        </div>
+      </form>
+    </>
   );
 }
