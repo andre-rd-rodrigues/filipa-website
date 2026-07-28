@@ -1,30 +1,37 @@
 "use client";
 
-import { useId, useState, type ChangeEvent, type FormEvent } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+} from "react";
 import Link from "next/link";
 import Script from "next/script";
 import { Button } from "@/components/button";
 
 const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA;
 
+type GrecaptchaRenderParams = {
+  sitekey: string;
+  callback?: (token: string) => void;
+  "expired-callback"?: () => void;
+  "error-callback"?: () => void;
+};
+
 declare global {
   interface Window {
     grecaptcha?: {
-      ready: (cb: () => void) => void;
-      execute: (
-        siteKey: string,
-        options: { action: string },
-      ) => Promise<string>;
+      render: (
+        container: HTMLElement | string,
+        params: GrecaptchaRenderParams,
+      ) => number;
+      getResponse: (widgetId?: number) => string;
+      reset: (widgetId?: number) => void;
     };
   }
-}
-
-async function getRecaptchaToken(): Promise<string | undefined> {
-  if (!recaptchaSiteKey) return undefined;
-  const grecaptcha = window.grecaptcha;
-  if (!grecaptcha) throw new Error("recaptcha-unavailable");
-  await new Promise<void>((resolve) => grecaptcha.ready(resolve));
-  return grecaptcha.execute(recaptchaSiteKey, { action: "submit" });
 }
 
 const subjects = [
@@ -67,9 +74,27 @@ export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [recaptchaReady, setRecaptchaReady] = useState(false);
+  const recaptchaRef = useRef<HTMLDivElement>(null);
+  const recaptchaWidgetId = useRef<number | null>(null);
 
   const fieldId = (name: keyof FormState) => `${uid}-${name}`;
   const errorId = (name: keyof FormState) => `${uid}-${name}-error`;
+
+  useEffect(() => {
+    if (isSent) {
+      recaptchaWidgetId.current = null;
+      return;
+    }
+    if (!recaptchaSiteKey || !recaptchaReady) return;
+    const container = recaptchaRef.current;
+    if (!container || recaptchaWidgetId.current !== null || !window.grecaptcha) {
+      return;
+    }
+    recaptchaWidgetId.current = window.grecaptcha.render(container, {
+      sitekey: recaptchaSiteKey,
+    });
+  }, [recaptchaReady, isSent]);
 
   function update(
     event: ChangeEvent<
@@ -115,10 +140,21 @@ export function ContactForm() {
 
     const endpoint = `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`;
 
+    let recaptchaToken: string | undefined;
+    if (recaptchaSiteKey) {
+      recaptchaToken =
+        window.grecaptcha && recaptchaWidgetId.current !== null
+          ? window.grecaptcha.getResponse(recaptchaWidgetId.current)
+          : "";
+      if (!recaptchaToken) {
+        setSubmitError("Confirma que não és um robô antes de enviar.");
+        return;
+      }
+    }
+
     setIsSubmitting(true);
     setSubmitError(null);
     try {
-      const recaptchaToken = await getRecaptchaToken();
       const res = await fetch(endpoint, {
         method: "POST",
         headers: {
@@ -141,6 +177,9 @@ export function ContactForm() {
       setIsSent(true);
       setValues(initialState);
     } catch {
+      if (window.grecaptcha && recaptchaWidgetId.current !== null) {
+        window.grecaptcha.reset(recaptchaWidgetId.current);
+      }
       setSubmitError(
         "Não consegui enviar a mensagem. Tenta novamente ou escreve-me diretamente por email.",
       );
@@ -197,8 +236,9 @@ export function ContactForm() {
     <>
       {recaptchaSiteKey ? (
         <Script
-          src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}
+          src="https://www.google.com/recaptcha/api.js?render=explicit"
           strategy="afterInteractive"
+          onLoad={() => setRecaptchaReady(true)}
         />
       ) : null}
       <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-6">
@@ -348,6 +388,8 @@ export function ContactForm() {
             </p>
           ) : null}
         </div>
+
+        {recaptchaSiteKey ? <div ref={recaptchaRef} /> : null}
 
         <div className="mt-1">
           {submitError ? (
