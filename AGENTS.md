@@ -2,12 +2,6 @@
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 
-## Project skills
-
-Skills live in `.cursor/skills/`. Use them proactively when a request matches, even if the user doesn't name the skill:
-
-- **copywriting** (`.cursor/skills/copywriting/SKILL.md`) — short-form marketing copy: headlines, CTAs, ad copy, landing page copy, email copy, and conversion frameworks (PAS, AIDA, BAB). Use whenever the user wants to write or optimize marketing copy.
-
 ## Best practices for developing on Vercel
 
 These defaults are optimized for AI coding agents (and humans) working on apps that deploy to Vercel.
