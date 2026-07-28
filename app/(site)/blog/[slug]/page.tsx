@@ -12,7 +12,7 @@ import {
   type BlogPost,
 } from "@/lib/blog";
 import { getSiteSettings } from "@/lib/settings";
-import { primaryCta, buildOpenGraph, resolveOgImages } from "@/lib/site";
+import { primaryCta, resolveOgImages } from "@/lib/site";
 import { buildBlogPostingSchema, buildFaqSchema } from "@/lib/schema";
 
 // All slugs are known at build time. Unknown slugs 404 rather than rendering.
@@ -25,10 +25,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: PageProps<"/blog/[slug]">) {
   const { slug } = await props.params;
-  const [site, post] = await Promise.all([
-    getSiteSettings(),
-    getPostBySlug(slug),
-  ]);
+  const post = await getPostBySlug(slug);
   if (!post) return { title: "Artigo não encontrado" };
 
   return {
@@ -38,15 +35,13 @@ export async function generateMetadata(props: PageProps<"/blog/[slug]">) {
     alternates: {
       canonical: `/blog/${slug}`,
     },
-    openGraph: buildOpenGraph({
+    openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `/blog/${slug}`,
       type: "article",
-      siteName: site.fullName,
       publishedTime: post.publishedAt,
       images: resolveOgImages(),
-    }),
+    },
   };
 }
 

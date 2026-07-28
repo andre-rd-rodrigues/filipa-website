@@ -8,26 +8,23 @@ import { EditorialImage } from "@/components/editorial-image";
 import { getSiteSettings } from "@/lib/settings";
 import { getAboutPage } from "@/lib/pages";
 import { buildPersonSchema } from "@/lib/schema";
-import { buildOpenGraph, resolveOgImages } from "@/lib/site";
+import { resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [site, about] = await Promise.all([getSiteSettings(), getAboutPage()]);
-  const title = about.seo?.metaTitle ?? "Sobre mim";
+  const about = await getAboutPage();
   const description =
     about.seo?.metaDescription ??
-    "Olá, o meu nome é Filipa Marques. Sou mental coach e coach de PNL, especializada em Gestão Emocional no Desporto. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.";
+    "Conhece a Filipa Marques: mental coach e coach de PNL, especializada em Psicologia do Desporto. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.";
   return {
-    title,
+    title: about.seo?.metaTitle ?? "Sobre mim",
     description,
     alternates: { canonical: "/sobre" },
-    openGraph: buildOpenGraph({
-      title,
+    openGraph: {
+      title: about.seo?.metaTitle ?? "Sobre mim",
       description,
-      url: "/sobre",
       type: "profile",
-      siteName: site.fullName,
       images: resolveOgImages(about.seo?.ogImage?.src),
-    }),
+    },
   };
 }
 

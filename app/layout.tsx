@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Bodoni_Moda, Hanken_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import { buildOpenGraph, siteConfig } from "@/lib/site";
+import { resolveOgImages, siteConfig } from "@/lib/site";
 import { getSiteSettings } from "@/lib/settings";
 import {
   buildOrganizationSchema,
@@ -48,13 +48,15 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${site.name}`,
     },
     description: site.description,
-    themeColor: "#FF5F00",
-    openGraph: buildOpenGraph({
+    openGraph: {
       title: `${site.name} | ${site.tagline}`,
       description: site.description,
-      url: "/",
+      url: siteConfig.url,
       siteName: site.fullName,
-    }),
+      locale: "pt_PT",
+      type: "website",
+      images: resolveOgImages(),
+    },
     robots: { index: true, follow: true },
   };
 }

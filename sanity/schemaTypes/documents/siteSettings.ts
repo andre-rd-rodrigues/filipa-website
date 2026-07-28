@@ -44,13 +44,9 @@ export const siteSettings = defineType({
       title: "Descrição do site",
       type: "text",
       rows: 4,
-      description: "Usada nos metadados e nas partilhas (idealmente até 160 caracteres).",
+      description: "Usada nos metadados e nas partilhas.",
       group: "identidade",
-      validation: (rule) =>
-        rule
-          .required()
-          .max(160)
-          .warning("Idealmente até 160 caracteres para Google e redes sociais."),
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "quote",

@@ -7,26 +7,23 @@ import { ButtonLink } from "@/components/button";
 import { BlogExplorer } from "@/components/blog-explorer";
 import { getAllPosts, getAllCategories } from "@/lib/blog";
 import { getBlogPage } from "@/lib/pages";
-import { getSiteSettings } from "@/lib/settings";
-import { buildOpenGraph, resolveOgImages } from "@/lib/site";
+import { resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [site, page] = await Promise.all([getSiteSettings(), getBlogPage()]);
-  const title = page.seo?.metaTitle ?? "Blog";
+  const page = await getBlogPage();
   const description =
     page.seo?.metaDescription ??
     "Artigos sobre coaching, PNL, gestão emocional e comunicação no desporto. Ferramentas práticas para pensar, sentir e agir melhor.";
   return {
-    title,
+    title: page.seo?.metaTitle ?? "Blog",
     description,
     alternates: { canonical: "/blog" },
-    openGraph: buildOpenGraph({
-      title,
+    openGraph: {
+      title: page.seo?.metaTitle ?? "Blog",
       description,
-      url: "/blog",
-      siteName: site.fullName,
+      type: "website",
       images: resolveOgImages(page.seo?.ogImage?.src),
-    }),
+    },
   };
 }
 

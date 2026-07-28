@@ -7,26 +7,23 @@ import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { getAllEpisodes, type Episode } from "@/lib/podcast";
 import { getPodcastPage } from "@/lib/pages";
-import { getSiteSettings } from "@/lib/settings";
-import { buildOpenGraph, resolveOgImages } from "@/lib/site";
+import { resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [site, page] = await Promise.all([getSiteSettings(), getPodcastPage()]);
-  const title = page.seo?.metaTitle ?? "Podcast";
+  const page = await getPodcastPage();
   const description =
     page.seo?.metaDescription ??
     "Conversas curtas sobre PNL, gestão emocional e a mente de quem compete. Episódios práticos de coaching desportivo, em pt-PT, para atletas e treinadores.";
   return {
-    title,
+    title: page.seo?.metaTitle ?? "Podcast",
     description,
     alternates: { canonical: "/podcast" },
-    openGraph: buildOpenGraph({
-      title,
+    openGraph: {
+      title: page.seo?.metaTitle ?? "Podcast",
       description,
-      url: "/podcast",
-      siteName: site.fullName,
+      type: "website",
       images: resolveOgImages(page.seo?.ogImage?.src),
-    }),
+    },
   };
 }
 

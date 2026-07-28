@@ -9,7 +9,7 @@ import { PageHero } from "@/components/page-hero";
 import { getAllCourses, getCourseBySlug } from "@/lib/courses";
 import { buildCourseSchema } from "@/lib/schema";
 import { getSiteSettings } from "@/lib/settings";
-import { primaryCta, buildOpenGraph, resolveOgImages } from "@/lib/site";
+import { primaryCta, resolveOgImages } from "@/lib/site";
 
 // All slugs are known at build time (mock today, Sanity later). Unknown slugs
 // 404 rather than rendering on demand.
@@ -22,10 +22,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: PageProps<"/cursos/[slug]">) {
   const { slug } = await props.params;
-  const [site, course] = await Promise.all([
-    getSiteSettings(),
-    getCourseBySlug(slug),
-  ]);
+  const course = await getCourseBySlug(slug);
   if (!course) return { title: "Curso não encontrado" };
 
   return {
@@ -34,13 +31,12 @@ export async function generateMetadata(props: PageProps<"/cursos/[slug]">) {
     alternates: {
       canonical: `/cursos/${slug}`,
     },
-    openGraph: buildOpenGraph({
+    openGraph: {
       title: course.title,
       description: course.summary,
-      url: `/cursos/${slug}`,
-      siteName: site.fullName,
+      type: "website",
       images: resolveOgImages(),
-    }),
+    },
   };
 }
 

@@ -10,28 +10,23 @@ import { EditorialImage } from "@/components/editorial-image";
 import { getSiteSettings } from "@/lib/settings";
 import { getServicesPage } from "@/lib/pages";
 import { getAllServices } from "@/lib/services";
-import { buildOpenGraph, resolveOgImages } from "@/lib/site";
+import { resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [site, page] = await Promise.all([
-    getSiteSettings(),
-    getServicesPage(),
-  ]);
-  const title = page.seo?.metaTitle ?? "Serviços";
+  const page = await getServicesPage();
   const description =
     page.seo?.metaDescription ??
     "Coaching individual, coaching de equipas, gestão emocional e PNL aplicados ao desporto. Serviços que ligam a mente aos teus resultados.";
   return {
-    title,
+    title: page.seo?.metaTitle ?? "Serviços",
     description,
     alternates: { canonical: "/servicos" },
-    openGraph: buildOpenGraph({
-      title,
+    openGraph: {
+      title: page.seo?.metaTitle ?? "Serviços",
       description,
-      url: "/servicos",
-      siteName: site.fullName,
+      type: "website",
       images: resolveOgImages(page.seo?.ogImage?.src),
-    }),
+    },
   };
 }
 

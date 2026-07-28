@@ -4,29 +4,23 @@ import { Section } from "@/components/section";
 import { PageHero } from "@/components/page-hero";
 import { LegalContent } from "@/components/legal-content";
 import { getLegalPage } from "@/lib/legal";
-import { getSiteSettings } from "@/lib/settings";
-import { buildOpenGraph, resolveOgImages } from "@/lib/site";
+import { resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [site, page] = await Promise.all([
-    getSiteSettings(),
-    getLegalPage("termos"),
-  ]);
-  const title = page?.seo?.metaTitle ?? page?.title ?? "Termos e Condições";
+  const page = await getLegalPage("termos");
   const description =
     page?.seo?.metaDescription ??
     "Termos e condições de utilização do site da Filipa Marques — Coaching & PNL: objeto, propriedade intelectual, isenção de responsabilidade e lei aplicável.";
   return {
-    title,
+    title: page?.seo?.metaTitle ?? page?.title ?? "Termos e Condições",
     description,
     alternates: { canonical: "/termos" },
-    openGraph: buildOpenGraph({
-      title,
+    openGraph: {
+      title: page?.seo?.metaTitle ?? page?.title ?? "Termos e Condições",
       description,
-      url: "/termos",
-      siteName: site.fullName,
+      type: "website",
       images: resolveOgImages(page?.seo?.ogImage?.src),
-    }),
+    },
   };
 }
 

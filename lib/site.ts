@@ -5,17 +5,15 @@
  * in Sanity — see `lib/settings.ts` / the "Definições do site" document.
  */
 
-import type { Metadata } from "next";
-
 /** Deployment config — used for canonical URLs, sitemap and JSON-LD. */
 export const siteConfig = {
   url: "https://filipamarques.pt",
   locale: "pt-PT",
 } as const;
 
-/** Default Open Graph share image (1200×630 JPEG). Overridden by Sanity `seo.ogImage`. */
+/** Default Open Graph share image (1200×630). Overridden by Sanity `seo.ogImage`. */
 export const defaultOgImage = {
-  url: "/img/opengraph-image.jpg",
+  url: "/img/opengraph-image.webp",
   width: 1200,
   height: 630,
 } as const;
@@ -23,42 +21,6 @@ export const defaultOgImage = {
 /** Resolve OG images: Sanity override when set, otherwise the site default. */
 export function resolveOgImages(overrideSrc?: string | null) {
   return [overrideSrc ? { url: overrideSrc } : { ...defaultOgImage }];
-}
-
-type BuildOpenGraphOpts = {
-  title: string;
-  description: string;
-  /** Path or absolute URL; resolved via metadataBase. Defaults to site root. */
-  url?: string;
-  type?: "website" | "article" | "profile";
-  images?: ReturnType<typeof resolveOgImages>;
-  siteName: string;
-  publishedTime?: string;
-};
-
-/**
- * Full Open Graph object so page-level metadata never drops url / siteName / locale
- * when overriding the root layout’s openGraph.
- */
-export function buildOpenGraph({
-  title,
-  description,
-  url = "/",
-  type = "website",
-  images = resolveOgImages(),
-  siteName,
-  publishedTime,
-}: BuildOpenGraphOpts): NonNullable<Metadata["openGraph"]> {
-  return {
-    title,
-    description,
-    url,
-    siteName,
-    locale: "pt_PT",
-    type,
-    images,
-    ...(publishedTime ? { publishedTime } : {}),
-  };
 }
 
 export type NavLink = { label: string; href: string };

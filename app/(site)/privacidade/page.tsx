@@ -4,30 +4,23 @@ import { Section } from "@/components/section";
 import { PageHero } from "@/components/page-hero";
 import { LegalContent } from "@/components/legal-content";
 import { getLegalPage } from "@/lib/legal";
-import { getSiteSettings } from "@/lib/settings";
-import { buildOpenGraph, resolveOgImages } from "@/lib/site";
+import { resolveOgImages } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [site, page] = await Promise.all([
-    getSiteSettings(),
-    getLegalPage("privacidade"),
-  ]);
-  const title =
-    page?.seo?.metaTitle ?? page?.title ?? "Política de Privacidade";
+  const page = await getLegalPage("privacidade");
   const description =
     page?.seo?.metaDescription ??
     "Como a Filipa Marques — Coaching & PNL trata os teus dados pessoais: formulário de contacto, Google Analytics, base legal, direitos RGPD e contactos.";
   return {
-    title,
+    title: page?.seo?.metaTitle ?? page?.title ?? "Política de Privacidade",
     description,
     alternates: { canonical: "/privacidade" },
-    openGraph: buildOpenGraph({
-      title,
+    openGraph: {
+      title: page?.seo?.metaTitle ?? page?.title ?? "Política de Privacidade",
       description,
-      url: "/privacidade",
-      siteName: site.fullName,
+      type: "website",
       images: resolveOgImages(page?.seo?.ogImage?.src),
-    }),
+    },
   };
 }
 
