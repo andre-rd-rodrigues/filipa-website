@@ -88,12 +88,31 @@ export function ContactForm() {
     }
     if (!recaptchaSiteKey || !recaptchaReady) return;
     const container = recaptchaRef.current;
-    if (!container || recaptchaWidgetId.current !== null || !window.grecaptcha) {
-      return;
-    }
-    recaptchaWidgetId.current = window.grecaptcha.render(container, {
-      sitekey: recaptchaSiteKey,
-    });
+    if (!container || recaptchaWidgetId.current !== null) return;
+
+    let cancelled = false;
+    let timeout: ReturnType<typeof setTimeout> | undefined;
+
+    const renderWidget = () => {
+      if (cancelled || recaptchaWidgetId.current !== null) return;
+      const grecaptcha = window.grecaptcha;
+      // api.js fires load before grecaptcha finishes initialising, so wait
+      // until render() is actually available before calling it.
+      if (!grecaptcha || typeof grecaptcha.render !== "function") {
+        timeout = setTimeout(renderWidget, 100);
+        return;
+      }
+      recaptchaWidgetId.current = grecaptcha.render(container, {
+        sitekey: recaptchaSiteKey,
+      });
+    };
+
+    renderWidget();
+
+    return () => {
+      cancelled = true;
+      if (timeout) clearTimeout(timeout);
+    };
   }, [recaptchaReady, isSent]);
 
   function update(
