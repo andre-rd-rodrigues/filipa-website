@@ -11,6 +11,7 @@ import { buildServiceSchema } from "@/lib/schema";
 import { getSiteSettings } from "@/lib/settings";
 import { primaryCta } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
+import { MarkdownBody } from "@/components/markdown-body";
 
 // All slugs are known at build time (mock today, Sanity later). Unknown slugs
 // 404 rather than rendering on demand.
@@ -130,15 +131,13 @@ export default async function ServicePage(props: PageProps<"/servicos/[slug]">) 
       </Section>
 
       {/* Introdução */}
-      {service.intro && service.intro.length > 0 ? (
+      {service.intro ? (
         <Section tone="surface" narrow>
           <Reveal>
             <Eyebrow className="mb-4">Introdução</Eyebrow>
-            <div className="text-pretty space-y-5 text-lg leading-relaxed text-fg-muted">
-              {service.intro.map((paragraph, i) => (
-                <p key={i}>{paragraph}</p>
-              ))}
-            </div>
+            <MarkdownBody className="text-pretty space-y-5 text-lg leading-relaxed text-fg-muted">
+              {service.intro}
+            </MarkdownBody>
           </Reveal>
         </Section>
       ) : null}

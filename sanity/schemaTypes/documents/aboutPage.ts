@@ -23,10 +23,12 @@ export const aboutPage = defineType({
     defineField({ name: "portraitCaption", title: "Legenda do retrato", type: "string", group: "bio" }),
     defineField({ name: "bioTitle", title: "Título da biografia", type: "text", rows: 2, group: "bio" }),
     defineField({
-      name: "bioParagraphs",
-      title: "Biografia (parágrafos)",
-      type: "array",
-      of: [{ type: "text", rows: 4 }],
+      name: "bio",
+      title: "Biografia",
+      type: "text",
+      rows: 12,
+      description:
+        "Markdown simples. Linha em branco = novo parágrafo. Suporta **negrito**, *itálico* e [links](url).",
       group: "bio",
     }),
     // Valores

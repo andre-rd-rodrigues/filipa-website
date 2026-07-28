@@ -35,7 +35,7 @@ export type Course = {
   schedule?: string;
   format?: string;
   includes?: string[];
-  intro?: string[];
+  intro?: string;
   objectives?: string[];
   program?: CourseModule[];
   outcomes: string[];

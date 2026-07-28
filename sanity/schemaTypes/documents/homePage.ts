@@ -51,10 +51,12 @@ export const homePage = defineType({
     defineField({ name: "methodEyebrow", title: "Etiqueta", type: "string", group: "metodo" }),
     defineField({ name: "methodTitle", title: "Título", type: "text", rows: 3, group: "metodo" }),
     defineField({
-      name: "methodParagraphs",
-      title: "Parágrafos",
-      type: "array",
-      of: [{ type: "text", rows: 3 }],
+      name: "methodBody",
+      title: "Texto do método",
+      type: "text",
+      rows: 8,
+      description:
+        "Markdown simples. Linha em branco = novo parágrafo. Suporta **negrito**, *itálico* e [links](url).",
       group: "metodo",
     }),
     defineField({ name: "methodCta", title: "Botão", type: "cta", group: "metodo" }),

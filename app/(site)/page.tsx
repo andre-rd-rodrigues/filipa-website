@@ -55,7 +55,7 @@ export default async function Home() {
         <LayeredShowcase
           eyebrow={home.methodEyebrow ?? ""}
           title={home.methodTitle ?? ""}
-          paragraphs={home.methodParagraphs ?? []}
+          body={home.methodBody ?? ""}
           cta={home.methodCta ? { label: home.methodCta.label, href: home.methodCta.href } : undefined}
           images={
             (home.methodImages ?? []).slice(0, 2) as [

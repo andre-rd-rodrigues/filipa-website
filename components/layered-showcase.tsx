@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import { Eyebrow } from "@/components/eyebrow";
 import { ButtonLink } from "@/components/button";
+import { MarkdownBody } from "@/components/markdown-body";
 
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -21,14 +22,14 @@ type CTA = { label: string; href: string };
 export function LayeredShowcase({
   eyebrow,
   title,
-  paragraphs,
+  body,
   cta,
   images,
   imageSide = "right",
 }: {
   eyebrow: string;
   title: string;
-  paragraphs: string[];
+  body: string;
   cta?: CTA;
   images: [ShowcaseImage, ShowcaseImage];
   imageSide?: "left" | "right";
@@ -115,13 +116,9 @@ export function LayeredShowcase({
         <h2 className="font-display text-balance text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1]">
           {title}
         </h2>
-        <div className="mt-6 max-w-xl space-y-4 text-lg leading-relaxed text-fg-muted">
-          {paragraphs.map((p) => (
-            <p key={p} className="text-pretty">
-              {p}
-            </p>
-          ))}
-        </div>
+        <MarkdownBody className="mt-6 max-w-xl space-y-4 text-lg leading-relaxed text-fg-muted">
+          {body}
+        </MarkdownBody>
         {cta ? (
           <div className="mt-9">
             <ButtonLink href={cta.href} variant="secondary" className="w-full sm:w-auto">

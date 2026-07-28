@@ -26,7 +26,7 @@ export type Service = {
   summary: string;
   description: string;
   image: { src: string; alt: string };
-  intro?: string[];
+  intro?: string;
   benefits?: ServiceBenefit[];
   process?: ServiceProcessStep[];
   audience?: string;

@@ -10,6 +10,7 @@ import { getSiteSettings } from "@/lib/settings";
 import { getAboutPage } from "@/lib/pages";
 import { buildPersonSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
+import { MarkdownBody } from "@/components/markdown-body";
 
 export async function generateMetadata(): Promise<Metadata> {
   const about = await getAboutPage();
@@ -63,11 +64,9 @@ export default async function SobrePage() {
             <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
               {about.bioTitle}
             </h2>
-            <div className="text-pretty mt-6 space-y-5 text-lg leading-relaxed text-fg-muted">
-              {(about.bioParagraphs ?? []).map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
-            </div>
+            <MarkdownBody className="mt-6 space-y-5 text-lg leading-relaxed text-fg-muted">
+              {about.bio ?? ""}
+            </MarkdownBody>
           </div>
         </Reveal>
       </Section>

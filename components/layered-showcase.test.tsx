@@ -27,7 +27,7 @@ describe("LayeredShowcase", () => {
       <LayeredShowcase
         eyebrow="Sobre"
         title="Treino mental"
-        paragraphs={["Primeiro parágrafo.", "Segundo parágrafo."]}
+        body={"Primeiro parágrafo.\n\nSegundo parágrafo."}
         images={[
           { src: "/img/a.webp", alt: "Foto A" },
           { src: "/img/b.webp", alt: "Foto B" },
@@ -48,7 +48,7 @@ describe("LayeredShowcase", () => {
       <LayeredShowcase
         eyebrow="Sobre"
         title="Título"
-        paragraphs={["Texto."]}
+        body="Texto."
         cta={{ label: "Saber mais", href: "/sobre" }}
         images={[
           { src: "/img/a.webp", alt: "Foto A" },

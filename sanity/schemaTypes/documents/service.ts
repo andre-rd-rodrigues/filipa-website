@@ -94,9 +94,11 @@ export const service = defineType({
     }),
     defineField({
       name: "intro",
-      title: "Introdução (parágrafos)",
-      type: "array",
-      of: [{ type: "text", rows: 3 }],
+      title: "Introdução",
+      type: "text",
+      rows: 10,
+      description:
+        "Markdown simples. Linha em branco = novo parágrafo. Suporta **negrito**, *itálico* e [links](url).",
       group: "detalhe",
     }),
     defineField({

@@ -24,7 +24,7 @@ export type HomePage = {
   heroPortrait?: Img;
   methodEyebrow?: string;
   methodTitle?: string;
-  methodParagraphs?: string[];
+  methodBody?: string;
   methodCta?: Cta;
   methodImages?: Img[];
   servicesEyebrow?: string;
@@ -51,7 +51,7 @@ export const getHomePage = cache(async (): Promise<HomePage> => {
   return (
     (await sanityFetch<HomePage | null>(`*[_type == "homePage"][0]{
       heroBackdropWord, heroEyebrow, heroCtas[]${CTA}, ${IMG("heroPortrait")},
-      methodEyebrow, methodTitle, methodParagraphs, methodCta${CTA},
+      methodEyebrow, methodTitle, methodBody, methodCta${CTA},
       "methodImages": methodImages[]{ "src": asset->url, "alt": alt },
       servicesEyebrow, servicesTitle,
       highlights[]{ label, body, href, ${IMG("image")} },
@@ -73,7 +73,7 @@ export type AboutPage = {
   portrait?: Img;
   portraitCaption?: string;
   bioTitle?: string;
-  bioParagraphs?: string[];
+  bio?: string;
   valuesEyebrow?: string;
   valuesTitle?: string;
   values?: { title: string; body: string }[];
@@ -96,7 +96,7 @@ export type AboutPage = {
 export const getAboutPage = cache(async (): Promise<AboutPage> => {
   return (
     (await sanityFetch<AboutPage | null>(`*[_type == "aboutPage"][0]{
-      heroTitle, ${IMG("portrait")}, portraitCaption, bioTitle, bioParagraphs,
+      heroTitle, ${IMG("portrait")}, portraitCaption, bioTitle, bio,
       valuesEyebrow, valuesTitle, values[]{ title, body },
       credentialsEyebrow, credentialsTitle, credentialsIntro, ${IMG("credentialsImage")},
       credentials[]{ title, detail, type },
