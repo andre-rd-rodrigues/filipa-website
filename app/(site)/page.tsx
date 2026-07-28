@@ -14,6 +14,7 @@ import { StatsStrip } from "@/components/stats-strip";
 import { InstagramStrip } from "@/components/instagram-strip";
 import { getSiteSettings } from "@/lib/settings";
 import { getHomePage } from "@/lib/pages";
+import { getClubs } from "@/lib/clubs";
 import { getLatestPosts, formatPostDate } from "@/lib/blog";
 import { getLatestEpisodes } from "@/lib/podcast";
 import { pageMetadata } from "@/lib/seo";
@@ -29,9 +30,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [site, home, latest, latestEpisodes] = await Promise.all([
+  const [site, home, clubsContent, latest, latestEpisodes] = await Promise.all([
     getSiteSettings(),
     getHomePage(),
+    getClubs(),
     getLatestPosts(1),
     getLatestEpisodes(3),
   ]);
@@ -47,8 +49,8 @@ export default async function Home() {
         portrait={home.heroPortrait}
       />
 
-      {/* Trust band — club names from Sanity (siteSettings) */}
-      <LogoStrip clubs={site.clubs} title={site.clubsTitle} />
+      {/* Trust band — club names from Sanity (Clubes collection) */}
+      <LogoStrip clubs={clubsContent.clubs} title={clubsContent.title} />
 
       {/* Layered editorial block — overlapping image panels on top of each other */}
       <Section tone="page">

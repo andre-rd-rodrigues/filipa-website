@@ -13,7 +13,6 @@ export const siteSettings = defineType({
     { name: "contactos", title: "Contactos" },
     { name: "redes", title: "Redes sociais" },
     { name: "citacoes", title: "Citações" },
-    { name: "clubes", title: "Clubes" },
   ],
   fields: [
     defineField({
@@ -107,23 +106,6 @@ export const siteSettings = defineType({
       type: "text",
       rows: 2,
       group: "citacoes",
-    }),
-    defineField({
-      name: "clubsTitle",
-      title: "Título dos clubes",
-      type: "string",
-      description:
-        'Ex.: "Clubes dos atletas que acompanho". Usado na página inicial e em Sobre.',
-      group: "clubes",
-    }),
-    defineField({
-      name: "clubs",
-      title: "Clubes",
-      type: "array",
-      of: [{ type: "string" }],
-      description:
-        "Clubes dos atletas acompanhados. Os primeiros 5 aparecem na página inicial; todos aparecem em Sobre.",
-      group: "clubes",
     }),
   ],
   preview: {

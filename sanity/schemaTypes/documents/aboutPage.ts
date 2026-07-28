@@ -9,6 +9,7 @@ export const aboutPage = defineType({
     { name: "bio", title: "Biografia", default: true },
     { name: "valores", title: "Valores" },
     { name: "formacao", title: "Formação" },
+    { name: "clubes", title: "Clubes" },
     { name: "cta", title: "Chamada final" },
     { name: "seo", title: "SEO" },
   ],
@@ -57,6 +58,16 @@ export const aboutPage = defineType({
       type: "array",
       of: [{ type: "credential" }],
       group: "formacao",
+    }),
+    // Clubes (lista em Conteúdo → Clubes)
+    defineField({
+      name: "clubsTitle",
+      title: "Título dos clubes",
+      type: "string",
+      description:
+        'Ex.: "Clubes dos atletas que acompanho". Usado na página inicial e em Sobre. A lista de clubes edita-se em Conteúdo → Clubes.',
+      group: "clubes",
+      initialValue: "Clubes dos atletas que acompanho",
     }),
     // CTA final
     defineField({

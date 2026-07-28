@@ -86,6 +86,7 @@ export type AboutPage = {
     detail: string;
     type: "licenciatura" | "pos-graduacao" | "certificacao";
   }[];
+  clubsTitle?: string;
   ctaImage?: Img;
   ctaTitle?: string;
   ctaBody?: string;
@@ -100,6 +101,7 @@ export const getAboutPage = cache(async (): Promise<AboutPage> => {
       valuesEyebrow, valuesTitle, values[]{ title, body },
       credentialsEyebrow, credentialsTitle, credentialsIntro, ${IMG("credentialsImage")},
       credentials[]{ title, detail, type },
+      clubsTitle,
       ${IMG("ctaImage")}, ctaTitle, ctaBody, ctas[]${CTA},
       ${SEO}
     }`)) ?? {}

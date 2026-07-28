@@ -8,6 +8,7 @@ import { EditorialImage } from "@/components/editorial-image";
 import { ClubsDisclosure } from "@/components/clubs-disclosure";
 import { getSiteSettings } from "@/lib/settings";
 import { getAboutPage } from "@/lib/pages";
+import { getClubs } from "@/lib/clubs";
 import { buildPersonSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 import { MarkdownBody } from "@/components/markdown-body";
@@ -27,7 +28,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function SobrePage() {
-  const [site, about] = await Promise.all([getSiteSettings(), getAboutPage()]);
+  const [site, about, clubsContent] = await Promise.all([
+    getSiteSettings(),
+    getAboutPage(),
+    getClubs(),
+  ]);
 
   return (
     <>
@@ -200,10 +205,10 @@ export default async function SobrePage() {
       </Section>
 
       {/* Clubes — animated expand/collapse of the full clubs list */}
-      {site.clubs.length > 0 ? (
+      {clubsContent.clubs.length > 0 ? (
         <Section tone="surface" id="clubes" className="scroll-mt-24">
           <Reveal>
-            <ClubsDisclosure clubs={site.clubs} title={site.clubsTitle} />
+            <ClubsDisclosure clubs={clubsContent.clubs} title={clubsContent.title} />
           </Reveal>
         </Section>
       ) : null}

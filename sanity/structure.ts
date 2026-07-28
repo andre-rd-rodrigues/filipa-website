@@ -68,6 +68,10 @@ export const structure: StructureResolver = (S) =>
         .schemaType("post")
         .child(S.documentTypeList("post").title("Artigos do blog")),
       S.listItem()
+        .title("Clubes")
+        .schemaType("club")
+        .child(S.documentTypeList("club").title("Clubes")),
+      S.listItem()
         .title("Episódios do podcast")
         .schemaType("episode")
         .child(S.documentTypeList("episode").title("Episódios do podcast")),

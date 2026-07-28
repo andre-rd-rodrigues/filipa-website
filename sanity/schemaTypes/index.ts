@@ -27,6 +27,7 @@ import {
 // Documents — settings & collections
 import { siteSettings } from "./documents/siteSettings";
 import { category } from "./documents/category";
+import { club } from "./documents/club";
 import { post } from "./documents/post";
 import { service } from "./documents/service";
 import { course } from "./documents/course";
@@ -70,6 +71,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   // Settings & collections
   siteSettings,
   category,
+  club,
   post,
   service,
   course,
