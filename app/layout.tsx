@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Bodoni_Moda, Hanken_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -39,8 +39,18 @@ const hanken = Hanken_Grotesk({
   display: "swap",
 });
 
+/**
+ * Viewport-only metadata. In Next 16 `themeColor`/`colorScheme` live here, not
+ * in `metadata`. Dark surface (`#0A0A0A`) matches the always-dark brand.
+ */
+export const viewport: Viewport = {
+  themeColor: "#0A0A0A",
+  colorScheme: "dark",
+};
+
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getSiteSettings();
+  const ogTitle = `${site.name} | ${site.tagline}`;
   return {
     metadataBase: new URL(siteConfig.url),
     title: {
@@ -49,12 +59,18 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description: site.description,
     openGraph: {
-      title: `${site.name} | ${site.tagline}`,
+      title: ogTitle,
       description: site.description,
       url: siteConfig.url,
       siteName: site.fullName,
       locale: "pt_PT",
       type: "website",
+      images: resolveOgImages(),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description: site.description,
       images: resolveOgImages(),
     },
     robots: { index: true, follow: true },

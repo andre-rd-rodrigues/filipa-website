@@ -5,6 +5,8 @@ import { ButtonLink } from "@/components/button";
 import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { EditorialImage } from "@/components/editorial-image";
+import { ClubsDisclosure } from "@/components/clubs-disclosure";
+import { allClubs } from "@/lib/clubs";
 import { getSiteSettings } from "@/lib/settings";
 import { getAboutPage } from "@/lib/pages";
 import { buildPersonSchema } from "@/lib/schema";
@@ -193,7 +195,7 @@ export default async function SobrePage() {
                 <ButtonLink
                   key={cta.label}
                   href={cta.href}
-                  variant={cta.variant === "primary" ? "primary" : "ghost"}
+                  variant={cta.variant === "primary" ? "primary" : "secondary"}
                 >
                   {cta.label}
                 </ButtonLink>
@@ -201,6 +203,13 @@ export default async function SobrePage() {
             </div>
           </Reveal>
         </div>
+      </Section>
+
+      {/* Clubes — animated expand/collapse of the full clubs list */}
+      <Section tone="surface" id="clubes" className="scroll-mt-24">
+        <Reveal>
+          <ClubsDisclosure clubs={allClubs} />
+        </Reveal>
       </Section>
     </>
   );

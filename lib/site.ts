@@ -11,9 +11,13 @@ export const siteConfig = {
   locale: "pt-PT",
 } as const;
 
-/** Default Open Graph share image (1200×630). Overridden by Sanity `seo.ogImage`. */
+/**
+ * Default Open Graph share image (1200×630), hosted externally (postimg) so the
+ * absolute URL always resolves for social scrapers regardless of DNS/where the
+ * app is served. Overridden by Sanity `seo.ogImage`.
+ */
 export const defaultOgImage = {
-  url: "/img/opengraph-image.webp",
+  url: "https://i.postimg.cc/28S98PCW/opengraph-image.webp",
   width: 1200,
   height: 630,
 } as const;
