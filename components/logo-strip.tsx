@@ -1,29 +1,34 @@
 import Link from "next/link";
 import { Container } from "@/components/container";
 import { Reveal } from "@/components/reveal";
-import { allClubs } from "@/lib/clubs";
 
 /**
  * Trust band — a dimmed, evenly spaced row of club names (Brand-Logo Strip in
  * DESIGN.md). Used once, high on the homepage, on the soft-wave base.
  *
- * Names only (no marks). Shows a subset of the clubs; the full list lives on the
- * /sobre page, reachable via the "Ver todos" link below.
+ * Names only (no marks). Shows the first few clubs; the full list lives on the
+ * /sobre page, reachable via the "Ver todos" link below. Data comes from Sanity
+ * (siteSettings) via props.
  */
+export function LogoStrip({
+  clubs,
+  title,
+}: {
+  clubs: string[];
+  title: string;
+}) {
+  const featured = clubs.slice(0, 5);
 
-const featured = allClubs.slice(0, 5);
+  if (featured.length === 0) return null;
 
-export function LogoStrip() {
   return (
     <section
-      aria-label="Clubes dos atletas que acompanho"
+      aria-label={title}
       className="border-y border-ink-line py-[clamp(2rem,4vw,3rem)]"
     >
       <Container>
         <Reveal>
-          <p className="eyebrow text-center text-fg-muted">
-            Clubes dos atletas que acompanho
-          </p>
+          <p className="eyebrow text-center text-fg-muted">{title}</p>
           <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-14">
             {featured.map((name) => (
               <li

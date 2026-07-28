@@ -9,7 +9,8 @@ import { PageHero } from "@/components/page-hero";
 import { getAllCourses, getCourseBySlug } from "@/lib/courses";
 import { buildCourseSchema } from "@/lib/schema";
 import { getSiteSettings } from "@/lib/settings";
-import { primaryCta, resolveOgImages } from "@/lib/site";
+import { primaryCta } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 // All slugs are known at build time (mock today, Sanity later). Unknown slugs
 // 404 rather than rendering on demand.
@@ -25,19 +26,11 @@ export async function generateMetadata(props: PageProps<"/cursos/[slug]">) {
   const course = await getCourseBySlug(slug);
   if (!course) return { title: "Curso não encontrado" };
 
-  return {
+  return pageMetadata({
     title: course.title,
     description: course.summary,
-    alternates: {
-      canonical: `/cursos/${slug}`,
-    },
-    openGraph: {
-      title: course.title,
-      description: course.summary,
-      type: "website",
-      images: resolveOgImages(),
-    },
-  };
+    path: `/cursos/${slug}`,
+  });
 }
 
 /** Definition row for the practical-details list; renders nothing when empty. */

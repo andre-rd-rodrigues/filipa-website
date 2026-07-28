@@ -19,6 +19,8 @@ export type SiteSettings = {
   };
   socials: { label: string; handle: string; href: string }[];
   quotes: { home: string; servicos: string; sobre: string };
+  clubsTitle: string;
+  clubs: string[];
 };
 
 type RawSettings = {
@@ -34,13 +36,16 @@ type RawSettings = {
   quoteHome?: string;
   quoteServicos?: string;
   quoteSobre?: string;
+  clubsTitle?: string;
+  clubs?: string[];
 };
 
 const query = `*[_type == "siteSettings"][0]{
   name, tagline, fullName, description, quote,
   phone, email, location,
   socials[]{ label, handle, href },
-  quoteHome, quoteServicos, quoteSobre
+  quoteHome, quoteServicos, quoteSobre,
+  clubsTitle, clubs
 }`;
 
 /**
@@ -79,5 +84,7 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
       servicos: data.quoteServicos ?? "",
       sobre: data.quoteSobre ?? "",
     },
+    clubsTitle: data.clubsTitle || "Clubes dos atletas que acompanho",
+    clubs: data.clubs ?? [],
   };
 });

@@ -18,7 +18,13 @@ const listClass =
  * 0fr -> 1fr trick (no JS measuring). Auto-opens when the page is reached with
  * the #clubes hash (e.g. from the homepage "Ver todos" link).
  */
-export function ClubsDisclosure({ clubs }: { clubs: string[] }) {
+export function ClubsDisclosure({
+  clubs,
+  title,
+}: {
+  clubs: string[];
+  title: string;
+}) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
 
@@ -37,7 +43,7 @@ export function ClubsDisclosure({ clubs }: { clubs: string[] }) {
       <div>
         <Eyebrow className="mb-4">Clubes</Eyebrow>
         <h2 className="font-display text-balance text-[clamp(2rem,4vw,3rem)] leading-[1.1]">
-          Clubes dos atletas que acompanho
+          {title}
         </h2>
       </div>
 

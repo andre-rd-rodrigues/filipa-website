@@ -22,9 +22,13 @@ export const defaultOgImage = {
   height: 630,
 } as const;
 
+export const defaultOgImageAlt =
+  "Filipa Marques — Mental Coach, PNL e Psicologia do Desporto";
+
 /** Resolve OG images: Sanity override when set, otherwise the site default. */
-export function resolveOgImages(overrideSrc?: string | null) {
-  return [overrideSrc ? { url: overrideSrc } : { ...defaultOgImage }];
+export function resolveOgImages(overrideSrc?: string | null, alt?: string) {
+  const image = overrideSrc ? { url: overrideSrc } : { ...defaultOgImage };
+  return [{ ...image, alt: alt ?? defaultOgImageAlt }];
 }
 
 export type NavLink = { label: string; href: string };

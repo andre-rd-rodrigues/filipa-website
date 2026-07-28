@@ -7,24 +7,19 @@ import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { getAllEpisodes, type Episode } from "@/lib/podcast";
 import { getPodcastPage } from "@/lib/pages";
-import { resolveOgImages } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPodcastPage();
   const description =
     page.seo?.metaDescription ??
     "Conversas curtas sobre PNL, gestão emocional e a mente de quem compete. Episódios práticos de coaching desportivo, em pt-PT, para atletas e treinadores.";
-  return {
+  return pageMetadata({
     title: page.seo?.metaTitle ?? "Podcast",
     description,
-    alternates: { canonical: "/podcast" },
-    openGraph: {
-      title: page.seo?.metaTitle ?? "Podcast",
-      description,
-      type: "website",
-      images: resolveOgImages(page.seo?.ogImage?.src),
-    },
-  };
+    path: "/podcast",
+    ogImageSrc: page.seo?.ogImage?.src,
+  });
 }
 
 const platformIcons: Record<string, ReactNode> = {

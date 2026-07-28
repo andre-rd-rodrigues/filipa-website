@@ -6,28 +6,23 @@ import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { EditorialImage } from "@/components/editorial-image";
 import { ClubsDisclosure } from "@/components/clubs-disclosure";
-import { allClubs } from "@/lib/clubs";
 import { getSiteSettings } from "@/lib/settings";
 import { getAboutPage } from "@/lib/pages";
 import { buildPersonSchema } from "@/lib/schema";
-import { resolveOgImages } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const about = await getAboutPage();
   const description =
     about.seo?.metaDescription ??
-    "Conhece a Filipa Marques: mental coach e coach de PNL, especializada em Psicologia do Desporto. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.";
-  return {
+    "Olá, o meu nome é Filipa Marques. Sou Mental Coach, Master Trainer em PNL e Pós-Graduada em Psicologia do Desporto. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.";
+  return pageMetadata({
     title: about.seo?.metaTitle ?? "Sobre mim",
     description,
-    alternates: { canonical: "/sobre" },
-    openGraph: {
-      title: about.seo?.metaTitle ?? "Sobre mim",
-      description,
-      type: "profile",
-      images: resolveOgImages(about.seo?.ogImage?.src),
-    },
-  };
+    path: "/sobre",
+    ogType: "profile",
+    ogImageSrc: about.seo?.ogImage?.src,
+  });
 }
 
 export default async function SobrePage() {
@@ -206,11 +201,13 @@ export default async function SobrePage() {
       </Section>
 
       {/* Clubes — animated expand/collapse of the full clubs list */}
-      <Section tone="surface" id="clubes" className="scroll-mt-24">
-        <Reveal>
-          <ClubsDisclosure clubs={allClubs} />
-        </Reveal>
-      </Section>
+      {site.clubs.length > 0 ? (
+        <Section tone="surface" id="clubes" className="scroll-mt-24">
+          <Reveal>
+            <ClubsDisclosure clubs={site.clubs} title={site.clubsTitle} />
+          </Reveal>
+        </Section>
+      ) : null}
     </>
   );
 }

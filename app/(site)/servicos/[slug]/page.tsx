@@ -9,7 +9,8 @@ import { PageHero } from "@/components/page-hero";
 import { getAllServices, getServiceBySlug } from "@/lib/services";
 import { buildServiceSchema } from "@/lib/schema";
 import { getSiteSettings } from "@/lib/settings";
-import { primaryCta, resolveOgImages } from "@/lib/site";
+import { primaryCta } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 // All slugs are known at build time (mock today, Sanity later). Unknown slugs
 // 404 rather than rendering on demand.
@@ -25,19 +26,11 @@ export async function generateMetadata(props: PageProps<"/servicos/[slug]">) {
   const service = await getServiceBySlug(slug);
   if (!service) return { title: "Serviço não encontrado" };
 
-  return {
+  return pageMetadata({
     title: service.title,
     description: service.summary,
-    alternates: {
-      canonical: `/servicos/${slug}`,
-    },
-    openGraph: {
-      title: service.title,
-      description: service.summary,
-      type: "website",
-      images: resolveOgImages(),
-    },
-  };
+    path: `/servicos/${slug}`,
+  });
 }
 
 export default async function ServicePage(props: PageProps<"/servicos/[slug]">) {

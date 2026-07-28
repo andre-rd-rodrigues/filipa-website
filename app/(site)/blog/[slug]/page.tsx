@@ -12,7 +12,8 @@ import {
   type BlogPost,
 } from "@/lib/blog";
 import { getSiteSettings } from "@/lib/settings";
-import { primaryCta, resolveOgImages } from "@/lib/site";
+import { primaryCta } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 import { buildBlogPostingSchema, buildFaqSchema } from "@/lib/schema";
 
 // All slugs are known at build time. Unknown slugs 404 rather than rendering.
@@ -28,21 +29,16 @@ export async function generateMetadata(props: PageProps<"/blog/[slug]">) {
   const post = await getPostBySlug(slug);
   if (!post) return { title: "Artigo não encontrado" };
 
-  return {
+  return pageMetadata({
     title: post.title,
     description: post.excerpt,
+    path: `/blog/${slug}`,
     keywords: post.keywords,
-    alternates: {
-      canonical: `/blog/${slug}`,
-    },
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      type: "article",
-      publishedTime: post.publishedAt,
-      images: resolveOgImages(),
-    },
-  };
+    ogType: "article",
+    publishedTime: post.publishedAt,
+    ogImageSrc: post.coverImage?.src,
+    ogImageAlt: post.coverImage?.alt,
+  });
 }
 
 function FaqSection({ faq }: { faq: NonNullable<BlogPost["faq"]> }) {

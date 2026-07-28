@@ -16,19 +16,16 @@ import { getSiteSettings } from "@/lib/settings";
 import { getHomePage } from "@/lib/pages";
 import { getLatestPosts, formatPostDate } from "@/lib/blog";
 import { getLatestEpisodes } from "@/lib/podcast";
-import { resolveOgImages } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [site, home] = await Promise.all([getSiteSettings(), getHomePage()]);
-  return {
-    alternates: { canonical: "/" },
-    openGraph: {
-      title: home.seo?.metaTitle ?? `${site.name} | ${site.tagline}`,
-      description: home.seo?.metaDescription ?? site.description,
-      type: "website",
-      images: resolveOgImages(home.seo?.ogImage?.src),
-    },
-  };
+  return pageMetadata({
+    description: home.seo?.metaDescription ?? site.description,
+    path: "/",
+    ogTitle: home.seo?.metaTitle ?? `${site.name} | ${site.tagline}`,
+    ogImageSrc: home.seo?.ogImage?.src,
+  });
 }
 
 export default async function Home() {
@@ -50,8 +47,8 @@ export default async function Home() {
         portrait={home.heroPortrait}
       />
 
-      {/* Trust band — dimmed club logos (mocked) */}
-      <LogoStrip />
+      {/* Trust band — club names from Sanity (siteSettings) */}
+      <LogoStrip clubs={site.clubs} title={site.clubsTitle} />
 
       {/* Layered editorial block — overlapping image panels on top of each other */}
       <Section tone="page">
