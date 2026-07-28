@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { makeCourse } from "@/test/fixtures";
 
 const fixtureCourses = [
@@ -9,7 +9,7 @@ const fixtureCourses = [
       {
         label: "Passada",
         format: "Online (Zoom)",
-        sessions: [{ date: "2020-01-01", start: "19:00", end: "21:00" }],
+        sessions: [{ date: "2999-10-06", start: "19:00", end: "21:00" }],
       },
       {
         label: "Futura",
@@ -40,6 +40,15 @@ import {
   getCourseBySlug,
   getUpcomingSessions,
 } from "@/lib/courses";
+
+beforeAll(() => {
+  vi.useFakeTimers();
+  vi.setSystemTime(new Date(2999, 9, 7, 12));
+});
+
+afterAll(() => {
+  vi.useRealTimers();
+});
 
 describe("courses data layer", () => {
   it("returns a non-empty list where every course has the required fields", async () => {
@@ -87,6 +96,11 @@ describe("getUpcomingSessions", () => {
         ).toBeLessThanOrEqual(0);
       }
     }
+
+    expect(sessions.map((item) => item.session.date)).toEqual([
+      "2999-10-07",
+      "2999-10-09",
+    ]);
   });
 
   it("carries the course + edition context for each session", async () => {
