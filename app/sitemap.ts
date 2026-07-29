@@ -11,61 +11,51 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${baseUrl}/sobre`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/servicos`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/contactos`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/cursos`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/podcast`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/privacidade`,
-      lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
       url: `${baseUrl}/termos`,
-      lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
       url: `${baseUrl}/cookies`,
-      lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.3,
     },
@@ -75,7 +65,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const services = await getAllServices();
   const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
     url: `${baseUrl}/servicos/${service.slug}`,
-    lastModified: new Date(),
+    lastModified: service.updatedAt,
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
@@ -84,7 +74,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const courses = await getAllCourses();
   const courseRoutes: MetadataRoute.Sitemap = courses.map((course) => ({
     url: `${baseUrl}/cursos/${course.slug}`,
-    lastModified: new Date(),
+    lastModified: course.updatedAt,
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
@@ -93,7 +83,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllPosts();
   const postRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: post.publishedAt,
+    lastModified: post.updatedAt,
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));

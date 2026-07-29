@@ -102,7 +102,7 @@ export function buildBlogPostingSchema(
     url,
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     datePublished: post.publishedAt,
-    dateModified: post.publishedAt,
+    dateModified: post.updatedAt,
     image: [image],
     articleSection: post.category,
     ...(post.keywords?.length ? { keywords: post.keywords.join(", ") } : {}),

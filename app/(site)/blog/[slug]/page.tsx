@@ -16,9 +16,6 @@ import { primaryCta } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 import { buildBlogPostingSchema, buildFaqSchema } from "@/lib/schema";
 
-// All slugs are known at build time. Unknown slugs 404 rather than rendering.
-export const dynamicParams = false;
-
 export async function generateStaticParams() {
   const posts = await getAllPosts();
   return posts.map((post) => ({ slug: post.slug }));

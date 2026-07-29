@@ -26,6 +26,7 @@ export type CourseEdition = {
 
 export type Course = {
   slug: string;
+  updatedAt: string;
   title: string;
   subtitle?: string;
   category: string;
@@ -46,6 +47,7 @@ export type Course = {
 
 const FIELDS = `
   "slug": slug.current,
+  "updatedAt": _updatedAt,
   title,
   subtitle,
   category,

@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { legalLinks, navLinks, primaryCta } from "@/lib/site";
+import { legalLinks, navLinks, primaryCta, siteConfig } from "@/lib/site";
 
 describe("site configuration", () => {
+  it("uses the canonical production origin", () => {
+    expect(siteConfig.url).toBe("https://www.filipamarques.com");
+  });
+
   it("exposes non-empty primary navigation with valid entries", () => {
     expect(navLinks.length).toBeGreaterThan(0);
     for (const link of navLinks) {

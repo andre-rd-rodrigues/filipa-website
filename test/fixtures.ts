@@ -40,6 +40,7 @@ export function makeBlogPost(overrides: Partial<BlogPost> = {}): BlogPost {
     category: "Categoria",
     author: "Filipa Marques",
     publishedAt: "2026-01-15",
+    updatedAt: "2026-01-15T00:00:00Z",
     readingMinutes: 5,
     coverImage: { src: "/img/editorial/capa.webp", alt: "Imagem de capa" },
     body: sampleBody,
@@ -55,7 +56,7 @@ export function makeSiteSettings(
     tagline: "Coaching & PNL",
     fullName: "Filipa Marques — Coaching & PNL",
     description: "Descrição de teste do site.",
-    url: "https://filipamarques.pt",
+    url: "https://www.filipamarques.com",
     locale: "pt-PT",
     quote: "Uma citação da marca.",
     contact: {
@@ -80,6 +81,7 @@ export function makeSiteSettings(
 export function makeCourse(overrides: Partial<Course> = {}): Course {
   return {
     slug: "curso-de-teste",
+    updatedAt: "2026-01-15T00:00:00Z",
     title: "Curso de teste",
     category: "Comunicação",
     summary: "Resumo curto do curso.",
@@ -94,6 +96,7 @@ export function makeCourse(overrides: Partial<Course> = {}): Course {
 export function makeService(overrides: Partial<Service> = {}): Service {
   return {
     slug: "servico-de-teste",
+    updatedAt: "2026-01-15T00:00:00Z",
     number: "01",
     title: "Serviço de teste",
     summary: "Resumo curto do serviço.",

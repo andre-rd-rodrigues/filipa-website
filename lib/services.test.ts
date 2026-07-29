@@ -27,6 +27,7 @@ describe("services data layer", () => {
     for (const service of services) {
       expect(typeof service.slug).toBe("string");
       expect(service.slug.length).toBeGreaterThan(0);
+      expect(Date.parse(service.updatedAt)).not.toBeNaN();
       expect(typeof service.number).toBe("string");
       expect(typeof service.title).toBe("string");
       expect(typeof service.summary).toBe("string");

@@ -22,6 +22,7 @@ import { pageMetadata } from "@/lib/seo";
 export async function generateMetadata(): Promise<Metadata> {
   const [site, home] = await Promise.all([getSiteSettings(), getHomePage()]);
   return pageMetadata({
+    absoluteTitle: "Filipa Marques | Coaching e PNL",
     description: home.seo?.metaDescription ?? site.description,
     path: "/",
     ogTitle: home.seo?.metaTitle ?? `${site.name} | ${site.tagline}`,

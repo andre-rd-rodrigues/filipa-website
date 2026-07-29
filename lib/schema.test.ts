@@ -89,6 +89,16 @@ describe("schema builders", () => {
       expect(schema.image).toEqual(["https://cdn.example.com/capa.webp"]);
     });
 
+    it("uses the Sanity update timestamp as dateModified", () => {
+      const post = makeBlogPost({
+        publishedAt: "2026-01-15",
+        updatedAt: "2026-02-20T10:30:00Z",
+      });
+      const schema = buildBlogPostingSchema(post, settings);
+      expect(schema.datePublished).toBe("2026-01-15");
+      expect(schema.dateModified).toBe("2026-02-20T10:30:00Z");
+    });
+
     it("includes keywords only when present", () => {
       const withKeywords = buildBlogPostingSchema(
         makeBlogPost({ keywords: ["burnout", "atleta"] }),

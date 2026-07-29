@@ -68,6 +68,7 @@ describe("blog data layer", () => {
       expect(typeof post.excerpt).toBe("string");
       expect(typeof post.category).toBe("string");
       expect(typeof post.author).toBe("string");
+      expect(Date.parse(post.updatedAt)).not.toBeNaN();
       expect(typeof post.coverImage.src).toBe("string");
       expect(typeof post.coverImage.alt).toBe("string");
       expect(Number.isFinite(post.readingMinutes)).toBe(true);

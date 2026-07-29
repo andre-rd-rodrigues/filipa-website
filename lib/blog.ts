@@ -19,6 +19,8 @@ export type BlogPost = {
   author: string;
   /** ISO date string. */
   publishedAt: string;
+  /** Sanity document update timestamp. */
+  updatedAt: string;
   /** Estimated reading time in minutes. */
   readingMinutes: number;
   coverImage: { src: string; alt: string };
@@ -39,6 +41,7 @@ const CARD_FIELDS = `
   "category": category->title,
   author,
   publishedAt,
+  "updatedAt": _updatedAt,
   readingMinutes,
   "coverImage": { "src": coverImage.asset->url, "alt": coverImage.alt }
 `;

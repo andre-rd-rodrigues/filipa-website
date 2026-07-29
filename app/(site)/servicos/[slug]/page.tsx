@@ -13,10 +13,6 @@ import { primaryCta } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 import { MarkdownBody } from "@/components/markdown-body";
 
-// All slugs are known at build time (mock today, Sanity later). Unknown slugs
-// 404 rather than rendering on demand.
-export const dynamicParams = false;
-
 export async function generateStaticParams() {
   const services = await getAllServices();
   return services.map((service) => ({ slug: service.slug }));

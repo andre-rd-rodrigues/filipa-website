@@ -4,6 +4,7 @@ import { resolveOgImages, siteConfig } from "@/lib/site";
 
 type PageMetaInput = {
   title?: string;
+  absoluteTitle?: string;
   description: string;
   path: string;
   ogTitle?: string;
@@ -22,7 +23,11 @@ export async function pageMetadata(input: PageMetaInput): Promise<Metadata> {
   const images = resolveOgImages(input.ogImageSrc, input.ogImageAlt);
 
   return {
-    title: input.title,
+    ...(input.absoluteTitle
+      ? { title: { absolute: input.absoluteTitle } }
+      : input.title
+        ? { title: input.title }
+        : {}),
     description: input.description,
     ...(input.keywords ? { keywords: input.keywords } : {}),
     alternates: { canonical: input.path },

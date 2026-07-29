@@ -163,8 +163,9 @@ export function Hero({
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
           >
+            <source src="/videos/smoke.webm" type="video/webm" />
             <source src="/videos/smoke.mp4" type="video/mp4" />
           </video>
           {/* Scrim: keep type legible and blend the smoke into the dark ground */}

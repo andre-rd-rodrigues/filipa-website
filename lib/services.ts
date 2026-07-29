@@ -19,6 +19,7 @@ export type ServiceClosing = {
 
 export type Service = {
   slug: string;
+  updatedAt: string;
   number: string;
   title: string;
   tag?: string;
@@ -37,6 +38,7 @@ export type Service = {
 
 const FIELDS = `
   "slug": slug.current,
+  "updatedAt": _updatedAt,
   number,
   title,
   tag,

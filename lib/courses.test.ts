@@ -57,6 +57,7 @@ describe("courses data layer", () => {
 
     for (const course of courses) {
       expect(typeof course.slug).toBe("string");
+      expect(Date.parse(course.updatedAt)).not.toBeNaN();
       expect(typeof course.title).toBe("string");
       expect(typeof course.category).toBe("string");
       expect(typeof course.summary).toBe("string");

@@ -7,7 +7,7 @@
 
 /** Deployment config — used for canonical URLs, sitemap and JSON-LD. */
 export const siteConfig = {
-  url: "https://filipamarques.pt",
+  url: "https://www.filipamarques.com",
   locale: "pt-PT",
 } as const;
 
