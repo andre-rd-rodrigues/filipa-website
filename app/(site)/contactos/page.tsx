@@ -6,6 +6,7 @@ import { PageHero } from "@/components/page-hero";
 import { ButtonLink } from "@/components/button";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { EditorialImage } from "@/components/editorial-image";
+import { SocialIcon } from "@/components/social-icon";
 import { getSiteSettings } from "@/lib/settings";
 import { getContactPage } from "@/lib/pages";
 import { ContactForm } from "./contact-form";
@@ -109,8 +110,9 @@ export default async function ContactosPage() {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex items-baseline gap-2 text-[1.0625rem] text-fg transition-colors hover:text-action-deep"
+                        className="group inline-flex items-center gap-2 text-[1.0625rem] text-fg transition-colors hover:text-action-deep"
                       >
+                        <SocialIcon label={social.label} className="h-4 w-4 shrink-0" />
                         <span className="font-medium">{social.label}</span>
                         <span className="text-[0.9375rem] text-fg-muted transition-colors group-hover:text-action-deep">
                           {social.handle}

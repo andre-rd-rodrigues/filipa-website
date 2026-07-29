@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/container";
 import { SiteLogo } from "@/components/site-logo";
+import { SocialIcon } from "@/components/social-icon";
 import { NewsletterForm } from "@/components/newsletter-form";
 import { legalLinks, navLinks, siteCredit } from "@/lib/site";
 import type { SiteSettings } from "@/lib/settings";
@@ -79,8 +80,9 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="transition-colors hover:text-action"
+                    className="inline-flex items-center gap-2 transition-colors hover:text-action"
                   >
+                    <SocialIcon label={s.label} className="h-4 w-4 shrink-0" />
                     {s.label}
                   </a>
                 </li>
