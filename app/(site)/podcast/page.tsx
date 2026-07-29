@@ -13,9 +13,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = await getPodcastPage();
   const description =
     page.seo?.metaDescription ??
-    "Conversas curtas sobre PNL, gestão emocional e a mente de quem compete. Episódios práticos de coaching desportivo, em pt-PT, para atletas e treinadores.";
+    "Conversas curtas sobre PNL, gestão emocional e a mente de quem compete. Episódios práticos de coaching desportivo para atletas e treinadores.";
   return pageMetadata({
-    title: page.seo?.metaTitle ?? "Podcast",
+    title: page.seo?.metaTitle ?? "Podcast de Coaching Desportivo",
     description,
     path: "/podcast",
     ogImageSrc: page.seo?.ogImage?.src,

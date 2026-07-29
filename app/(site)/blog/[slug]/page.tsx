@@ -27,7 +27,8 @@ export async function generateMetadata(props: PageProps<"/blog/[slug]">) {
   if (!post) return { title: "Artigo não encontrado" };
 
   return pageMetadata({
-    title: post.title,
+    absoluteTitle: post.title,
+    ogTitle: post.title,
     description: post.excerpt,
     path: `/blog/${slug}`,
     keywords: post.keywords,

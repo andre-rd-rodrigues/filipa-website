@@ -18,6 +18,7 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
           variant="dark"
           fullWidth
           title="Newsletter"
+          titleAs="p"
           description="Ideias, artigos e novidades sobre coaching, PNL e desporto, directamente na tua caixa de correio electrónico."
         />
 

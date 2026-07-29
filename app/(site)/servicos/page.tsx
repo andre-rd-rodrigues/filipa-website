@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     page.seo?.metaDescription ??
     "Coaching individual, coaching de equipas, gestão emocional e PNL aplicados ao desporto. Serviços que ligam a mente aos teus resultados.";
   return pageMetadata({
-    title: page.seo?.metaTitle ?? "Serviços",
+    title: page.seo?.metaTitle ?? "Serviços de Coaching e PNL no Desporto",
     description,
     path: "/servicos",
     ogImageSrc: page.seo?.ogImage?.src,

@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = await getLegalPage("termos");
   const description =
     page?.seo?.metaDescription ??
-    "Termos e condições de utilização do site da Filipa Marques — Coaching & PNL: objeto, propriedade intelectual, isenção de responsabilidade e lei aplicável.";
+    "Termos e condições do site da Filipa Marques — Coaching & PNL: objeto, propriedade intelectual, isenção de responsabilidade e lei aplicável.";
   return pageMetadata({
     title: page?.seo?.metaTitle ?? page?.title ?? "Termos e Condições",
     description,

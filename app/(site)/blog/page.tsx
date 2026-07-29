@@ -5,6 +5,7 @@ import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-hero";
 import { ButtonLink } from "@/components/button";
 import { BlogExplorer } from "@/components/blog-explorer";
+import { BlogList } from "@/components/blog-list";
 import { getAllPosts, getAllCategories } from "@/lib/blog";
 import { getBlogPage } from "@/lib/pages";
 import { pageMetadata } from "@/lib/seo";
@@ -15,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
     page.seo?.metaDescription ??
     "Artigos sobre coaching, PNL, gestão emocional e comunicação no desporto. Ferramentas práticas para pensar, sentir e agir melhor.";
   return pageMetadata({
-    title: page.seo?.metaTitle ?? "Blog",
+    title: page.seo?.metaTitle ?? "Blog de Coaching, PNL e Desporto",
     description,
     path: "/blog",
     ogImageSrc: page.seo?.ogImage?.src,
@@ -35,7 +36,7 @@ export default async function BlogPage() {
 
       <Section tone="page">
         {posts.length > 0 ? (
-          <Suspense fallback={null}>
+          <Suspense fallback={<BlogList posts={posts} />}>
             <BlogExplorer posts={posts} categories={categories} />
           </Suspense>
         ) : (

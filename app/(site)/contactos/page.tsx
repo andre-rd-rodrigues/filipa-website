@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     page.seo?.metaDescription ??
     "Marca uma conversa comigo. Coaching, PNL e gestão emocional para o desporto: por telefone, email ou formulário. Respondo em breve.";
   return pageMetadata({
-    title: page.seo?.metaTitle ?? "Contactos",
+    title: page.seo?.metaTitle ?? "Contactos — Coaching e PNL no Desporto",
     description,
     path: "/contactos",
     ogImageSrc: page.seo?.ogImage?.src,

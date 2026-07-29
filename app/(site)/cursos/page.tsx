@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     page.seo?.metaDescription ??
     "Cursos de PNL, gestão emocional e comunicação aplicados ao desporto. Formação prática para atletas, treinadores e profissionais que querem agir.";
   return pageMetadata({
-    title: page.seo?.metaTitle ?? "Cursos",
+    title: page.seo?.metaTitle ?? "Cursos de PNL e Gestão Emocional",
     description,
     path: "/cursos",
     ogImageSrc: page.seo?.ogImage?.src,
@@ -53,6 +53,7 @@ export default async function CursosPage() {
 
       {/* Upcoming dates — month grid + agenda */}
       <Section tone="page" id="datas">
+        <h2 className="sr-only">{page.datesEyebrow ?? "Próximas datas"}</h2>
         <Reveal>
           <Eyebrow className="mb-4">{page.datesEyebrow}</Eyebrow>
         </Reveal>
@@ -64,6 +65,7 @@ export default async function CursosPage() {
 
       {/* Course listing — full-width editorial blocks, alternating image side */}
       <Section tone="surface" id="lista">
+        <h2 className="sr-only">{page.listEyebrow ?? "Cursos disponíveis"}</h2>
         <Reveal>
           <Eyebrow className="mb-4">{page.listEyebrow}</Eyebrow>
         </Reveal>

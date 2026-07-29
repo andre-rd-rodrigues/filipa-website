@@ -17,9 +17,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const about = await getAboutPage();
   const description =
     about.seo?.metaDescription ??
-    "Olá, o meu nome é Filipa Marques. Sou Mental Coach, Master Trainer em PNL e Pós-Graduada em Psicologia do Desporto. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.";
+    "Mental Coach, Master Trainer em PNL e Pós-Graduada em Psicologia do Desporto. Ajudo atletas, treinadores e profissionais a pensar, sentir e agir com foco.";
   return pageMetadata({
-    title: about.seo?.metaTitle ?? "Sobre mim",
+    title: about.seo?.metaTitle ?? "Sobre — Mental Coach e Coach de PNL",
     description,
     path: "/sobre",
     ogType: "profile",

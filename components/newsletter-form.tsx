@@ -58,6 +58,7 @@ function ArrowIcon({ className = "" }: { className?: string }) {
 export function NewsletterForm({
   variant = "light",
   title,
+  titleAs: TitleTag = "h2",
   description,
   fullWidth = false,
 }: {
@@ -65,6 +66,11 @@ export function NewsletterForm({
   variant?: "light" | "dark";
   /** Large display title above the form (reference: “Newsletter Signup”). */
   title?: string;
+  /**
+   * Element used for the title. Defaults to `h2`; the footer passes `p` so the
+   * sitewide newsletter widget doesn't create a duplicate <h2> on every page.
+   */
+  titleAs?: "h2" | "p";
   description?: string;
   /** Stretch to the full width of the parent (footer). */
   fullWidth?: boolean;
@@ -159,11 +165,11 @@ export function NewsletterForm({
   return (
     <div className={fullWidth ? "w-full" : "max-w-xl"}>
       {title ? (
-        <h2
+        <TitleTag
           className={`font-display text-balance text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.08] tracking-[-0.02em] ${titleClass}`}
         >
           {title}
-        </h2>
+        </TitleTag>
       ) : null}
       {description ? (
         <p
