@@ -53,7 +53,7 @@ export function InstagramStrip({
             <a href={href} target="_blank" rel="noopener noreferrer" tabIndex={-1} aria-hidden>
               <Image
                 src={img.src}
-                alt=""
+                alt={img.alt || `Publicação de Filipa Marques no Instagram ${handle}`}
                 fill
                 sizes="(max-width: 640px) 33vw, 16vw"
                 className="object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"

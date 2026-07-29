@@ -4,6 +4,7 @@ type SiteLogoProps = {
   className?: string;
   priority?: boolean;
   variant?: "default" | "navbar";
+  alt?: string;
 };
 
 const logos = {
@@ -17,13 +18,14 @@ export function SiteLogo({
   className = "h-10 w-auto sm:h-11",
   priority = false,
   variant = "default",
+  alt = "Filipa Marques — Coaching e PNL",
 }: SiteLogoProps) {
   const logo = logos[variant];
 
   return (
     <Image
       src={logo.src}
-      alt=""
+      alt={alt}
       width={logo.width}
       height={logo.height}
       priority={priority}

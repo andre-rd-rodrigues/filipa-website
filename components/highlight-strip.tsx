@@ -52,7 +52,7 @@ export function HighlightStrip({ items }: { items: HighlightItem[] }) {
           >
             <Image
               src={item.image.src}
-              alt=""
+              alt={item.image.alt || item.label}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="scale-105 object-cover transition-transform duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-100"
