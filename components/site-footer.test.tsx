@@ -5,6 +5,13 @@ import { legalLinks, navLinks } from "@/lib/site";
 import { makeSiteSettings } from "@/test/fixtures";
 
 describe("SiteFooter", () => {
+  it("exposes the newsletter section as a #newsletter hash target", () => {
+    render(<SiteFooter settings={makeSiteSettings()} />);
+    const section = document.getElementById("newsletter");
+    expect(section).toBeInTheDocument();
+    expect(section?.tagName).toBe("SECTION");
+  });
+
   it("renders navigation and legal links plus contact info", () => {
     const settings = makeSiteSettings();
     render(<SiteFooter settings={settings} />);

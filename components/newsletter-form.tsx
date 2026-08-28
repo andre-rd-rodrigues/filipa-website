@@ -1,6 +1,13 @@
 "use client";
 
-import { useId, useState, type ChangeEvent, type FormEvent } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+} from "react";
 import Link from "next/link";
 
 type FormState = {
@@ -76,11 +83,25 @@ export function NewsletterForm({
   fullWidth?: boolean;
 }) {
   const uid = useId();
+  const emailRef = useRef<HTMLInputElement>(null);
   const [values, setValues] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleHash = () => {
+      if (window.location.hash === "#newsletter") {
+        document.getElementById("newsletter")?.scrollIntoView({ block: "start" });
+        emailRef.current?.focus({ preventScroll: true });
+      }
+    };
+
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
 
   const isDark = variant === "dark";
   const fieldId = (name: keyof FormState) => `${uid}-${name}`;
@@ -234,6 +255,7 @@ export function NewsletterForm({
           >
             <EnvelopeIcon className={`shrink-0 ${iconClass}`} />
             <input
+              ref={emailRef}
               id={fieldId("email")}
               name="email"
               type="email"

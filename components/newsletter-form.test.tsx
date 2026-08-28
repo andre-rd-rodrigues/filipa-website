@@ -7,11 +7,29 @@ describe("NewsletterForm", () => {
   afterEach(() => {
     vi.unstubAllGlobals();
     vi.restoreAllMocks();
+    window.history.replaceState(null, "", "/");
   });
 
-  it("renders the email field", () => {
+  it("renders the email field without stealing focus", () => {
     render(<NewsletterForm />);
     expect(screen.getByLabelText("Email")).toBeInTheDocument();
+    expect(screen.getByLabelText("Email")).not.toHaveFocus();
+  });
+
+  it("focuses the email field when the URL hash is #newsletter", () => {
+    window.history.replaceState(null, "", "/#newsletter");
+    render(<NewsletterForm />);
+    expect(screen.getByLabelText("Email")).toHaveFocus();
+  });
+
+  it("focuses the email field when the hash changes to #newsletter", () => {
+    render(<NewsletterForm />);
+    expect(screen.getByLabelText("Email")).not.toHaveFocus();
+
+    window.history.replaceState(null, "", "/#newsletter");
+    window.dispatchEvent(new HashChangeEvent("hashchange"));
+
+    expect(screen.getByLabelText("Email")).toHaveFocus();
   });
 
   it("shows a validation error when submitted empty", async () => {

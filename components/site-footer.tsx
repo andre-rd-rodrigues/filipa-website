@@ -14,13 +14,19 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
   return (
     <footer className="bg-ink text-fg-inverse-muted">
       <Container className="py-16 sm:py-20">
-        <NewsletterForm
-          variant="dark"
-          fullWidth
-          title="Newsletter"
-          titleAs="p"
-          description="Ideias, artigos e novidades sobre coaching, PNL e desporto, directamente na tua caixa de correio electrónico."
-        />
+        <section
+          id="newsletter"
+          tabIndex={-1}
+          className="scroll-mt-24 outline-none"
+        >
+          <NewsletterForm
+            variant="dark"
+            fullWidth
+            title="Newsletter"
+            titleAs="p"
+            description="Ideias, artigos e novidades sobre coaching, PNL e desporto, directamente na tua caixa de correio electrónico."
+          />
+        </section>
 
         <div className="mt-14 grid gap-12 border-t border-white/10 pt-14 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           {/* Brand + quote */}
