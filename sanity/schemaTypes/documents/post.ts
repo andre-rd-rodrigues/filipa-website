@@ -1,4 +1,4 @@
-import { defineType, defineField } from "sanity";
+import { defineType, defineField, defineArrayMember } from "sanity";
 
 /** Artigo do blog. */
 export const post = defineType({
@@ -91,7 +91,29 @@ export const post = defineType({
       name: "relatedPosts",
       title: "Artigos relacionados",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "post" }] }],
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "post" }],
+          // Allows linking to draft-only posts; required before publishing.
+          weak: true,
+          options: {
+            filter: ({ document }) => {
+              const baseId = document._id?.replace(/^drafts\./, "") ?? "";
+              return {
+                filter:
+                  '_type == "post" && !(_id in [$draftId, $publishedId])',
+                params: {
+                  draftId: `drafts.${baseId}`,
+                  publishedId: baseId,
+                },
+              };
+            },
+          },
+        }),
+      ],
+      description:
+        "Opcional. Podes incluir artigos ainda não publicados; só os publicados aparecem no site.",
       group: "conteudo",
     }),
     defineField({
