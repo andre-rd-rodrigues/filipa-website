@@ -16,7 +16,7 @@ relatedPosts:
   - "pressao-na-competicao-porque-os-atletas-bloqueiam"
   - "treinar-a-resposta-a-pressao-ferramentas"
   - "analise-da-competicao-alem-do-resultado"
-coverImage: "images/cover-02-bloqueio.png" # fazer upload no Sanity (campo figure)
+coverImage: "images/cover-02-bloqueio.webp" # fazer upload no Sanity (campo figure)
 coverImageAlt: "Grande plano de um atleta tenso e concentrado, com o mundo desfocado em movimento à volta"
 ---
 

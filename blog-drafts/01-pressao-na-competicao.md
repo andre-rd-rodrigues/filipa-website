@@ -16,7 +16,7 @@ relatedPosts:
   - "bloqueio-na-competicao-corpo-trava-hora-decisiva"
   - "treinar-a-resposta-a-pressao-ferramentas"
   - "analise-da-competicao-alem-do-resultado"
-coverImage: "images/cover-01-pressao.png" # fazer upload no Sanity (campo figure)
+coverImage: "images/cover-01-pressao.webp" # fazer upload no Sanity (campo figure)
 coverImageAlt: "Atleta sozinho num túnel escuro de estádio a caminhar para a luz da entrada em campo"
 ---
 

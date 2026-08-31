@@ -13,14 +13,16 @@ Nada aqui está ligado ao código do site. É conteúdo para integrares manualme
 
 ## Imagens de capa
 
-As capas estão em `images/` (16:9, geradas com a linha visual do site: fundo quase preto + acento laranja `#FF5F00`). Cada artigo referencia a sua no frontmatter (`coverImage`), com texto alternativo em `coverImageAlt`. No Sanity, faz upload da imagem para o campo `coverImage` (tipo `figure`) e usa o `coverImageAlt` como texto alternativo/legenda.
+As capas estão em `images/` (1536×1024, `.webp` com qualidade 80, geradas com a linha visual do site: fundo quase preto + acento laranja `#FF5F00`). Cada artigo referencia a sua no frontmatter (`coverImage`), com texto alternativo em `coverImageAlt`. No Sanity, faz upload da imagem para o campo `coverImage` (tipo `figure`) e usa o `coverImageAlt` como texto alternativo/legenda.
+
+Nota: as capas do blog são servidas com o URL cru do asset (`coverImage.asset->url`), sem transformações — por isso já foram otimizadas para `.webp` (o CDN do Sanity só converteria formato se a URL usasse `?auto=format`/`urlFor(...)`).
 
 | Artigo | Imagem |
 |---|---|
-| 01 pilar | `images/cover-01-pressao.png` |
-| 02 bloqueio | `images/cover-02-bloqueio.png` |
-| 03 treino | `images/cover-03-treino.png` |
-| 04 análise | `images/cover-04-analise.png` |
+| 01 pilar | `images/cover-01-pressao.webp` |
+| 02 bloqueio | `images/cover-02-bloqueio.webp` |
+| 03 treino | `images/cover-03-treino.webp` |
+| 04 análise | `images/cover-04-analise.webp` |
 
 ## Mapa frontmatter → campos do schema `post` do Sanity
 
