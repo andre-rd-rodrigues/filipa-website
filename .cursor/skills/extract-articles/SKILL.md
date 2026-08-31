@@ -95,9 +95,13 @@ Fix every occurrence. Examples show the tell, then the fix.
 - Tell: `Este mecanismo — o momento em que trava — merece atenção.`
 - Fix: `Este mecanismo, o momento em que trava, merece atenção.`
 
-**Negation-heavy framing** ("não é X, é Y" / "not just X, but Y") used repeatedly. Use it once at most; otherwise state things positively.
+**Unnecessary contrastive negation** ("não é X, é Y" / "not just X, but Y"). This is a common AI-slop pattern when the negative clause adds no useful correction or contrast. State the point directly and positively. Keep negation only when it corrects a likely misconception or preserves an important distinction from the source.
+- Tell: `Não é falta de qualidade, é o corpo a travar sob pressão.`
+- Fix: `O corpo está a travar sob pressão.`
 - Tell: `Não é sobre vencer. É sobre evoluir. Não se trata de...`
 - Fix: `O foco está na evolução.`
+
+Check paragraphs for repeated constructions such as `não é`, `não se trata de`, `não significa`, `mais do que`, `não só... mas também` and `em vez de`. Rewrite them when the same idea can be expressed more clearly as a direct statement.
 
 **Unnecessary commas / comma splices.** Don't join two full sentences with a comma when the source wouldn't; don't add a comma before every subordinate clause.
 - Tell: `Treina a respiração, isto ajuda no jogo.`
@@ -119,12 +123,37 @@ Fix every occurrence. Examples show the tell, then the fix.
 
 **Invented facts, stats, or quotes.** Only use claims present in the source. Never fabricate numbers or citations.
 
+## Title best practices
+
+Titles should be appealing, practical, and above all make the reader want to read the article. The title does most of the work of earning the click, so treat it as the highest-leverage sentence in the piece.
+
+For every article, propose the title with intent:
+
+- **Promise a clear payoff.** The reader should know what they get and why it helps them. Favour the practical benefit or the question the reader actually has.
+- **Be specific and concrete.** Name the real situation, not an abstraction. Specificity is what makes a title feel useful.
+- **Front-load the topic/keyword.** Put the core subject early, for scanning and for SEO.
+- **Clarity beats cleverness.** A clear title outperforms a witty but vague one. Wordplay is fine only when it does not cost comprehension.
+- **Curiosity with substance.** Open a genuine gap the article closes. Never overpromise or bait; the article must deliver exactly what the title claims.
+- **Match voice and language.** Same register, person, and locale as the source. Keep sentence case unless the source uses title case.
+- **Keep it tight.** Aim for roughly 50-60 characters so it survives in search results and cards, without forcing it.
+
+Useful, honest angles: "how to [do X]", "why [X happens]", "the [thing] that [outcome]", or a real reader question as the title. Use numbers only when they are true and add precision.
+
+Avoid: generic or interchangeable titles, hype and jargon (see the AI-tells list), fake urgency, ALL CAPS, clickbait the body cannot back up, and trailing punctuation clutter.
+
+- Weak: `Pressão no desporto` (vague, no payoff)
+- Weak: `Desbloqueia todo o teu potencial mental!` (hype, empty promise)
+- Strong: `Pressão na competição: porque alguns atletas bloqueiam e como treinar a resposta` (specific topic, clear practical payoff)
+
+When helpful, offer one alternative title per article so the user can choose, but lead with your strongest.
+
 ## Output template
 
 For each proposed article:
 
 ```markdown
-### [n]. [Working title] — (pillar | spoke)
+### [n]. [Title] — (pillar | spoke)
+- **alt title:** one strong alternative (optional)
 - **slug:** kebab-case-slug
 - **excerpt:** one or two sentences in the source's voice
 - **category:** [existing site category]
