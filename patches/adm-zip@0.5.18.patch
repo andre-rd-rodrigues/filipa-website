@@ -1,0 +1,157 @@
+diff --git a/util/utils.js b/util/utils.js
+index ae4b159386f6a2e9db2940cff0467c0f69868d82..0477732bfa6a9460cff42ba0ef7bb19a297aa87e 100644
+--- a/util/utils.js
++++ b/util/utils.js
+@@ -62,27 +62,57 @@ Utils.prototype.makeDir = function (/*String*/ folder) {
+     mkdirSync(folder);
+ };
+ 
++function lstatOrNull(fs, path) {
++    try {
++        return fs.lstatSync(path);
++    } catch (e) {
++        if (e && e.code === "ENOENT") return null;
++        throw e;
++    }
++}
++
++function writeOpenFlags(fs) {
++    const c = fs.constants;
++    if (c && typeof c.O_NOFOLLOW === "number") {
++        return c.O_WRONLY | c.O_CREAT | c.O_TRUNC | c.O_NOFOLLOW;
++    }
++    return "w";
++}
++
+ Utils.prototype.writeFileTo = function (/*String*/ path, /*Buffer*/ content, /*Boolean*/ overwrite, /*Number*/ attr) {
+     const self = this;
+-    if (self.fs.existsSync(path)) {
++    var destStat = lstatOrNull(self.fs, path);
++    if (destStat) {
+         if (!overwrite) return false; // cannot overwrite
+-
+-        var stat = self.fs.statSync(path);
+-        if (stat.isDirectory()) {
++        // Do not follow or replace a symlink at the destination (CVE-2026-76845).
++        if (destStat.isDirectory() || destStat.isSymbolicLink()) {
+             return false;
+         }
+     }
+     var folder = pth.dirname(path);
+-    if (!self.fs.existsSync(folder)) {
++    var folderStat = lstatOrNull(self.fs, folder);
++    if (folderStat && folderStat.isSymbolicLink()) {
++        return false;
++    }
++    if (!folderStat) {
+         self.makeDir(folder);
+     }
+ 
++    var flags = writeOpenFlags(self.fs);
+     var fd;
+     try {
+-        fd = self.fs.openSync(path, "w", 0o666); // 0666
++        fd = self.fs.openSync(path, flags, 0o666);
+     } catch (e) {
++        if (e && e.code === "ELOOP") return false;
++        var retryStat = lstatOrNull(self.fs, path);
++        if (retryStat && retryStat.isSymbolicLink()) return false;
+         self.fs.chmodSync(path, 0o666);
+-        fd = self.fs.openSync(path, "w", 0o666);
++        try {
++            fd = self.fs.openSync(path, flags, 0o666);
++        } catch (openErr) {
++            if (openErr && openErr.code === "ELOOP") return false;
++            throw openErr;
++        }
+     }
+     if (fd) {
+         try {
+@@ -102,46 +132,54 @@ Utils.prototype.writeFileToAsync = function (/*String*/ path, /*Buffer*/ content
+     }
+ 
+     const self = this;
++    const flags = writeOpenFlags(self.fs);
+ 
+-    self.fs.exists(path, function (exist) {
+-        if (exist && !overwrite) return callback(false);
++    function fail() {
++        callback(false);
++    }
+ 
+-        self.fs.stat(path, function (err, stat) {
+-            if (exist && stat.isDirectory()) {
+-                return callback(false);
+-            }
++    function writeFd(fd) {
++        self.fs.write(fd, content, 0, content.length, 0, function () {
++            self.fs.close(fd, function () {
++                self.fs.chmod(path, attr || 0o666, function () {
++                    callback(true);
++                });
++            });
++        });
++    }
+ 
+-            var folder = pth.dirname(path);
+-            self.fs.exists(folder, function (exists) {
+-                if (!exists) self.makeDir(folder);
++    self.fs.lstat(path, function (err, destStat) {
++        if (!err && destStat) {
++            if (!overwrite) return fail();
++            if (destStat.isDirectory() || destStat.isSymbolicLink()) return fail();
++        } else if (err && err.code !== "ENOENT") {
++            return fail();
++        }
++
++        var folder = pth.dirname(path);
++        self.fs.lstat(folder, function (folderErr, folderStat) {
++            if (!folderErr && folderStat && folderStat.isSymbolicLink()) return fail();
++            if (folderErr && folderErr.code === "ENOENT") self.makeDir(folder);
+ 
+-                self.fs.open(path, "w", 0o666, function (err, fd) {
+-                    if (err) {
++            self.fs.open(path, flags, 0o666, function (openErr, fd) {
++                if (openErr) {
++                    if (openErr.code === "ELOOP") return fail();
++                    self.fs.lstat(path, function (retryErr, retryStat) {
++                        if (!retryErr && retryStat && retryStat.isSymbolicLink()) return fail();
+                         self.fs.chmod(path, 0o666, function () {
+-                            self.fs.open(path, "w", 0o666, function (err, fd) {
+-                                self.fs.write(fd, content, 0, content.length, 0, function () {
+-                                    self.fs.close(fd, function () {
+-                                        self.fs.chmod(path, attr || 0o666, function () {
+-                                            callback(true);
+-                                        });
+-                                    });
+-                                });
+-                            });
+-                        });
+-                    } else if (fd) {
+-                        self.fs.write(fd, content, 0, content.length, 0, function () {
+-                            self.fs.close(fd, function () {
+-                                self.fs.chmod(path, attr || 0o666, function () {
+-                                    callback(true);
+-                                });
++                            self.fs.open(path, flags, 0o666, function (retryOpenErr, retryFd) {
++                                if (retryOpenErr || !retryFd) return fail();
++                                writeFd(retryFd);
+                             });
+                         });
+-                    } else {
+-                        self.fs.chmod(path, attr || 0o666, function () {
+-                            callback(true);
+-                        });
+-                    }
+-                });
++                    });
++                } else if (fd) {
++                    writeFd(fd);
++                } else {
++                    self.fs.chmod(path, attr || 0o666, function () {
++                        callback(true);
++                    });
++                }
+             });
+         });
+     });

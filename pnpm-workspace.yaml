@@ -10,3 +10,26 @@ minimumReleaseAgeExclude:
   - '@rolldown/*'
   - rolldown
   - vite
+# Force patched releases for transitive Snyk findings. Ranges stay
+# inside the same major so consumers are not jumped to a new API.
+overrides:
+  adm-zip: 0.5.18
+  brace-expansion@1: 1.1.18
+  brace-expansion@2: 2.1.4
+  brace-expansion@5: 5.0.9
+  browserslist: 4.28.8
+  dompurify: 3.4.14
+  js-yaml@3: 3.15.2
+  js-yaml@4: 4.3.2
+  nanoid@3: 3.3.17
+  postcss@8: 8.5.26
+  sharp: 0.35.4
+  smol-toml: 1.7.0
+  tar@7: 7.5.22
+  undici@6: 6.28.0
+  undici@7: 7.29.0
+  uuid@10: 11.1.1
+  uuid@13: 14.0.1
+  "@sanity/uuid": 3.0.3
+patchedDependencies:
+  adm-zip@0.5.18: patches/adm-zip@0.5.18.patch
