@@ -1,0 +1,14 @@
+# Snyk policy: document residual findings that have no upstream patch.
+# https://docs.snyk.io/scan-with-snyk/snyk-cli/commands/ignore
+version: v1.25.1
+ignore:
+  SNYK-JS-ADMZIP-19276676:
+    - '*':
+        reason: >-
+          No upstream patched release as of 2026-09-02 (CVE-2026-76845 affects
+          adm-zip 0.5.9–0.6.0). Mitigated with patches/adm-zip@0.5.18.patch,
+          which refuses to write through destination or parent symlinks
+          (lstat + O_NOFOLLOW). Transitive via Sanity CLI, not used by the
+          production website. Revisit when adm-zip publishes >0.6.0.
+        expires: 2026-12-02T00:00:00.000Z
+patch: {}
